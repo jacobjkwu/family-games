@@ -2,7 +2,11 @@
 
 Games built with Claude, hosted on GitHub Pages: https://jacobjkwu.github.io/family-games/
 
-- `index.html` + `games.json`: the Game Hub (touch and controller). Edit `games.json` to add a game or bump its latest version.
+- `index.html` + `games.json`: the Game Hub (touch, Xbox controller, mouse, keyboard). Edit `games.json` to add a game or bump its latest version; the hub sorts it onto shelves by `category`, `input` and `genre`.
+  - Layout (TV style): a hero card (▶ Continue the last game, or today's pick from our own games), then horizontal shelves: Recently played, My favorites, Our own games, Play with a controller (on Xbox or once a controller is used), one shelf per community genre (games that suit the device first), and keyboard-only games last.
+  - Controller: D-pad/left stick move (each shelf remembers its position), A play, B back (start of shelf → hero), X search, Y favorite, LB/RB page through a shelf, Menu language & settings. A detail bar shows the focused game's full description. Touch: swipe shelves, ☆ on each tile, ‹ › arrows for mouse.
+  - Storage (all under `game-hub/`, backed up by family-cloud): `settings` {lang, sound}, `recent` {v:1, list:[{id, at}]}, `favs` {v:1, ids}, and `last` {id, at} kept for older hub versions.
+  - Tests: `python3 tests/test_hub.py` (Playwright: TV with 1/2/4 mocked controllers, Xbox user agent, iPad touch in both orientations, keyboard, four languages, TV readability, bad data).
 - `dragon-gems/`, `crab-castle/`: copied unchanged from their claude.ai artifacts on 2026-11-13. Only each launcher `index.html` gained one line that loads `shared/family-cloud.js`.
 - `community/`: 社区游戏 · community games — open-source games other people made with AI (Claude, Grok…), each with its licence and credit. They run sandboxed through `community/play.html`, so they can't touch the family games' data. See `community/README.md`.
 - `tests/`: Playwright tests for the hub (`test_hub.py`) and the community games (`test_community.py`).

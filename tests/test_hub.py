@@ -1,16 +1,25 @@
-"""Game Hub tests (Playwright, headless Chrome): TV 1920x1080 with 1/2/4 mocked controllers, iPad touch at
-1180x820 and 820x1180, four languages, both sections (our games / community games), corrupt storage.
-Run: python3 tests/test_hub.py   (screenshots go to /tmp/hub-shots)"""
-import json, sys, threading, functools, http.server, socketserver, os
+"""Game Hub tests (Playwright, headless Chrome).
+
+Covers: TV 1920x1080 with 1, 2 and 4 mocked controllers (every tile reached by D-pad, A opens it, Y favorites, X search,
+LB/RB paging, Menu settings, B back), an Xbox user agent, iPad touch at 1180x820 and 820x1180 (tap, star, arrows, swipe,
+rotation), a desktop keyboard, four languages, TV readability (text >= 28px, numbers >= 40px, 5% safe margins),
+and bad data (corrupt storage, old keys, broken games.json, storage that throws).
+Run: python3 tests/test_hub.py        Screenshots: /tmp/hub-shots
+"""
+import json, sys, threading, functools, http.server, socketserver, os, re
 from playwright.sync_api import sync_playwright
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = '/tmp/hub-shots'
 os.makedirs(OUT, exist_ok=True)
 GAMES = json.load(open(f'{ROOT}/games.json'))['games']
+BYID = {g['id']: g for g in GAMES}
 FAMILY = [g for g in GAMES if g.get('category', 'family') == 'family']
 COMMUNITY = [g for g in GAMES if g.get('category') == 'community']
+PADOK = [g for g in GAMES if g['input'] in ('controller', 'both')]
+KBD = [g for g in COMMUNITY if g['input'] == 'keyboard']
 PORT = 8767
+LANGS = ['en', 'fr', 'zh-Hans', 'zh-Hant']
 
 class Q(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *a): pass
@@ -30,204 +39,381 @@ PAD_MOCK = """
   navigator.getGamepads = () => [0, 1, 2, 3].map(i => window.__pads[i] || null);
 })();
 """
+ROWS_JS = """() => [...document.querySelectorAll('#app .navrow')].filter(r => !r.hidden && r.offsetParent)
+  .map(r => [...r.querySelectorAll('.nav')].filter(e => e.offsetParent && !e.hidden && !e.disabled).map(e => e.dataset.key)).filter(x => x.length)"""
+
 results = []
 def check(name, ok, detail=''):
     results.append((name, bool(ok), detail))
-    print(('PASS ' if ok else 'FAIL ') + name + (('  — ' + str(detail)) if detail and not ok else ''))
+    print(('PASS ' if ok else 'FAIL ') + name + (('  — ' + str(detail)[:600]) if detail and not ok else ''))
 
-BTN = {'A': 0, 'B': 1, 'up': 12, 'down': 13, 'left': 14, 'right': 15}
-def press(page, b, pad=0):
+BTN = {'A': 0, 'B': 1, 'X': 2, 'Y': 3, 'LB': 4, 'RB': 5, 'menu': 9, 'up': 12, 'down': 13, 'left': 14, 'right': 15}
+def press(page, b, pad=0, hold=60):
     page.evaluate(f'(() => {{ const x = window.__pads[{pad}].buttons[{BTN[b]}]; x.pressed = true; x.value = 1; }})()')
-    page.wait_for_timeout(60)
+    page.wait_for_timeout(hold)
     page.evaluate(f'(() => {{ const x = window.__pads[{pad}].buttons[{BTN[b]}]; x.pressed = false; x.value = 0; }})()')
     page.wait_for_timeout(60)
-focused = lambda page: page.evaluate("(() => { const e = document.querySelector('.nav.focused'); return e ? (e.dataset.key || e.id) : null; })()")
-def walk_to(page, key, pad=0):
-    """Drive the focus to [data-key=key] with the D-pad only, one step at a time toward the target."""
-    for _ in range(40):
+def focused(page): return page.evaluate("(() => { const e = document.querySelector('.nav.focused'); return e ? (e.dataset.key || e.id) : null; })()")
+def rows(page): return page.evaluate(ROWS_JS)
+def walk_to(page, key, pad=0, limit=260):
+    """Drive the focus to [data-key=key] with the D-pad only (row by row, then along the row)."""
+    for _ in range(limit):
         f = focused(page)
         if f == key: return True
-        d = page.evaluate("""(k) => { const a = document.querySelector('.nav.focused'), b = document.querySelector('[data-key="' + k + '"]');
-          if (!a || !b) return 'down'; const p = a.getBoundingClientRect(), q = b.getBoundingClientRect();
-          const dy = (q.top + q.bottom) / 2 - (p.top + p.bottom) / 2, dx = (q.left + q.right) / 2 - (p.left + p.right) / 2;
-          if (Math.abs(dy) > p.height / 2) return dy > 0 ? 'down' : 'up'; return dx > 0 ? 'right' : 'left'; }""", key)
-        press(page, d, pad)
+        R = rows(page)
+        cur = next(((i, r.index(f)) for i, r in enumerate(R) if f in r), None)
+        tgt = next(((i, r.index(key)) for i, r in enumerate(R) if key in r), None)
+        if not cur or not tgt: press(page, 'down', pad); continue
+        if cur[0] != tgt[0]: press(page, 'down' if tgt[0] > cur[0] else 'up', pad)
+        else: press(page, 'right' if tgt[1] > cur[1] else 'left', pad)
     return focused(page) == key
 
-def new_ctx(b, w, h, pads=0, touch=False, lang='zh-CN'):
-    ctx = b.new_context(viewport={'width': w, 'height': h}, has_touch=touch, is_mobile=touch, locale=lang, device_scale_factor=1)
+def new_ctx(b, w, h, pads=0, touch=False, lang='zh-CN', ua=None):
+    kw = dict(viewport={'width': w, 'height': h}, has_touch=touch, is_mobile=touch, locale=lang, device_scale_factor=1)
+    if ua: kw['user_agent'] = ua
+    ctx = b.new_context(**kw)
     if pads: ctx.add_init_script(PAD_MOCK % pads)
     opened = []
     def stub(route):
         opened.append(route.request.url)
-        route.fulfill(status=200, content_type='text/html', body='<!DOCTYPE html><title>stub</title>launcher stub')
-    # every game page is stubbed: our launchers, community/play.html and external game sites (links)
-    ctx.route(lambda u: u.startswith('http') and not u.startswith(BASE) and not any(h in u for h in ('googleapis', 'gstatic', 'google.com')), stub)
-    ctx.route(lambda u: any(h in u for h in ('googleapis', 'gstatic', 'google.com')), lambda r: r.abort())
-    ctx.route('**/community/play.html*', stub)
+        route.fulfill(status=200, content_type='text/html', body='<!DOCTYPE html><title>stub</title>game stub')
+    ctx.route(lambda u: u.startswith('http') and not u.startswith(BASE), stub)    # family launchers + linked sites
+    ctx.route('**/community/play.html*', stub)                                     # sandboxed community games
+    ctx.route('**/vendor/firebase-lite.js', lambda r: r.abort())                   # cloud backup: offline here
     return ctx, opened
 
+def open_page(ctx, url=URL):
+    page = ctx.new_page(); errs = []
+    page.on('pageerror', lambda e: errs.append(str(e)))
+    page.goto(url); page.wait_for_selector('#shelves .tile')
+    return page, errs
+
+LAYOUT_JS = """(tv) => {
+  const iw = innerWidth, ih = innerHeight, bad = [];
+  const vis = e => e.offsetParent !== null && getComputedStyle(e).visibility !== 'hidden';
+  if (document.documentElement.scrollWidth > iw + 1) bad.push('page scrolls sideways ' + document.documentElement.scrollWidth);
+  for (const e of document.querySelectorAll('.tb, h1, .shead h2, .play, .inp, .hname, #count')) {
+    if (!vis(e)) continue;
+    if (e.scrollWidth > e.clientWidth + 1) bad.push('cut: ' + (e.id || e.className) + ' "' + e.textContent.slice(0, 40) + '"');
+    const q = e.getBoundingClientRect();
+    if (!e.closest('.tiles') && (q.right > iw + 1 || q.left < -1)) bad.push('off-screen: ' + e.textContent.slice(0, 30));
+  }
+  for (const t of document.querySelectorAll('.tw')) {          // every tile in a shelf has the same width as its siblings
+    const sib = t.parentElement.querySelector('.tw' + (t.classList.contains('wide') ? '.wide' : ':not(.wide)'));
+    if (Math.abs(t.getBoundingClientRect().width - sib.getBoundingClientRect().width) > 1) { bad.push('uneven tile ' + t.querySelector('a').dataset.key); break; }
+  }
+  for (const i of document.querySelectorAll('.tile .inp, .tile .ver, .tile .tname')) {     // nothing inside a tile is clipped by its edge
+    const t = i.closest('.tile').getBoundingClientRect(), r = i.getBoundingClientRect();
+    if (r.right > t.right - 4 || i.scrollWidth > i.clientWidth + 1) { bad.push('clipped in tile: ' + i.textContent.slice(0, 30)); break; }
+  }
+  for (const b of document.querySelectorAll('.tblurb')) { if (b.scrollHeight > b.clientHeight + 2 && b.getBoundingClientRect().height > parseFloat(getComputedStyle(b).lineHeight) * 2.2) { bad.push('blurb > 2 lines'); break; } }
+  const small = [...document.querySelectorAll('.nav, .star, .arr')].filter(e => vis(e) && !e.closest('[hidden]')).filter(e => { const r = e.getBoundingClientRect(); return r.width && (r.height < 43.5 || r.width < 43.5); }).map(e => e.dataset.key || e.className);
+  if (small.length) bad.push('tap target <44px: ' + small.slice(0, 5).join(','));
+  let m = null;
+  if (tv) {
+    const fs = e => parseFloat(getComputedStyle(e).fontSize);
+    const textEls = [...document.querySelectorAll('.tname, .tblurb, .credit, .inp, .shead h2, .shead small, .divider, .kicker, .hblurb, .tb, #count, .dline, .dname, .keys span')].filter(vis);
+    const minText = Math.min(...textEls.map(fs)), minEl = textEls.find(e => fs(e) === minText);
+    const nums = [...document.querySelectorAll('.ver b')].filter(vis).map(fs);
+    const mx = iw * 0.05, my = ih * 0.05, out = [];
+    for (const e of document.querySelectorAll('header .nav, h1, #hero, .shead h2, #detail, .nav.focused')) {
+      if (!vis(e)) continue; const q = e.getBoundingClientRect();
+      if (q.bottom < 0 || q.top > ih) continue;
+      const tol = e.classList.contains('focused') ? 12 : 1;      // the 4.5% lift of a focused tile
+      if (q.left < mx - tol || q.right > iw - mx + tol || q.top < my - tol && q.bottom > 0 && e.tagName !== 'H2' || q.bottom > ih - my + tol) out.push((e.dataset.key || e.id || e.tagName) + ' ' + JSON.stringify([q.left|0, q.top|0, q.right|0, q.bottom|0]));
+    }
+    m = { minText, minEl: minEl && (minEl.className || minEl.tagName) + ' ' + minEl.textContent.slice(0, 20), minNum: nums.length ? Math.min(...nums) : 99, out };
+  }
+  return { bad, m };
+}"""
 def layout_checks(page, tag, tv=False):
-    r = page.evaluate("""(() => {
-      const iw = innerWidth, bad = [];
-      if (document.documentElement.scrollWidth > iw + 1) bad.push('page scrolls sideways ' + document.documentElement.scrollWidth);
-      for (const e of document.querySelectorAll('.btn, #cont .tx, .card .name, .card .blurb, .card .credit, .tag, .ver, h1, h2.sec')) {
-        if (e.offsetParent === null) continue;
-        if (e.scrollWidth > e.clientWidth + 1) bad.push('overflow: ' + (e.className || e.tagName) + ' "' + e.textContent.slice(0, 30) + '"');
-        const q = e.getBoundingClientRect();
-        if (q.right > iw + 1 || q.left < -1) bad.push('off-screen: ' + e.textContent.slice(0, 30));
-      }
-      const small = [...document.querySelectorAll('.nav')].filter(e => e.offsetParent && (e.getBoundingClientRect().height < 44 || e.getBoundingClientRect().width < 44)).map(e => e.textContent.slice(0, 20));
-      if (small.length) bad.push('tap target <44px: ' + small.join(','));
-      return bad;
-    })()""")
-    check(f'{tag}: no overflow / cut-off, tap targets ≥44px', not r, r)
+    r = page.evaluate(LAYOUT_JS, tv)
+    check(f'{tag}: nothing cut off or off-screen, tiles even, tap targets ≥44px', not r['bad'], r['bad'])
     if tv:
-        m = page.evaluate("""(() => {
-          const fs = e => parseFloat(getComputedStyle(e).fontSize);
-          const body = fs(document.body), num = Math.min(...[...document.querySelectorAll('.ver b')].map(fs));
-          const text = Math.min(...[...document.querySelectorAll('.card .blurb, .card .credit, .tag, footer, .btn, h2.sec small')].filter(e => e.offsetParent).map(fs));
-          const mx = innerWidth * 0.05, out = [];
-          for (const e of document.querySelectorAll('.nav, h1, h2.sec, footer, .ver b')) {
-            if (e.offsetParent === null) continue; const q = e.getBoundingClientRect();
-            if (q.left < mx - 1 || q.right > innerWidth - mx + 1) out.push((e.dataset.key || e.id || e.tagName) + ' ' + JSON.stringify([q.left|0, q.right|0]));
-          }
-          return { body, num, text, out };
-        })()""")
-        check(f'{tag}: body text ≥28px (body {m["body"]:.1f}, smallest text {m["text"]:.1f})', m['body'] >= 28 and m['text'] >= 27.9)
-        check(f'{tag}: version numbers ≥40px ({m["num"]:.1f})', m['num'] >= 40)
-        check(f'{tag}: UI inside the 5% side margins', not m['out'], m['out'])
+        m = r['m']
+        check(f'{tag}: all text ≥28px (smallest {m["minText"]:.1f}px)', m['minText'] >= 27.9, m['minEl'])
+        check(f'{tag}: version numbers ≥40px ({m["minNum"]:.1f}px)', m['minNum'] >= 40)
+        check(f'{tag}: important UI inside the 5% safe area', not m['out'], m['out'])
+
+def touch_swipe(page, x0, y0, x1, y1, steps=8):
+    cdp = page.context.new_cdp_session(page)
+    cdp.send('Input.dispatchTouchEvent', {'type': 'touchStart', 'touchPoints': [{'x': x0, 'y': y0}]})
+    for i in range(1, steps + 1):
+        cdp.send('Input.dispatchTouchEvent', {'type': 'touchMove', 'touchPoints': [{'x': x0 + (x1 - x0) * i / steps, 'y': y0 + (y1 - y0) * i / steps}]})
+        page.wait_for_timeout(16)
+    cdp.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []})
+    page.wait_for_timeout(500)
 
 with sync_playwright() as p:
     b = p.chromium.launch()
 
-    # ---------- 1. TV 1920x1080, one controller only ----------
+    # =============== 1. TV 1920x1080, one controller, controller only ===============
     ctx, opened = new_ctx(b, 1920, 1080, pads=1)
-    page = ctx.new_page()
-    errs = []; page.on('pageerror', lambda e: errs.append(str(e)))
-    page.goto(URL); page.wait_for_selector('#games .card')
-    check(f'TV: all {len(GAMES)} cards loaded from games.json', page.locator('#games .card').count() == len(GAMES))
-    subs = page.locator('h3.sub').all_text_contents()
-    check('TV: community games grouped by input (touch / controller / keyboard)', len(subs) == 3 and '触屏' in subs[0] and '手柄' in subs[1] and '键盘' in subs[2], subs)
-    tags = page.evaluate("[...document.querySelectorAll('#games .card')].map(a => a.dataset.id + ':' + a.querySelector('.tag').className)")
-    want = {g['id']: g['input'] for g in GAMES}
-    check('TV: every card shows its input tag', all(t.split(':')[1].endswith(want[t.split(':')[0]]) for t in tags), [t for t in tags if not t.split(':')[1].endswith(want[t.split(':')[0]])])
-    ext_ok = page.evaluate("[...document.querySelectorAll('#games .card')].filter(a => a.querySelector('.credit') && a.querySelector('.credit').textContent.includes('外部网站')).length")
-    check('TV: embedded and linked games are marked as external sites', ext_ok == len([g for g in COMMUNITY if 'external' in g or g.get('link')]), ext_ok)
-    secs = page.locator('h2.sec').all_text_contents()
-    check('TV: two sections, ours first, community second', len(secs) == 2 and '自己开发的游戏' in secs[0] and '社区游戏' in secs[1], secs)
-    order = page.evaluate("[...document.querySelectorAll('#games .card')].map(a => a.dataset.id)")
-    grp = lambda g: 0 if g['input'] in ('touch', 'both') else 1 if g['input'] == 'controller' else 2
-    check('TV: section order matches the categories and input groups', order == [g['id'] for g in FAMILY] + [g['id'] for g in sorted(COMMUNITY, key=grp)], order)
-    credit = page.locator(f'[data-key="game-{COMMUNITY[0]["id"]}"] .credit').text_content()
-    check('TV: community card shows author and AI tool', COMMUNITY[0]['credit']['author'] in credit and COMMUNITY[0]['credit']['made'] in credit, credit)
-    check('TV: no "Continue" before any game was opened', page.locator('#cont').is_hidden())
+    page, errs = open_page(ctx)
+    check('TV: hero shows today\'s pick (one of our games) before anything was played',
+          page.locator('#hero').is_visible() and page.locator('#hero').get_attribute('data-id') in [g['id'] for g in FAMILY])
+    check('TV: header shows the game count', page.locator('#count').text_content() == f'{len(GAMES)} 个游戏', page.locator('#count').text_content())
+    check('TV: no controller shelf before a controller is used (not an Xbox)', page.locator('[data-shelf="pad"]').count() == 0)
+    page.screenshot(path=f'{OUT}/tv-start.png')
     press(page, 'A')
-    check('TV: first A press only shows the focus ring (opens nothing)', not opened and focused(page) == 'game-' + FAMILY[0]['id'], focused(page))
-    sample = FAMILY + [g for g in COMMUNITY if g.get('link')][:2] + [g for g in COMMUNITY if 'external' in g][:2] + [g for g in COMMUNITY if 'entry' in g][:2] + [sorted(COMMUNITY, key=grp)[-1]]
-    for g in sample:
-        page.goto(URL); page.wait_for_selector('#games .card')
-        press(page, 'down')
-        ok = walk_to(page, 'game-' + g['id'])
-        check(f'TV pad: D-pad reaches {g["id"]}', ok, focused(page))
-        n0 = len(opened); press(page, 'A'); page.wait_for_timeout(400)
-        check(f'TV pad: A opens {g["id"]}', len(opened) > n0 and opened[-1] == abs_url(g), opened[-1:])
-        page.go_back(); page.wait_for_selector('#games .card')
-        txt = page.locator('#cont .tx').text_content() if page.locator('#cont').is_visible() else None
-        check(f'TV: Continue now shows {g["name"]["zh-Hans"]}', txt == f'继续玩：{g["name"]["zh-Hans"]}', txt)
-    press(page, 'down')
-    check('TV: default focus is Continue when present', focused(page) == 'cont', focused(page))
-    n0 = len(opened); press(page, 'A'); page.wait_for_timeout(400)
-    check('TV pad: A on Continue opens the last game opened', len(opened) > n0 and opened[-1] == abs_url(sample[-1]))
-    page.go_back(); page.wait_for_selector('#games .card')
-    press(page, 'down'); ok = walk_to(page, 'lang-en'); press(page, 'A'); page.wait_for_timeout(100)
-    check('TV pad: language switch to English by controller', ok and page.locator('h1').text_content() == '🎮 Game Hub')
-    check('TV pad: section titles follow the language', page.locator('h2.sec').first.text_content().startswith('🏠 Our own games'))
-    press(page, 'B'); page.wait_for_timeout(100)
-    check('TV pad: B goes back to Continue', focused(page) == 'cont', focused(page))
-    check('TV: no page errors', not errs, errs)
-    for lg in ['en', 'fr', 'zh-Hans', 'zh-Hant']:
-        page.evaluate(f"localStorage.setItem('game-hub/settings', JSON.stringify({{lang:'{lg}'}})); localStorage.setItem('game-hub/last', JSON.stringify({{id:'crab-castle'}}))")
-        page.reload(); page.wait_for_selector('#games .card'); press(page, 'down')
-        layout_checks(page, f'TV 1920x1080 {lg}', tv=True)
-        page.screenshot(path=f'{OUT}/tv-{lg}.png', full_page=True)
+    check('TV: first A press only shows the focus ring (opens nothing)', not opened and focused(page) == 'cont', focused(page))
+    check('TV: controller shelf appears once a controller is used, with every controller game',
+          sorted(page.eval_on_selector_all('[data-shelf="pad"] .tile', 'e => e.map(x => x.dataset.id)')) == sorted(g['id'] for g in PADOK))
+    shelf_ids = page.eval_on_selector_all('.shelf', 'e => e.map(x => x.dataset.shelf)')
+    check('TV: shelves in order: ours, controller, genres…, keyboard last', shelf_ids[0] == 'family' and shelf_ids[1] == 'pad' and shelf_ids[-1] == 'kbd' and all(s.startswith('g-') for s in shelf_ids[2:-1]), shelf_ids)
+    kb_ids = page.eval_on_selector_all('[data-shelf="kbd"] .tile', 'e => e.map(x => x.dataset.id)')
+    check('TV: keyboard-only games are all in the last shelf, and only there', sorted(kb_ids) == sorted(g['id'] for g in KBD)
+          and not page.eval_on_selector_all('[data-shelf^="g-"] .tile', f'e => e.filter(x => {json.dumps([g["id"] for g in KBD])}.includes(x.dataset.id)).length'))
+    genre_ok = page.evaluate("""(G) => [...document.querySelectorAll('[data-shelf^="g-"]')].every(s => [...s.querySelectorAll('.tile')].every(t => 'g-' + G[t.dataset.id] === s.dataset.shelf))""", {g['id']: g.get('genre') for g in GAMES})
+    check('TV: every genre shelf only holds games of that genre', genre_ok)
+    shown = set(page.eval_on_selector_all('#shelves .tile', 'e => e.map(x => x.dataset.id)'))
+    check(f'TV: all {len(GAMES)} games are on a shelf', shown == set(BYID), sorted(set(BYID) - shown))
+    ext = page.eval_on_selector_all('#shelves .tile', 'e => e.filter(x => x.querySelector(".extb")).map(x => x.dataset.id)')
+    check('TV: embedded and linked games carry the ↗ external mark', set(ext) == {g['id'] for g in GAMES if 'external' in g or g.get('link')})
 
-    # ---------- 1b. search and filters (controller and keyboard) ----------
-    page.evaluate("localStorage.removeItem('game-hub/last'); localStorage.setItem('game-hub/settings', JSON.stringify({lang:'zh-Hans'}))")
-    page.reload(); page.wait_for_selector('#games .card')
-    n_all = page.locator('#games .card').count()
-    check('Filters: toolbar shown with search box and chips', page.locator('#q').is_visible() and page.locator('#fInput .chip').count() == 4 and page.locator('#fGenre .chip').count() >= 5)
-    press(page, 'down'); ok = walk_to(page, 'fInput-controller'); press(page, 'A'); page.wait_for_timeout(150)
-    ids = page.evaluate("[...document.querySelectorAll('#games .card')].map(a => a.dataset.id)")
-    want = [g['id'] for g in GAMES if g['input'] in ('controller', 'both')]
-    check('Filters: controller chip by D-pad + A shows only controller-playable games', ok and sorted(ids) == sorted(want), (len(ids), len(want)))
-    check('Filters: focus stays on the chip after filtering', focused(page) == 'fInput-controller', focused(page))
-    walk_to(page, 'fInput-all'); press(page, 'A'); walk_to(page, 'fGenre-board'); press(page, 'A'); page.wait_for_timeout(150)
-    ids = page.evaluate("[...document.querySelectorAll('#games .card')].map(a => a.dataset.id)")
-    check('Filters: genre chip shows only that genre', sorted(ids) == sorted(g['id'] for g in GAMES if g.get('genre') == 'board'), ids)
-    walk_to(page, 'fGenre-all'); press(page, 'A')
-    walk_to(page, 'q')
-    check('Search: moving onto the search box does not focus it (no keyboard pop-up)', page.evaluate("document.activeElement.id") != 'q')
+    # --- every tile is reachable with the D-pad; focus stays fully visible; per-shelf memory ---
+    press(page, 'down')              # hero → first shelf
+    seen, hidden_tiles, R = [], [], rows(page)
+    tile_rows = [r for r in R if r and ':' in r[0]]
+    for ri, want in enumerate(tile_rows):
+        if ri: press(page, 'down')
+        keys = [focused(page)]
+        for _ in range(len(want) - 1):
+            press(page, 'right'); keys.append(focused(page)); page.wait_for_timeout(250)
+            vis = page.evaluate("""() => { const f = document.querySelector('.nav.focused'), r = f.getBoundingClientRect(), row = f.closest('.tiles').getBoundingClientRect(), d = document.getElementById('detail').getBoundingClientRect();
+                return r.left >= row.left - 2 && r.right <= row.right + 2 && r.bottom <= d.top + 1 && r.top >= 0; }""")
+            if not vis: hidden_tiles.append(keys[-1])
+        press(page, 'right')
+        if focused(page) != want[-1]: keys.append('moved past end')
+        seen.append(keys == want)
+        if ri == 2:                                   # remembered position: down then up comes back to the same tile
+            press(page, 'down'); press(page, 'up')
+            check('TV pad: up/down returns to the remembered tile in a shelf', focused(page) == want[-1], focused(page))
+    check(f'TV pad: D-pad walks every tile of all {len(tile_rows)} shelves in order and stops at the end', all(seen) and len(seen) == len(tile_rows), seen)
+    check('TV pad: the focused tile is always fully visible (inside its shelf, above the detail bar)', not hidden_tiles, hidden_tiles[:5])
+    page.screenshot(path=f'{OUT}/tv-pad-deep.png')
+
+    # --- B steps back: start of shelf, then the hero ---
+    press(page, 'B'); f1 = focused(page)
+    press(page, 'B'); f2 = focused(page)
+    check('TV pad: B goes to the start of the shelf, then back to the hero', f1 == tile_rows[-1][0] and f2 == 'cont', (f1, f2))
+
+    # --- LB / RB page through a long shelf ---
+    long_row = max(tile_rows, key=len)
+    walk_to(page, long_row[0]); press(page, 'RB'); i1 = long_row.index(focused(page)); press(page, 'LB'); i2 = long_row.index(focused(page))
+    check('TV pad: RB jumps a page right in a shelf and LB jumps back', i1 >= 2 and i2 == 0, (i1, i2))
+
+    # --- detail bar shows the focused game ---
+    walk_to(page, 'family:' + FAMILY[0]['id'])
+    dname = page.locator('#detail .dname').text_content()
+    check('TV pad: detail bar names the focused game and shows A/Y/X/B hints', dname == FAMILY[0]['name']['zh-Hans'] and page.locator('#detail .k.a').count() == 1 and page.locator('#detail .k.y').count() == 1, dname)
+
+    # --- A opens games (family, community, external link, keyboard), hero/recent/return focus ---
+    sample = [FAMILY[0], FAMILY[1], next(g for g in COMMUNITY if g.get('link')), next(g for g in COMMUNITY if 'entry' in g), KBD[0]]
+    for n, g in enumerate(sample):
+        key = page.evaluate("(id) => { const t = document.querySelector('#shelves .tile[data-id=\"' + id + '\"]'); return t && t.dataset.key; }", g['id'])
+        ok = walk_to(page, key)
+        n0 = len(opened); press(page, 'A'); page.wait_for_timeout(500)
+        check(f'TV pad: A opens {g["id"]}', ok and len(opened) > n0 and opened[-1] == abs_url(g), (ok, opened[-1:]))
+        page.go_back(); page.wait_for_selector('#shelves .tile'); page.wait_for_timeout(300)
+        check(f'TV: back on the hub, focus returns to the {g["id"]} tile', focused(page) == key, (focused(page), key))
+        check(f'TV: hero now says Continue {g["id"]}', page.locator('#hero').get_attribute('data-id') == g['id'] and page.locator('#cont span').text_content() == '继续玩')
+        if not page.evaluate("document.body.classList.contains('show-focus')"): press(page, 'A')   # first press after a reload only re-shows the focus ring
+    rec = page.eval_on_selector_all('[data-shelf="recent"] .tile', 'e => e.map(x => x.dataset.id)')
+    check('TV: "recently played" shelf lists the games newest first', rec == [g['id'] for g in reversed(sample)], rec)
+    n0 = len(opened); walk_to(page, 'cont'); press(page, 'A'); page.wait_for_timeout(400)
+    check('TV pad: A on Continue opens the last game played', len(opened) > n0 and opened[-1] == abs_url(sample[-1]))
+    page.go_back(); page.wait_for_selector('#shelves .tile')
+    if not page.evaluate("document.body.classList.contains('show-focus')"): press(page, 'A')
+
+    # --- Y favorites ---
+    fav_g = next(g for g in COMMUNITY[3:] if g['input'] != 'keyboard' and g['id'] not in [x['id'] for x in sample])
+    key = page.evaluate("(id) => document.querySelector('[data-shelf^=\"g-\"] .tile[data-id=\"' + id + '\"]').dataset.key", fav_g['id'])
+    walk_to(page, key); press(page, 'Y'); page.wait_for_timeout(200)
+    favs = page.eval_on_selector_all('[data-shelf="fav"] .tile', 'e => e.map(x => x.dataset.id)')
+    stored = page.evaluate("JSON.parse(localStorage.getItem('game-hub/favs')).ids")
+    check('TV pad: Y adds the focused game to "My favorites" and saves it', favs == [fav_g['id']] and stored == [fav_g['id']], (favs, stored))
+    check('TV pad: focus stays on the same tile after Y', focused(page) == key, focused(page))
+    check('TV: a toast confirms the favorite', page.locator('#toast').is_visible() and '收藏' in page.locator('#toast').text_content())
+    press(page, 'Y'); page.wait_for_timeout(200)
+    check('TV pad: Y again removes it', page.locator('[data-shelf="fav"]').count() == 0 and page.evaluate("JSON.parse(localStorage.getItem('game-hub/favs')).ids") == [])
+    walk_to(page, 'hfav'); press(page, 'A'); page.wait_for_timeout(200)
+    hid = page.locator('#hero').get_attribute('data-id')
+    check('TV pad: the hero ☆ button favorites the hero game', page.eval_on_selector_all('[data-shelf="fav"] .tile', 'e => e.map(x => x.dataset.id)') == [hid] and page.locator('#hfav').get_attribute('aria-pressed') == 'true')
+
+    # --- X search ---
+    press(page, 'X'); page.wait_for_timeout(200)
+    check('TV pad: X opens search and puts the cursor in the box', page.locator('#sbar').is_visible() and page.evaluate("document.activeElement.id") == 'q')
+    page.keyboard.type('sudoku'); page.wait_for_timeout(200)
+    res = page.eval_on_selector_all('[data-shelf="results"] .tile', 'e => e.map(x => x.dataset.id)')
+    check('Search: typing filters to one results shelf', 'sudoku' in res and page.locator('.shelf').count() == 1 and page.locator('#hero').is_hidden(), res)
+    page.keyboard.press('Enter'); page.wait_for_timeout(150)
+    check('Search: Enter moves focus to the first result', focused(page) == 'results:' + res[0] and page.evaluate("document.activeElement.id") != 'q', focused(page))
+    page.fill('#q', '恐龙'); page.wait_for_timeout(150)
+    res = page.eval_on_selector_all('[data-shelf="results"] .tile', 'e => e.map(x => x.dataset.id)')
+    check('Search: Chinese words match (恐龙 → Drawrassic Park)', 'drawrassic-park' in res, res)
+    page.fill('#q', 'zzzqqq'); page.wait_for_timeout(150)
+    check('Search: no match shows a message', page.locator('#none').is_visible() and page.locator('#shelves .tile').count() == 0)
+    page.fill('#q', ''); page.locator('#q').blur(); walk_to(page, 'q'); press(page, 'B'); page.wait_for_timeout(150)
+    check('Search: B closes search and every shelf comes back', page.locator('#sbar').is_hidden() and page.locator('#shelves .tile').count() > len(GAMES))
+
+    # --- Menu: language & settings dialog, controller only ---
+    press(page, 'menu'); page.wait_for_timeout(150)
+    check('TV pad: Menu opens "language & settings"', page.locator('#dlg').is_visible() and page.locator('#dlg .dnav').count() == 7)
+    names = page.eval_on_selector_all('#dlg .dnav', 'e => e.slice(0, 4).map(x => x.textContent)')
+    check('Settings: languages listed in their own names', names == ['English', 'Français', '简体中文', '繁體中文'], names)
+    for _ in range(3): press(page, 'up')
+    press(page, 'A'); page.wait_for_timeout(150)
+    check('TV pad: picking English switches the whole hub at once', page.locator('h1').text_content() == '🎮 Game Hub' and page.locator('.shead h2').first.text_content() == '🕹️ Recently played' and page.locator('.shead h2').nth(1).text_content() == '⭐ My favorites')
+    for _ in range(4): press(page, 'down')
+    snd0 = page.evaluate("JSON.parse(localStorage.getItem('game-hub/settings')).sound")
     press(page, 'A'); page.wait_for_timeout(100)
-    check('Search: A on the search box focuses it for typing', page.evaluate("document.activeElement.id") == 'q')
-    page.keyboard.type('chess'); page.wait_for_timeout(150)
-    ids = page.evaluate("[...document.querySelectorAll('#games .card')].map(a => a.dataset.id)")
-    check('Search: typing "chess" (Backspace-free letters) filters by name', ids and all('chess' in i for i in ids), ids)
-    page.keyboard.press('Backspace'); page.wait_for_timeout(100)
-    check('Search: Backspace edits the text instead of leaving', page.locator('#q').input_value() == 'ches')
-    page.locator('#q').fill('宝石'); page.wait_for_timeout(150)
-    ids = page.evaluate("[...document.querySelectorAll('#games .card')].map(a => a.dataset.id)")
-    check('Search: Chinese text matches Chinese names', 'dragon-gems' in ids and 'casa-de-gemas' in ids, ids)
-    page.locator('#q').fill('zzzzqq'); page.wait_for_timeout(150)
-    check('Search: no match shows a message', page.locator('#none').is_visible() and page.locator('#games .card').count() == 0)
-    page.locator('#q').fill(''); page.wait_for_timeout(150)
-    check('Search: clearing brings every game back', page.locator('#games .card').count() == n_all)
-    page.keyboard.press('Enter'); press(page, 'down'); press(page, 'down')
-    check('Search: Enter leaves the box and the D-pad works again', page.evaluate("document.activeElement.id") != 'q' and focused(page) not in (None, 'q'), focused(page))
-    page.evaluate("document.querySelector('[data-key=lang-fr]').click()"); page.wait_for_timeout(100)
-    check('Filters: chips and placeholder follow the language', page.locator('#fInput .chip').first.text_content() == 'Tous' and 'Chercher' in page.locator('#q').get_attribute('placeholder'))
+    snd1 = page.evaluate("JSON.parse(localStorage.getItem('game-hub/settings')).sound")
+    check('Settings: the sound switch toggles and is saved', snd0 is not False and snd1 is False, (snd0, snd1))
+    press(page, 'B'); page.wait_for_timeout(100)
+    check('TV pad: B closes the dialog', page.locator('#dlg').is_hidden())
+    page.reload(); page.wait_for_selector('#shelves .tile')
+    check('Settings: language kept after reload', page.locator('h1').text_content() == '🎮 Game Hub')
+    check('TV: no page errors', not errs, errs)
+
+    # --- TV readability in four languages (controller mode, focus on a deep tile) ---
+    for lg in LANGS:
+        page.evaluate(f"localStorage.setItem('game-hub/settings', JSON.stringify({{lang:'{lg}', sound:false}}))")
+        page.reload(); page.wait_for_selector('#shelves .tile'); press(page, 'down'); page.wait_for_timeout(150)
+        layout_checks(page, f'TV 1920x1080 {lg} (top)', tv=True)
+        page.screenshot(path=f'{OUT}/tv-{lg}-top.png')
+        for _ in range(5): press(page, 'down')
+        press(page, 'right'); page.wait_for_timeout(500)
+        layout_checks(page, f'TV 1920x1080 {lg} (deep, detail bar)', tv=True)
+        page.screenshot(path=f'{OUT}/tv-{lg}-deep.png')
     ctx.close()
 
-    # ---------- 2. 2 and 4 controllers: any controller can drive ----------
+    # =============== 2. Two and four controllers: any controller drives the hub ===============
     for n in (2, 4):
         ctx, opened = new_ctx(b, 1920, 1080, pads=n)
-        page = ctx.new_page(); page.goto(URL); page.wait_for_selector('#games .card')
+        page, errs = open_page(ctx)
         last = n - 1
-        press(page, 'down', last); walk_to(page, 'game-' + COMMUNITY[1]['id'], last); press(page, 'A', last); page.wait_for_timeout(400)
-        check(f'{n} pads: controller #{n} alone opens a community game', opened and opened[-1] == abs_url(COMMUNITY[1]), opened)
+        press(page, 'down', last); press(page, 'down', last); press(page, 'right', last)
+        check(f'{n} pads: header shows {n} controllers', page.locator('#pads').text_content() == f'🎮 ×{n}', page.locator('#pads').text_content())
+        press(page, 'A', last); page.wait_for_timeout(400)
+        check(f'{n} pads: controller #{n} alone opens the second family game', opened and opened[-1] == abs_url(FAMILY[1]), opened)
         ctx.close()
 
-    # ---------- 3. iPad sizes, touch only ----------
+    # =============== 3. Xbox user agent ===============
+    XUA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; Xbox; Xbox Series X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0'
+    ctx, opened = new_ctx(b, 1920, 1080, ua=XUA)
+    page, errs = open_page(ctx)
+    check('Xbox: controller shelf shown right away', page.locator('[data-shelf="pad"]').count() == 1)
+    check('Xbox: "press A once to wake the page" hint shown', '按一次 A' in page.locator('#foot').text_content())
+    first_genre = page.eval_on_selector_all('[data-shelf="g-racing"] .tile', 'e => e.map(x => x.dataset.id)')
+    racing = [g for g in COMMUNITY if g.get('genre') == 'racing' and g['input'] != 'keyboard']
+    want = [g['id'] for g in racing if g['input'] in ('controller', 'both')] + [g['id'] for g in racing if g['input'] not in ('controller', 'both')]
+    check('Xbox: controller games come first inside each genre shelf', first_genre == want, (first_genre[:6], want[:6]))
+    check('Xbox: no page errors', not errs, errs)
+    ctx.close()
+
+    # =============== 4. iPad touch, both orientations ===============
     for (w, h) in [(1180, 820), (820, 1180)]:
         ctx, opened = new_ctx(b, w, h, touch=True)
-        page = ctx.new_page(); errs = []; page.on('pageerror', lambda e: errs.append(str(e)))
-        page.goto(URL); page.wait_for_selector('#games .card')
-        for i, g in enumerate(GAMES):
-            page.goto(URL); page.wait_for_selector('#games .card')
-            c = page.locator(f'#games .card[data-id="{g["id"]}"]'); c.scroll_into_view_if_needed(); c.tap(); page.wait_for_timeout(300)
-            check(f'iPad {w}x{h}: tap opens {g["id"]}', opened and opened[-1] == abs_url(g))
-            page.go_back(); page.wait_for_selector('#games .card')
-        page.get_by_text('繁體中文').tap(); page.wait_for_timeout(100)
-        check(f'iPad {w}x{h}: tap 繁體中文 switches language', page.locator('h1').text_content() == '🎮 遊戲大廳')
-        check(f'iPad {w}x{h}: no focus ring shown for touch', not page.evaluate("document.body.classList.contains('show-focus')"))
-        for lg in ['en', 'fr', 'zh-Hans', 'zh-Hant']:
+        page, errs = open_page(ctx)
+        tag = f'iPad {w}x{h}'
+        g = COMMUNITY[0]
+        t = page.locator(f'[data-shelf^="g-"] .tile[data-id="{g["id"]}"]').first
+        t.scroll_into_view_if_needed(); t.tap(); page.wait_for_timeout(500)
+        check(f'{tag}: tap a tile opens the game', opened and opened[-1] == abs_url(g))
+        page.go_back(); page.wait_for_selector('#shelves .tile')
+        check(f'{tag}: no focus ring or detail bar for touch', not page.evaluate("document.body.classList.contains('show-focus')") and page.locator('#detail').is_hidden())
+        star = page.locator('[data-shelf="family"] .star').nth(1)
+        n0 = len(opened); star.tap(); page.wait_for_timeout(300)
+        check(f'{tag}: tap ☆ favorites the game without opening it', len(opened) == n0 and page.eval_on_selector_all('[data-shelf="fav"] .tile', 'e => e.map(x => x.dataset.id)') == [FAMILY[1]['id']])
+        page.locator('[data-shelf="fav"] .star').first.tap(); page.wait_for_timeout(300)
+        check(f'{tag}: tap ★ again removes it', page.locator('[data-shelf="fav"]').count() == 0)
+        sec = page.locator('[data-shelf="g-arcade"]'); sec.scroll_into_view_if_needed()
+        row = sec.locator('.tiles')
+        x0 = row.evaluate('e => e.scrollLeft'); sec.locator('.arr').nth(1).tap(); page.wait_for_timeout(700)
+        x1 = row.evaluate('e => e.scrollLeft')
+        check(f'{tag}: › arrow scrolls the shelf', x1 > x0 + 50, (x0, x1))
+        bb = row.bounding_box(); touch_swipe(page, bb['x'] + bb['width'] * 0.8, bb['y'] + bb['height'] / 2, bb['x'] + bb['width'] * 0.2, bb['y'] + bb['height'] / 2)
+        x2 = row.evaluate('e => e.scrollLeft')
+        check(f'{tag}: swiping a shelf sideways scrolls it', x2 > x1 + 50, (x1, x2))
+        y0 = page.evaluate('scrollY'); touch_swipe(page, bb['x'] + 40, min(h - 60, bb['y'] + bb['height'] - 20), bb['x'] + 40, 80); y1 = page.evaluate('scrollY')
+        check(f'{tag}: swiping up on a shelf still scrolls the page', y1 > y0 + 50, (y0, y1))
+        ta = page.evaluate("[getComputedStyle(document.body).touchAction, getComputedStyle(document.querySelector('.tiles')).touchAction]")
+        check(f'{tag}: pinch/double-tap zoom blocked (touch-action {ta})', ta == ['pan-y', 'pan-x pan-y'])
+        page.evaluate('scrollTo(0,0)'); page.locator('#bLang').tap(); page.wait_for_timeout(150)
+        page.locator('#dlg .dnav', has_text='繁體中文').tap(); page.wait_for_timeout(150)
+        check(f'{tag}: 🌐 → 繁體中文 switches the language', page.locator('h1').text_content() == '🎮 遊戲大廳')
+        page.locator('#dlg').tap(position={'x': 5, 'y': 5}); page.wait_for_timeout(150)
+        check(f'{tag}: tapping outside closes the dialog', page.locator('#dlg').is_hidden())
+        page.locator('#bSearch').tap(); page.wait_for_timeout(150)
+        check(f'{tag}: 🔍 opens search with the keyboard ready', page.evaluate("document.activeElement.id") == 'q')
+        fs = page.evaluate("parseFloat(getComputedStyle(document.getElementById('q')).fontSize)")
+        check(f'{tag}: search box font ≥16px (no iOS zoom)', fs >= 16, fs)
+        page.keyboard.type('bloom'); page.wait_for_timeout(150)
+        page.locator('[data-shelf="results"] .tile').first.tap(); page.wait_for_timeout(400)
+        check(f'{tag}: tap a search result opens it', opened[-1] == abs_url(BYID['bloom-hop']))
+        page.go_back(); page.wait_for_selector('#shelves .tile')
+        for lg in LANGS:
             page.evaluate(f"localStorage.setItem('game-hub/settings', JSON.stringify({{lang:'{lg}'}}))")
-            page.reload(); page.wait_for_selector('#games .card')
-            layout_checks(page, f'iPad {w}x{h} {lg}')
-            page.screenshot(path=f'{OUT}/ipad-{w}x{h}-{lg}.png', full_page=True)
-        check(f'iPad {w}x{h}: no page errors', not errs, errs)
+            page.reload(); page.wait_for_selector('#shelves .tile')
+            layout_checks(page, f'{tag} {lg}')
+            page.screenshot(path=f'{OUT}/ipad-{w}x{h}-{lg}.png')
+        page.set_viewport_size({'width': h, 'height': w}); page.wait_for_timeout(400)
+        layout_checks(page, f'{tag} rotated to {h}x{w}')
+        check(f'{tag}: no page errors', not errs, errs)
         ctx.close()
 
-    # ---------- 4. Robustness ----------
+    # =============== 5. Desktop keyboard ===============
+    ctx, opened = new_ctx(b, 1440, 900)
+    page, errs = open_page(ctx)
+    page.keyboard.press('ArrowDown')
+    check('Keyboard: first arrow only shows the focus ring', focused(page) == 'cont' and not opened)
+    page.keyboard.press('ArrowDown'); page.keyboard.press('ArrowRight'); page.keyboard.press('Enter'); page.wait_for_timeout(400)
+    check('Keyboard: arrows + Enter open a game', opened and opened[-1] == abs_url(FAMILY[1]))
+    page.go_back(); page.wait_for_selector('#shelves .tile')
+    page.keyboard.press('/'); page.wait_for_timeout(150)
+    check('Keyboard: "/" opens search', page.evaluate("document.activeElement.id") == 'q')
+    page.keyboard.press('Escape'); page.keyboard.press('Escape'); page.wait_for_timeout(150)
+    check('Keyboard: Escape leaves and closes search', page.locator('#sbar').is_hidden())
+    check('Keyboard: no page errors', not errs, errs)
+    ctx.close()
+
+    # =============== 6. Bad data and old data ===============
     ctx, opened = new_ctx(b, 1920, 1080, pads=1)
-    page = ctx.new_page(); errs = []; page.on('pageerror', lambda e: errs.append(str(e)))
-    page.goto(URL); page.wait_for_selector('#games .card')
-    page.evaluate("localStorage.setItem('game-hub/settings', '{bad json'); localStorage.setItem('game-hub/last', '\"nope');")
-    page.reload(); page.wait_for_selector('#games .card')
-    check('Corrupt localStorage: page still loads, no Continue', page.locator('#cont').is_hidden() and not errs, errs)
-    page.route('**/games.json', lambda r: r.fulfill(status=200, content_type='application/json', body=json.dumps({'games': FAMILY[:1] + [{'id': 'x', 'url': 'javascript:alert(1)'}]})))
-    page.reload(); page.wait_for_selector('#games .card')
-    check('Bad url in games.json is dropped; one section only shows no headings', page.locator('#games .card').count() == 1 and page.locator('h2.sec').count() == 0)
+    page, errs = open_page(ctx)
+    page.evaluate("""localStorage.setItem('game-hub/settings', '{bad json'); localStorage.setItem('game-hub/recent', '[1,2'); localStorage.setItem('game-hub/favs', '{"ids": [5, null, "sudoku", "sudoku", "no-such-game"]}')""")
+    page.reload(); page.wait_for_selector('#shelves .tile')
+    check('Corrupt storage: page loads, bad values ignored, valid favorite kept once',
+          page.eval_on_selector_all('[data-shelf="fav"] .tile', 'e => e.map(x => x.dataset.id)') == ['sudoku'] and not errs, errs)
+    page.evaluate("localStorage.removeItem('game-hub/recent'); localStorage.setItem('game-hub/last', JSON.stringify({id: 'crab-castle', at: 5}))")
+    page.reload(); page.wait_for_selector('#shelves .tile')
+    check('Old hub data: game-hub/last still becomes "Continue"', page.locator('#hero').get_attribute('data-id') == 'crab-castle' and page.locator('#cont span').text_content() == '继续玩')
+    page.evaluate("localStorage.setItem('game-hub/last', JSON.stringify({id: 'deleted-game'})); localStorage.removeItem('game-hub/recent')")
+    page.reload(); page.wait_for_selector('#shelves .tile')
+    check('Old hub data: a removed game falls back to today\'s pick', page.locator('#hero').get_attribute('data-id') in [g['id'] for g in FAMILY])
+    state = {'mode': 'fail'}
+    def gj(route):
+        if state['mode'] == 'fail': route.fulfill(status=500, body='x')
+        elif state['mode'] == 'weird':
+            bad = {'games': [{'id': 'a', 'url': 'javascript:alert(1)'}, {'id': 'b', 'url': 'https://example.org/b', 'icon': '<img src=x onerror=alert(1)>', 'color': 'red;background:url(x)'},
+                             {'id': 'b', 'url': 'https://example.org/dup'}, {'nope': 1}]}
+            route.fulfill(status=200, content_type='application/json', body=json.dumps(bad))
+        else: route.continue_()
+    page.route('**/games.json', gj)
+    page.reload(); page.wait_for_selector('#msg:not([hidden])')
+    check('games.json fails: message and Retry button', page.locator('#retry').is_visible())
+    press(page, 'down'); f = focused(page)
+    check('games.json fails: the controller lands on Retry', f == 'retry', f)
+    state['mode'] = 'ok'; press(page, 'A'); page.wait_for_selector('#shelves .tile')
+    check('Retry by controller loads the games', page.locator('#shelves .tile').count() > len(GAMES))
+    state['mode'] = 'weird'; page.reload(); page.wait_for_timeout(800)
+    info = page.evaluate("[document.querySelectorAll('#shelves .tile').length, document.querySelectorAll('#shelves img').length, document.querySelector('#shelves .tile') && document.querySelector('#shelves .tile').href]")
+    check('Bad entries in games.json: unsafe URL, injected icon, duplicate id and junk are dropped', info[0] >= 1 and info[1] == 0 and info[2] == 'https://example.org/b', info)
+    state['mode'] = 'ok'; page.reload(); page.wait_for_selector('#shelves .tile')
+    page.evaluate("Object.defineProperty(window, 'localStorage', { get() { throw new Error('denied'); } })")
+    page.evaluate("document.querySelector('[data-shelf=\"family\"] .star').click()")
+    page.evaluate("document.getElementById('bLang').click()"); page.evaluate("document.querySelector('[data-key=\"d-lang-en\"]').click()")
+    check('Storage that throws: favorites and language switch don\'t crash', page.locator('h1').text_content() == '🎮 Game Hub' and not errs, errs)
     ctx.close()
     b.close()
 

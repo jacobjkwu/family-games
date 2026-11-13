@@ -3,215 +3,379 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0e1326">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Game Hub">
 <title>游戏大厅 Game Hub</title>
 <style>
-/* ===== Base ===== */
+/* =====================================================================
+   Game Hub — touch (iPad), controller (Xbox Edge on a TV), mouse, keyboard
+   Layout: header · hero (continue / today's pick) · horizontal shelves
+   ===================================================================== */
 :root {
-  --fs: max(17px, 2.6vmin);           /* 28px at 1920x1080 */
-  --bg: #0f1428; --panel: #1c2344; --panel2: #262f5a; --ink: #f5f7ff; --dim: #b4bce0;
+  --fs: max(16px, 2.6vmin);                 /* 28px at 1920x1080 */
+  --bg: #0e1326; --panel: #1b2244; --panel2: #283163; --ink: #f3f5ff; --dim: #b3bbdf;
   --focus: #ffd23f; --A: #3ddc84; --B: #ff5c5c; --X: #4da3ff; --Y: #ffd23f;
+  --sx: max(5vw, env(safe-area-inset-left)); --sxr: max(5vw, env(safe-area-inset-right)); --sy: 5vh;
+  --tileW: 11em; --tileWide: 14.5em; --gap: 0.8em;
 }
 * { box-sizing: border-box; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
 html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); overscroll-behavior: none; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "PingFang TC", "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "Noto Sans CJK SC", "Noto Sans CJK TC", sans-serif;
   font-size: var(--fs); line-height: 1.3; touch-action: pan-y; -webkit-text-size-adjust: 100%;
-  background: radial-gradient(ellipse at 50% -20%, #2a3570 0%, var(--bg) 60%) fixed;
+  background:
+    radial-gradient(70vw 45vh at 15% -10%, rgba(64, 86, 190, .55), transparent 70%),
+    radial-gradient(60vw 40vh at 100% 0%, rgba(120, 60, 190, .35), transparent 70%),
+    var(--bg);
+  background-attachment: fixed;
 }
+button, a, input { font: inherit; color: inherit; }
+button, a { touch-action: manipulation; }
 #app {
-  min-height: 100vh; display: flex; flex-direction: column; gap: 0.9em;
-  /* 5% TV safe margin */
-  padding: max(5vh, env(safe-area-inset-top)) max(5vw, env(safe-area-inset-right)) max(5vh, env(safe-area-inset-bottom)) max(5vw, env(safe-area-inset-left));
+  min-height: 100vh; display: flex; flex-direction: column; gap: 0.85em;
+  padding: max(var(--sy), env(safe-area-inset-top)) var(--sxr) max(var(--sy), env(safe-area-inset-bottom)) var(--sx);
 }
-button, a { font: inherit; color: inherit; touch-action: manipulation; }
+body.show-focus #app { padding-bottom: calc(var(--sy) + 5.6em); }   /* room for the detail bar */
+[hidden] { display: none !important; }
 
-/* ===== Header ===== */
-header { display: flex; align-items: center; gap: 0.5em 0.8em; flex-wrap: wrap; }
-h1 { margin: 0; font-size: 1.7em; font-weight: 800; letter-spacing: 0.02em; white-space: nowrap; }
-.spacer { flex: 1; }
-.row { display: flex; gap: 0.35em; flex-wrap: wrap; align-items: center; }
-.btn {
-  min-height: 44px; min-width: 44px; padding: 0.3em 0.7em; border: 0; border-radius: 0.6em;
-  background: var(--panel2); cursor: pointer; white-space: nowrap;
+/* ---------- Header ---------- */
+header { display: flex; align-items: center; gap: 0.45em 0.55em; flex-wrap: wrap; }
+.brand { display: flex; align-items: baseline; gap: 0.5em; margin-right: auto; min-width: 0; flex-wrap: wrap; }
+h1 { margin: 0; font-size: 1.6em; font-weight: 800; white-space: nowrap; }
+#count { color: var(--dim); font-weight: 600; white-space: nowrap; }
+.tb {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.35em; min-height: 44px; min-width: 44px;
+  padding: 0.3em 0.75em; border: 0; border-radius: 0.7em; background: var(--panel2); cursor: pointer; white-space: nowrap; font-weight: 650;
+  text-decoration: none;
 }
-.btn[aria-pressed="true"] { background: #4b5bd0; font-weight: 700; }
+.tb[aria-pressed="true"] { background: #4b5bd0; }
 #pads { color: var(--dim); white-space: nowrap; }
+@media (max-width: 600px) { header .tb .lbl { display: none; } }
 
-/* ===== Focus (big, visible on TV) ===== */
-.nav { outline: none; transition: transform 0.12s, box-shadow 0.12s; }
+/* ---------- Focus (big, visible from the couch) ---------- */
+.nav { outline: none; }
 body.show-focus .nav.focused {
-  box-shadow: 0 0 0 0.2em var(--bg), 0 0 0 0.42em var(--focus), 0 0 1.4em 0.4em rgba(255, 210, 63, 0.45);
-  position: relative; z-index: 2;
+  box-shadow: 0 0 0 0.17em var(--bg), 0 0 0 0.4em var(--focus), 0 0 1.3em 0.35em rgba(255, 210, 63, .5);
+  position: relative; z-index: 3;
 }
+.tile { transition: transform .14s ease, box-shadow .14s ease; }
+body.show-focus .tile.focused { transform: scale(1.045); }
+@media (prefers-reduced-motion: reduce) { .tile { transition: none; } body.show-focus .tile.focused { transform: none; } }
 
-/* ===== Continue ===== */
-#cont {
-  display: flex; align-items: center; gap: 0.6em; width: 100%; text-decoration: none;
-  min-height: 2.8em; padding: 0.45em 0.9em; border-radius: 0.8em;
-  background: linear-gradient(135deg, #2f8f46, #1d6b34); font-size: 1.3em; font-weight: 800;
+/* ---------- Hero ---------- */
+#hero {
+  --hc: #4b5bd0;
+  display: flex; align-items: center; gap: 1.1em; padding: 0.9em 1.1em; border-radius: 1.2em;
+  background-color: #1b2244;
+  background-image: linear-gradient(115deg, color-mix(in srgb, var(--hc) 62%, #121937) 0%, color-mix(in srgb, var(--hc) 22%, #151c3c) 55%, #151c3c 100%);
+  box-shadow: 0 0.5em 1.6em rgba(0, 0, 0, .35);
 }
-#cont[hidden] { display: none; }
-#cont .ic { flex: 0 0 1.9em; height: 1.9em; }
-#cont .tx { flex: 1; min-width: 0; overflow-wrap: anywhere; }
-#cont .play { font-size: 1.3em; }
-
-/* ===== Sections ===== */
-#games { display: flex; flex-direction: column; gap: 0.6em; }
-.sec { margin: 0.5em 0 0; font-size: 1.15em; font-weight: 800; color: var(--dim); display: flex; align-items: baseline; gap: 0.5em; flex-wrap: wrap; }
-.sec small { font-size: 0.87em; font-weight: 600; }
-
-/* ===== Cards ===== */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15em), 1fr)); gap: 0.9em; }
-.card {
-  display: flex; flex-direction: column; gap: 0.45em; padding: 0.9em 1em 1em; text-decoration: none;
-  background: var(--panel); border-radius: 1em; border-top: 0.32em solid var(--c, #888); cursor: pointer;
+.hart { flex: 0 0 6.2em; height: 6.2em; border-radius: 1.1em; background: rgba(255, 255, 255, .12); display: flex; align-items: center; justify-content: center; }
+.hart .ic { width: 5.2em; height: 5.2em; filter: drop-shadow(0 .2em .3em rgba(0, 0, 0, .35)); }
+.hbody { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.3em; }
+.kicker { color: #e6e9ff; font-weight: 700; opacity: .9; }
+.hname { margin: 0; font-size: 1.7em; font-weight: 850; line-height: 1.15; overflow-wrap: anywhere; }
+.hblurb { margin: 0; color: #dfe3fb; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.hacts { display: flex; gap: 0.6em; align-items: center; flex-wrap: wrap; margin-top: 0.25em; }
+.play {
+  display: inline-flex; align-items: center; gap: 0.45em; min-height: 2.3em; padding: 0.3em 1.1em; border-radius: 0.8em;
+  background: linear-gradient(135deg, #34a853, #1e7a3a); color: #fff; font-size: 1.15em; font-weight: 850; text-decoration: none; white-space: nowrap;
 }
-.card .top { display: flex; align-items: center; gap: 0.7em; }
-.card .ic { flex: 0 0 4.2em; height: 4.2em; }
-.ic svg { width: 100%; height: 100%; display: block; }
-.card .name { font-size: 1.25em; font-weight: 800; line-height: 1.2; overflow-wrap: anywhere; }
-.card .blurb { color: var(--dim); flex: 1; }
-.card .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4em 0.7em; }
-.ver { display: flex; align-items: baseline; gap: 0.3em; white-space: nowrap; }
+.ver { display: inline-flex; align-items: baseline; gap: 0.3em; white-space: nowrap; }
 .ver span { color: var(--dim); }
-.ver b { font-size: 1.5em; }                       /* ~42px at 1080p */
-.tag { padding: 0.15em 0.6em; border-radius: 0.6em; font-weight: 700; }
-.tag.touch { background: #4a3a10; color: #ffe08a; }
-.tag.controller { background: #16422c; color: #b9f6ca; }
-.tag.both { background: #1d3b5c; color: #bfe0ff; }
-.tag.keyboard { background: #3a2f4f; color: #e2d4ff; }
-.sub { margin: 0.3em 0 0; font-size: 1em; font-weight: 700; color: var(--dim); }
-#filters { display: flex; flex-direction: column; gap: 0.45em; }
-#filters[hidden], #none[hidden] { display: none; }
-#q { font: inherit; font-size: max(16px, 1em); color: var(--ink); background: var(--panel); border: 2px solid var(--panel2); border-radius: 0.6em;
-  min-height: 44px; padding: 0.3em 0.7em; width: min(100%, 24em); -webkit-user-select: text; user-select: text; }
-#q::placeholder { color: var(--dim); }
-.chip { font-size: 1em; }
-#none { color: var(--dim); padding: 1em 0; }
-.credit { color: var(--dim); overflow-wrap: anywhere; }
+.ver b { font-size: 1.45em; }                   /* ≥40px at 1080p */
 
-/* ===== Messages & hints ===== */
-#msg { background: var(--panel); border-radius: 1em; padding: 1em; display: flex; gap: 0.8em; align-items: center; flex-wrap: wrap; }
-#msg[hidden] { display: none; }
-footer { margin-top: auto; color: var(--dim); display: flex; flex-wrap: wrap; gap: 0.4em 1.4em; align-items: center; }
-.k {
-  display: inline-flex; align-items: center; justify-content: center; min-width: 1.5em; height: 1.5em; padding: 0 0.3em;
-  border-radius: 999px; font-weight: 800; color: #0b0f1e; vertical-align: middle; margin-right: 0.25em;
+/* ---------- Search ---------- */
+#sbar { display: flex; gap: 0.5em; align-items: center; }
+#q {
+  flex: 1; max-width: 30em; min-height: 44px; font-size: max(16px, 1em); color: var(--ink); background: var(--panel);
+  border: 3px solid var(--panel2); border-radius: 0.7em; padding: 0.3em 0.7em; -webkit-user-select: text; user-select: text;
 }
-.k.a { background: var(--A); } .k.b { background: var(--B); } .k.d { background: #cfd5f0; border-radius: 0.35em; }
+#q::placeholder { color: var(--dim); }
+#q:focus { border-color: var(--X); outline: none; }
+
+/* ---------- Shelves ---------- */
+#shelves { display: flex; flex-direction: column; gap: 1.05em; }
+.shelf { display: flex; flex-direction: column; gap: 0.35em; min-width: 0; }
+.shead { display: flex; align-items: center; gap: 0 0.5em; min-height: 44px; }
+.shead h2 { margin: 0; font-size: 1.2em; font-weight: 800; white-space: nowrap; flex: none; max-width: 100%; }
+.shead small { font-size: 1em; color: var(--dim); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 0 1 auto; }
+.arrs { margin-left: auto; display: flex; gap: 0.3em; flex: none; }
+.arr { width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--panel2); cursor: pointer; font-weight: 800; }
+.arr:disabled { opacity: .3; cursor: default; }
+body.show-focus .arrs { visibility: hidden; }
+.divider { margin: 0.4em 0 -0.4em; padding-top: 0.6em; border-top: 2px solid rgba(255, 255, 255, .08); color: var(--dim); }
+.divider b { color: var(--ink); font-size: 1.15em; }
+.tiles {
+  display: flex; gap: var(--gap); overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity;
+  padding: 0.7em 0.9em 0.9em; margin: -0.7em -0.9em -0.9em; scroll-padding-inline: 0.9em;
+  scrollbar-width: none; touch-action: pan-x pan-y; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
+}
+.tiles::-webkit-scrollbar { display: none; }
+.tw { position: relative; flex: 0 0 var(--tileW); width: var(--tileW); min-width: 0; scroll-snap-align: start; display: flex; }
+.tw.wide { flex-basis: var(--tileWide); width: var(--tileWide); }
+.tile {
+  flex: 1; min-width: 0; width: 100%; display: flex; flex-direction: column; text-decoration: none; background: var(--panel); border-radius: 1em; overflow: hidden;
+  cursor: pointer;
+}
+.art {
+  --c: #888; position: relative; height: 4.9em; display: flex; align-items: center; justify-content: center;
+  background-color: var(--c);
+  background-image: linear-gradient(160deg, color-mix(in srgb, var(--c) 78%, #ffffff) 0%, var(--c) 45%, color-mix(in srgb, var(--c) 55%, #0e1326) 100%);
+}
+.wide .art { height: 5.8em; }
+.art .ic { width: 4em; height: 4em; filter: drop-shadow(0 .15em .25em rgba(0, 0, 0, .35)); }
+.wide .art .ic { width: 4.8em; height: 4.8em; }
+.ic svg { width: 100%; height: 100%; display: block; }
+.extb { position: absolute; left: 0.35em; bottom: 0.3em; padding: 0 0.35em; border-radius: 0.4em; background: rgba(10, 14, 30, .6); font-weight: 800; }
+.tbody { flex: 1; display: flex; flex-direction: column; gap: 0.28em; padding: 0.5em 0.7em 0.65em; min-width: 0; }
+.tname { font-size: 1.08em; font-weight: 800; line-height: 1.2; max-height: 2.4em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+.tblurb { color: var(--dim); max-height: 2.6em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.tmeta { display: flex; gap: 0.2em 0.45em; align-items: center; flex-wrap: wrap; min-width: 0; margin-top: auto; padding-top: 0.15em; }
+.credit { color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; max-width: 100%; }
+.inp { padding: 0.04em 0.45em; border-radius: 0.5em; font-weight: 700; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.inp.touch { background: #4a3a10; color: #ffe08a; }
+.inp.controller { background: #16422c; color: #b9f6ca; }
+.inp.both { background: #1d3b5c; color: #bfe0ff; }
+.inp.keyboard { background: #3a2f4f; color: #e2d4ff; }
+.star {
+  position: absolute; top: 0.25em; right: 0.25em; width: 44px; height: 44px; border-radius: 50%; border: 0; z-index: 4;
+  background: rgba(10, 14, 30, .55); color: #fff; font-size: 1em; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.star[aria-pressed="true"] { color: var(--Y); }
+body.show-focus .star[aria-pressed="false"] { display: none; }
+
+/* ---------- Messages ---------- */
+#msg { background: var(--panel); border-radius: 1em; padding: 1em; display: flex; gap: 0.8em; align-items: center; flex-wrap: wrap; }
+#none { color: var(--dim); padding: 0.6em 0; }
+footer { color: var(--dim); margin-top: auto; }
+
+/* ---------- Detail bar (controller / keyboard) ---------- */
+#detail {
+  position: fixed; left: var(--sx); right: var(--sxr); bottom: var(--sy); z-index: 20; display: none; align-items: center; gap: 0.8em;
+  padding: 0.55em 0.9em; min-height: 4.4em; border-radius: 1em; background: rgba(13, 18, 38, .95); border: 2px solid rgba(255, 255, 255, .1);
+  box-shadow: 0 -0.3em 1.6em rgba(0, 0, 0, .55);
+}
+body.show-focus #detail { display: flex; }
+.dic { flex: 0 0 2.8em; height: 2.8em; }
+.dtext { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.1em; }
+.dname { font-weight: 800; font-size: 1.08em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dline { color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.keys { display: flex; gap: 0.25em 0.9em; flex-wrap: wrap; justify-content: flex-end; max-width: 50%; }
+.keys span { white-space: nowrap; }
+.k { display: inline-flex; align-items: center; justify-content: center; min-width: 1.45em; height: 1.45em; padding: 0 0.3em; margin-right: 0.25em;
+  border-radius: 999px; font-weight: 850; color: #0b0f1e; vertical-align: middle; }
+.k.a { background: var(--A); } .k.b { background: var(--B); } .k.x { background: var(--X); } .k.y { background: var(--Y); }
+.k.d, .k.lb { background: #cfd5f0; border-radius: 0.35em; }
+
+/* ---------- Dialog ---------- */
+#dlg { position: fixed; inset: 0; z-index: 40; background: rgba(5, 8, 20, .75); display: flex; align-items: center; justify-content: center; padding: var(--sy) var(--sx); }
+.dbox { background: var(--panel); border-radius: 1.2em; padding: 1em 1.2em; width: min(100%, 22em); max-height: 100%; overflow: auto;
+  display: flex; flex-direction: column; gap: 0.5em; box-shadow: 0 1em 3em rgba(0, 0, 0, .6); }
+.dbox h2 { margin: 0 0 0.2em; font-size: 1.25em; }
+.dbox .sep { height: 2px; background: rgba(255, 255, 255, .08); margin: 0.2em 0; }
+.dbox .tb { width: 100%; justify-content: flex-start; min-height: 2.1em; }
+#dlg.show-focus .tb.focused, body.show-focus #dlg .tb.focused { box-shadow: 0 0 0 0.17em var(--panel), 0 0 0 0.4em var(--focus); }
+
+/* ---------- Narrow screens (iPad portrait) ---------- */
+@media (max-aspect-ratio: 1/1) {
+  :root { --tileW: 10.2em; --tileWide: 12.5em; }
+  .hart { flex-basis: 4.8em; height: 4.8em; } .hart .ic { width: 4em; height: 4em; }
+  .hname { font-size: 1.45em; }
+}
 </style>
 </head>
 <body>
 <div id="app">
-  <header>
-    <h1 id="title"></h1>
-    <span class="spacer"></span>
-    <div class="row" id="langs"></div>
-    <button class="btn nav" id="fs" type="button"></button>
+  <header class="navrow" data-row="header">
+    <div class="brand"><h1 id="title"></h1><span id="count"></span></div>
+    <button class="tb nav" id="bSearch" type="button" data-key="bSearch">🔍<span class="lbl"></span></button>
+    <button class="tb nav" id="bLang" type="button" data-key="bLang">🌐<span class="lbl"></span></button>
+    <button class="tb nav" id="fs" type="button" data-key="fs">⛶<span class="lbl"></span></button>
     <span id="pads"></span>
   </header>
 
-  <a id="cont" class="nav" hidden href="#"><span class="ic"></span><span class="tx"></span><span class="play">▶</span></a>
-
-  <div id="msg" hidden><span id="msgText"></span><button class="btn nav" id="retry" type="button"></button></div>
-
-  <div id="filters" hidden>
-    <input id="q" data-key="q" class="nav" type="search" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search">
-    <div class="row" id="fInput"></div>
-    <div class="row" id="fGenre"></div>
+  <div id="sbar" class="navrow" data-row="search" hidden>
+    <input id="q" class="nav" data-key="q" type="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
+    <button class="tb nav" id="bClose" type="button" data-key="bClose">✕<span class="lbl2"></span></button>
   </div>
 
-  <main id="games"></main>
-  <div id="none" hidden></div>
+  <section id="hero" class="navrow" data-row="hero" hidden>
+    <div class="hart"><div class="ic"></div></div>
+    <div class="hbody">
+      <div class="kicker"></div>
+      <h2 class="hname"></h2>
+      <p class="hblurb"></p>
+      <div class="hacts">
+        <a id="cont" class="play nav" data-key="cont" href="#">▶ <span></span></a>
+        <button id="hfav" class="tb nav" type="button" data-key="hfav"></button>
+        <span class="ver" id="hver"><span></span><b></b></span>
+      </div>
+    </div>
+  </section>
 
-  <footer id="hint"></footer>
+  <div id="msg" class="navrow" data-row="msg" hidden><span id="msgText"></span><button class="tb nav" id="retry" type="button" data-key="retry"></button></div>
+
+  <main id="shelves"></main>
+  <div id="none" hidden></div>
+  <footer id="foot"></footer>
 </div>
+
+<div id="detail" aria-live="polite">
+  <div class="dic ic"></div>
+  <div class="dtext"><div class="dname"></div><div class="dline d1"></div><div class="dline d2"></div></div>
+  <div class="keys"></div>
+</div>
+
+<div id="dlg" hidden role="dialog" aria-modal="true"><div class="dbox"></div></div>
 
 <script>
 (() => {
 'use strict';
 
-/* ===================== Config ===================== */
+/* ============================== Config ============================== */
 const HUB_ID = 'game-hub';
-const KEY_SETTINGS = HUB_ID + '/settings';   // { lang }
-const KEY_LAST = HUB_ID + '/last';           // { id, at }
+const K = {                                  // storage keys (all under game-hub/, backed up by family-cloud)
+  settings: HUB_ID + '/settings',            // { lang, sound }
+  last: HUB_ID + '/last',                    // { id, at }   (kept for older hub versions)
+  recent: HUB_ID + '/recent',                // { v:1, list:[{id, at}] }
+  favs: HUB_ID + '/favs',                    // { v:1, ids:[id] }
+};
+const SS_FOCUS = HUB_ID + '/focus';          // sessionStorage: tile to refocus after coming back from a game
 const GAMES_URL = 'games.json';
 const CFG = {
-  deadZone: 0.15,      // stick dead zone
-  navThreshold: 0.55,  // stick tilt that counts as a direction
-  repeatDelay: 380,    // ms before a held direction repeats
-  repeatRate: 150,     // ms between repeats
-  crossWeight: 3,      // spatial nav: penalty for sideways distance
+  deadZone: 0.15, navThreshold: 0.55,        // sticks
+  repeatDelay: 360, repeatRate: 130,         // held direction
+  recentMax: 12, recentShelfMin: 2,          // "recently played" shelf appears from 2 games
+  smoothAfterMs: 220,                        // fast repeats scroll instantly (smooth scrolling lags on Xbox)
+  volume: 0.06,
 };
+const GENRES = ['arcade', 'racing', 'adventure', 'puzzle', 'build', 'cozy', 'board'];
+const UA = navigator.userAgent || '';
+const IS_XBOX = /Xbox/i.test(UA);
+const IS_DESKTOP = !IS_XBOX && !!(window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches);
+// Legacy Edge on Xbox only: turn its mouse cursor off so the controller drives the page directly (no-op elsewhere).
+try { if ('gamepadInputEmulation' in navigator) navigator.gamepadInputEmulation = 'gamepad'; } catch (e) {}
 
-/* ===================== Strings ===================== */
+/* ============================== Strings ============================== */
 const LANGS = [['en', 'English'], ['fr', 'Français'], ['zh-Hans', '简体中文'], ['zh-Hant', '繁體中文']];
 const STR = {
   'zh-Hans': {
-    search: '🔍 搜索游戏名、作者…', all: '全部', fTouch: '👆 触屏', fPad: '🎮 手柄', fKeyboard: '⌨️ 键盘', allGenres: '全部类型', none: '没有符合条件的游戏。', genres: { board: '♟️ 棋牌', puzzle: '🧩 解谜', racing: '🏁 赛车与飞行', adventure: '🧭 冒险探索', build: '🏗️ 经营建造', arcade: '🕹️ 动作街机', cozy: '🌿 休闲放松' },
-    both: '👆🎮 触屏或手柄', keyboard: '⌨️ 需要键盘鼠标（电脑）', subTouch: '👆 iPad 触屏能玩', subPad: '🎮 手柄 + 电视', subKeyboard: '⌨️ 要用键盘鼠标（在电脑上玩）', ext: '🔗 外部网站',
-    secFamily: '🏠 自己开发的游戏', secCommunity: '🌐 社区游戏', secCommunityNote: '别人用 AI 做的游戏', by: a => `作者 ${a}`, made: m => `用 ${m} 制作`,
-    title: '🎮 游戏大厅', cont: n => `继续玩：${n}`, latest: '最新版本',
-    touch: '👆 触屏优先（用 iPad 投屏）', controller: '🎮 手柄+电视',
-    fs: '全屏', exitfs: '退出全屏', fsFail: '✗ 全屏',
-    pads: n => `🎮 ×${n}`, loading: '正在读取游戏清单…',
-    loadFail: '读不到游戏清单（games.json）。', retry: '再试一次', empty: '清单里还没有游戏。',
-    hintMove: '移动', hintOpen: '打开', hintBack: '回到顶部',
-    hintTouch: '点一张卡片就能打开游戏。', hintWake: '用手柄：先按一次 A 叫醒这个页面。',
+    title: '🎮 游戏大厅', count: n => `${n} 个游戏`, search: '搜索', searchPh: n => `搜索 ${n} 个游戏：名字、作者…`, close: '关闭',
+    fs: '全屏', exitfs: '退出全屏', fsFail: '全屏不可用', settings: '语言和设置', sound: s => s ? '🔊 按键声音：开' : '🔇 按键声音：关',
+    kickCont: '▶ 上次玩的', kickPick: '⭐ 今日推荐', cont: '继续玩', play: '开始玩', fav: '☆ 收藏', faved: '★ 已收藏', latest: '最新',
+    shRecent: '🕹️ 最近玩过', shFav: '⭐ 我的收藏', shFamily: '🏠 我们自己做的游戏', shPad: '🎮 用手柄玩', shKeyboard: '⌨️ 要用键盘鼠标',
+    kbdNote: '在电脑上玩，iPad 和 Xbox 上玩不了', results: n => `🔍 找到 ${n} 个`, none: '没有找到。换个词试试？', gOther: '🎲 其他',
+    community: '🌐 社区游戏', communityNote: '别人用 AI 做的开源游戏，在安全的沙盒里运行',
+    genres: { board: '♟️ 棋牌', puzzle: '🧩 解谜', racing: '🏁 赛车与飞行', adventure: '🧭 冒险探索', build: '🏗️ 经营建造', arcade: '🕹️ 动作街机', cozy: '🌿 休闲放松' },
+    inp: { touch: '👆 触屏', controller: '🎮 手柄', both: '👆🎮 触屏+手柄', keyboard: '⌨️ 键盘鼠标' },
+    inpLong: { touch: '👆 用 iPad 触屏玩（电视上可以投屏）', controller: '🎮 手柄 + 电视', both: '👆🎮 触屏或手柄都能玩', keyboard: '⌨️ 要键盘鼠标（电脑上玩）' },
+    by: a => `作者 ${a}`, made: m => `用 ${m} 制作`, ext: '↗ 外部网站',
+    kMove: '移动', kOpen: '开始玩', kFav: '收藏', kSearch: '搜索', kBack: '返回', kPage: '翻页', kMenu: '设置',
+    loading: '正在读取游戏清单…', loadFail: '读不到游戏清单（games.json）。', retry: '再试一次', empty: '清单里还没有游戏。',
+    wake: '用手柄：先按一次 A 叫醒页面，然后用十字键选游戏。', favOn: n => `⭐ 已收藏「${n}」`, favOff: n => `已取消收藏「${n}」`,
   },
   'zh-Hant': {
-    search: '🔍 搜尋遊戲名、作者…', all: '全部', fTouch: '👆 觸控', fPad: '🎮 手把', fKeyboard: '⌨️ 鍵盤', allGenres: '全部類型', none: '沒有符合條件的遊戲。', genres: { board: '♟️ 棋牌', puzzle: '🧩 解謎', racing: '🏁 賽車與飛行', adventure: '🧭 冒險探索', build: '🏗️ 經營建造', arcade: '🕹️ 動作街機', cozy: '🌿 休閒放鬆' },
-    both: '👆🎮 觸控或手把', keyboard: '⌨️ 需要鍵盤滑鼠（電腦）', subTouch: '👆 iPad 觸控能玩', subPad: '🎮 手把 + 電視', subKeyboard: '⌨️ 要用鍵盤滑鼠（在電腦上玩）', ext: '🔗 外部網站',
-    secFamily: '🏠 自己開發的遊戲', secCommunity: '🌐 社群遊戲', secCommunityNote: '別人用 AI 做的遊戲', by: a => `作者 ${a}`, made: m => `用 ${m} 製作`,
-    title: '🎮 遊戲大廳', cont: n => `繼續玩：${n}`, latest: '最新版本',
-    touch: '👆 觸控優先（用 iPad 投影）', controller: '🎮 手把+電視',
-    fs: '全螢幕', exitfs: '離開全螢幕', fsFail: '✗ 全螢幕',
-    pads: n => `🎮 ×${n}`, loading: '正在讀取遊戲清單…',
-    loadFail: '讀不到遊戲清單（games.json）。', retry: '再試一次', empty: '清單裡還沒有遊戲。',
-    hintMove: '移動', hintOpen: '打開', hintBack: '回到頂部',
-    hintTouch: '點一張卡片就能打開遊戲。', hintWake: '用手把：先按一次 A 叫醒這個頁面。',
+    title: '🎮 遊戲大廳', count: n => `${n} 個遊戲`, search: '搜尋', searchPh: n => `搜尋 ${n} 個遊戲：名字、作者…`, close: '關閉',
+    fs: '全螢幕', exitfs: '離開全螢幕', fsFail: '全螢幕不可用', settings: '語言和設定', sound: s => s ? '🔊 按鍵聲音：開' : '🔇 按鍵聲音：關',
+    kickCont: '▶ 上次玩的', kickPick: '⭐ 今日推薦', cont: '繼續玩', play: '開始玩', fav: '☆ 收藏', faved: '★ 已收藏', latest: '最新',
+    shRecent: '🕹️ 最近玩過', shFav: '⭐ 我的收藏', shFamily: '🏠 我們自己做的遊戲', shPad: '🎮 用手把玩', shKeyboard: '⌨️ 要用鍵盤滑鼠',
+    kbdNote: '在電腦上玩，iPad 和 Xbox 上玩不了', results: n => `🔍 找到 ${n} 個`, none: '沒有找到。換個詞試試？', gOther: '🎲 其他',
+    community: '🌐 社群遊戲', communityNote: '別人用 AI 做的開源遊戲，在安全的沙盒裡執行',
+    genres: { board: '♟️ 棋牌', puzzle: '🧩 解謎', racing: '🏁 賽車與飛行', adventure: '🧭 冒險探索', build: '🏗️ 經營建造', arcade: '🕹️ 動作街機', cozy: '🌿 休閒放鬆' },
+    inp: { touch: '👆 觸控', controller: '🎮 手把', both: '👆🎮 觸控+手把', keyboard: '⌨️ 鍵盤滑鼠' },
+    inpLong: { touch: '👆 用 iPad 觸控玩（電視上可以投影）', controller: '🎮 手把 + 電視', both: '👆🎮 觸控或手把都能玩', keyboard: '⌨️ 要鍵盤滑鼠（電腦上玩）' },
+    by: a => `作者 ${a}`, made: m => `用 ${m} 製作`, ext: '↗ 外部網站',
+    kMove: '移動', kOpen: '開始玩', kFav: '收藏', kSearch: '搜尋', kBack: '返回', kPage: '翻頁', kMenu: '設定',
+    loading: '正在讀取遊戲清單…', loadFail: '讀不到遊戲清單（games.json）。', retry: '再試一次', empty: '清單裡還沒有遊戲。',
+    wake: '用手把：先按一次 A 叫醒頁面，然後用十字鍵選遊戲。', favOn: n => `⭐ 已收藏「${n}」`, favOff: n => `已取消收藏「${n}」`,
   },
   en: {
-    search: '🔍 Search games, authors…', all: 'All', fTouch: '👆 Touch', fPad: '🎮 Controller', fKeyboard: '⌨️ Keyboard', allGenres: 'All kinds', none: 'No games match.', genres: { board: '♟️ Board & cards', puzzle: '🧩 Puzzle', racing: '🏁 Racing & flying', adventure: '🧭 Adventure', build: '🏗️ Build & manage', arcade: '🕹️ Action & arcade', cozy: '🌿 Relaxing' },
-    both: '👆🎮 Touch or controller', keyboard: '⌨️ Keyboard & mouse (computer)', subTouch: '👆 Plays on the iPad by touch', subPad: '🎮 Controller + TV', subKeyboard: '⌨️ Needs a keyboard & mouse (play on a computer)', ext: '🔗 external site',
-    secFamily: '🏠 Our own games', secCommunity: '🌐 Community games', secCommunityNote: 'Games other people made with AI', by: a => `by ${a}`, made: m => `made with ${m}`,
-    title: '🎮 Game Hub', cont: n => `Continue: ${n}`, latest: 'Latest',
-    touch: '👆 Touch-first (mirror the iPad)', controller: '🎮 Controller + TV',
-    fs: 'Fullscreen', exitfs: 'Exit fullscreen', fsFail: '✗ Fullscreen',
-    pads: n => `🎮 ×${n}`, loading: 'Loading the game list…',
-    loadFail: 'Couldn’t load the game list (games.json).', retry: 'Try again', empty: 'No games in the list yet.',
-    hintMove: 'Move', hintOpen: 'Open', hintBack: 'Back to top',
-    hintTouch: 'Tap a card to open a game.', hintWake: 'Controller: press A once to wake this page.',
+    title: '🎮 Game Hub', count: n => `${n} games`, search: 'Search', searchPh: n => `Search ${n} games: name, author…`, close: 'Close',
+    fs: 'Fullscreen', exitfs: 'Exit fullscreen', fsFail: 'No fullscreen', settings: 'Language & settings', sound: s => s ? '🔊 Button sounds: on' : '🔇 Button sounds: off',
+    kickCont: '▶ Last played', kickPick: '⭐ Today’s pick', cont: 'Continue', play: 'Play', fav: '☆ Favorite', faved: '★ Favorite', latest: 'Latest',
+    shRecent: '🕹️ Recently played', shFav: '⭐ My favorites', shFamily: '🏠 Our own games', shPad: '🎮 Play with a controller', shKeyboard: '⌨️ Needs keyboard & mouse',
+    kbdNote: 'Play these on a computer, not on the iPad or Xbox', results: n => `🔍 ${n} found`, none: 'Nothing found. Try another word?', gOther: '🎲 Other',
+    community: '🌐 Community games', communityNote: 'Open-source games other people made with AI, run in a safe sandbox',
+    genres: { board: '♟️ Board & cards', puzzle: '🧩 Puzzle', racing: '🏁 Racing & flying', adventure: '🧭 Adventure', build: '🏗️ Build & manage', arcade: '🕹️ Action & arcade', cozy: '🌿 Relaxing' },
+    inp: { touch: '👆 Touch', controller: '🎮 Controller', both: '👆🎮 Both', keyboard: '⌨️ Keyboard' },
+    inpLong: { touch: '👆 Touch on the iPad (mirror it to the TV)', controller: '🎮 Controller + TV', both: '👆🎮 Touch or controller', keyboard: '⌨️ Keyboard & mouse (on a computer)' },
+    by: a => `by ${a}`, made: m => `made with ${m}`, ext: '↗ external site',
+    kMove: 'Move', kOpen: 'Play', kFav: 'Favorite', kSearch: 'Search', kBack: 'Back', kPage: 'Page', kMenu: 'Settings',
+    loading: 'Loading the game list…', loadFail: 'Couldn’t load the game list (games.json).', retry: 'Try again', empty: 'No games in the list yet.',
+    wake: 'Controller: press A once to wake the page, then pick a game with the D-pad.', favOn: n => `⭐ Added “${n}” to favorites`, favOff: n => `Removed “${n}” from favorites`,
   },
   fr: {
-    search: '🔍 Chercher un jeu, un auteur…', all: 'Tous', fTouch: '👆 Tactile', fPad: '🎮 Manette', fKeyboard: '⌨️ Clavier', allGenres: 'Tous les genres', none: 'Aucun jeu ne correspond.', genres: { board: '♟️ Plateau et cartes', puzzle: '🧩 Réflexion', racing: '🏁 Course et vol', adventure: '🧭 Aventure', build: '🏗️ Gestion', arcade: '🕹️ Action', cozy: '🌿 Détente' },
-    both: '👆🎮 Tactile ou manette', keyboard: '⌨️ Clavier et souris (ordinateur)', subTouch: '👆 Se joue au doigt sur l’iPad', subPad: '🎮 Manette + TV', subKeyboard: '⌨️ Clavier et souris (sur un ordinateur)', ext: '🔗 site externe',
-    secFamily: '🏠 Nos propres jeux', secCommunity: '🌐 Jeux de la communauté', secCommunityNote: 'Jeux faits avec l’IA par d’autres', by: a => `par ${a}`, made: m => `fait avec ${m}`,
-    title: '🎮 Salle de jeux', cont: n => `Continuer : ${n}`, latest: 'Dernière version',
-    touch: '👆 Tactile : recopier l’iPad', controller: '🎮 Manette + TV',
-    fs: 'Plein écran', exitfs: 'Quitter le plein écran', fsFail: '✗ Plein écran',
-    pads: n => `🎮 ×${n}`, loading: 'Chargement de la liste des jeux…',
-    loadFail: 'Impossible de charger la liste des jeux (games.json).', retry: 'Réessayer', empty: 'Aucun jeu dans la liste pour l’instant.',
-    hintMove: 'Se déplacer', hintOpen: 'Ouvrir', hintBack: 'Revenir en haut',
-    hintTouch: 'Touche une carte pour ouvrir un jeu.', hintWake: 'Manette : appuie une fois sur A pour réveiller la page.',
+    title: '🎮 Salle de jeux', count: n => `${n} jeux`, search: 'Chercher', searchPh: n => `Chercher parmi ${n} jeux : nom, auteur…`, close: 'Fermer',
+    fs: 'Plein écran', exitfs: 'Quitter le plein écran', fsFail: 'Plein écran indisponible', settings: 'Langue et réglages', sound: s => s ? '🔊 Sons des boutons : oui' : '🔇 Sons des boutons : non',
+    kickCont: '▶ Dernier joué', kickPick: '⭐ Le choix du jour', cont: 'Continuer', play: 'Jouer', fav: '☆ Favori', faved: '★ Favori', latest: 'Version',
+    shRecent: '🕹️ Joués récemment', shFav: '⭐ Mes favoris', shFamily: '🏠 Nos propres jeux', shPad: '🎮 À la manette', shKeyboard: '⌨️ Clavier et souris',
+    kbdNote: 'À jouer sur un ordinateur, pas sur l’iPad ni la Xbox', results: n => `🔍 ${n} trouvé(s)`, none: 'Rien trouvé. Essaie un autre mot ?', gOther: '🎲 Autres',
+    community: '🌐 Jeux de la communauté', communityNote: 'Jeux libres faits avec l’IA par d’autres, lancés dans un bac à sable sûr',
+    genres: { board: '♟️ Plateau et cartes', puzzle: '🧩 Réflexion', racing: '🏁 Course et vol', adventure: '🧭 Aventure', build: '🏗️ Gestion', arcade: '🕹️ Action', cozy: '🌿 Détente' },
+    inp: { touch: '👆 Tactile', controller: '🎮 Manette', both: '👆🎮 Les deux', keyboard: '⌨️ Clavier' },
+    inpLong: { touch: '👆 Au doigt sur l’iPad (recopié sur la TV)', controller: '🎮 Manette + TV', both: '👆🎮 Tactile ou manette', keyboard: '⌨️ Clavier et souris (ordinateur)' },
+    by: a => `par ${a}`, made: m => `fait avec ${m}`, ext: '↗ site externe',
+    kMove: 'Bouger', kOpen: 'Jouer', kFav: 'Favori', kSearch: 'Chercher', kBack: 'Retour', kPage: 'Page', kMenu: 'Réglages',
+    loading: 'Chargement de la liste des jeux…', loadFail: 'Impossible de charger la liste des jeux (games.json).', retry: 'Réessayer', empty: 'Aucun jeu dans la liste pour l’instant.',
+    wake: 'Manette : appuie une fois sur A pour réveiller la page, puis choisis avec la croix.', favOn: n => `⭐ « ${n} » ajouté aux favoris`, favOff: n => `« ${n} » retiré des favoris`,
   },
 };
 
-/* ===================== Storage (never throws) ===================== */
+/* ============================== Storage (never throws, tolerant) ============================== */
 const store = {
   get(k) { try { const v = localStorage.getItem(k); return v == null ? null : JSON.parse(v); } catch (e) { return null; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } },
 };
-
+const sess = {
+  get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} },
+  del(k) { try { sessionStorage.removeItem(k); } catch (e) {} },
+};
+function loadSettings() {
+  const s = store.get(K.settings);
+  const o = s && typeof s === 'object' && !Array.isArray(s) ? s : {};
+  return { ...o, lang: STR[o.lang] ? o.lang : null, sound: o.sound !== false };
+}
+function saveSettings(patch) {
+  const s = store.get(K.settings);
+  store.set(K.settings, Object.assign(s && typeof s === 'object' && !Array.isArray(s) ? s : {}, patch));
+}
 function detectLang() {
   const n = String(navigator.language || '').toLowerCase();
   if (n.startsWith('zh')) return /^zh-(tw|hk|mo|hant)/.test(n) ? 'zh-Hant' : 'zh-Hans';
   if (n.startsWith('fr')) return 'fr';
   return 'en';
 }
-const saved = store.get(KEY_SETTINGS);
-let lang = saved && STR[saved.lang] ? saved.lang : detectLang();
+function recentList() {
+  const r = store.get(K.recent);
+  let list = r && Array.isArray(r.list) ? r.list.filter(x => x && typeof x.id === 'string').map(x => ({ id: x.id, at: +x.at || 0 })) : null;
+  if (!list) { const l = store.get(K.last); list = l && typeof l.id === 'string' ? [{ id: l.id, at: +l.at || 0 }] : []; }  // migrate the old single "last" key
+  const seen = new Set();
+  return list.sort((a, b) => b.at - a.at).filter(x => !seen.has(x.id) && seen.add(x.id)).slice(0, CFG.recentMax);
+}
+function remember(id) {
+  const at = Date.now();
+  store.set(K.last, { id, at });
+  store.set(K.recent, { v: 1, list: [{ id, at }, ...recentList().filter(x => x.id !== id)].slice(0, CFG.recentMax) });
+}
+function favIds() {
+  const f = store.get(K.favs);
+  const ids = f && Array.isArray(f.ids) ? f.ids : Array.isArray(f) ? f : [];
+  return [...new Set(ids.filter(x => typeof x === 'string'))];
+}
+function isFav(id) { return favIds().includes(id); }
+function toggleFav(id) {
+  const ids = favIds(), on = !ids.includes(id);
+  store.set(K.favs, { v: 1, ids: on ? [id, ...ids] : ids.filter(x => x !== id) });
+  return on;
+}
 
+/* ============================== i18n ============================== */
+const settings = loadSettings();
+let lang = settings.lang || detectLang();
+let soundOn = settings.sound;
 const tr = (key, ...a) => { const v = (STR[lang] && STR[lang][key]) ?? STR.en[key]; return typeof v === 'function' ? v(...a) : v; };
 const loc = o => {
   if (!o || typeof o !== 'object') return String(o ?? '');
@@ -220,12 +384,34 @@ const loc = o => {
   return Object.values(o)[0] || '';
 };
 
-/* ===================== State ===================== */
-const S = { games: null, status: 'loading', mode: 'none', padSeen: false, q: '', fInput: 'all', fGenre: 'all' };
-const GENRES = ['board', 'puzzle', 'racing', 'adventure', 'build', 'arcade', 'cozy'];
+/* ============================== State ============================== */
+const S = { games: null, status: 'loading', mode: 'none', padSeen: sess.get(HUB_ID + '/pad') === '1', q: '', searchOpen: false, dlg: null };
 const $ = id => document.getElementById(id);
+const byId = id => (S.games || []).find(g => g.id === id) || null;
 
-/* ===================== Load games.json ===================== */
+/* ============================== Sound (only after the first tap / key) ============================== */
+let actx = null, unlocked = false;
+function unlockAudio() { unlocked = true; }
+function sfx(kind) {
+  if (!soundOn || !unlocked) return;
+  try {
+    if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === 'suspended') actx.resume().catch(() => {});
+    const t = actx.currentTime, P = {
+      move: [[660, 0, 0.035, 'triangle']], bump: [[150, 0, 0.06, 'sine']],
+      ok: [[523, 0, 0.06, 'triangle'], [784, 0.05, 0.09, 'triangle']], back: [[440, 0, 0.05, 'triangle'], [330, 0.045, 0.07, 'triangle']],
+      fav: [[784, 0, 0.05, 'sine'], [1175, 0.05, 0.1, 'sine']], unfav: [[587, 0, 0.05, 'sine'], [392, 0.05, 0.08, 'sine']],
+    }[kind] || [];
+    for (const [f, d, len, type] of P) {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = type; o.frequency.value = f; o.connect(g); g.connect(actx.destination);
+      g.gain.setValueAtTime(0.0001, t + d); g.gain.exponentialRampToValueAtTime(CFG.volume, t + d + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, t + d + len);
+      o.start(t + d); o.stop(t + d + len + 0.02);
+    }
+  } catch (e) {}
+}
+
+/* ============================== Load games.json ============================== */
 function cleanGame(g) {
   if (!g || typeof g !== 'object' || typeof g.id !== 'string' || typeof g.url !== 'string') return null;
   let url;
@@ -239,8 +425,9 @@ function cleanGame(g) {
     input: ['controller', 'both', 'keyboard'].includes(g.input) ? g.input : 'touch',
     ext: typeof g.external === 'string' || g.link === true,
     genre: typeof g.genre === 'string' ? g.genre : '',
-    color: typeof g.color === 'string' ? g.color : '#888',
-    name: g.name || { en: g.id }, blurb: g.blurb || {}, icon: typeof g.icon === 'string' ? g.icon : '',
+    color: typeof g.color === 'string' && /^#[0-9a-f]{3,8}$/i.test(g.color) ? g.color : '#7783b5',
+    name: g.name && typeof g.name === 'object' ? g.name : { en: g.id }, blurb: g.blurb && typeof g.blurb === 'object' ? g.blurb : {},
+    icon: typeof g.icon === 'string' && /^<svg[\s>]/.test(g.icon.trim()) ? g.icon : '',
   };
 }
 async function loadGames() {
@@ -251,303 +438,480 @@ async function loadGames() {
     const d = await r.json();
     const list = Array.isArray(d) ? d : (d && d.games);
     if (!Array.isArray(list)) throw new Error('bad format');
-    S.games = list.map(cleanGame).filter(Boolean);
+    const seen = new Set();
+    S.games = list.map(cleanGame).filter(g => g && !seen.has(g.id) && seen.add(g.id));
     S.status = 'ok';
   } catch (e) {
     S.status = 'error';
   }
   render();
-  if (!focusEl || !document.body.contains(focusEl) || focusEl.offsetParent === null) setFocus(defaultFocus(), false);
+  const back = sess.get(SS_FOCUS); sess.del(SS_FOCUS);           // came back from a game: land on its tile
+  const el = findKey(back);
+  if (el && visible(el)) setFocus(el, true);
+  else if (!focusEl || !document.body.contains(focusEl) || !visible(focusEl)) setFocus(defaultFocus(), false);
 }
 
-/* ===================== Render ===================== */
-function lastGame() {
-  const l = store.get(KEY_LAST);
-  return l && S.games ? S.games.find(g => g.id === l.id) || null : null;
+function findKey(key) {                                       // a tile by its key, or the same game on another shelf
+  if (!key) return null;
+  const el = document.querySelector(`[data-key="${CSS.escape(key)}"]`);
+  if (el && visible(el)) return el;
+  const id = key.includes(':') ? key.slice(key.indexOf(':') + 1) : key;
+  return [...document.querySelectorAll(`#shelves .tile[data-id="${CSS.escape(id)}"]`)].find(visible) || null;
 }
-function remember(id) { store.set(KEY_LAST, { id, at: Date.now() }); }
 
-function render() {
-  const keep = focusEl && (focusEl.dataset.key || focusEl.id);
-  document.documentElement.lang = lang;
-  document.title = tr('title').replace(/^\S+\s/, '');
-  $('title').textContent = tr('title');
-
-  // language switcher (each language in its own name)
-  const langs = $('langs');
-  if (!langs.children.length) {
-    for (const [code, label] of LANGS) {
-      const b = document.createElement('button');
-      b.type = 'button'; b.className = 'btn nav'; b.textContent = label; b.lang = code;
-      b.dataset.key = 'lang-' + code;
-      b.addEventListener('click', () => setLang(code));
-      langs.appendChild(b);
-    }
+/* ============================== Shelves (what goes where) ============================== */
+const padish = () => IS_XBOX || S.padSeen;
+function rankForDevice(list) {
+  const good = padish() ? g => g.input === 'controller' || g.input === 'both' : g => g.input === 'touch' || g.input === 'both';
+  return [...list].sort((a, b) => (good(b) ? 1 : 0) - (good(a) ? 1 : 0));   // stable: keeps games.json order within a group
+}
+const norm = t => String(t || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '');
+function matches(g, q) {
+  const hay = norm([...Object.values(g.name || {}), ...Object.values(g.blurb || {}), g.credit.author, g.credit.made, g.id,
+    g.genre && STR[lang].genres[g.genre], tr('inp')[g.input]].join(' '));
+  return q.split(/\s+/).filter(Boolean).every(w => hay.includes(w));
+}
+function buildShelves() {
+  const G = S.games || [], out = [];
+  const q = norm(S.q).trim();
+  if (S.searchOpen && q) { out.push({ id: 'results', title: tr('results', G.filter(g => matches(g, q)).length), items: rankForDevice(G.filter(g => matches(g, q))) }); return out; }
+  const rec = recentList().map(x => byId(x.id)).filter(Boolean);
+  if (rec.length >= CFG.recentShelfMin) out.push({ id: 'recent', title: tr('shRecent'), items: rec });
+  const fav = favIds().map(byId).filter(Boolean);
+  if (fav.length) out.push({ id: 'fav', title: tr('shFav'), items: fav });
+  const fam = G.filter(g => g.category === 'family');
+  if (fam.length) out.push({ id: 'family', title: tr('shFamily'), items: fam, wide: true });
+  if (padish()) { const pad = G.filter(g => g.input === 'controller' || g.input === 'both'); if (pad.length) out.push({ id: 'pad', title: tr('shPad'), items: pad }); }
+  const com = G.filter(g => g.category === 'community');
+  if (com.length) out.push({ divider: true });
+  for (const gen of GENRES) {
+    const it = com.filter(g => g.input !== 'keyboard' && g.genre === gen);
+    if (it.length) out.push({ id: 'g-' + gen, title: STR[lang].genres[gen] || gen, items: rankForDevice(it) });
   }
-  for (const b of langs.children) b.setAttribute('aria-pressed', String(b.dataset.key === 'lang-' + lang));
+  const other = com.filter(g => g.input !== 'keyboard' && !GENRES.includes(g.genre));
+  if (other.length) out.push({ id: 'g-other', title: tr('gOther'), items: rankForDevice(other) });
+  const kb = com.filter(g => g.input === 'keyboard');
+  if (kb.length) out.push({ id: 'kbd', title: tr('shKeyboard'), note: IS_DESKTOP ? '' : tr('kbdNote'), items: kb });
+  return out;
+}
+function heroGame() {
+  const r = recentList().map(x => byId(x.id)).find(Boolean);
+  if (r) return { g: r, cont: true };
+  const fam = (S.games || []).filter(g => g.category === 'family');
+  const pool = fam.length ? fam : (S.games || []);
+  if (!pool.length) return null;
+  const day = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
+  return { g: pool[day % pool.length], cont: false };
+}
+
+/* ============================== Render ============================== */
+function render() {
+  const keep = focusEl && focusEl.dataset.key;
+  document.documentElement.lang = lang;
+  document.title = tr('title').replace(/^\S+\s/, '') + ' · Game Hub';
+  $('title').textContent = tr('title');
+  $('count').textContent = S.games && S.games.length ? tr('count', S.games.length) : '';
+  $('bSearch').querySelector('.lbl').textContent = tr('search'); $('bSearch').setAttribute('aria-label', tr('search'));
+  $('bLang').querySelector('.lbl').textContent = (LANGS.find(l => l[0] === lang) || [, ''])[1]; $('bLang').setAttribute('aria-label', tr('settings'));
   fsLabel();
   $('retry').textContent = tr('retry');
+  $('q').placeholder = tr('searchPh', (S.games || []).length); $('q').setAttribute('aria-label', tr('search'));
+  $('bClose').setAttribute('aria-label', tr('close'));
+  $('sbar').hidden = !S.searchOpen;
+  if ($('q').value !== S.q) $('q').value = S.q;
 
-  // message
   const msg = $('msg');
   if (S.status === 'loading') { msg.hidden = false; $('msgText').textContent = tr('loading'); $('retry').hidden = true; }
   else if (S.status === 'error') { msg.hidden = false; $('msgText').textContent = tr('loadFail'); $('retry').hidden = false; }
   else if (!S.games.length) { msg.hidden = false; $('msgText').textContent = tr('empty'); $('retry').hidden = true; }
   else msg.hidden = true;
 
-  // continue
-  const cont = $('cont'), lg = lastGame();
-  if (lg) {
-    cont.hidden = false; cont.href = lg.url; cont.dataset.id = lg.id;
-    cont.querySelector('.ic').innerHTML = lg.icon;
-    cont.querySelector('.tx').textContent = tr('cont', loc(lg.name));
-  } else cont.hidden = true;
-
-  renderFilters();
-  renderCards();
-  renderHint();
+  renderHero();
+  renderShelves();
+  renderFoot();
   renderPads();
+  if (S.dlg) S.dlg.render();
 
   if (keep) {
-    const el = document.querySelector(`[data-key="${keep}"]`) || $(keep);
-    if (el && el.offsetParent !== null) setFocus(el, false);
+    const el = document.querySelector(`[data-key="${CSS.escape(keep)}"]`);
+    if (el && visible(el)) setFocus(el, false);
+    else if (focusEl && !document.body.contains(focusEl)) setFocus(defaultFocus(), false);
   }
+  if (S.mode === 'pad' || S.mode === 'key') renderDetail();
 }
 
-/* ===================== Search & filters ===================== */
-function chipRow(box, items, cur, onPick) {
-  box.textContent = '';
-  for (const [val, label] of items) {
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'btn nav chip'; b.textContent = label; b.dataset.key = box.id + '-' + val;
-    b.setAttribute('aria-pressed', String(val === cur));
-    b.addEventListener('click', () => onPick(val));
-    box.appendChild(b);
-  }
+function renderHero() {
+  const h = $('hero'), hg = S.status === 'ok' && !(S.searchOpen && S.q.trim()) ? heroGame() : null;
+  h.hidden = !hg;
+  if (!hg) return;
+  const g = hg.g;
+  h.style.setProperty('--hc', g.color);
+  h.dataset.id = g.id;
+  h.querySelector('.hart .ic').innerHTML = g.icon;
+  h.querySelector('.kicker').textContent = hg.cont ? tr('kickCont') : tr('kickPick');
+  h.querySelector('.hname').textContent = loc(g.name);
+  h.querySelector('.hblurb').textContent = loc(g.blurb);
+  const c = $('cont'); c.href = g.url; c.dataset.id = g.id; c.querySelector('span').textContent = hg.cont ? tr('cont') : tr('play');
+  const f = $('hfav'), on = isFav(g.id); f.textContent = on ? tr('faved') : tr('fav'); f.setAttribute('aria-pressed', String(on)); f.dataset.id = g.id;
+  const v = $('hver'); v.hidden = !g.latest; v.querySelector('span').textContent = tr('latest'); v.querySelector('b').textContent = g.latest;
 }
-function renderFilters() {
-  const many = (S.games || []).length > 12;
-  $('filters').hidden = !many || S.status !== 'ok';
-  if ($('filters').hidden) return;
-  $('q').placeholder = tr('search');
-  $('q').setAttribute('aria-label', tr('search'));
-  if ($('q').value !== S.q) $('q').value = S.q;
-  chipRow($('fInput'), [['all', tr('all')], ['touch', tr('fTouch')], ['controller', tr('fPad')], ['keyboard', tr('fKeyboard')]], S.fInput, v => { S.fInput = v; refilter('fInput-' + v); });
-  const used = new Set((S.games || []).map(g => g.genre));
-  chipRow($('fGenre'), [['all', tr('allGenres')], ...GENRES.filter(x => used.has(x)).map(x => [x, tr('genres')[x]])], S.fGenre, v => { S.fGenre = v; refilter('fGenre-' + v); });
-}
-function refilter(keepKey) {
-  renderFilters(); renderCards();
-  const el = keepKey && document.querySelector(`[data-key="${keepKey}"]`);
-  if (el) setFocus(el, false);
-}
-const norm = t => String(t || '').toLowerCase();
-function matches(g) {
-  if (S.fInput === 'touch' && !(g.input === 'touch' || g.input === 'both')) return false;
-  if (S.fInput === 'controller' && !(g.input === 'controller' || g.input === 'both')) return false;
-  if (S.fInput === 'keyboard' && g.input !== 'keyboard') return false;
-  if (S.fGenre !== 'all' && g.genre !== S.fGenre) return false;
-  const q = norm(S.q).trim();
-  if (!q) return true;
-  const hay = norm([...Object.values(g.name || {}), loc(g.blurb), g.credit.author, g.credit.made, g.id].join(' '));
-  return q.split(/\s+/).every(w => hay.includes(w));
-}
-$('q').addEventListener('input', () => { S.q = $('q').value; renderCards(); });
 
-function renderCards() {
-  const box = $('games');
+function renderShelves() {
+  const box = $('shelves');
+  const keepScroll = {};
+  for (const t of box.querySelectorAll('.tiles')) keepScroll[t.dataset.row] = t.scrollLeft;
   box.textContent = '';
-  const groups = [['family', tr('secFamily'), ''], ['community', tr('secCommunity'), tr('secCommunityNote')]];
-  const many = (S.games || []).some(g => g.category === 'community');
-  for (const [cat, title, note] of groups) {
-    const list = (S.games || []).filter(g => g.category === cat && matches(g));
-    if (!list.length) continue;
-    if (many) {
-      const h = document.createElement('h2'); h.className = 'sec'; h.textContent = title;
-      if (note) { const sm = document.createElement('small'); sm.textContent = note; h.appendChild(sm); }
-      box.appendChild(h);
+  if (S.status !== 'ok') { $('none').hidden = true; return; }
+  const list = buildShelves();
+  const favSet = new Set(favIds());
+  for (const sh of list) {
+    if (sh.divider) {
+      const d = document.createElement('div'); d.className = 'divider';
+      const b = document.createElement('b'); b.textContent = tr('community'); d.appendChild(b);
+      d.appendChild(document.createTextNode(' · ' + tr('communityNote')));
+      box.appendChild(d); continue;
     }
-    // community games are grouped by what they can be played with
-    const subs = cat === 'community'
-      ? [['subTouch', list.filter(g => g.input === 'touch' || g.input === 'both')], ['subPad', list.filter(g => g.input === 'controller')], ['subKeyboard', list.filter(g => g.input === 'keyboard')]]
-      : [[null, list]];
-    for (const [sub, items] of subs) {
-      if (!items.length) continue;
-      if (sub && many) { const h = document.createElement('h3'); h.className = 'sub'; h.textContent = tr(sub); box.appendChild(h); }
-      const grid = document.createElement('div'); grid.className = 'grid'; box.appendChild(grid);
-      for (const g of items) grid.appendChild(card(g));
+    const sec = document.createElement('section'); sec.className = 'shelf'; sec.dataset.shelf = sh.id;
+    const head = document.createElement('div'); head.className = 'shead';
+    const h2 = document.createElement('h2'); h2.textContent = sh.title; head.appendChild(h2);
+    const sm = document.createElement('small'); sm.textContent = sh.note ? `${sh.items.length} · ${sh.note}` : String(sh.items.length); head.appendChild(sm);
+    const arrs = document.createElement('div'); arrs.className = 'arrs';
+    for (const [dir, ch] of [[-1, '‹'], [1, '›']]) {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'arr'; b.textContent = ch; b.tabIndex = -1;
+      b.setAttribute('aria-label', ch); b.dataset.dir = dir; arrs.appendChild(b);
     }
+    head.appendChild(arrs); sec.appendChild(head);
+    const row = document.createElement('div'); row.className = 'tiles navrow'; row.dataset.row = 's-' + sh.id;
+    for (const g of sh.items) row.appendChild(tile(g, sh, favSet.has(g.id)));
+    sec.appendChild(row); box.appendChild(sec);
+    if (keepScroll[row.dataset.row]) row.scrollLeft = keepScroll[row.dataset.row];
+    row.addEventListener('scroll', () => arrowState(sec), { passive: true });
   }
-  const shown = box.querySelectorAll('.card').length;
-  $('none').hidden = !(S.status === 'ok' && S.games.length && !shown);
+  requestAnimationFrame(() => box.querySelectorAll('.shelf').forEach(arrowState));
+  $('none').hidden = !(S.searchOpen && S.q.trim() && !box.querySelector('.tile'));
   $('none').textContent = tr('none');
 }
-
-function card(g) {
+function arrowState(sec) {
+  const t = sec.querySelector('.tiles'); if (!t) return;
+  const [l, r] = sec.querySelectorAll('.arr');
+  const max = t.scrollWidth - t.clientWidth - 2;
+  l.disabled = t.scrollLeft <= 2; r.disabled = t.scrollLeft >= max;
+  sec.querySelector('.arrs').hidden = max <= 0;
+}
+function tile(g, sh, fav) {
+  const w = document.createElement('div'); w.className = 'tw' + (sh.wide ? ' wide' : '');
   const a = document.createElement('a');
-  a.className = 'card nav'; a.href = g.url; a.dataset.id = g.id; a.dataset.key = 'game-' + g.id;
-  a.style.setProperty('--c', g.color);
-  a.innerHTML = '<div class="top"><div class="ic"></div><div class="name"></div></div><div class="blurb"></div>' +
-    '<div class="meta"><div class="ver"><span></span><b></b></div><div class="tag"></div></div>';
+  a.className = 'tile nav'; a.href = g.url; a.dataset.id = g.id; a.dataset.key = sh.id + ':' + g.id;
+  a.innerHTML = '<div class="art"><div class="ic"></div></div><div class="tbody"><div class="tname"></div><div class="tblurb"></div><div class="tmeta"></div></div>';
+  const art = a.querySelector('.art'); art.style.setProperty('--c', g.color);
   a.querySelector('.ic').innerHTML = g.icon;
-  a.querySelector('.name').textContent = loc(g.name);
-  a.querySelector('.blurb').textContent = loc(g.blurb);
-  if (g.latest) {
-    a.querySelector('.ver span').textContent = tr('latest');
-    a.querySelector('.ver b').textContent = g.latest;
-  } else a.querySelector('.ver').remove();
-  if (g.category === 'community') {
-    const cr = document.createElement('div'); cr.className = 'credit';
-    cr.textContent = [g.credit.author && tr('by', g.credit.author), g.credit.made && tr('made', g.credit.made), g.ext && tr('ext')].filter(Boolean).join(' · ');
-    a.insertBefore(cr, a.querySelector('.meta'));
-  }
-  const tag = a.querySelector('.tag');
-  tag.classList.add(g.input); tag.textContent = tr(g.input);
-  return a;
+  if (g.ext) { const e = document.createElement('span'); e.className = 'extb'; e.textContent = '↗'; e.title = tr('ext'); art.appendChild(e); }
+  a.querySelector('.tname').textContent = loc(g.name);
+  a.querySelector('.tblurb').textContent = loc(g.blurb);
+  const m = a.querySelector('.tmeta');
+  const inp = document.createElement('span'); inp.className = 'inp ' + g.input; inp.textContent = tr('inp')[g.input]; m.appendChild(inp);
+  if (g.latest) { const v = document.createElement('span'); v.className = 'ver'; v.innerHTML = '<b></b>'; v.querySelector('b').textContent = g.latest; m.appendChild(v); }
+  if (g.category === 'community' && g.credit.author) { const c = document.createElement('span'); c.className = 'credit'; c.textContent = tr('by', g.credit.author); m.appendChild(c); }
+  a.setAttribute('aria-label', `${loc(g.name)}. ${loc(g.blurb)}`);
+  w.appendChild(a);
+  const s = document.createElement('button'); s.type = 'button'; s.className = 'star'; s.tabIndex = -1; s.dataset.id = g.id;
+  s.textContent = fav ? '★' : '☆'; s.setAttribute('aria-pressed', String(fav)); s.setAttribute('aria-label', tr('kFav'));
+  w.appendChild(s);
+  return w;
 }
 
-function renderHint() {
-  const h = $('hint');
-  if (S.mode === 'pad' || S.mode === 'key') {
-    h.innerHTML = `<span><span class="k d">✥</span><span class="t1"></span></span>` +
-      `<span><span class="k a">A</span><span class="t2"></span></span>` +
-      `<span><span class="k b">B</span><span class="t3"></span></span>`;
-    h.querySelector('.t1').textContent = tr('hintMove');
-    h.querySelector('.t2').textContent = tr('hintOpen');
-    h.querySelector('.t3').textContent = tr('hintBack');
-  } else {
-    h.innerHTML = '<span class="t1"></span>' + (S.padSeen ? '' : '<span class="t2"></span>');
-    h.querySelector('.t1').textContent = tr('hintTouch');
-    if (!S.padSeen) h.querySelector('.t2').textContent = tr('hintWake');
-  }
+function renderFoot() {
+  $('foot').textContent = IS_XBOX && !S.padSeen && S.mode !== 'pad' ? tr('wake') : '';
 }
-
 let padCount = 0;
-function renderPads() { $('pads').textContent = padCount ? tr('pads', padCount) : ''; }
+function renderPads() { $('pads').textContent = padCount ? `🎮 ×${padCount}` : ''; }
 
-function setLang(code) {
-  if (!STR[code]) return;
-  lang = code;
-  const s = store.get(KEY_SETTINGS);
-  store.set(KEY_SETTINGS, Object.assign(s && typeof s === 'object' ? s : {}, { lang: code }));
-  render();
+function keyHint(cls, label, text) { return `<span><span class="k ${cls}">${label}</span>${esc(text)}</span>`; }
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+function renderDetail() {
+  const d = $('detail');
+  const id = focusEl && focusEl.dataset.id && (focusEl.classList.contains('tile') || focusEl.id === 'cont' || focusEl.id === 'hfav') ? focusEl.dataset.id : null;
+  const g = id ? byId(id) : null;
+  d.querySelector('.dic').innerHTML = g ? g.icon : '';
+  d.querySelector('.dic').hidden = !g;
+  d.querySelector('.dname').textContent = g ? loc(g.name) : tr('title');
+  d.querySelector('.d1').textContent = g ? loc(g.blurb) : '';
+  d.querySelector('.d2').textContent = g ? [tr('inpLong')[g.input], g.latest && `${tr('latest')} ${g.latest}`,
+    g.credit.author && tr('by', g.credit.author), g.credit.made && tr('made', g.credit.made), g.ext && tr('ext')].filter(Boolean).join(' · ') : '';
+  const pad = S.mode === 'pad';
+  d.querySelector('.keys').innerHTML = (pad
+    ? keyHint('a', 'A', g ? tr('kOpen') : 'OK') + (g ? keyHint('y', 'Y', tr('kFav')) : '') + keyHint('x', 'X', tr('kSearch')) + keyHint('b', 'B', tr('kBack'))
+      + (focusEl && focusEl.classList.contains('tile') ? keyHint('lb', 'LB RB', tr('kPage')) : '') + keyHint('lb', '☰', tr('kMenu'))
+    : keyHint('a', '⏎', g ? tr('kOpen') : 'OK') + (g ? keyHint('y', 'F', tr('kFav')) : '') + keyHint('x', '/', tr('kSearch')) + keyHint('b', 'Esc', tr('kBack')));
 }
 
-/* ===================== Fullscreen ===================== */
+/* ============================== Toast ============================== */
+let toastT = 0;
+function toast(text) {
+  let t = $('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; t.setAttribute('role', 'status');
+    t.style.cssText = 'position:fixed;left:50%;top:max(5vh,env(safe-area-inset-top));transform:translateX(-50%);z-index:60;background:#fff8e1;color:#1d2a10;font-weight:800;padding:.45em 1em;border-radius:999px;box-shadow:0 .4em 1.2em rgba(0,0,0,.45);max-width:90vw;text-align:center';
+    document.body.appendChild(t); }
+  t.textContent = text; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 1800);
+}
+
+/* ============================== Actions shared by every input ============================== */
+function setLang(code) { if (!STR[code]) return; lang = code; saveSettings({ lang: code }); render(); }
+function favToggle(id) {
+  const g = byId(id); if (!g) return;
+  const on = toggleFav(id); sfx(on ? 'fav' : 'unfav'); toast(on ? tr('favOn', loc(g.name)) : tr('favOff', loc(g.name)));
+  const keep = focusEl && focusEl.dataset.key;
+  render();
+  if (keep) { const el = document.querySelector(`[data-key="${CSS.escape(keep)}"]`); if (el) setFocus(el, false); }
+}
+function openSearch(typeNow) {
+  S.searchOpen = true; render();
+  setFocus($('q'));
+  if (typeNow) { try { $('q').focus({ preventScroll: true }); } catch (e) {} }
+  try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); }
+}
+function closeSearch() {
+  S.searchOpen = false; S.q = ''; try { $('q').blur(); } catch (e) {} render(); setFocus(defaultFocus());
+}
+
+/* ============================== Fullscreen ============================== */
 const isFs = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
-function fsLabel() { $('fs').textContent = isFs() ? tr('exitfs') : tr('fs'); }
-$('fs').addEventListener('click', async () => {
+let fsBroken = false;
+function fsLabel() { $('fs').querySelector('.lbl').textContent = fsBroken ? tr('fsFail') : isFs() ? tr('exitfs') : tr('fs'); $('fs').setAttribute('aria-label', isFs() ? tr('exitfs') : tr('fs')); }
+async function toggleFs() {
   try {
     if (isFs()) await (document.exitFullscreen || document.webkitExitFullscreen).call(document);
-    else { const el = document.documentElement; await (el.requestFullscreen || el.webkitRequestFullscreen).call(el); }
-  } catch (e) { $('fs').textContent = tr('fsFail'); }
-});
+    else { const el = document.documentElement; const f = el.requestFullscreen || el.webkitRequestFullscreen; if (!f) throw new Error('no fs'); await f.call(el); }
+    fsBroken = false;
+  } catch (e) { fsBroken = true; }
+  fsLabel();
+}
 document.addEventListener('fullscreenchange', fsLabel);
 document.addEventListener('webkitfullscreenchange', fsLabel);
-$('retry').addEventListener('click', loadGames);
 
-/* Remember the game when any link to it is used (touch, mouse, keyboard or controller). */
-document.addEventListener('click', e => {
-  const a = e.target.closest && e.target.closest('a.nav[data-id]');
-  if (a) remember(a.dataset.id);
-}, true);
+/* ============================== Dialog (language & settings) ============================== */
+function openSettings() {
+  const box = $('dlg').querySelector('.dbox');
+  S.dlg = {
+    render() {
+      const keep = S.dlg.focus && S.dlg.focus.dataset.key;
+      box.innerHTML = '';
+      const h = document.createElement('h2'); h.textContent = '🌐 ' + tr('settings'); box.appendChild(h);
+      const add = (key, label, fn, pressed) => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'tb dnav'; b.dataset.key = key; b.textContent = label;
+        if (pressed != null) b.setAttribute('aria-pressed', String(pressed));
+        b.addEventListener('click', fn); box.appendChild(b); return b;
+      };
+      for (const [code, label] of LANGS) { const b = add('d-lang-' + code, label, () => { setLang(code); sfx('ok'); }, code === lang); b.lang = code; }
+      const sep = document.createElement('div'); sep.className = 'sep'; box.appendChild(sep);
+      add('d-sound', tr('sound', soundOn), () => { soundOn = !soundOn; saveSettings({ sound: soundOn }); unlocked = true; sfx('ok'); S.dlg.render(); }, soundOn);
+      add('d-fs', '⛶ ' + (isFs() ? tr('exitfs') : tr('fs')), () => { toggleFs().then(() => S.dlg && S.dlg.render()); });
+      add('d-close', '✕ ' + tr('close'), closeDlg);
+      const btns = [...box.querySelectorAll('.dnav')];
+      S.dlg.btns = btns;
+      dlgFocus(btns.find(b => b.dataset.key === keep) || btns.find(b => b.getAttribute('aria-pressed') === 'true') || btns[0]);
+    },
+  };
+  $('dlg').hidden = false;
+  S.dlg.render();
+}
+function dlgFocus(b) {
+  if (!S.dlg || !b) return;
+  for (const x of S.dlg.btns) x.classList.toggle('focused', x === b);
+  S.dlg.focus = b;
+  try { b.focus({ preventScroll: true }); b.scrollIntoView({ block: 'nearest' }); } catch (e) {}
+}
+function closeDlg() {
+  $('dlg').hidden = true; $('dlg').querySelector('.dbox').innerHTML = ''; S.dlg = null;
+  if (focusEl && document.body.contains(focusEl)) setFocus(focusEl, false); else setFocus(defaultFocus(), false);
+}
+$('dlg').addEventListener('click', e => { if (e.target === $('dlg')) closeDlg(); });
 
-/* ===================== Focus & spatial navigation ===================== */
-let focusEl = null;
-const navEls = () => [...document.querySelectorAll('.nav')].filter(e => e.offsetParent !== null && !e.hidden && !e.disabled);
+/* ============================== Focus & shelf navigation ============================== */
+let focusEl = null, lastMoveAt = 0;
+const memo = new Map();                                   // shelf row → last focused index (TV convention)
+const visible = e => !!e && e.offsetParent !== null && !e.hidden && !e.disabled;
+const rowEls = r => [...r.querySelectorAll('.nav')].filter(visible);
+const rowsList = () => [...document.querySelectorAll('#app .navrow')].filter(r => !r.hidden && r.offsetParent !== null).map(r => ({ r, els: rowEls(r) })).filter(x => x.els.length);
+const cx = e => { const b = e.getBoundingClientRect(); return (b.left + b.right) / 2; };
 function defaultFocus() {
-  const c = $('cont');
-  if (!c.hidden) return c;
-  return document.querySelector('#games .card') || (!$('retry').hidden && !$('msg').hidden ? $('retry') : null) || navEls()[0] || null;
+  if (!$('hero').hidden) return $('cont');
+  return document.querySelector('#shelves .tile') || (!$('msg').hidden && !$('retry').hidden ? $('retry') : null) || (rowsList()[0] || { els: [] }).els[0] || null;
 }
 function setFocus(el, scroll = true) {
   if (!el) return;
   if (focusEl && focusEl !== el) focusEl.classList.remove('focused');
   focusEl = el; el.classList.add('focused');
-  // the search box only takes real focus when it is activated (A / Enter / tap), so moving over it never pops up a keyboard
+  const row = el.closest('.navrow');
+  if (row && row.classList.contains('tiles')) memo.set(row.dataset.row, rowEls(row).indexOf(el));
+  // the search box only takes real focus when activated (A / Enter / tap), so moving over it never pops up a keyboard
   if (el.tagName !== 'INPUT') { try { el.focus({ preventScroll: true }); } catch (e) {} }
   else if (document.activeElement && document.activeElement !== el && document.activeElement.tagName === 'INPUT') document.activeElement.blur();
-  if (scroll) try { el.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' }); } catch (e) { el.scrollIntoView(false); }
+  if (scroll) {
+    const now = performance.now(), behavior = now - lastMoveAt > CFG.smoothAfterMs ? 'smooth' : 'auto'; lastMoveAt = now;
+    if (row && (row.dataset.row === 'header' || row.dataset.row === 'hero' || row.dataset.row === 'search')) { try { window.scrollTo({ top: 0, behavior }); } catch (e) { window.scrollTo(0, 0); } }
+    else reveal(el, behavior);
+  }
+  if (S.mode === 'pad' || S.mode === 'key') renderDetail();
+}
+// Keep the focused tile fully visible: inside its shelf horizontally, and between the top safe margin and the detail bar vertically.
+function reveal(el, behavior) {
+  try {
+    const row = el.closest('.tiles');
+    if (row) {
+      const rr = row.getBoundingClientRect(), r = el.getBoundingClientRect(), pad = parseFloat(getComputedStyle(row).paddingLeft) || 0;
+      let dx = 0;
+      if (r.left < rr.left + pad) dx = r.left - (rr.left + pad);
+      else if (r.right > rr.right - pad) dx = r.right - (rr.right - pad);
+      if (dx) row.scrollBy({ left: dx, behavior });
+    }
+    const sec = el.closest('.shelf') || el, sr = sec.getBoundingClientRect(), er = el.getBoundingClientRect();
+    const top = innerHeight * 0.05;
+    const bottom = document.body.classList.contains('show-focus') ? $('detail').getBoundingClientRect().top - innerHeight * 0.03 : innerHeight * 0.95;
+    let dy = 0;
+    if (sr.top < top) dy = sr.top - top;
+    else if (er.bottom > bottom) dy = Math.min(er.bottom - bottom, sr.top - top);
+    if (dy) window.scrollBy({ top: dy, behavior });
+  } catch (e) { try { el.scrollIntoView(false); } catch (e2) {} }
 }
 function move(dir) {
-  const els = navEls();
-  if (!els.length) return false;
-  if (!focusEl || !els.includes(focusEl)) { setFocus(defaultFocus() || els[0]); return true; }
-  const r = focusEl.getBoundingClientRect();
-  let best = null, bestScore = Infinity;
-  for (const e of els) {
-    if (e === focusEl) continue;
-    const q = e.getBoundingClientRect();
-    let main, cross;
-    if (dir === 'down')  { main = q.top - r.bottom;  cross = Math.max(0, q.left - r.right, r.left - q.right); if (q.top < r.top + r.height * 0.5) continue; }
-    if (dir === 'up')    { main = r.top - q.bottom;  cross = Math.max(0, q.left - r.right, r.left - q.right); if (q.bottom > r.bottom - r.height * 0.5) continue; }
-    if (dir === 'right') { main = q.left - r.right;  cross = Math.max(0, q.top - r.bottom, r.top - q.bottom); if (q.left < r.left + r.width * 0.5) continue; }
-    if (dir === 'left')  { main = r.left - q.right;  cross = Math.max(0, q.top - r.bottom, r.top - q.bottom); if (q.right > r.right - r.width * 0.5) continue; }
-    // left/right stay on the same row; up/down may slide sideways (header ↔ wide button ↔ cards)
-    if ((dir === 'left' || dir === 'right') && cross > r.height * 0.5) continue;
-    const score = Math.max(0, main) + cross * CFG.crossWeight;
-    if (score < bestScore) { bestScore = score; best = e; }
+  const rows = rowsList(); if (!rows.length) return false;
+  const ri = rows.findIndex(x => x.els.includes(focusEl));
+  if (ri < 0) { setFocus(defaultFocus() || rows[0].els[0]); return true; }
+  const { els } = rows[ri], i = els.indexOf(focusEl);
+  if (dir === 'left' || dir === 'right') {
+    const j = i + (dir === 'right' ? 1 : -1);
+    if (j < 0 || j >= els.length) return false;
+    setFocus(els[j]); return true;
   }
-  if (best) { setFocus(best); return true; }
-  return false;
+  const t = rows[ri + (dir === 'down' ? 1 : -1)]; if (!t) return false;
+  setFocus(pickIn(t, focusEl)); return true;
+}
+function pickIn(t, from) {
+  const key = t.r.dataset.row;
+  if (t.r.classList.contains('tiles')) {
+    if (memo.has(key)) return t.els[Math.max(0, Math.min(memo.get(key), t.els.length - 1))];
+    const sl = t.r.getBoundingClientRect();
+    return t.els.find(e => e.getBoundingClientRect().left >= sl.left - 2) || t.els[0];
+  }
+  const fx = cx(from);
+  return t.els.reduce((b, e) => Math.abs(cx(e) - fx) < Math.abs(cx(b) - fx) ? e : b);
+}
+function page(dir) {
+  const row = focusEl && focusEl.closest('.tiles'); if (!row) return false;
+  const els = rowEls(row), i = els.indexOf(focusEl), w = focusEl.parentElement.getBoundingClientRect().width || 1;
+  const n = Math.max(1, Math.floor(row.clientWidth / w) - 1);
+  const j = Math.max(0, Math.min(els.length - 1, i + dir * n));
+  if (j === i) return false;
+  setFocus(els[j]); return true;
+}
+function back() {
+  if (S.searchOpen) {
+    if (document.activeElement === $('q')) { $('q').blur(); setFocus($('q'), false); return true; }
+    closeSearch(); return true;
+  }
+  const row = focusEl && focusEl.closest('.tiles');
+  if (row) { const els = rowEls(row); if (els.indexOf(focusEl) > 0) { setFocus(els[0]); row.scrollTo({ left: 0, behavior: 'smooth' }); return true; } }
+  const d = defaultFocus();
+  if (focusEl === d) return false;
+  setFocus(d); return true;
 }
 
-/* ===================== Actions (every input goes through act) ===================== */
 function setMode(m) {
   if (S.mode === m) return;
   S.mode = m;
   document.body.classList.toggle('show-focus', m === 'pad' || m === 'key');
-  renderHint();
+  if (m === 'pad' || m === 'key') renderDetail();
+  renderFoot();
 }
 function act(a) {
-  if (window.FamilyCloud && window.FamilyCloud.isModalOpen()) return; // the cloud dialog handles the controller itself
-  // The first controller/keyboard input only reveals the focus ring, so a stray press never opens a game.
-  const showing = S.mode === 'pad' || S.mode === 'key';
-  if (!showing && (a.src === 'pad' || a.src === 'key')) {
+  if (window.FamilyCloud && window.FamilyCloud.isModalOpen()) return;   // the cloud dialog handles the controller itself
+  if (a.src === 'pad' || a.src === 'key') {
+    if (S.dlg) return dlgAct(a);
+    // The first controller/keyboard input only reveals the focus ring, so a stray press never opens a game.
+    if (S.mode !== 'pad' && S.mode !== 'key') {
+      setMode(a.src);
+      setFocus(focusEl && document.body.contains(focusEl) && visible(focusEl) ? focusEl : defaultFocus());
+      return;
+    }
     setMode(a.src);
-    setFocus(focusEl && document.body.contains(focusEl) && focusEl.offsetParent !== null ? focusEl : defaultFocus());
-    return;
   }
+  if (!focusEl || !document.body.contains(focusEl) || !visible(focusEl)) { setFocus(defaultFocus()); return; }
   switch (a.type) {
-    case 'move':
-      setMode(a.src);
-      if (!focusEl || !document.body.contains(focusEl)) setFocus(defaultFocus());
-      else if (!move(a.dir)) rumble(a.player, 0.15, 40);
-      break;
+    case 'move': { const ok = move(a.dir); sfx(ok ? 'move' : 'bump'); if (!ok) rumble(a.player, 0.15, 40); break; }
+    case 'page': sfx(page(a.dir) ? 'move' : 'bump'); break;
     case 'activate':
-      setMode(a.src);
-      if (!focusEl || !document.body.contains(focusEl)) { setFocus(defaultFocus()); break; }
-      rumble(a.player, 0.5, 90);
-      if (focusEl.tagName === 'INPUT') { try { focusEl.focus({ preventScroll: true }); } catch (e) {} } else focusEl.click();
+      rumble(a.player, 0.5, 80); sfx('ok');
+      if (focusEl.tagName === 'INPUT') { try { focusEl.focus({ preventScroll: true }); } catch (e) {} }
+      else focusEl.click();
       break;
-    case 'back':
-      setMode(a.src);
-      setFocus(defaultFocus());
-      try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); }
-      break;
+    case 'back': sfx(back() ? 'back' : 'bump'); break;
+    case 'fav': { const id = focusEl.dataset.id; if (id) favToggle(id); else sfx('bump'); break; }
+    case 'search': openSearch(true); sfx('ok'); break;
+    case 'menu': openSettings(); sfx('ok'); break;
   }
 }
+function dlgAct(a) {
+  const btns = S.dlg.btns || [], i = btns.indexOf(S.dlg.focus);
+  if (a.type === 'move') {
+    const j = i + (a.dir === 'down' || a.dir === 'right' ? 1 : -1);
+    if (j >= 0 && j < btns.length) { dlgFocus(btns[j]); sfx('move'); } else sfx('bump');
+  } else if (a.type === 'activate') { sfx('ok'); S.dlg.focus && S.dlg.focus.click(); }
+  else if (a.type === 'back' || a.type === 'menu') { sfx('back'); closeDlg(); }
+}
 
-/* ===================== Touch / mouse ===================== */
-window.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse' || S.mode !== 'pad') setMode('touch'); }, { passive: true });
+/* ============================== Clicks (touch, mouse, and A / Enter via .click()) ============================== */
+document.addEventListener('click', e => {
+  unlockAudio();
+  const t = e.target;
+  const star = t.closest && t.closest('.star');
+  if (star) { e.preventDefault(); favToggle(star.dataset.id); return; }
+  const arr = t.closest && t.closest('.arr');
+  if (arr) { const row = arr.closest('.shelf').querySelector('.tiles'); row.scrollBy({ left: +arr.dataset.dir * row.clientWidth * 0.8, behavior: 'smooth' }); return; }
+  const a = t.closest && t.closest('a.nav[data-id]');
+  if (a) { remember(a.dataset.id); if (a.dataset.key) sess.set(SS_FOCUS, a.dataset.key); }
+}, true);
+$('bSearch').addEventListener('click', () => (S.searchOpen ? closeSearch() : openSearch(true)));
+$('bClose').addEventListener('click', closeSearch);
+$('bLang').addEventListener('click', openSettings);
+$('fs').addEventListener('click', toggleFs);
+$('retry').addEventListener('click', loadGames);
+$('hfav').addEventListener('click', () => favToggle($('hfav').dataset.id));
+$('q').addEventListener('input', () => { S.q = $('q').value; renderShelves(); renderHero(); });
+$('q').addEventListener('focus', () => { if (focusEl !== $('q')) { if (focusEl) focusEl.classList.remove('focused'); focusEl = $('q'); $('q').classList.add('focused'); } });
+
+/* ============================== Touch / mouse ============================== */
+window.addEventListener('pointerdown', e => { unlockAudio(); if (e.pointerType !== 'mouse' || S.mode !== 'pad') setMode('touch'); }, { passive: true });
 document.addEventListener('gesturestart', e => e.preventDefault());
 document.addEventListener('dblclick', e => e.preventDefault());
 document.addEventListener('contextmenu', e => e.preventDefault());
 
-/* ===================== Keyboard (optional extra) ===================== */
+/* ============================== Keyboard (optional extra) ============================== */
 const KEYDIR = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' };
 window.addEventListener('keydown', e => {
-  if (e.target && e.target.id === 'q') {
-    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { e.preventDefault(); act({ type: 'move', dir: KEYDIR[e.key], player: 'kbd', src: 'key' }); }
-    else if (e.key === 'Enter' || e.key === 'Escape') { e.preventDefault(); e.target.blur(); setMode('key'); setFocus(e.target, false); }
+  unlockAudio();
+  if (S.dlg) {
+    if (KEYDIR[e.key]) { e.preventDefault(); act({ type: 'move', dir: KEYDIR[e.key], player: 'kbd', src: 'key' }); }
+    else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act({ type: 'activate', player: 'kbd', src: 'key' }); }
+    else if (e.key === 'Escape' || e.key === 'Backspace') { e.preventDefault(); act({ type: 'back', player: 'kbd', src: 'key' }); }
     return;
   }
+  if (e.target && e.target.id === 'q') {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); $('q').blur(); setMode('key'); act({ type: 'move', dir: KEYDIR[e.key], player: 'kbd', src: 'key' }); }
+    else if (e.key === 'Enter') { e.preventDefault(); $('q').blur(); setMode('key'); const f = document.querySelector('#shelves .tile'); setFocus(f || $('q')); }
+    else if (e.key === 'Escape') { e.preventDefault(); act({ type: 'back', player: 'kbd', src: 'key' }); }
+    return;
+  }
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
   if (KEYDIR[e.key]) { e.preventDefault(); act({ type: 'move', dir: KEYDIR[e.key], player: 'kbd', src: 'key' }); }
   else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act({ type: 'activate', player: 'kbd', src: 'key' }); }
   else if (e.key === 'Escape' || e.key === 'Backspace' || e.key === 'GamepadB') { e.preventDefault(); act({ type: 'back', player: 'kbd', src: 'key' }); }
+  else if (e.key === '/' ) { e.preventDefault(); setMode('key'); act({ type: 'search', player: 'kbd', src: 'key' }); }
+  else if (e.key === 'f' || e.key === 'F') { if (S.mode === 'key') act({ type: 'fav', player: 'kbd', src: 'key' }); }
+  else if (e.key === 'PageDown' || e.key === 'PageUp') { e.preventDefault(); act({ type: 'page', dir: e.key === 'PageDown' ? 1 : -1, player: 'kbd', src: 'key' }); }
 });
 
-/* ===================== Gamepad ===================== */
+/* ============================== Gamepad ============================== */
 const padState = {};   // index -> { prev: bool[], dir, next }
 function rumble(player, mag, ms) {
   if (typeof player !== 'number') return;
@@ -558,11 +922,12 @@ function rumble(player, mag, ms) {
 }
 function padDir(gp, down) {
   if (down[12]) return 'up'; if (down[13]) return 'down'; if (down[14]) return 'left'; if (down[15]) return 'right';
-  let x = gp.axes[0] || 0, y = gp.axes[1] || 0;
+  const x = gp.axes[0] || 0, y = gp.axes[1] || 0;
   if (Math.hypot(x, y) < CFG.deadZone) return null;
   if (Math.max(Math.abs(x), Math.abs(y)) < CFG.navThreshold) return null;
   return Math.abs(x) > Math.abs(y) ? (x > 0 ? 'right' : 'left') : (y > 0 ? 'down' : 'up');
 }
+const BTN = { 0: 'activate', 1: 'back', 2: 'search', 3: 'fav', 4: 'pageL', 5: 'pageR', 9: 'menu' };
 function pollPads(now) {
   let list = [];
   try { list = Array.from((navigator.getGamepads && navigator.getGamepads()) || []).filter(Boolean); } catch (e) {}
@@ -572,30 +937,36 @@ function pollPads(now) {
     const i = gp.index; live.add(i);
     const down = gp.buttons.map(b => !!(b && (b.pressed || b.value > 0.5)));
     let st = padState[i];
-    if (!st) { st = padState[i] = { prev: down, dir: null, next: 0 }; }  // buttons already held at connect don't fire
-    const rose = b => down[b] && !st.prev[b];
+    if (!st) st = padState[i] = { prev: down, dir: null, next: 0 };   // buttons already held at connect don't fire
     const dir = padDir(gp, down);
+    const used = down.some(Boolean) || dir;
+    if (used && !S.padSeen) { S.padSeen = true; sess.set(HUB_ID + '/pad', '1'); const k = focusEl && focusEl.dataset.key; render(); if (k) { const el = document.querySelector(`[data-key="${CSS.escape(k)}"]`); if (el) setFocus(el, false); } }
     if (dir !== st.dir) {
       st.dir = dir;
       if (dir) { act({ type: 'move', dir, player: i, src: 'pad' }); st.next = now + CFG.repeatDelay; }
     } else if (dir && now >= st.next) {
       act({ type: 'move', dir, player: i, src: 'pad' }); st.next = now + CFG.repeatRate;
     }
-    if (rose(0)) act({ type: 'activate', player: i, src: 'pad' });
-    if (rose(1)) act({ type: 'back', player: i, src: 'pad' });
-    if (down.some(Boolean) || dir) { if (!S.padSeen) { S.padSeen = true; } if (S.mode !== 'pad') setMode('pad'); }
+    for (const b in BTN) {
+      if (down[b] && !st.prev[b]) {
+        const t = BTN[b];
+        if (t === 'pageL' || t === 'pageR') act({ type: 'page', dir: t === 'pageR' ? 1 : -1, player: i, src: 'pad' });
+        else act({ type: t, player: i, src: 'pad' });
+      }
+    }
     st.prev = down;
   }
   for (const k of Object.keys(padState)) if (!live.has(+k)) delete padState[k];
 }
-window.addEventListener('gamepadconnected', () => { S.padSeen = true; renderHint(); });
+window.addEventListener('gamepadconnected', () => { renderPads(); });
 window.addEventListener('gamepaddisconnected', () => { renderPads(); });
-
 function loop(now) { pollPads(now); requestAnimationFrame(loop); }
 
-/* ===================== Start ===================== */
-window.addEventListener('pageshow', () => { if (S.games) render(); });  // back from a game: refresh "Continue"
+/* ============================== Start ============================== */
+window.addEventListener('pageshow', e => { if (e.persisted && S.games) { render(); const el = findKey(sess.get(SS_FOCUS)); sess.del(SS_FOCUS); if (el) setFocus(el, true); } });
 document.addEventListener('visibilitychange', () => { if (!document.hidden && S.games) render(); });
+window.addEventListener('resize', () => document.querySelectorAll('.shelf').forEach(arrowState));
+try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {}); } catch (e) {}
 render();
 loadGames();
 requestAnimationFrame(loop);

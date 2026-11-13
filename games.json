@@ -8,7 +8,7 @@
       "category": "family",
       "url": "https://jacobjkwu.github.io/family-games/goat-mayhem/",
       "latest": "v3",
-      "input": "controller",
+      "input": "both",
       "color": "#7ac8ff",
       "name": {
         "zh-Hans": "疯狂山羊",
@@ -28,7 +28,7 @@
       "id": "drawrassic-park",
       "url": "https://jacobjkwu.github.io/family-games/drawrassic-park/",
       "latest": "v3.23",
-      "input": "touch",
+      "input": "both",
       "color": "#5cc85f",
       "name": {
         "zh-Hans": "Drawrassic Park",
