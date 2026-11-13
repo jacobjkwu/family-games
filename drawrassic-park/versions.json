@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.19",
+      "file": "drawrassic-park-v3.19.html",
+      "date": "2026-11-13",
+      "schema": 7,
+      "switcher": true,
+      "notes": {
+        "en": "🎮 Xbox controller: a cursor on the left stick (A taps or holds, like a finger), D-pad for every button and menu, coloured A/B/X/Y hints, 2-player army battles with two controllers. 📺 Bigger text on the TV.",
+        "fr": "🎮 Manette Xbox : un curseur au stick gauche (A touche ou tient, comme un doigt), la croix pour tous les boutons et menus, aides A/B/X/Y en couleur, batailles d’armées à deux manettes. 📺 Texte plus grand sur la télé.",
+        "zh-Hans": "🎮 Xbox 手柄：左摇杆控制光标（A 键点击或按住，就像手指），十字键可以选所有按钮和菜单，彩色 A/B/X/Y 提示，两个手柄玩双人军团大战。📺 电视上的字更大。",
+        "zh-Hant": "🎮 Xbox 手把：左搖桿控制游標（A 鍵點擊或按住，就像手指），十字鍵可以選所有按鈕和選單，彩色 A/B/X/Y 提示，兩個手把玩雙人軍團大戰。📺 電視上的字更大。"
+      }
+    },
+    {
       "v": "3.18",
       "file": "drawrassic-park-v3.18.html",
       "date": "2026-11-13",

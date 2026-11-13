@@ -1,5 +1,16 @@
 # Drawrassic Park — Changelog
 
+## v3.19 (2026-11-13) — save schema s7 (unchanged)
+- 🎮 Controller support (Xbox controller in Edge on Xbox, or any standard gamepad). One rule everywhere: the left stick moves a cursor and A taps or holds where it points, exactly like a finger (pick up and carry dinos, rub to pet, hold for terrain, draw); the D-pad moves a big yellow focus ring between buttons, A presses it, B goes back.
+- Park: LB/RB change tool, right stick or LT/RT look around (the cursor at the screen edge also scrolls), X ✏️ draw a dino, Y or Menu ⚙️ settings (pause), View ❓ help. Menus and dialogs: D-pad or stick to move, A choose, B back/close, LB/RB switch tabs, right stick scrolls, ◀ ▶ change sliders. Drawing (touch-first, but playable): stick cursor + hold A to draw, X undo, Y pen/fill/eye/eraser, LB/RB colour, LT/RT size, B back to the park. Arena: A cheer at the cursor, X speed, Y/Menu pause.
+- ⚔️ Army battle with controllers: each controller presses A to join (player 1 red, then player 2 blue; touch players can mix in); with a controller the two halves sit side by side facing the TV instead of being turned toward the iPad's sides. Each player has their own focus ring; B removes the last dino, View switches side, Y leaves. In the battle: A ⚡ charge, X 🛡️ defend, B 🌟 super move, Y/Menu pause. A 3rd or 4th controller is told the two seats are taken. Rumble on powers and at the end.
+- On-screen hints follow the last input: after a controller press a bar shows A/B/X/Y in their colours (A green, B red, X blue, Y yellow); touching the screen hides the cursor, ring and hints. If a controller in use disconnects, the arena pauses and the park opens ⚙️ settings.
+- Xbox Edge is asked for raw controller input (`navigator.gamepadInputEmulation='gamepad'`), so Edge's own mouse cursor is off in the game and B no longer means "browser back". Pressing both sticks (L3+R3) gives the controller back to Edge's cursor, and again to return.
+- 📺 TV size: on Xbox (or Settings → 📺 TV size: Auto / On / Off) menus, buttons and dialogs are zoomed (×1.75 at 1080p: body text 28 px, coin/amber numbers 40 px) and kept inside a 5% safe margin; canvases are not zoomed. ⛶ Full screen button on the start (help) screen and in Settings.
+- Launcher: works with a controller (focus ring, A choose, B close dialogs) and is zoomed on Xbox.
+- Number panel: new 🕹️ Controller group (stick dead zone, cursor speeds, camera speed). Saved in the same config key (`config/c1`); an older version that saves the panel drops these four values (they return to defaults). Save format unchanged (s7).
+
+
 ## v3.18 (2026-11-13) — save schema s7 (unchanged)
 - 🌐 Four-language UI for the whole game (English, Français, 简体中文, 繁體中文): menus, buttons, shop, lab, arena, army and online dialogs, sky panel, number panel, ticker messages, signposts, floating text and the help screen. The dinos' speech, jokes and riddles (397 lines) are translated too; species names use the 141-species name table.
 - Language buttons in the help screen and in ⚙️ Settings; the choice applies at once (no reload) and is stored in the shared settings key, so the launcher and every version use the same language. First launch picks from the device language (zh-TW/HK/MO/Hant → 繁體, other zh → 简体, fr → Français, else English).
