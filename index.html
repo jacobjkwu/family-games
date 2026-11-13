@@ -508,7 +508,7 @@ function heroGame() {
 function render() {
   const keep = focusEl && focusEl.dataset.key;
   document.documentElement.lang = lang;
-  document.title = tr('title').replace(/^\S+\s/, '') + ' · Game Hub';
+  { const t = tr('title').replace(/^\S+\s/, ''); document.title = t === 'Game Hub' ? t : t + ' · Game Hub'; }
   $('title').textContent = tr('title');
   $('count').textContent = S.games && S.games.length ? tr('count', S.games.length) : '';
   $('bSearch').querySelector('.lbl').textContent = tr('search'); $('bSearch').setAttribute('aria-label', tr('search'));
