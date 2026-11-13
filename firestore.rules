@@ -1,24 +1,53 @@
 rules_version = '2';
-// Template. In the Firebase console, replace FAMILY_EMAIL with the family's Google account(s).
+// Template. In the Firebase console (Firestore Database → Rules), paste this and replace FAMILY_EMAIL with the family's
+// Google account(s), e.g. ['mum@example.com', 'dad@example.com']. Never put the real addresses in this public file.
 // Also enable Authentication > Sign-in method > Anonymous (used to pair an Xbox with a 6-letter code).
+//
+// Who can do what:
+// - family (emails listed below): their own cloud saves, see and answer friends' requests, approve/remove friends.
+// - approved friends (allowed/{email}, written only by the family): their own cloud saves, pair their own Xbox.
+// - any other Google account: may create ONE request about itself (requests/{its uid}), read it, and cancel it while pending.
+// - paired devices (anonymous sign-in): the saves of the account that paired them.
 service cloud.firestore {
   match /databases/{database}/documents {
-    function isFamily() {
+    function google() {
       return request.auth != null
         && request.auth.token.email_verified == true
-        && request.auth.token.email in ['FAMILY_EMAIL'];
+        && request.auth.token.firebase.sign_in_provider == 'google.com';
+    }
+    function isFamily() {
+      return google() && request.auth.token.email.lower() in ['FAMILY_EMAIL'];
+    }
+    function isAllowed() {
+      return google() && exists(/databases/$(database)/documents/allowed/$(request.auth.token.email.lower()));
     }
     function isPairedWith(uid) {
       return request.auth != null
         && exists(/databases/$(database)/documents/users/$(uid)/devices/$(request.auth.uid));
     }
     match /users/{uid}/{document=**} {
-      allow read, write: if (isFamily() && request.auth.uid == uid) || isPairedWith(uid);
+      allow read, write: if ((isFamily() || isAllowed()) && request.auth.uid == uid) || isPairedWith(uid);
+    }
+    match /allowed/{email} {
+      allow read: if isFamily() || (google() && request.auth.token.email.lower() == email);
+      allow write: if isFamily();
+    }
+    match /requests/{uid} {
+      allow create: if google() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['uid', 'email', 'name', 'at', 'status', 'lang'])
+        && request.resource.data.uid == uid
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.status == 'pending'
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 40;
+      allow read: if isFamily() || (request.auth != null && request.auth.uid == uid);
+      allow update: if isFamily();
+      allow delete: if isFamily() || (request.auth != null && request.auth.uid == uid && resource.data.status == 'pending');
     }
     match /pairing/{code} {
       allow create: if request.auth != null && request.resource.data.anon == request.auth.uid;
       allow read: if request.auth != null;
-      allow update: if isFamily();
+      allow update: if isFamily() || isAllowed();
       allow delete: if request.auth != null && resource.data.anon == request.auth.uid;
     }
   }
