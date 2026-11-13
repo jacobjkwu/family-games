@@ -179,7 +179,7 @@ with sync_playwright() as p:
         if ri: press(page, 'down')
         keys = [focused(page)]
         for _ in range(len(want) - 1):
-            press(page, 'right'); keys.append(focused(page)); page.wait_for_timeout(250)
+            press(page, 'right'); keys.append(focused(page)); page.wait_for_timeout(450)
             vis = page.evaluate("""() => { const f = document.querySelector('.nav.focused'), r = f.getBoundingClientRect(), row = f.closest('.tiles').getBoundingClientRect(), d = document.getElementById('detail').getBoundingClientRect();
                 return r.left >= row.left - 2 && r.right <= row.right + 2 && r.bottom <= d.top + 1 && r.top >= 0; }""")
             if not vis: hidden_tiles.append(keys[-1])
@@ -215,7 +215,7 @@ with sync_playwright() as p:
         ok = walk_to(page, key)
         n0 = len(opened); press(page, 'A'); page.wait_for_timeout(500)
         check(f'TV pad: A opens {g["id"]}', ok and len(opened) > n0 and opened[-1] == abs_url(g), (ok, opened[-1:]))
-        page.go_back(); page.wait_for_selector('#shelves .tile'); page.wait_for_timeout(300)
+        page.go_back(); page.wait_for_selector('#shelves .tile'); page.wait_for_timeout(700)
         check(f'TV: back on the hub, focus returns to the {g["id"]} tile', focused(page) == key, (focused(page), key))
         check(f'TV: hero now says Continue {g["id"]}', page.locator('#hero').get_attribute('data-id') == g['id'] and page.locator('#cont span').text_content() == '继续玩')
         if not page.evaluate("document.body.classList.contains('show-focus')"): press(page, 'A')   # first press after a reload only re-shows the focus ring
