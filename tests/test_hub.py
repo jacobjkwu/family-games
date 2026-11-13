@@ -118,9 +118,9 @@ LAYOUT_JS = """(tv) => {
     const mx = iw * 0.05, my = ih * 0.05, out = [];
     for (const e of document.querySelectorAll('header .nav, h1, #hero, .shead h2, #detail, .nav.focused')) {
       if (!vis(e)) continue; const q = e.getBoundingClientRect();
-      if (q.bottom < 0 || q.top > ih) continue;
+      if (q.bottom < 0 || q.top > ih) continue;   // shelf headings scroll: one peeking past the top or bottom edge is the next row, not fixed UI
       const tol = e.classList.contains('focused') ? 12 : 1;      // the 4.5% lift of a focused tile
-      if (q.left < mx - tol || q.right > iw - mx + tol || q.top < my - tol && q.bottom > 0 && e.tagName !== 'H2' || q.bottom > ih - my + tol) out.push((e.dataset.key || e.id || e.tagName) + ' ' + JSON.stringify([q.left|0, q.top|0, q.right|0, q.bottom|0]));
+      if (q.left < mx - tol || q.right > iw - mx + tol || q.top < my - tol && q.bottom > 0 && e.tagName !== 'H2' || q.bottom > ih - my + tol && e.tagName !== 'H2') out.push((e.dataset.key || e.id || e.tagName) + ' ' + JSON.stringify([q.left|0, q.top|0, q.right|0, q.bottom|0]));
     }
     m = { minText, minEl: minEl && (minEl.className || minEl.tagName) + ' ' + minEl.textContent.slice(0, 20), minNum: nums.length ? Math.min(...nums) : 99, out };
   }
@@ -155,6 +155,30 @@ with sync_playwright() as p:
     check('TV: header shows the game count', page.locator('#count').text_content() == f'{len(GAMES)} 个游戏', page.locator('#count').text_content())
     check('TV: no controller shelf before a controller is used (not an Xbox)', page.locator('[data-shelf="pad"]').count() == 0)
     page.screenshot(path=f'{OUT}/tv-start.png')
+    # --- cover art: every game has a 16:9 picture; the ones on screen have loaded and fill their tile ---
+    from PIL import Image as _Im
+    bad_art = []
+    for g in GAMES:
+        f = os.path.join(ROOT, g.get('art', '') or '-')
+        try:
+            w_, h_ = _Im.open(f).size
+            if abs(w_ / h_ - 16 / 9) > 0.01 or w_ < 960: bad_art.append((g['id'], w_, h_))
+        except Exception as e: bad_art.append((g['id'], 'missing'))
+    check(f'Art: all {len(GAMES)} games have a 16:9 cover file ≥960px wide', not bad_art, bad_art)
+    page.wait_for_timeout(600)
+    art = page.evaluate("""() => {
+      const vis = [...document.querySelectorAll('#shelves .tile')].filter(t => { const r = t.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth; });
+      const noImg = vis.filter(t => !t.querySelector('.art img.kimg')).map(t => t.dataset.id);
+      const notLoaded = vis.filter(t => { const i = t.querySelector('img.kimg'); return i && !(i.complete && i.naturalWidth); }).map(t => t.dataset.id);
+      const ratio = vis.filter(t => { const r = t.querySelector('.art').getBoundingClientRect(); return Math.abs(r.width / r.height - 16 / 9) > 0.03; }).map(t => t.dataset.id);
+      const named = vis.filter(t => !t.classList.contains('key') && !t.querySelector('.tname').offsetHeight).map(t => t.dataset.id);
+      const lazy = [...document.querySelectorAll('#shelves img.kimg')].every(i => i.loading === 'lazy');
+      const hero = document.querySelector('#hero .hbg img');
+      return { n: vis.length, noImg, notLoaded, ratio, named, lazy, hero: !!(hero && hero.complete && hero.naturalWidth) };
+    }""")
+    check('Art: tiles on screen show their cover picture, loaded, at 16:9', art['n'] > 3 and not art['noImg'] and not art['notLoaded'] and not art['ratio'], art)
+    check('Art: community tiles keep the (translated) name under the picture; shelf pictures load lazily', not art['named'] and art['lazy'], art)
+    check('Art: the hero shows the game\'s cover picture', art['hero'], art)
     press(page, 'A')
     check('TV: first A press only shows the focus ring (opens nothing)', not opened and focused(page) == 'cont', focused(page))
     check('TV: controller shelf appears once a controller is used, with every controller game',

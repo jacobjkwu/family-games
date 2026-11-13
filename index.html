@@ -95,9 +95,11 @@ body.show-focus .tile.focused { transform: scale(1.045); }
 .logoT::after { content: attr(data-t); position: absolute; left: 0; top: 0; right: 0; -webkit-text-stroke: 0; text-shadow: none; color: transparent;
   background: linear-gradient(180deg, var(--l1) 8%, var(--l2) 55%, var(--l3) 100%); -webkit-background-clip: text; background-clip: text;
   filter: drop-shadow(0 -0.03em 0 rgba(255, 255, 255, .65)); }
-.tile.key { will-change: transform; }
-.tile.key .art { height: auto; aspect-ratio: 16 / 9; display: block; overflow: hidden; contain: paint; }
-.tile.key .art .ic { position: absolute; inset: 0; width: 100%; height: 100%; filter: none; }
+.tile.key, .tile.shot { will-change: transform; }
+.tile.key .art, .tile.shot .art { height: auto; aspect-ratio: 16 / 9; display: block; overflow: hidden; contain: paint; }
+.tile.key .art .ic, .tile.shot .art .ic { position: absolute; inset: 0; width: 100%; height: 100%; filter: none; }
+.tile.shot .art::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), inset 0 -2.2em 2em -1.6em rgba(6, 8, 24, .55); }
 .tile.key .art::after { content: ''; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(180deg, rgba(255, 255, 255, .14) 0%, rgba(255, 255, 255, 0) 28%, rgba(6, 8, 24, 0) 50%, rgba(6, 8, 24, .82) 100%); }
 .tile.key .art .logoT { position: absolute; left: 0.4em; bottom: 0.3em; z-index: 1; max-width: calc(100% - 0.8em); }
@@ -112,7 +114,7 @@ body.show-focus .tile.focused { transform: scale(1.045); }
 .dic { border-radius: 0.5em; overflow: hidden; }
 #hero.key .hbody { max-width: 62%; }
 #hero.key .hname { line-height: 1; padding: 0.1em 0 0.25em; }
-#hero.key .hblurb { text-shadow: 0 1px 2px rgba(0, 0, 0, .6); }
+#hero.key .hblurb, #hero.key .hname { text-shadow: 0 1px 2px rgba(0, 0, 0, .6); }
 @media (max-width: 700px) { #hero.key .hbg { width: 100%; opacity: .45; -webkit-mask-image: none; mask-image: none; } #hero.key .hbody { max-width: none; } }
 
 /* ---------- Search ---------- */
@@ -588,8 +590,11 @@ function uniqSvg(svg) {
 // The title stays real text (it is translated); the lettering is CSS: gradient fill, thick outline, extrusion and glow.
 // Key art is shown as an image (a pre-rendered WebP from games.json "art"): the browser decodes it once, off the main thread, and then only composites it, which keeps focus moves smooth on the Xbox.
 const ART = new Map();
-function artHTML(g) {
-  if (!g || !g.icon) return '';
+function artHTML(g, lazy) {
+  if (!g) return '';
+  // every game has a 16:9 cover picture (games.json "art"); shelves load them lazily, as they scroll into view
+  if (g.art) return `<img class="kimg" alt="" decoding="async"${lazy ? ' loading="lazy"' : ''} draggable="false" src="${esc(g.art)}">`;
+  if (!g.icon) return '';
   if (!g.logo) return uniqSvg(g.icon);
   // a ready-made picture (games.json "art") when there is one, else the SVG as an image
   if (!ART.has(g.id)) ART.set(g.id, g.art || 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(g.icon));
@@ -620,11 +625,11 @@ function renderHero() {
   const g = hg.g;
   h.style.setProperty('--hc', g.color);
   h.dataset.id = g.id;
-  const key = !!(g.logo && g.icon); h.classList.toggle('key', key);
+  const pic = !!(g.art || (g.logo && g.icon)), key = !!(g.logo && g.icon); h.classList.toggle('key', pic);
   if (h.dataset.art !== g.id + lang) {   // only rebuild the art when the game (or language) changes
     h.dataset.art = g.id + lang;
-    h.querySelector('.hart .ic').innerHTML = key ? '' : uniqSvg(g.icon);
-    h.querySelector('.hbg').innerHTML = key ? artHTML(g) : '';
+    h.querySelector('.hart .ic').innerHTML = pic ? '' : uniqSvg(g.icon);
+    h.querySelector('.hbg').innerHTML = pic ? artHTML(g) : '';
   }
   const hn = h.querySelector('.hname');
   h.querySelector('.kicker').textContent = hg.cont ? tr('kickCont') : tr('kickPick');
@@ -685,7 +690,8 @@ function tile(g, sh, fav) {
   a.className = 'tile nav'; a.href = g.url; a.dataset.id = g.id; a.dataset.key = sh.id + ':' + g.id;
   a.innerHTML = '<div class="art"><div class="ic"></div></div><div class="tbody"><div class="tname"></div><div class="tblurb"></div><div class="tmeta"></div></div>';
   const art = a.querySelector('.art'); art.style.setProperty('--c', g.color);
-  a.querySelector('.ic').innerHTML = artHTML(g);
+  a.querySelector('.ic').innerHTML = artHTML(g, true);
+  if (g.art) a.classList.add('shot');
   if (g.logo && g.icon) { a.classList.add('key'); art.appendChild(logoEl(g)); }
   if (g.ext) { const e = document.createElement('span'); e.className = 'extb'; e.textContent = '↗'; e.title = tr('ext'); art.appendChild(e); }
   a.querySelector('.tname').textContent = loc(g.name);
