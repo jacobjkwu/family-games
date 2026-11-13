@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.44",
+      "file": "drawrassic-park-v3.44.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🌿 Wild raids: wild dinos jump into the park to fight; beaten ones are tamed, your losers take a nap and recover, and both sides can call friends for a brawl. Smoother dino motion. Studio stats budget is now 200 points (changeable). Bosses come much less often.",
+        "fr": "🌿 Attaques sauvages : des dinos sauvages sautent dans le parc pour se battre ; les vaincus sont apprivoisés, tes perdants font une sieste et récupèrent, et chaque camp peut appeler des amis pour une mêlée. Mouvements plus doux. Le studio donne 200 points de stats (réglable). Les boss viennent beaucoup moins souvent.",
+        "zh-Hans": "🌿 野生恐龙闯园：野生恐龙会跳进公园打架，输了就被驯服；你的恐龙输了会去睡一觉再恢复；双方都能叫队友大乱斗。恐龙动作更顺滑。工作室能力值变成 200 点（可以改）。Boss 出现得少多了。",
+        "zh-Hant": "🌿 野生恐龍闖園：野生恐龍會跳進公園打架，輸了就被馴服；你的恐龍輸了會去睡一覺再恢復；雙方都能叫隊友大亂鬥。恐龍動作更順滑。工作室能力值變成 200 點（可以改）。Boss 出現得少多了。"
+      }
+    },
+    {
       "v": "3.43",
       "file": "drawrassic-park-v3.43.html",
       "date": "2026-11-13",
