@@ -6,6 +6,7 @@
 - 😵 A full dino shakes its head and the snack bounces off onto the ground, where another dino can eat it; a knocked-out dino gets the snack put down beside it. The button shows “· full”.
 - ❤️ Feeding a wild dino gives it trust hearts (up to 3, shown over its head and on the button); each heart adds +12% catch chance (dev panel: fdTrust). Dev panel also gets fdSnack (tummy per snack).
 - Dinos that find food on their own now chew too.
+- Save format unchanged (s8); trust hearts and chewing are never saved. Not tested on a real iPad or Xbox.
 
 ## v3.28 (2026-11-13) — save schema s8 (unchanged)
 - 🏆 Design contest (quick bar): a random theme (funniest, coolest, cutest, scariest, most colourful, biggest), pick one of your park dinos, three rival monsters from the Mix Factory, three judges flip score cards one by one with comments; scores come from the drawing itself (colours, size, dark/red, pink, length, special move…) plus a little luck. Prizes: 1st +10 coins +3 amber (with fireworks), 2nd +5, 3rd +2.
