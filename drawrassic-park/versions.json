@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.28",
+      "file": "drawrassic-park-v3.28.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎪 Creation play: 🏆 design contest with themes, three judges and prizes; 🃏 trading cards for every dino; ✨ doodle magic (circle = shield, zigzag = lightning, heart = heal, line = rainbow); 🎨 draw & guess for two or more players; and a welcome ceremony for every new dino.",
+        "fr": "🎪 Jeux de création : 🏆 concours de design avec thèmes, trois juges et prix ; 🃏 cartes à collectionner pour chaque dino ; ✨ magie dessinée (cercle = bouclier, zigzag = éclair, cœur = soin, trait = arc-en-ciel) ; 🎨 dessine et devine à plusieurs ; et une fête de bienvenue pour chaque nouveau dino.",
+        "zh-Hans": "🎪 创作玩法：🏆 设计大赛（主题、三位评委、奖品）；🃏 每只恐龙都有自己的卡牌；✨ 涂鸦魔法（画圆圈＝护盾，折线＝闪电，爱心＝治疗，直线＝彩虹）；🎨 你画我猜多人玩；每只新恐龙进公园都有欢迎仪式。",
+        "zh-Hant": "🎪 創作玩法：🏆 設計大賽（主題、三位評審、獎品）；🃏 每隻恐龍都有自己的卡牌；✨ 塗鴉魔法（畫圓圈＝護盾，折線＝閃電，愛心＝治療，直線＝彩虹）；🎨 你畫我猜多人玩；每隻新恐龍進公園都有歡迎儀式。"
+      }
+    },
+    {
       "v": "3.27",
       "file": "drawrassic-park-v3.27.html",
       "date": "2026-11-13",

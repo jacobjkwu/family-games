@@ -1,5 +1,13 @@
 # Drawrassic Park — Changelog
 
+## v3.28 (2026-11-13) — save schema s8 (unchanged)
+- 🏆 Design contest (quick bar): a random theme (funniest, coolest, cutest, scariest, most colourful, biggest), pick one of your park dinos, three rival monsters from the Mix Factory, three judges flip score cards one by one with comments; scores come from the drawing itself (colours, size, dark/red, pink, length, special move…) plus a little luck. Prizes: 1st +10 coins +3 amber (with fireworks), 2nd +5, 3rd +2.
+- 🃏 Trading cards (quick bar, or 🃏 on the dino card): a card drawn on the spot with a rarity frame (holo shine for epic and legendary), the drawing, level, rarity, food and movement, health/attack/stamina bars and the special move; ◀ ▶ through all park dinos; long-press to save.
+- ✨ Doodle magic (quick bar toggle): draw on the park — a circle shields the dinos inside for 15 s (70% less damage, a bubble shows it), a zigzag calls magic lightning that hurts shadow dinos and bosses, a heart heals and wakes the dinos inside, a straight line makes a rainbow that cheers everyone up. 2 s between spells.
+- 🎨 Draw & guess (quick bar, pass-and-play): one player draws a secret word (20 words in 4 languages) on a board with 6 colours, the other picks from 4 answers; right answers pay +2 coins each.
+- 🎉 Welcome ceremony: every dino released through the gate gets a banner, a hatch flash, hearts and cheering visitors.
+- Save format unchanged (s8). Not tested on a real iPad or Xbox.
+
 ## v3.27 (2026-11-13) — save schema s8 (unchanged)
 - 🏭 Crazy Mix Factory (quick bar 🏭, and a button on the studio bar): parts are data entries with a painter, names and name syllables in 4 languages, and what they bring — 16 heads (shark, chicken, frog, owl, octopus, pumpkin, toaster, lightbulb, robot, T-rex, cat, duck, dragon, alien, pony, panda), 12 bodies (dino, ball, banana, burger, cloud, rocket, cactus, jelly, egg, teapot, ice cream, robot box), 10 legs, 9 tails (+none), 7 wings (+none), 9 hats/horns (+none). Mutations: 1–3 heads, 2–8 legs, long neck, size 80–125%, 10 colours.
 - What a monster is: the name is built from syllables (e.g. shark + chicken legs + unicorn horn + body → 鲨鸡角兽), the special move comes from the head, a 20-point stats budget comes from what the parts bring, wings or rocket boots make it fly, fins or tentacles make it swim, the head decides food and voice pitch. 🎉 Make it! draws it into the studio and opens the release dialog with all of this filled in (still editable).
