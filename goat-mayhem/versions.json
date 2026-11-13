@@ -2,6 +2,18 @@
   "game": "goat-mayhem",
   "versions": [
     {
+      "v": 10,
+      "file": "goat-mayhem-v10.html",
+      "date": "2026-11-13",
+      "schema": "s3",
+      "notes": {
+        "en": "Big fun update: charged headbutt, double jump, wall run and wall kick, dive and ground pound, belly slide and long jump, tongue swing from lamp posts and roofs, silly trick combos. Random events (meteors, UFO, stampede, tornado, moon gravity, ball and banana rain, dance party, golden chicken, piñata drop), police chases with wanted stars, quick challenges, people's emoji reactions, 14 new tasks. New save format s3 (your v9 progress is copied in).",
+        "fr": "Grosse mise à jour : coup de tête chargé, double saut, course et saut muraux, plongeon et écrasement, glissade sur le ventre et saut en longueur, balançoire à langue aux lampadaires et aux toits, combos de figures rigolos. Événements aléatoires (météores, OVNI, débandade, tornade, gravité lunaire, pluie de ballons et de bananes, fête, poule dorée, piñatas), poursuites de police avec étoiles, défis éclair, réactions emoji des passants, 14 nouveaux défis. Nouveau format de sauvegarde s3 (ta progression v9 est copiée).",
+        "zh-Hans": "超级大更新：蓄力头槌、二段跳、蹬墙跑和蹬墙跳、飞扑和空中重击、肚皮滑行和跳远、用舌头在路灯和屋顶之间荡秋千、搞笑招式连击。随机事件（陨石雨、飞碟、动物狂奔、龙卷风、月球重力、球雨和香蕉雨、跳舞派对、金色小鸡、皮纳塔空投）、警察追捕和通缉星星、限时挑战、路人的表情气泡、14 个新任务。新存档格式 s3（会自动把 v9 的进度复制过来）。",
+        "zh-Hant": "超級大更新：蓄力頭槌、二段跳、蹬牆跑和蹬牆跳、飛撲和空中重擊、肚皮滑行和跳遠、用舌頭在路燈和屋頂之間盪鞦韆、搞笑招式連擊。隨機事件（隕石雨、飛碟、動物狂奔、龍捲風、月球重力、球雨和香蕉雨、跳舞派對、金色小雞、皮納塔空投）、警察追捕和通緝星星、限時挑戰、路人的表情氣泡、14 個新任務。新存檔格式 s3（會自動把 v9 的進度複製過來）。"
+      }
+    },
+    {
       "v": 9,
       "file": "goat-mayhem-v9.html",
       "date": "2026-11-13",
