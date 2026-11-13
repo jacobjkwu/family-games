@@ -2,6 +2,18 @@
   "game": "goat-mayhem",
   "versions": [
     {
+      "v": 5,
+      "file": "goat-mayhem-v5.html",
+      "date": "2026-11-13",
+      "schema": "s2",
+      "notes": {
+        "en": "Play together on one screen: tap 👥 2 players (split screen; in portrait the top half faces the player across the iPad), or press A on more controllers for up to 4 players on the TV. Co-op: everyone's chaos adds up. Each player has their own coloured collar, controls and pause button.",
+        "fr": "Jouez ensemble sur un seul écran : touche 👥 2 joueurs (écran partagé ; en portrait, la moitié du haut est tournée vers le joueur d’en face), ou appuie sur A sur d’autres manettes pour jouer jusqu’à 4 sur la télé. En coopération : le chaos de chacun s’additionne. Chaque joueur a son collier coloré, ses commandes et son bouton pause.",
+        "zh-Hans": "同一个屏幕一起玩：点「👥 两人玩」分屏玩（竖着拿时，上半屏是倒过来的，正好给坐在对面的人）；在电视上用手柄，其他人在自己的手柄上按 A 就能加入，最多 4 个人。合作模式：大家的捣乱分数加在一起。每个玩家有自己颜色的项圈、按钮和暂停键。",
+        "zh-Hant": "同一個螢幕一起玩：點「👥 兩人玩」分割畫面（直著拿時，上半螢幕是倒過來的，正好給坐在對面的人）；在電視上用手把，其他人在自己的手把上按 A 就能加入，最多 4 個人。合作模式：大家的搗亂分數加在一起。每個玩家有自己顏色的項圈、按鈕和暫停鍵。"
+      }
+    },
+    {
       "v": 4,
       "file": "goat-mayhem-v4.html",
       "date": "2026-11-13",

@@ -68,7 +68,7 @@ const STR = {
     kind_main: '目前存檔', kind_bak: '上一次的存檔', kind_day: '每日副本 {d}', kind_copy: '複製/恢復前的備份', kind_broken: '損壞的資料（保留著）', unreadable: '讀不出來' },
 };
 const LANGS = [['en', 'English'], ['fr', 'Français'], ['zh-Hans', '简体中文'], ['zh-Hant', '繁體中文']];
-const FALLBACK = { game: GAME, versions: [{ v: 4, file: 'goat-mayhem-v4.html', date: '2026-11-13', schema: 's2', notes: {} }, { v: 3, file: 'goat-mayhem-v3.html', date: '2026-11-13', schema: 's1', notes: {} }, { v: 2, file: 'goat-mayhem-v2.html', date: '2026-11-13', schema: 's1', notes: {} }, { v: 1, file: 'goat-mayhem-v1.html', date: '2026-11-13', schema: 's1', notes: {} }] };
+const FALLBACK = { game: GAME, versions: [{ v: 5, file: 'goat-mayhem-v5.html', date: '2026-11-13', schema: 's2', notes: {} }, { v: 4, file: 'goat-mayhem-v4.html', date: '2026-11-13', schema: 's2', notes: {} }, { v: 3, file: 'goat-mayhem-v3.html', date: '2026-11-13', schema: 's1', notes: {} }, { v: 2, file: 'goat-mayhem-v2.html', date: '2026-11-13', schema: 's1', notes: {} }, { v: 1, file: 'goat-mayhem-v1.html', date: '2026-11-13', schema: 's1', notes: {} }] };
 const get = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
 const set = (k, v) => { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } };
 const keys = () => { try { return Object.keys(localStorage); } catch (e) { return []; } };
@@ -77,7 +77,7 @@ const SETK = GAME + '/settings';
 function pickLang() { const s = (parse(get(SETK)) || {}).lang; if (STR[s]) return s; const n = navigator.language || 'en'; if (/^zh-(TW|HK|MO)/i.test(n) || /hant/i.test(n)) return 'zh-Hant'; if (/^zh/i.test(n)) return 'zh-Hans'; if (/^fr/i.test(n)) return 'fr'; return 'en'; }
 let LANG = pickLang();
 const T = (k, p) => (STR[LANG][k] || STR.en[k] || k).replace(/\{(\w+)\}/g, (_, x) => p && p[x] !== undefined ? p[x] : '');
-// save formats & migrations — must match the game files (s1 = goat-mayhem-v1..v3, s2 = v4+: five destruction stats added)
+// save formats & migrations — must match the game files (s1 = goat-mayhem-v1..v3, s2 = v4+: five destruction stats added; v5 adds no save fields)
 const SAVE_KEY = s => `${GAME}/save/${s}`; const ORDER = ['s1', 's2'];
 const NEW_S2 = ['lampsDown', 'treesDown', 'wallsDown', 'blocksDown', 'collapses'];
 const UP = { s1_s2: d => Object.assign({}, d, { schema: 2, stats: Object.assign(Object.fromEntries(NEW_S2.map(k => [k, 0])), d.stats || {}) }) };
