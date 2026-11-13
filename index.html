@@ -86,6 +86,35 @@ body.show-focus .tile.focused { transform: scale(1.045); }
 .ver span { color: var(--dim); }
 .ver b { font-size: 1.45em; }                   /* ≥40px at 1080p */
 
+/* ---------- Key art & logo lettering (our own games) ---------- */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.logoT { position: relative; display: inline-block; isolation: isolate; font-weight: 900; line-height: 1.04; letter-spacing: 0.01em;
+  transform: rotate(-2deg); transform-origin: left bottom; overflow-wrap: anywhere; pointer-events: none;
+  color: var(--ls); -webkit-text-stroke: 0.24em var(--ls);
+  text-shadow: 0 0.09em 0 var(--ls), 0 0.16em 0.06em rgba(0, 0, 0, .55), 0 0 0.5em var(--lg); }
+.logoT::after { content: attr(data-t); position: absolute; left: 0; top: 0; right: 0; -webkit-text-stroke: 0; text-shadow: none; color: transparent;
+  background: linear-gradient(180deg, var(--l1) 8%, var(--l2) 55%, var(--l3) 100%); -webkit-background-clip: text; background-clip: text;
+  filter: drop-shadow(0 -0.03em 0 rgba(255, 255, 255, .65)); }
+.tile.key { will-change: transform; }
+.tile.key .art { height: auto; aspect-ratio: 16 / 9; display: block; overflow: hidden; contain: paint; }
+.tile.key .art .ic { position: absolute; inset: 0; width: 100%; height: 100%; filter: none; }
+.tile.key .art::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .14) 0%, rgba(255, 255, 255, 0) 28%, rgba(6, 8, 24, 0) 50%, rgba(6, 8, 24, .82) 100%); }
+.tile.key .art .logoT { position: absolute; left: 0.4em; bottom: 0.3em; z-index: 1; max-width: calc(100% - 0.8em); }
+.tile.key .tname { display: none; }
+.hbg { display: none; }
+#hero.key { position: relative; overflow: hidden; isolation: isolate; min-height: 11em; }
+#hero.key .hart { display: none; }
+#hero.key .hbg { display: block; position: absolute; top: 0; right: 0; bottom: 0; width: min(64%, 34em); z-index: -1; contain: paint;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 38%); mask-image: linear-gradient(90deg, transparent 0%, #000 38%); }
+#hero.key .hbg img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.ic .kimg { width: 100%; height: 100%; display: block; object-fit: cover; border-radius: inherit; -webkit-user-drag: none; }
+.dic { border-radius: 0.5em; overflow: hidden; }
+#hero.key .hbody { max-width: 62%; }
+#hero.key .hname { line-height: 1; padding: 0.1em 0 0.25em; }
+#hero.key .hblurb { text-shadow: 0 1px 2px rgba(0, 0, 0, .6); }
+@media (max-width: 700px) { #hero.key .hbg { width: 100%; opacity: .45; -webkit-mask-image: none; mask-image: none; } #hero.key .hbody { max-width: none; } }
+
 /* ---------- Search ---------- */
 #sbar { display: flex; gap: 0.5em; align-items: center; }
 #q {
@@ -202,6 +231,7 @@ body.show-focus #detail { display: flex; }
   </div>
 
   <section id="hero" class="navrow" data-row="hero" hidden>
+    <div class="hbg" aria-hidden="true"></div>
     <div class="hart"><div class="ic"></div></div>
     <div class="hbody">
       <div class="kicker"></div>
@@ -428,6 +458,9 @@ function cleanGame(g) {
     color: typeof g.color === 'string' && /^#[0-9a-f]{3,8}$/i.test(g.color) ? g.color : '#7783b5',
     name: g.name && typeof g.name === 'object' ? g.name : { en: g.id }, blurb: g.blurb && typeof g.blurb === 'object' ? g.blurb : {},
     icon: typeof g.icon === 'string' && /^<svg[\s>]/.test(g.icon.trim()) ? g.icon : '',
+    art: (() => { try { const u = typeof g.art === 'string' && new URL(g.art, location.href); return u && /^https?:$/.test(u.protocol) ? u.href : ''; } catch (e) { return ''; } })(),
+    logo: g.logo && typeof g.logo === 'object' && Array.isArray(g.logo.fill) && g.logo.fill.length ? {
+      fill: g.logo.fill.slice(0, 3).map(String), stroke: String(g.logo.stroke || '#1a1030'), glow: String(g.logo.glow || 'transparent') } : null,
   };
 }
 async function loadGames() {
@@ -540,6 +573,41 @@ function render() {
   if (S.mode === 'pad' || S.mode === 'key') renderDetail();
 }
 
+/* ---------- key art & title lettering (launch-style logos) ---------- */
+// An icon can be on the page several times (hero, shelves, detail bar); ids are page-wide, so each copy gets its own.
+let svgN = 0;
+function uniqSvg(svg) {
+  const n = ++svgN;
+  return String(svg || '').replace(/\bid='([^']+)'/g, (m, id) => `id='${id}_${n}'`).replace(/\bid="([^"]+)"/g, (m, id) => `id="${id}_${n}"`).replace(/url\(#([^)]+)\)/g, (m, id) => `url(#${id}_${n})`);
+}
+// The title stays real text (it is translated); the lettering is CSS: gradient fill, thick outline, extrusion and glow.
+// Key art is shown as an image (a pre-rendered WebP from games.json "art"): the browser decodes it once, off the main thread, and then only composites it, which keeps focus moves smooth on the Xbox.
+const ART = new Map();
+function artHTML(g) {
+  if (!g || !g.icon) return '';
+  if (!g.logo) return uniqSvg(g.icon);
+  // a ready-made picture (games.json "art") when there is one, else the SVG as an image
+  if (!ART.has(g.id)) ART.set(g.id, g.art || 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(g.icon));
+  return `<img class="kimg" alt="" decoding="async" draggable="false" src="${esc(ART.get(g.id))}">`;
+}
+function logoEl(g, cls) {
+  const t = document.createElement('span'); t.className = 'logoT' + (cls ? ' ' + cls : ''); const name = loc(g.name);
+  t.textContent = name; t.dataset.t = name; t.setAttribute('aria-hidden', 'true');
+  const f = g.logo.fill; t.style.setProperty('--l1', f[0]); t.style.setProperty('--l2', f[1] || f[0]); t.style.setProperty('--l3', f[2] || f[1] || f[0]);
+  t.style.setProperty('--ls', g.logo.stroke); t.style.setProperty('--lg', g.logo.glow);
+  return t;
+}
+// As big as fits: at most ~46% of the art's height and never wider than it (long French names shrink, short ones stay big).
+function fitLogos(root) {
+  for (const t of (root || document).querySelectorAll('.logoT')) {
+    const box = t.closest('.art, .hbg, #hero'); if (!box || !box.offsetHeight) continue;
+    const hero = t.classList.contains('hlogo'), W = hero ? t.parentNode.offsetWidth : box.offsetWidth - 14, Hm = hero ? box.offsetHeight * 0.42 : box.offsetHeight * 0.5;
+    let fs = hero ? Math.min(W * 0.11, 64) : Math.min(box.offsetWidth * 0.1, box.offsetHeight * 0.3); t.style.fontSize = fs + 'px';
+    for (let i = 0; i < 16 && (t.offsetHeight > Hm || t.offsetWidth > W) && fs > 13; i++) { fs *= 0.9; t.style.fontSize = fs + 'px'; }
+  }
+}
+addEventListener('resize', () => { clearTimeout(fitLogos.t); fitLogos.t = setTimeout(() => fitLogos(), 80); });
+
 function renderHero() {
   const h = $('hero'), hg = S.status === 'ok' && !(S.searchOpen && S.q.trim()) ? heroGame() : null;
   h.hidden = !hg;
@@ -547,9 +615,17 @@ function renderHero() {
   const g = hg.g;
   h.style.setProperty('--hc', g.color);
   h.dataset.id = g.id;
-  h.querySelector('.hart .ic').innerHTML = g.icon;
+  const key = !!(g.logo && g.icon); h.classList.toggle('key', key);
+  if (h.dataset.art !== g.id + lang) {   // only rebuild the art when the game (or language) changes
+    h.dataset.art = g.id + lang;
+    h.querySelector('.hart .ic').innerHTML = key ? '' : uniqSvg(g.icon);
+    h.querySelector('.hbg').innerHTML = key ? artHTML(g) : '';
+  }
+  const hn = h.querySelector('.hname');
   h.querySelector('.kicker').textContent = hg.cont ? tr('kickCont') : tr('kickPick');
-  h.querySelector('.hname').textContent = loc(g.name);
+  if (key && hn.dataset.k === g.id + lang) { /* same lettering already there */ }
+  else if (key) { hn.dataset.k = g.id + lang; hn.textContent = ''; const sr = document.createElement('span'); sr.className = 'sr'; sr.textContent = loc(g.name); hn.append(sr, logoEl(g, 'hlogo')); requestAnimationFrame(() => fitLogos(h)); }
+  else { hn.dataset.k = ''; hn.textContent = loc(g.name); }
   h.querySelector('.hblurb').textContent = loc(g.blurb);
   const c = $('cont'); c.href = g.url; c.dataset.id = g.id; c.querySelector('span').textContent = hg.cont ? tr('cont') : tr('play');
   const f = $('hfav'), on = isFav(g.id); f.textContent = on ? tr('faved') : tr('fav'); f.setAttribute('aria-pressed', String(on)); f.dataset.id = g.id;
@@ -587,7 +663,7 @@ function renderShelves() {
     if (keepScroll[row.dataset.row]) row.scrollLeft = keepScroll[row.dataset.row];
     row.addEventListener('scroll', () => arrowState(sec), { passive: true });
   }
-  requestAnimationFrame(() => box.querySelectorAll('.shelf').forEach(arrowState));
+  requestAnimationFrame(() => { box.querySelectorAll('.shelf').forEach(arrowState); fitLogos(box); });
   $('none').hidden = !(S.searchOpen && S.q.trim() && !box.querySelector('.tile'));
   $('none').textContent = tr('none');
 }
@@ -604,7 +680,8 @@ function tile(g, sh, fav) {
   a.className = 'tile nav'; a.href = g.url; a.dataset.id = g.id; a.dataset.key = sh.id + ':' + g.id;
   a.innerHTML = '<div class="art"><div class="ic"></div></div><div class="tbody"><div class="tname"></div><div class="tblurb"></div><div class="tmeta"></div></div>';
   const art = a.querySelector('.art'); art.style.setProperty('--c', g.color);
-  a.querySelector('.ic').innerHTML = g.icon;
+  a.querySelector('.ic').innerHTML = artHTML(g);
+  if (g.logo && g.icon) { a.classList.add('key'); art.appendChild(logoEl(g)); }
   if (g.ext) { const e = document.createElement('span'); e.className = 'extb'; e.textContent = '↗'; e.title = tr('ext'); art.appendChild(e); }
   a.querySelector('.tname').textContent = loc(g.name);
   a.querySelector('.tblurb').textContent = loc(g.blurb);
@@ -632,7 +709,7 @@ function renderDetail() {
   const d = $('detail');
   const id = focusEl && focusEl.dataset.id && (focusEl.classList.contains('tile') || focusEl.id === 'cont' || focusEl.id === 'hfav') ? focusEl.dataset.id : null;
   const g = id ? byId(id) : null;
-  d.querySelector('.dic').innerHTML = g ? g.icon : '';
+  d.querySelector('.dic').innerHTML = g ? artHTML(g) : '';
   d.querySelector('.dic').hidden = !g;
   d.querySelector('.dname').textContent = g ? loc(g.name) : tr('title');
   d.querySelector('.d1').textContent = g ? loc(g.blurb) : '';
