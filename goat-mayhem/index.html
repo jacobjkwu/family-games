@@ -68,7 +68,7 @@ const STR = {
     kind_main: '目前存檔', kind_bak: '上一次的存檔', kind_day: '每日副本 {d}', kind_copy: '複製/恢復前的備份', kind_broken: '損壞的資料（保留著）', unreadable: '讀不出來' },
 };
 const LANGS = [['en', 'English'], ['fr', 'Français'], ['zh-Hans', '简体中文'], ['zh-Hant', '繁體中文']];
-const FALLBACK = { game: GAME, versions: [{ v: 1, file: 'goat-mayhem-v1.html', date: '2026-11-13', schema: 's1', notes: {} }] };
+const FALLBACK = { game: GAME, versions: [{ v: 2, file: 'goat-mayhem-v2.html', date: '2026-11-13', schema: 's1', notes: {} }, { v: 1, file: 'goat-mayhem-v1.html', date: '2026-11-13', schema: 's1', notes: {} }] };
 const get = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
 const set = (k, v) => { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } };
 const keys = () => { try { return Object.keys(localStorage); } catch (e) { return []; } };

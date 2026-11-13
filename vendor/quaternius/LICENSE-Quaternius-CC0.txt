@@ -1,0 +1,2 @@
+Cow, Horse, Alpaca and Donkey models and animations: Quaternius, Ultimate Animated Animal Pack (https://quaternius.com), released under CC0 1.0 (public domain): https://creativecommons.org/publicdomain/zero/1.0/
+Converted to GLB, unused clips removed and geometry quantized with glTF-Transform for Goat Mayhem.
