@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="../shim.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Maher Magic Puzzle — Turn Any Image Into a Sliding Puzzle</title>
+<meta name="description" content="Upload any image and turn it into an interactive sliding puzzle. With slide sounds, levels and a confetti celebration. Built by Maher Khan.">
+<style>
+  :root{
+    --cream:#f2ece1;
+    --cream-2:#faf6ee;
+    --blue:#1f3fbf;
+    --blue-dark:#162f95;
+    --ink:#22242a;
+    --ink-soft:#6b6d75;
+    --white:#ffffff;
+    --gold:#e8a33d;
+    --radius:18px;
+    --shadow:0 10px 30px rgba(34,36,42,.10);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    background:var(--cream);
+    font-family:"Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center;
+    padding:22px 14px 40px;
+    overflow-x:hidden;
+  }
+
+  /* ---------- header ---------- */
+  .logo{
+    font-weight:900; letter-spacing:.14em; color:var(--blue);
+    font-size:15px; text-transform:uppercase; text-align:center; line-height:1.25;
+    transform:rotate(-2deg);
+  }
+  .logo span{display:block; letter-spacing:.3em; font-size:11px;}
+  h1{
+    margin:10px 0 6px; color:var(--blue);
+    font-size:clamp(28px, 6vw, 40px); font-weight:900; text-align:center; letter-spacing:-.5px;
+  }
+  .tagline{
+    margin:0 0 18px; color:var(--ink-soft); font-size:14.5px; text-align:center; max-width:340px;
+  }
+
+  /* ---------- welcome tip ---------- */
+  .tip{
+    background:var(--white); border:2px dashed var(--blue); border-radius:14px;
+    padding:10px 14px; font-size:13.5px; color:var(--ink); max-width:400px;
+    margin:0 0 16px; text-align:center; line-height:1.45; position:relative;
+    animation:pop .4s ease;
+  }
+  .tip b{color:var(--blue);}
+  .tip button{
+    position:absolute; top:4px; right:8px; border:0; background:none;
+    font-size:15px; cursor:pointer; color:var(--ink-soft);
+  }
+
+  /* ---------- stats ---------- */
+  .stats{display:flex; gap:12px; margin-bottom:16px;}
+  .stat{
+    background:var(--white); border-radius:16px; box-shadow:var(--shadow);
+    padding:9px 22px; text-align:center; min-width:96px;
+  }
+  .stat .v{font-size:19px; font-weight:800; color:var(--ink);}
+  .stat .l{font-size:10px; letter-spacing:.18em; color:var(--ink-soft); text-transform:uppercase; margin-top:2px;}
+
+  /* ---------- levels ---------- */
+  .levels{display:flex; gap:8px; margin-bottom:16px;}
+  .lvl{
+    border:2px solid var(--blue); color:var(--blue); background:transparent;
+    border-radius:999px; padding:7px 16px; font-size:13px; font-weight:700; cursor:pointer;
+    transition:all .15s ease;
+  }
+  .lvl.active{background:var(--blue); color:var(--white);}
+  .lvl:active{transform:scale(.95);}
+
+  /* ---------- board ---------- */
+  .board-wrap{position:relative;}
+  #board{
+    position:relative;
+    width:min(92vw, 480px); height:min(92vw, 480px);
+    background:var(--cream-2);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    touch-action:manipulation;
+    user-select:none;
+  }
+  .tile{
+    position:absolute; top:0; left:0;
+    border-radius:12px;
+    background-size:var(--imgsize) var(--imgsize);
+    background-color:var(--white);
+    box-shadow:0 4px 12px rgba(34,36,42,.18);
+    cursor:pointer;
+    transition:transform .14s cubic-bezier(.22,.9,.35,1.2);
+    will-change:transform;
+  }
+  .tile .num{
+    position:absolute; top:5px; left:7px;
+    font-size:11px; font-weight:800; color:var(--white);
+    text-shadow:0 1px 3px rgba(0,0,0,.55);
+    display:none; pointer-events:none;
+  }
+  #board.show-nums .tile .num{display:block;}
+
+  #peek{
+    position:absolute; inset:0; border-radius:var(--radius);
+    background-size:cover; background-position:center;
+    opacity:0; pointer-events:none; transition:opacity .18s ease;
+    box-shadow:var(--shadow); z-index:5;
+  }
+  #peek.on{opacity:1;}
+
+  /* ---------- win overlay ---------- */
+  #winlay{
+    position:absolute; inset:0; border-radius:var(--radius); z-index:6;
+    background:rgba(31,63,191,.88); color:var(--white);
+    display:none; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:20px; animation:pop .45s cubic-bezier(.2,1.4,.4,1);
+  }
+  #winlay.on{display:flex;}
+  #winlay .big{font-size:clamp(26px,7vw,38px); font-weight:900; margin:6px 0;}
+  #winlay .sub{font-size:15px; opacity:.92; margin-bottom:18px;}
+  #winlay .best{font-size:13px; color:var(--gold); font-weight:700; margin-bottom:14px;}
+  #winlay button{
+    background:var(--white); color:var(--blue); border:0; border-radius:999px;
+    padding:12px 28px; font-size:15px; font-weight:800; cursor:pointer;
+  }
+  @keyframes pop{from{transform:scale(.85); opacity:0;} to{transform:scale(1); opacity:1;}}
+
+  /* ---------- caption ---------- */
+  .caption{
+    margin:16px 0 18px; font-size:11.5px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:700; text-align:center; max-width:90vw;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+
+  /* ---------- buttons ---------- */
+  .controls{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; max-width:480px;}
+  .btn{
+    border-radius:999px; padding:12px 22px; font-size:14px; font-weight:700; cursor:pointer;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:active{transform:scale(.95);}
+  .btn-primary{background:var(--blue); color:var(--white); border:2px solid var(--blue); box-shadow:0 6px 16px rgba(31,63,191,.35);}
+  .btn-ghost{background:transparent; color:var(--blue); border:2px solid var(--blue);}
+  .toggles{display:flex; gap:10px; margin-top:12px;}
+  .tgl{
+    width:44px; height:44px; border-radius:50%; border:2px solid var(--blue);
+    background:transparent; color:var(--blue); font-size:17px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:all .15s ease;
+  }
+  .tgl.off{opacity:.4; border-style:dashed;}
+
+  footer{
+    margin-top:26px; text-align:center; color:var(--ink-soft); font-size:12.5px; line-height:1.9;
+  }
+  footer .sig{font-weight:700; color:var(--ink);}
+  footer a{color:var(--blue); text-decoration:none; font-weight:700;}
+
+  #confetti{
+    position:fixed; inset:0; pointer-events:none; z-index:50;
+  }
+  #file{display:none;}
+</style>
+</head>
+<body>
+
+<div class="logo">✦ MAHER<span>MAGIC</span></div>
+<h1>Sliding Puzzle</h1>
+<p class="tagline">Slide the tiles. Rebuild the picture. One tap at a time.</p>
+
+<div class="tip" id="tip">
+  <button id="tipclose" aria-label="close">✕</button>
+  👋 <b>Make it yours!</b> Tap <b>Change image</b> and upload any picture — from your
+  phone gallery, Pinterest, your desktop, anywhere. We'll turn it into your own puzzle.
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="v" id="moves">0</div><div class="l">Moves</div></div>
+  <div class="stat"><div class="v" id="time">0:00</div><div class="l">Time</div></div>
+</div>
+
+<div class="levels" id="levels">
+  <button class="lvl active" data-n="3">Beginner 3×3</button>
+  <button class="lvl" data-n="4">Advanced 4×4</button>
+  <button class="lvl" data-n="5">Expert 5×5</button>
+</div>
+
+<div class="board-wrap">
+  <div id="board" aria-label="sliding puzzle board"></div>
+  <div id="peek"></div>
+  <div id="winlay">
+    <div style="font-size:44px">🎉</div>
+    <div class="big">You did it!</div>
+    <div class="sub" id="winstats"></div>
+    <div class="best" id="winbest"></div>
+    <button id="again">Play again</button>
+  </div>
+</div>
+
+<div class="caption" id="caption">MAHER MAGIC ART — TAP TO SLIDE</div>
+
+<div class="controls">
+  <button class="btn btn-primary" id="shuffle">Shuffle</button>
+  <button class="btn btn-ghost" id="peekbtn">Hold to peek</button>
+  <button class="btn btn-ghost" id="change">Change image</button>
+</div>
+<div class="toggles">
+  <button class="tgl" id="sound" title="Sound on/off">🔊</button>
+  <button class="tgl off" id="nums" title="Show tile numbers (easy mode)">#</button>
+</div>
+
+<input type="file" id="file" accept="image/*">
+
+<footer>
+  <div class="sig">Made with ✦ by Maher Khan — built with Claude (Fable)</div>
+  <div>Upload your image. Own your puzzle. <a href="https://github.com/maherkhan-builds/maher-magic-puzzle" target="_blank">Get the code</a></div>
+  <div>Slide. Solve. Smile.</div>
+</footer>
+
+<canvas id="confetti"></canvas>
+
+<script>
+(function(){
+  "use strict";
+  var board = document.getElementById('board');
+  var peekEl = document.getElementById('peek');
+  var movesEl = document.getElementById('moves');
+  var timeEl = document.getElementById('time');
+  var captionEl = document.getElementById('caption');
+  var winlay = document.getElementById('winlay');
+
+  var N = parseInt(localStorage.getItem('mmp_n') || '3', 10);
+  var imgURL = null;        // dataURL of the current puzzle image
+  var tiles = [];           // tile DOM elements, indexed by tileIndex (0..N*N-2)
+  var pos = [];             // pos[cell] = tileIndex, blank = N*N-1
+  var moves = 0, secs = 0, timerId = null, started = false, solvedLock = true;
+  var soundOn = localStorage.getItem('mmp_sound') !== '0';
+
+  /* ================= default artwork (no assets needed) ================= */
+  function makeDefaultArt(){
+    var s = 720, c = document.createElement('canvas'); c.width = c.height = s;
+    var x = c.getContext('2d');
+    x.fillStyle = '#f2ece1'; x.fillRect(0,0,s,s);
+    var cols = ['#1f3fbf','#e8a33d','#16305f','#d96c3f','#7a9bd8'];
+    // bold brush arcs
+    for (var i=0;i<7;i++){
+      x.strokeStyle = cols[i%cols.length];
+      x.lineWidth = 34 + (i*7)%40; x.lineCap='round';
+      x.beginPath();
+      var cx = (i*197)%s, cy = (i*283)%s, r = 90+(i*67)%180;
+      x.arc(cx, cy, r, (i*.9), (i*.9)+2.2+ (i%3)*.6);
+      x.globalAlpha = .9;
+      x.stroke();
+    }
+    // dots
+    x.globalAlpha = 1;
+    for (var j=0;j<26;j++){
+      x.fillStyle = cols[(j+2)%cols.length];
+      var dx=(j*173+90)%s, dy=(j*251+40)%s, dr=6+(j*13)%16;
+      x.beginPath(); x.arc(dx,dy,dr,0,7); x.fill();
+    }
+    // signature star
+    x.fillStyle='#1f3fbf'; x.font='900 110px Arial'; x.textAlign='center';
+    x.fillText('✦', s/2, s/2+38);
+    return c.toDataURL('image/jpeg', .88);
+  }
+
+  /* ================= audio (Web Audio, no files) ================= */
+  var AC = null;
+  function ac(){ if(!AC){ AC = new (window.AudioContext||window.webkitAudioContext)(); } if(AC.state==='suspended'){AC.resume();} return AC; }
+  function snap(){ // the sliding "click"
+    if(!soundOn) return;
+    try{
+      var a = ac(), t = a.currentTime;
+      // noise tick
+      var len = a.sampleRate*0.05, buf = a.createBuffer(1,len,a.sampleRate), d = buf.getChannelData(0);
+      for(var i=0;i<len;i++){ d[i] = (Math.random()*2-1)*Math.pow(1-i/len,3); }
+      var src = a.createBufferSource(); src.buffer = buf;
+      var f = a.createBiquadFilter(); f.type='highpass'; f.frequency.value=1400;
+      var g = a.createGain(); g.gain.setValueAtTime(.5,t); g.gain.exponentialRampToValueAtTime(.001,t+.06);
+      src.connect(f); f.connect(g); g.connect(a.destination); src.start(t);
+      // low thump
+      var o = a.createOscillator(), g2 = a.createGain();
+      o.type='sine'; o.frequency.setValueAtTime(190,t); o.frequency.exponentialRampToValueAtTime(70,t+.07);
+      g2.gain.setValueAtTime(.35,t); g2.gain.exponentialRampToValueAtTime(.001,t+.09);
+      o.connect(g2); g2.connect(a.destination); o.start(t); o.stop(t+.1);
+    }catch(e){}
+  }
+  function fanfare(){
+    if(!soundOn) return;
+    try{
+      var a = ac(), t = a.currentTime;
+      var notes = [523.25, 659.25, 783.99, 1046.5, 1318.5];
+      notes.forEach(function(fr, i){
+        var o=a.createOscillator(), g=a.createGain();
+        o.type='triangle'; o.frequency.value=fr;
+        var st=t+i*.13;
+        g.gain.setValueAtTime(0.0001,st); g.gain.exponentialRampToValueAtTime(.4,st+.02);
+        g.gain.exponentialRampToValueAtTime(.001,st+.5);
+        o.connect(g); g.connect(a.destination); o.start(st); o.stop(st+.55);
+      });
+      // claps (noise bursts)
+      for(var k=0;k<8;k++){
+        var len=a.sampleRate*0.08, buf=a.createBuffer(1,len,a.sampleRate), d=buf.getChannelData(0);
+        for(var i2=0;i2<len;i2++){ d[i2]=(Math.random()*2-1)*Math.pow(1-i2/len,2); }
+        var src=a.createBufferSource(); src.buffer=buf;
+        var f=a.createBiquadFilter(); f.type='bandpass'; f.frequency.value=1100+Math.random()*600;
+        var g3=a.createGain(); g3.gain.value=.25;
+        src.connect(f); f.connect(g3); g3.connect(a.destination);
+        src.start(t+.5+k*.14+Math.random()*.05);
+      }
+    }catch(e){}
+  }
+
+  /* ================= board / game logic ================= */
+  function blankIdx(){ return N*N-1; }
+  function findBlank(){ return pos.indexOf(blankIdx()); }
+  function boardSize(){ return board.clientWidth; }
+  function gap(){ return Math.max(4, Math.round(boardSize()*0.012)); }
+  function tileSize(){ return (boardSize() - gap()*(N+1)) / N; }
+
+  function buildTiles(){
+    board.innerHTML = '';
+    tiles = [];
+    if (pos.length !== N*N){
+      pos = []; for (var p=0;p<N*N;p++) pos.push(p);
+    }
+    var ts = tileSize(), g = gap(), bs = boardSize();
+    board.style.setProperty('--imgsize', bs - g*2 + 'px');
+    for (var i=0; i<N*N-1; i++){
+      var el = document.createElement('div');
+      el.className = 'tile';
+      el.style.width = ts+'px'; el.style.height = ts+'px';
+      var r = Math.floor(i/N), c = i%N;
+      el.style.backgroundImage = 'url("'+imgURL+'")';
+      el.style.backgroundPosition = (-(c*(ts+g))) + 'px ' + (-(r*(ts+g))) + 'px';
+      var num = document.createElement('span');
+      num.className='num'; num.textContent = i+1;
+      el.appendChild(num);
+      el.dataset.tile = i;
+      tiles.push(el);
+      board.appendChild(el);
+    }
+    layout(false);
+  }
+
+  function layout(animate){
+    var ts = tileSize(), g = gap();
+    for (var cell=0; cell<N*N; cell++){
+      var t = pos[cell];
+      if (t === blankIdx()) continue;
+      var el = tiles[t];
+      if (!animate){ el.style.transition = 'none'; }
+      var r = Math.floor(cell/N), c = cell%N;
+      el.style.transform = 'translate('+(g + c*(ts+g))+'px,'+(g + r*(ts+g))+'px)';
+      if (!animate){ void el.offsetWidth; el.style.transition = ''; }
+    }
+  }
+
+  // slide the clicked tile (and everything between it and the blank in the
+  // same row/column) toward the blank. Returns number of tiles moved.
+  function slideFrom(cell){
+    var b = findBlank();
+    var br = Math.floor(b/N), bc = b%N, cr = Math.floor(cell/N), cc = cell%N;
+    if (br !== cr && bc !== cc) return 0;
+    var step = 0;
+    if (br === cr){ step = (cc > bc) ? 1 : -1; }
+    else { step = (cr > br) ? N : -N; }
+    var count = 0;
+    while (b !== cell){
+      var next = b + step;
+      pos[b] = pos[next];
+      pos[next] = blankIdx();
+      b = next;
+      count++;
+    }
+    return count;
+  }
+
+  function isSolved(){
+    for (var i=0;i<N*N;i++){ if (pos[i] !== i) return false; }
+    return true;
+  }
+
+  function onTileTap(e){
+    if (solvedLock) return;
+    var el = e.target.closest('.tile'); if (!el) return;
+    var t = parseInt(el.dataset.tile, 10);
+    var cell = pos.indexOf(t);
+    var moved = slideFrom(cell);
+    if (moved > 0){
+      snap();
+      if (!started){ started = true; startTimer(); }
+      moves += moved;
+      movesEl.textContent = moves;
+      layout(true);
+      if (isSolved()){ win(); }
+    }
+  }
+
+  function shuffle(){
+    hideWin();
+    pos = []; for (var i=0;i<N*N;i++) pos.push(i);
+    var steps = N*N*12;
+    var last = -1;
+    for (var s=0; s<steps; s++){
+      var b = findBlank(), opts = [];
+      var br = Math.floor(b/N), bc = b%N;
+      if (br>0) opts.push(b-N); if (br<N-1) opts.push(b+N);
+      if (bc>0) opts.push(b-1); if (bc<N-1) opts.push(b+1);
+      opts = opts.filter(function(o){ return o!==last; });
+      var pick = opts[Math.floor(Math.random()*opts.length)];
+      pos[b] = pos[pick]; pos[pick] = blankIdx(); last = b;
+    }
+    if (isSolved()){ shuffle(); return; }
+    moves = 0; secs = 0; started = false; solvedLock = false;
+    movesEl.textContent='0'; timeEl.textContent='0:00';
+    stopTimer();
+    layout(true);
+    snap();
+  }
+
+  /* ================= timer ================= */
+  function fmt(s){ return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2); }
+  function startTimer(){ stopTimer(); timerId = setInterval(function(){ secs++; timeEl.textContent = fmt(secs); }, 1000); }
+  function stopTimer(){ if (timerId){ clearInterval(timerId); timerId=null; } }
+
+  /* ================= win ================= */
+  function win(){
+    solvedLock = true;
+    stopTimer();
+    var bestKey = 'mmp_best_'+N;
+    var prev = parseInt(localStorage.getItem(bestKey)||'0',10);
+    var isBest = !prev || moves < prev;
+    if (isBest) localStorage.setItem(bestKey, moves);
+    document.getElementById('winstats').textContent = moves+(moves===1?' move · ':' moves · ')+fmt(secs);
+    document.getElementById('winbest').textContent = isBest ? '★ New best score for '+N+'×'+N+'!' : 'Best: '+prev+' moves';
+    setTimeout(function(){
+      winlay.classList.add('on');
+      fanfare();
+      confettiBurst();
+    }, 350);
+  }
+  function hideWin(){ winlay.classList.remove('on'); }
+
+  /* ================= confetti ================= */
+  var cv = document.getElementById('confetti'), cx = cv.getContext('2d'), parts = [], rafId = null;
+  function confettiBurst(){
+    cv.width = innerWidth; cv.height = innerHeight;
+    var cols = ['#1f3fbf','#e8a33d','#d96c3f','#7a9bd8','#ffffff','#f2ece1'];
+    parts = [];
+    for (var i=0;i<180;i++){
+      parts.push({
+        x: innerWidth/2 + (Math.random()-.5)*160,
+        y: innerHeight*0.45,
+        vx: (Math.random()-.5)*14,
+        vy: -6 - Math.random()*11,
+        w: 6+Math.random()*7, h: 8+Math.random()*8,
+        rot: Math.random()*Math.PI, vr: (Math.random()-.5)*.35,
+        col: cols[i%cols.length], life: 0
+      });
+    }
+    if (rafId) cancelAnimationFrame(rafId);
+    (function tick(){
+      cx.clearRect(0,0,cv.width,cv.height);
+      var alive = false;
+      parts.forEach(function(p){
+        p.life++;
+        p.vy += .32; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        p.vx *= .99;
+        if (p.y < cv.height + 30 && p.life < 260){
+          alive = true;
+          cx.save(); cx.translate(p.x,p.y); cx.rotate(p.rot);
+          cx.fillStyle = p.col;
+          cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+          cx.restore();
+        }
+      });
+      if (alive){ rafId = requestAnimationFrame(tick); }
+      else { cx.clearRect(0,0,cv.width,cv.height); rafId = null; }
+    })();
+  }
+
+  /* ================= image handling ================= */
+  function setImage(url, name){
+    imgURL = url;
+    peekEl.style.backgroundImage = 'url("'+url+'")';
+    captionEl.textContent = (name || 'MAHER MAGIC ART') + ' — TAP TO SLIDE';
+    buildTiles();
+    shuffle();
+  }
+
+  function loadFile(file){
+    if (!file || !file.type || file.type.indexOf('image/') !== 0) return;
+    var rd = new FileReader();
+    rd.onload = function(){
+      var img = new Image();
+      img.onload = function(){
+        var s = 720, c = document.createElement('canvas'); c.width=c.height=s;
+        var x = c.getContext('2d');
+        // center-crop to square
+        var m = Math.min(img.width, img.height);
+        x.drawImage(img, (img.width-m)/2, (img.height-m)/2, m, m, 0, 0, s, s);
+        var url = c.toDataURL('image/jpeg', .85);
+        var name = (file.name||'MY PUZZLE').replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').toUpperCase().slice(0,32);
+        try{
+          localStorage.setItem('mmp_img', url);
+          localStorage.setItem('mmp_imgname', name);
+        }catch(e){ /* storage full — still play with it in memory */ }
+        // hide the welcome tip once they've uploaded
+        var tip = document.getElementById('tip');
+        if (tip) tip.style.display='none';
+        localStorage.setItem('mmp_tip','1');
+        setImage(url, name);
+      };
+      img.src = rd.result;
+    };
+    rd.readAsDataURL(file);
+  }
+
+  /* ================= wire up ================= */
+  board.addEventListener('pointerdown', onTileTap);
+
+  document.getElementById('shuffle').addEventListener('click', function(){ shuffle(); });
+  document.getElementById('again').addEventListener('click', function(){ shuffle(); });
+
+  var peekBtn = document.getElementById('peekbtn');
+  function peekOn(e){ e.preventDefault(); peekEl.classList.add('on'); }
+  function peekOff(){ peekEl.classList.remove('on'); }
+  peekBtn.addEventListener('pointerdown', peekOn);
+  peekBtn.addEventListener('pointerup', peekOff);
+  peekBtn.addEventListener('pointerleave', peekOff);
+  peekBtn.addEventListener('pointercancel', peekOff);
+
+  var fileIn = document.getElementById('file');
+  document.getElementById('change').addEventListener('click', function(){ fileIn.click(); });
+  fileIn.addEventListener('change', function(){ loadFile(fileIn.files[0]); fileIn.value=''; });
+
+  // drag & drop an image anywhere on the page (desktop)
+  document.addEventListener('dragover', function(e){ e.preventDefault(); });
+  document.addEventListener('drop', function(e){
+    e.preventDefault();
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+  });
+
+  var soundBtn = document.getElementById('sound');
+  function paintSound(){ soundBtn.textContent = soundOn ? '🔊' : '🔇'; soundBtn.classList.toggle('off', !soundOn); }
+  soundBtn.addEventListener('click', function(){
+    soundOn = !soundOn; localStorage.setItem('mmp_sound', soundOn?'1':'0'); paintSound();
+    if (soundOn) snap();
+  });
+  paintSound();
+
+  var numsBtn = document.getElementById('nums');
+  numsBtn.addEventListener('click', function(){
+    board.classList.toggle('show-nums');
+    numsBtn.classList.toggle('off', !board.classList.contains('show-nums'));
+  });
+
+  document.getElementById('levels').addEventListener('click', function(e){
+    var b = e.target.closest('.lvl'); if (!b) return;
+    N = parseInt(b.dataset.n, 10);
+    localStorage.setItem('mmp_n', N);
+    document.querySelectorAll('.lvl').forEach(function(x){ x.classList.remove('active'); });
+    b.classList.add('active');
+    buildTiles();
+    shuffle();
+  });
+  document.querySelectorAll('.lvl').forEach(function(b){
+    b.classList.toggle('active', parseInt(b.dataset.n,10)===N);
+  });
+
+  document.getElementById('tipclose').addEventListener('click', function(){
+    document.getElementById('tip').style.display='none';
+    localStorage.setItem('mmp_tip','1');
+  });
+  if (localStorage.getItem('mmp_tip')==='1'){
+    document.getElementById('tip').style.display='none';
+  }
+
+  var resizeT = null;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeT);
+    resizeT = setTimeout(function(){
+      if (!imgURL) return;
+      var savedPos = pos.slice(), m=moves, s=secs, st=started, sl=solvedLock;
+      buildTiles();
+      pos = savedPos; moves=m; secs=s; started=st; solvedLock=sl;
+      layout(false);
+    }, 150);
+  });
+
+  /* ================= boot ================= */
+  var saved = localStorage.getItem('mmp_img');
+  var savedName = localStorage.getItem('mmp_imgname');
+  setImage(saved || makeDefaultArt(), saved ? savedName : null);
+})();
+</script>
+</body>
+</html>

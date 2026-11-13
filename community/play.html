@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>社区游戏 Community game</title>
+<style>
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: #0f1428; color: #f5f7ff; overflow: hidden; overscroll-behavior: none; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "PingFang TC", "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "Noto Sans CJK SC", sans-serif;
+  font-size: max(16px, 1.5vmin); display: flex; flex-direction: column; height: 100vh; height: 100dvh;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-text-size-adjust: 100%;
+}
+#bar {
+  flex: 0 0 auto; display: flex; align-items: center; gap: 0.5em; min-height: 52px;
+  padding: max(4px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) 4px max(8px, env(safe-area-inset-left));
+  background: #1c2344; touch-action: none;
+}
+.btn {
+  font: inherit; font-weight: 700; color: inherit; min-height: 44px; min-width: 44px; padding: 0.3em 0.8em;
+  border: 0; border-radius: 0.6em; background: #262f5a; cursor: pointer; white-space: nowrap; touch-action: manipulation;
+}
+.btn.home { background: #2f8f46; }
+.btn:focus-visible, .btn.focused { outline: 4px solid #ffd23f; outline-offset: 2px; }
+#info { flex: 1; min-width: 0; line-height: 1.2; overflow: hidden; }
+#name { font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#credit { color: #b4bce0; font-size: 0.8em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#credit a { color: #9fc4ff; }
+#padHint { color: #b4bce0; font-size: 0.85em; white-space: nowrap; }
+#padHint[hidden] { display: none; }
+.k { display: inline-flex; align-items: center; justify-content: center; min-width: 1.5em; height: 1.5em; border-radius: 999px; font-weight: 800; color: #0b0f1e; background: #ff5c5c; margin-right: 0.25em; }
+#stage { position: relative; flex: 1 1 auto; min-height: 0; background: #000; }
+#stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: #000; }
+#msg { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 1em; align-items: center; justify-content: center; padding: 1.5em; text-align: center; background: #0f1428; font-size: 1.2em; }
+#msg[hidden] { display: none; }
+#hold { position: fixed; left: 50%; top: 64px; transform: translateX(-50%); background: rgba(28, 35, 68, 0.95); padding: 0.5em 1em; border-radius: 999px; font-weight: 700; z-index: 5; pointer-events: none; }
+#hold[hidden] { display: none; }
+#hold i { display: block; height: 6px; margin-top: 0.3em; border-radius: 3px; background: #ff5c5c; width: 0; }
+@media (max-width: 700px) { #credit { display: none; } }
+</style>
+</head>
+<body>
+<div id="bar">
+  <a class="btn home" id="home" href="../index.html"></a>
+  <div id="info"><div id="name"></div><div id="credit"></div></div>
+  <span id="padHint" hidden><span class="k">B</span><span id="padHintT"></span></span>
+  <button class="btn" id="cloud" type="button" hidden>☁️</button>
+  <button class="btn" id="fs" type="button"></button>
+</div>
+<div id="stage">
+  <div id="msg"><div id="msgText"></div><a class="btn home" id="msgHome" href="../index.html"></a></div>
+</div>
+<div id="hold" hidden><span id="holdT"></span><i></i></div>
+
+<script>
+(() => {
+'use strict';
+/* ===== Config ===== */
+const CFG = { holdBackMs: 1500, maxChars: 4500000, keepDaily: 7, deadZone: 0.15 };
+const ID_RE = /^[a-z0-9-]{1,40}$/;
+
+/* ===== Strings ===== */
+const STR = {
+  'zh-Hans': { home: '← 游戏大厅', fs: '全屏', exitfs: '退出全屏', loading: '正在打开游戏…', notFound: '找不到这个社区游戏。', loadFail: '读不到游戏清单（games.json）。',
+    by: a => `作者 ${a}`, made: m => `用 ${m} 制作`, src: '源代码', holdB: '按住 B 回大厅', holding: '继续按住 B…',
+    conflict: '这个游戏的存档在别的地方（另一个标签页或云端恢复）被改过了。为了不覆盖它，这里先停止存档。', reload: '重新打开', title: '社区游戏' },
+  'zh-Hant': { home: '← 遊戲大廳', fs: '全螢幕', exitfs: '離開全螢幕', loading: '正在打開遊戲…', notFound: '找不到這個社群遊戲。', loadFail: '讀不到遊戲清單（games.json）。',
+    by: a => `作者 ${a}`, made: m => `用 ${m} 製作`, src: '原始碼', holdB: '按住 B 回大廳', holding: '繼續按住 B…',
+    conflict: '這個遊戲的存檔在別的地方（另一個分頁或雲端恢復）被改過了。為了不覆蓋它，這裡先停止存檔。', reload: '重新打開', title: '社群遊戲' },
+  en: { home: '← Game Hub', fs: 'Fullscreen', exitfs: 'Exit fullscreen', loading: 'Opening the game…', notFound: 'This community game wasn’t found.', loadFail: 'Couldn’t load the game list (games.json).',
+    by: a => `by ${a}`, made: m => `made with ${m}`, src: 'source', holdB: 'Hold B for the hub', holding: 'Keep holding B…',
+    conflict: 'This game’s progress was changed somewhere else (another tab or a cloud restore). Saving is paused here so it isn’t overwritten.', reload: 'Reopen', title: 'Community game' },
+  fr: { home: '← Salle de jeux', fs: 'Plein écran', exitfs: 'Quitter le plein écran', loading: 'Ouverture du jeu…', notFound: 'Ce jeu de la communauté est introuvable.', loadFail: 'Impossible de charger la liste des jeux (games.json).',
+    by: a => `par ${a}`, made: m => `fait avec ${m}`, src: 'code source', holdB: 'Maintiens B pour la salle', holding: 'Continue d’appuyer sur B…',
+    conflict: 'La progression de ce jeu a été modifiée ailleurs (autre onglet ou restauration cloud). La sauvegarde est en pause ici pour ne pas l’écraser.', reload: 'Rouvrir', title: 'Jeu de la communauté' },
+};
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } },
+  del(k) { try { localStorage.removeItem(k); } catch (e) {} },
+  keys() { try { return Object.keys(localStorage); } catch (e) { return []; } },
+};
+function detectLang() {
+  try { const s = JSON.parse(store.get('game-hub/settings') || 'null'); if (s && STR[s.lang]) return s.lang; } catch (e) {}
+  const n = String(navigator.language || '').toLowerCase();
+  if (n.startsWith('zh')) return /^zh-(tw|hk|mo|hant)/.test(n) ? 'zh-Hant' : 'zh-Hans';
+  return n.startsWith('fr') ? 'fr' : 'en';
+}
+const lang = detectLang();
+const tr = (k, ...a) => { const v = STR[lang][k] ?? STR.en[k]; return typeof v === 'function' ? v(...a) : v; };
+const loc = o => { if (!o || typeof o !== 'object') return String(o ?? '');
+  const order = lang === 'zh-Hant' ? ['zh-Hant', 'zh-Hans', 'en'] : lang === 'zh-Hans' ? ['zh-Hans', 'zh-Hant', 'en'] : [lang, 'en', 'zh-Hans'];
+  for (const k of order) if (o[k]) return o[k]; return Object.values(o)[0] || ''; };
+const $ = id => document.getElementById(id);
+
+document.documentElement.lang = lang;
+$('home').textContent = tr('home'); $('msgHome').textContent = tr('home');
+$('padHintT').textContent = tr('holdB'); $('holdT').textContent = tr('holding');
+function msg(t) { $('msg').hidden = false; $('msgText').textContent = t; }
+msg(tr('loading'));
+
+/* ===== Save storage: community/<id>/save (+ /bak, daily /bak-dYYYYMMDD, /broken-<time>) ===== */
+const id = new URLSearchParams(location.search).get('g') || '';
+const KEY = 'community/' + id + '/save';
+let lastWritten = null, blocked = false;
+
+function validData(d) {
+  if (!d || typeof d !== 'object' || Array.isArray(d)) return null;
+  const out = {}; let n = 0;
+  for (const k of Object.keys(d)) { if (typeof d[k] !== 'string') continue; out[k] = d[k]; n += k.length + d[k].length; }
+  return n <= CFG.maxChars ? out : null;
+}
+function parseSave(raw) { try { const o = JSON.parse(raw); if (o && o.v === 1) return validData(o.data); } catch (e) {} return null; }
+function loadSave() {
+  const raw = store.get(KEY);
+  if (raw == null) { lastWritten = null; return {}; }
+  const d = parseSave(raw);
+  lastWritten = raw;
+  if (d) return d;
+  store.set(KEY + '/broken-' + Date.now(), raw);                      // keep the bad data, never delete it
+  const bak = parseSave(store.get(KEY + '/bak') || '');
+  return bak || {};
+}
+const pad2 = n => String(n).padStart(2, '0');
+function writeSave(data) {
+  if (blocked) return;
+  const d = validData(data); if (!d) return;
+  const cur = store.get(KEY);
+  if (cur !== lastWritten) { blocked = true; showConflict(); return; } // someone else changed it: don't overwrite
+  const raw = JSON.stringify({ v: 1, g: id, at: Date.now(), data: d });
+  if (raw === cur) return;
+  if (cur != null && parseSave(cur)) {
+    store.set(KEY + '/bak', cur);
+    const t = new Date(), day = KEY + '/bak-d' + t.getFullYear() + pad2(t.getMonth() + 1) + pad2(t.getDate());
+    if (store.get(day) == null) {
+      store.set(day, cur);
+      const days = store.keys().filter(k => k.startsWith(KEY + '/bak-d')).sort();
+      for (const k of days.slice(0, Math.max(0, days.length - CFG.keepDaily))) store.del(k);
+    }
+  }
+  if (store.set(KEY, raw)) lastWritten = raw;
+}
+function showConflict() {
+  msg(tr('conflict'));
+  const b = document.createElement('button'); b.className = 'btn'; b.type = 'button'; b.textContent = tr('reload');
+  b.addEventListener('click', () => location.reload()); $('msg').appendChild(b);
+  const f = document.querySelector('#stage iframe'); if (f) f.remove();
+}
+
+/* ===== Start the game in a sandboxed iframe ===== */
+let frame = null;
+async function start() {
+  if (!ID_RE.test(id)) { msg(tr('notFound')); return; }
+  let g = null;
+  try {
+    const r = await fetch('../games.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const d = await r.json();
+    g = (d.games || []).find(x => x && x.id === id && x.category === 'community');
+  } catch (e) { msg(tr('loadFail')); return; }
+  if (!g || typeof g.entry !== 'string' || !/^[a-z0-9-]+\/[\w./-]+\.html$/.test(g.entry) || g.entry.split('/')[0] !== id || g.entry.includes('..')) { msg(tr('notFound')); return; }
+
+  document.title = loc(g.name) + ' · ' + tr('title');
+  $('name').textContent = loc(g.name);
+  const c = g.credit || {}, credit = $('credit');
+  const parts = [];
+  if (c.author) parts.push(tr('by', c.author));
+  if (c.made) parts.push(tr('made', c.made));
+  if (c.license) parts.push(c.license);
+  credit.textContent = parts.join(' · ') + (c.repo ? ' · ' : '');
+  if (typeof c.repo === 'string' && /^https:\/\/github\.com\//.test(c.repo)) {
+    const a = document.createElement('a'); a.href = c.repo; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = tr('src') + ' ↗'; credit.appendChild(a);
+  }
+
+  const data = loadSave();
+  frame = document.createElement('iframe');
+  // No allow-same-origin: the game gets an opaque origin, so it can't reach this site's storage, cookies or cloud sign-in.
+  frame.setAttribute('sandbox', 'allow-scripts allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads allow-orientation-lock');
+  frame.setAttribute('allow', 'fullscreen; gamepad; autoplay; accelerometer; gyroscope; screen-wake-lock');
+  frame.setAttribute('allowfullscreen', '');
+  frame.title = loc(g.name);
+  frame.name = JSON.stringify({ __fgshim: 1, g: id, data });
+  frame.src = g.entry;
+  frame.addEventListener('load', () => { $('msg').hidden = true; try { frame.focus(); } catch (e) {} });
+  $('stage').appendChild(frame);
+}
+window.addEventListener('message', e => {
+  if (!frame || e.source !== frame.contentWindow) return;
+  const m = e.data;
+  if (!m || m.__fgshim !== 1 || m.type !== 'save' || m.g !== id) return;
+  writeSave(m.data);
+});
+
+/* ===== Fullscreen ===== */
+const isFs = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+function fsLabel() { $('fs').textContent = isFs() ? tr('exitfs') : tr('fs'); }
+$('fs').addEventListener('click', async () => {
+  try { if (isFs()) await (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    else { const el = document.documentElement; await (el.requestFullscreen || el.webkitRequestFullscreen).call(el); } } catch (e) {}
+  fsLabel(); try { frame && frame.focus(); } catch (e) {}
+});
+document.addEventListener('fullscreenchange', fsLabel); document.addEventListener('webkitfullscreenchange', fsLabel);
+fsLabel();
+
+/* ===== Block Safari's pinch / double-tap zoom on the bar ===== */
+document.addEventListener('gesturestart', e => e.preventDefault());
+document.addEventListener('dblclick', e => e.preventDefault());
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+/* ===== Controller: hold B to go back to the hub (the game keeps every other button) ===== */
+let holdStart = 0;
+function goHome() { location.href = $('home').href; }
+function poll(now) {
+  let pads = []; try { pads = Array.from((navigator.getGamepads && navigator.getGamepads()) || []).filter(Boolean); } catch (e) {}
+  $('padHint').hidden = !pads.length;
+  const b = pads.some(p => p.buttons[1] && p.buttons[1].pressed);
+  if (b && !(window.FamilyCloud && window.FamilyCloud.isModalOpen())) {
+    if (!holdStart) holdStart = now;
+    const f = Math.min(1, (now - holdStart) / CFG.holdBackMs);
+    $('hold').hidden = f < 0.15; $('hold').querySelector('i').style.width = Math.round(f * 100) + '%';
+    if (f >= 1) { holdStart = Infinity; goHome(); }
+  } else { holdStart = 0; $('hold').hidden = true; }
+  requestAnimationFrame(poll);
+}
+requestAnimationFrame(poll);
+window.addEventListener('keydown', e => { if (e.key === 'Escape' && e.target === document.body) goHome(); });
+
+/* ===== Cloud backup button (family-cloud.js loads below) ===== */
+$('cloud').addEventListener('click', () => { if (window.FamilyCloud) window.FamilyCloud.menu(); });
+const showCloud = () => { if (window.FamilyCloud) $('cloud').hidden = false; else setTimeout(showCloud, 500); };
+showCloud();
+
+start();
+// family-cloud backs up community/<id>/... (each community game is its own entry in its GAMES table)
+if (ID_RE.test(id)) {
+  const s = document.createElement('script'); s.type = 'module'; s.src = '../shared/family-cloud.js';
+  s.dataset.games = 'community-' + id; s.dataset.chip = 'none'; document.body.appendChild(s);
+}
+})();
+</script>
+</body>
+</html>

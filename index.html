@@ -55,8 +55,13 @@ body.show-focus .nav.focused {
 #cont .tx { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 #cont .play { font-size: 1.3em; }
 
+/* ===== Sections ===== */
+#games { display: flex; flex-direction: column; gap: 0.6em; }
+.sec { margin: 0.5em 0 0; font-size: 1.15em; font-weight: 800; color: var(--dim); display: flex; align-items: baseline; gap: 0.5em; flex-wrap: wrap; }
+.sec small { font-size: 0.87em; font-weight: 600; }
+
 /* ===== Cards ===== */
-#games { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15em), 1fr)); gap: 0.9em; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15em), 1fr)); gap: 0.9em; }
 .card {
   display: flex; flex-direction: column; gap: 0.45em; padding: 0.9em 1em 1em; text-decoration: none;
   background: var(--panel); border-radius: 1em; border-top: 0.32em solid var(--c, #888); cursor: pointer;
@@ -73,6 +78,7 @@ body.show-focus .nav.focused {
 .tag { padding: 0.15em 0.6em; border-radius: 0.6em; font-weight: 700; }
 .tag.touch { background: #4a3a10; color: #ffe08a; }
 .tag.controller { background: #16422c; color: #b9f6ca; }
+.credit { color: var(--dim); overflow-wrap: anywhere; }
 
 /* ===== Messages & hints ===== */
 #msg { background: var(--panel); border-radius: 1em; padding: 1em; display: flex; gap: 0.8em; align-items: center; flex-wrap: wrap; }
@@ -125,6 +131,7 @@ const CFG = {
 const LANGS = [['en', 'English'], ['fr', 'Français'], ['zh-Hans', '简体中文'], ['zh-Hant', '繁體中文']];
 const STR = {
   'zh-Hans': {
+    secFamily: '🏠 自己开发的游戏', secCommunity: '🌐 社区游戏', secCommunityNote: '别人用 AI 做的开源游戏', by: a => `作者 ${a}`, made: m => `用 ${m} 制作`,
     title: '🎮 游戏大厅', cont: n => `继续玩：${n}`, latest: '最新版本',
     touch: '👆 触屏优先（用 iPad 投屏）', controller: '🎮 手柄+电视',
     fs: '全屏', exitfs: '退出全屏', fsFail: '✗ 全屏',
@@ -134,6 +141,7 @@ const STR = {
     hintTouch: '点一张卡片就能打开游戏。', hintWake: '用手柄：先按一次 A 叫醒这个页面。',
   },
   'zh-Hant': {
+    secFamily: '🏠 自己開發的遊戲', secCommunity: '🌐 社群遊戲', secCommunityNote: '別人用 AI 做的開源遊戲', by: a => `作者 ${a}`, made: m => `用 ${m} 製作`,
     title: '🎮 遊戲大廳', cont: n => `繼續玩：${n}`, latest: '最新版本',
     touch: '👆 觸控優先（用 iPad 投影）', controller: '🎮 手把+電視',
     fs: '全螢幕', exitfs: '離開全螢幕', fsFail: '✗ 全螢幕',
@@ -143,6 +151,7 @@ const STR = {
     hintTouch: '點一張卡片就能打開遊戲。', hintWake: '用手把：先按一次 A 叫醒這個頁面。',
   },
   en: {
+    secFamily: '🏠 Our own games', secCommunity: '🌐 Community games', secCommunityNote: 'Open-source games other people made with AI', by: a => `by ${a}`, made: m => `made with ${m}`,
     title: '🎮 Game Hub', cont: n => `Continue: ${n}`, latest: 'Latest',
     touch: '👆 Touch-first (mirror the iPad)', controller: '🎮 Controller + TV',
     fs: 'Fullscreen', exitfs: 'Exit fullscreen', fsFail: '✗ Fullscreen',
@@ -152,6 +161,7 @@ const STR = {
     hintTouch: 'Tap a card to open a game.', hintWake: 'Controller: press A once to wake this page.',
   },
   fr: {
+    secFamily: '🏠 Nos propres jeux', secCommunity: '🌐 Jeux de la communauté', secCommunityNote: 'Jeux open source faits avec l’IA par d’autres', by: a => `par ${a}`, made: m => `fait avec ${m}`,
     title: '🎮 Salle de jeux', cont: n => `Continuer : ${n}`, latest: 'Dernière version',
     touch: '👆 Tactile : recopier l’iPad', controller: '🎮 Manette + TV',
     fs: 'Plein écran', exitfs: 'Quitter le plein écran', fsFail: '✗ Plein écran',
@@ -192,9 +202,14 @@ const $ = id => document.getElementById(id);
 /* ===================== Load games.json ===================== */
 function cleanGame(g) {
   if (!g || typeof g !== 'object' || typeof g.id !== 'string' || typeof g.url !== 'string') return null;
-  if (!/^https:\/\//.test(g.url)) return null;
+  let url;
+  try { url = new URL(g.url, location.href); } catch (e) { return null; }
+  if (!/^https?:$/.test(url.protocol)) return null;
+  const c = g.credit && typeof g.credit === 'object' ? g.credit : {};
   return {
-    id: g.id, url: g.url, latest: String(g.latest || ''),
+    id: g.id, url: url.href, latest: String(g.latest || ''),
+    category: g.category === 'community' ? 'community' : 'family',
+    credit: { author: String(c.author || ''), made: String(c.made || '') },
     input: g.input === 'controller' ? 'controller' : 'touch',
     color: typeof g.color === 'string' ? g.color : '#888',
     name: g.name || { en: g.id }, blurb: g.blurb || {}, icon: typeof g.icon === 'string' ? g.icon : '',
@@ -263,20 +278,18 @@ function render() {
   // cards
   const box = $('games');
   box.textContent = '';
-  for (const g of S.games || []) {
-    const a = document.createElement('a');
-    a.className = 'card nav'; a.href = g.url; a.dataset.id = g.id; a.dataset.key = 'game-' + g.id;
-    a.style.setProperty('--c', g.color);
-    a.innerHTML = '<div class="top"><div class="ic"></div><div class="name"></div></div><div class="blurb"></div>' +
-      '<div class="meta"><div class="ver"><span></span><b></b></div><div class="tag"></div></div>';
-    a.querySelector('.ic').innerHTML = g.icon;
-    a.querySelector('.name').textContent = loc(g.name);
-    a.querySelector('.blurb').textContent = loc(g.blurb);
-    a.querySelector('.ver span').textContent = tr('latest');
-    a.querySelector('.ver b').textContent = g.latest;
-    const tag = a.querySelector('.tag');
-    tag.classList.add(g.input); tag.textContent = tr(g.input);
-    box.appendChild(a);
+  const groups = [['family', tr('secFamily'), ''], ['community', tr('secCommunity'), tr('secCommunityNote')]];
+  const many = (S.games || []).some(g => g.category === 'community');
+  for (const [cat, title, note] of groups) {
+    const list = (S.games || []).filter(g => g.category === cat);
+    if (!list.length) continue;
+    if (many) {
+      const h = document.createElement('h2'); h.className = 'sec'; h.textContent = title;
+      if (note) { const sm = document.createElement('small'); sm.textContent = note; h.appendChild(sm); }
+      box.appendChild(h);
+    }
+    const grid = document.createElement('div'); grid.className = 'grid'; box.appendChild(grid);
+    for (const g of list) grid.appendChild(card(g));
   }
   renderHint();
   renderPads();
@@ -285,6 +298,29 @@ function render() {
     const el = document.querySelector(`[data-key="${keep}"]`) || $(keep);
     if (el && el.offsetParent !== null) setFocus(el, false);
   }
+}
+
+function card(g) {
+  const a = document.createElement('a');
+  a.className = 'card nav'; a.href = g.url; a.dataset.id = g.id; a.dataset.key = 'game-' + g.id;
+  a.style.setProperty('--c', g.color);
+  a.innerHTML = '<div class="top"><div class="ic"></div><div class="name"></div></div><div class="blurb"></div>' +
+    '<div class="meta"><div class="ver"><span></span><b></b></div><div class="tag"></div></div>';
+  a.querySelector('.ic').innerHTML = g.icon;
+  a.querySelector('.name').textContent = loc(g.name);
+  a.querySelector('.blurb').textContent = loc(g.blurb);
+  if (g.latest) {
+    a.querySelector('.ver span').textContent = tr('latest');
+    a.querySelector('.ver b').textContent = g.latest;
+  } else a.querySelector('.ver').remove();
+  if (g.category === 'community') {
+    const cr = document.createElement('div'); cr.className = 'credit';
+    cr.textContent = [g.credit.author && tr('by', g.credit.author), g.credit.made && tr('made', g.credit.made)].filter(Boolean).join(' · ');
+    a.insertBefore(cr, a.querySelector('.meta'));
+  }
+  const tag = a.querySelector('.tag');
+  tag.classList.add(g.input); tag.textContent = tr(g.input);
+  return a;
 }
 
 function renderHint() {

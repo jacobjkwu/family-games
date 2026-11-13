@@ -13,6 +13,15 @@ const GAMES = {
   'dragon-gems': { prefixes: ['dragon-gems/'], exact: ['dragonGemMountain.v1'], name: { en: "Dragon's Gem Mountain", fr: 'La Montagne aux Gemmes', 'zh-Hans': '喷火龙的宝石山', 'zh-Hant': '噴火龍的寶石山' } },
   'crab-castle': { prefixes: ['crab-castle/'], exact: ['crab3d'], name: { en: 'Crab King Castle Defense', fr: 'Le Roi Crabe défend son château', 'zh-Hans': '巨蟹王城堡保卫战', 'zh-Hant': '巨蟹王城堡保衛戰' } },
   'game-hub': { prefixes: ['game-hub/'], exact: [], name: { en: 'Game Hub settings', fr: 'Réglages de la salle de jeux', 'zh-Hans': '游戏大厅设置', 'zh-Hant': '遊戲大廳設定' } },
+  // community games (community/play.html): each one saves under community/<id>/
+  'community-bloom-hop': { prefixes: ['community/bloom-hop/'], exact: [], name: {"en": "🌐 Bloom Hop", "fr": "🌐 Bloom Hop", "zh-Hans": "🌐 荷塘跳跳蛙 Bloom Hop", "zh-Hant": "🌐 荷塘跳跳蛙 Bloom Hop"} },
+  'community-puffling-flight': { prefixes: ['community/puffling-flight/'], exact: [], name: {"en": "🌐 Puffling Flight", "fr": "🌐 Le vol du macareux", "zh-Hans": "🌐 小海鹦飞飞", "zh-Hant": "🌐 小海鸚飛飛"} },
+  'community-pixel-princess': { prefixes: ['community/pixel-princess/'], exact: [], name: {"en": "🌐 Pixel Princess Platformer", "fr": "🌐 Pixel Princess Platformer", "zh-Hans": "🌐 像素公主闯关", "zh-Hant": "🌐 像素公主闖關"} },
+  'community-casa-de-gemas': { prefixes: ['community/casa-de-gemas/'], exact: [], name: {"en": "🌐 Casa de Gemas", "fr": "🌐 Casa de Gemas", "zh-Hans": "🌐 宝石小屋", "zh-Hant": "🌐 寶石小屋"} },
+  'community-magic-puzzle': { prefixes: ['community/magic-puzzle/'], exact: [], name: {"en": "🌐 Magic Sliding Puzzle", "fr": "🌐 Taquin magique", "zh-Hans": "🌐 魔法滑块拼图", "zh-Hant": "🌐 魔法滑塊拼圖"} },
+  'community-sudoku': { prefixes: ['community/sudoku/'], exact: [], name: {"en": "🌐 Sudoku", "fr": "🌐 Sudoku", "zh-Hans": "🌐 数独", "zh-Hant": "🌐 數獨"} },
+  'community-kapadokya-balonu': { prefixes: ['community/kapadokya-balonu/'], exact: [], name: {"en": "🌐 Cappadocia Balloon", "fr": "🌐 Montgolfière de Cappadoce", "zh-Hans": "🌐 卡帕多奇亚热气球", "zh-Hant": "🌐 卡帕多奇亞熱氣球"} },
+  'community-karagoz': { prefixes: ['community/karagoz/'], exact: [], name: {"en": "🌐 Karagöz Shadow Theatre", "fr": "🌐 Théâtre d’ombres Karagöz", "zh-Hans": "🌐 皮影戏光影谜题", "zh-Hant": "🌐 皮影戲光影謎題"} },
 };
 const STATE_KEY = 'family-cloud/state';
 const STR = {
@@ -120,7 +129,7 @@ async function checkNewer() { if (!active()) return;
     } catch (e) { C.err = (e && (e.code || e.message)) || '?'; chip(); } } }
 
 /* ---------- UI: chip, dialogs (touch + controller) ---------- */
-const css = `.fc-chip{font:inherit;font-size:clamp(16px,1.35vw,28px);font-weight:700;min-height:44px;padding:6px 14px;border-radius:999px;border:3px solid #1d3b25;background:#fff8e1;color:#1d3b25;cursor:pointer}
+const css = `.fc-chip{font:inherit;font-size:clamp(16px,1.46vw,28px);font-weight:700;min-height:44px;padding:6px 14px;border-radius:999px;border:3px solid #1d3b25;background:#fff8e1;color:#1d3b25;cursor:pointer}
 .fc-chip.float{position:fixed;left:max(10px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));z-index:50;box-shadow:0 4px 0 rgba(0,0,0,.3)}
 .fc-overlay{position:fixed;inset:0;background:rgba(10,20,12,.6);display:flex;align-items:center;justify-content:center;z-index:1000;padding:16px;touch-action:pan-y}
 .fc-box{background:#fff8e1;color:#1d3b25;border:4px solid #1d3b25;border-radius:22px;padding:18px 20px;width:min(36em,100%);max-height:90vh;overflow:auto;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","PingFang TC","Microsoft YaHei",system-ui,sans-serif;font-size:clamp(18px,1.55vw,32px)}

@@ -1,7 +1,7 @@
 {
   "hub": "game-hub",
-  "format": 1,
-  "notes": "Game list for the Game Hub. To add a game: add one entry to \"games\" and republish this artifact. input: \"controller\" = 手柄+电视, \"touch\" = 触屏优先（用 iPad 投屏）. url = the game's launcher artifact link. icon = hand-drawn inline SVG (viewBox 0 0 100 100, single quotes inside).",
+  "format": 2,
+  "notes": "Game list for the Game Hub. category: \"family\" (our own games) or \"community\" (open-source AI-made games vendored under community/<id>/, played through community/play.html in a sandbox). input: \"controller\" = 手柄+电视, \"touch\" = 触屏优先. url: the game launcher (absolute, or relative to the hub). Community entries also have entry (start page under community/) and credit {author, made, license, repo}. icon = hand-drawn inline SVG (viewBox 0 0 100 100, single quotes inside).",
   "games": [
     {
       "id": "drawrassic-park",
@@ -21,7 +21,8 @@
         "en": "Draw your own dinos, raise them in your park, and send them to battle in the arena.",
         "fr": "Dessine tes dinos, élève-les dans ton parc et envoie-les combattre dans l’arène."
       },
-      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffe08a'/><path d='M8 70 Q20 66 26 58' stroke='#2e7d32' stroke-width='9' fill='none' stroke-linecap='round'/><path d='M30 50 L34 42 L38 50 Z M40 47 L44 39 L48 47 Z M50 47 L54 40 L57 48 Z' fill='#ff8a65'/><ellipse cx='45' cy='60' rx='23' ry='14' fill='#4caf50' stroke='#1b5e20' stroke-width='3'/><path d='M58 54 Q62 38 66 30' stroke='#1b5e20' stroke-width='13' fill='none' stroke-linecap='round'/><path d='M58 54 Q62 38 66 30' stroke='#4caf50' stroke-width='8' fill='none' stroke-linecap='round'/><ellipse cx='71' cy='27' rx='11' ry='8' fill='#4caf50' stroke='#1b5e20' stroke-width='3'/><circle cx='74' cy='24' r='2.6' fill='#1b5e20'/><path d='M76 31 Q79 32 81 30' stroke='#1b5e20' stroke-width='2' fill='none' stroke-linecap='round'/><rect x='31' y='68' width='7' height='14' rx='3' fill='#388e3c' stroke='#1b5e20' stroke-width='2.5'/><rect x='51' y='68' width='7' height='14' rx='3' fill='#388e3c' stroke='#1b5e20' stroke-width='2.5'/><g transform='rotate(40 80 72)'><rect x='76' y='52' width='9' height='28' rx='2' fill='#42a5f5' stroke='#0d47a1' stroke-width='2'/><path d='M76 80 L85 80 L80.5 90 Z' fill='#ffd7a8' stroke='#0d47a1' stroke-width='2' stroke-linejoin='round'/><path d='M79 86.5 L82 86.5 L80.5 90 Z' fill='#263238'/></g></svg>"
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffe08a'/><path d='M8 70 Q20 66 26 58' stroke='#2e7d32' stroke-width='9' fill='none' stroke-linecap='round'/><path d='M30 50 L34 42 L38 50 Z M40 47 L44 39 L48 47 Z M50 47 L54 40 L57 48 Z' fill='#ff8a65'/><ellipse cx='45' cy='60' rx='23' ry='14' fill='#4caf50' stroke='#1b5e20' stroke-width='3'/><path d='M58 54 Q62 38 66 30' stroke='#1b5e20' stroke-width='13' fill='none' stroke-linecap='round'/><path d='M58 54 Q62 38 66 30' stroke='#4caf50' stroke-width='8' fill='none' stroke-linecap='round'/><ellipse cx='71' cy='27' rx='11' ry='8' fill='#4caf50' stroke='#1b5e20' stroke-width='3'/><circle cx='74' cy='24' r='2.6' fill='#1b5e20'/><path d='M76 31 Q79 32 81 30' stroke='#1b5e20' stroke-width='2' fill='none' stroke-linecap='round'/><rect x='31' y='68' width='7' height='14' rx='3' fill='#388e3c' stroke='#1b5e20' stroke-width='2.5'/><rect x='51' y='68' width='7' height='14' rx='3' fill='#388e3c' stroke='#1b5e20' stroke-width='2.5'/><g transform='rotate(40 80 72)'><rect x='76' y='52' width='9' height='28' rx='2' fill='#42a5f5' stroke='#0d47a1' stroke-width='2'/><path d='M76 80 L85 80 L80.5 90 Z' fill='#ffd7a8' stroke='#0d47a1' stroke-width='2' stroke-linejoin='round'/><path d='M79 86.5 L82 86.5 L80.5 90 Z' fill='#263238'/></g></svg>",
+      "category": "family"
     },
     {
       "id": "dragon-gems",
@@ -41,7 +42,8 @@
         "en": "Help the dragon carry gems and share candy, and use division to climb Gem Mountain.",
         "fr": "Aide le dragon à porter des gemmes et à partager des bonbons : grimpe la montagne grâce à la division."
       },
-      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#2a1b4a'/><circle cx='22' cy='22' r='1.8' fill='#fff'/><circle cx='80' cy='16' r='1.4' fill='#fff'/><circle cx='14' cy='48' r='1.2' fill='#fff'/><path d='M40 34 L30 12 L50 30 Z' fill='#ffd54f' stroke='#8d6e00' stroke-width='2' stroke-linejoin='round'/><path d='M22 62 Q20 40 40 32 Q58 26 72 34 L84 40 Q88 46 82 49 L70 51 Q66 60 52 64 Q34 68 22 62 Z' fill='#e8452c' stroke='#7f1d0f' stroke-width='3' stroke-linejoin='round'/><path d='M30 50 Q38 44 46 50' stroke='#ff8a65' stroke-width='3' fill='none' stroke-linecap='round'/><circle cx='58' cy='40' r='5' fill='#fff'/><circle cx='59.5' cy='40' r='2.6' fill='#1a1a1a'/><circle cx='78' cy='41' r='1.6' fill='#7f1d0f'/><path d='M86 45 Q96 40 94 30 Q92 38 86 39 Q93 32 90 24 Q86 34 84 40 Z' fill='#ffb300' stroke='#e65100' stroke-width='1.5' stroke-linejoin='round'/><path d='M38 76 L50 66 L62 76 L50 92 Z' fill='#4dd0e1' stroke='#006064' stroke-width='2.5' stroke-linejoin='round'/><path d='M38 76 L62 76 M50 66 L45 76 L50 92 L55 76 Z' stroke='#006064' stroke-width='1.5' fill='none' stroke-linejoin='round'/><path d='M44 72 L47 69' stroke='#e0f7fa' stroke-width='2' stroke-linecap='round'/></svg>"
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#2a1b4a'/><circle cx='22' cy='22' r='1.8' fill='#fff'/><circle cx='80' cy='16' r='1.4' fill='#fff'/><circle cx='14' cy='48' r='1.2' fill='#fff'/><path d='M40 34 L30 12 L50 30 Z' fill='#ffd54f' stroke='#8d6e00' stroke-width='2' stroke-linejoin='round'/><path d='M22 62 Q20 40 40 32 Q58 26 72 34 L84 40 Q88 46 82 49 L70 51 Q66 60 52 64 Q34 68 22 62 Z' fill='#e8452c' stroke='#7f1d0f' stroke-width='3' stroke-linejoin='round'/><path d='M30 50 Q38 44 46 50' stroke='#ff8a65' stroke-width='3' fill='none' stroke-linecap='round'/><circle cx='58' cy='40' r='5' fill='#fff'/><circle cx='59.5' cy='40' r='2.6' fill='#1a1a1a'/><circle cx='78' cy='41' r='1.6' fill='#7f1d0f'/><path d='M86 45 Q96 40 94 30 Q92 38 86 39 Q93 32 90 24 Q86 34 84 40 Z' fill='#ffb300' stroke='#e65100' stroke-width='1.5' stroke-linejoin='round'/><path d='M38 76 L50 66 L62 76 L50 92 Z' fill='#4dd0e1' stroke='#006064' stroke-width='2.5' stroke-linejoin='round'/><path d='M38 76 L62 76 M50 66 L45 76 L50 92 L55 76 Z' stroke='#006064' stroke-width='1.5' fill='none' stroke-linejoin='round'/><path d='M44 72 L47 69' stroke='#e0f7fa' stroke-width='2' stroke-linecap='round'/></svg>",
+      "category": "family"
     },
     {
       "id": "crab-castle",
@@ -61,7 +63,232 @@
         "en": "Help the Crab King guard his castle with traps, guards and blasters against wave after wave of invaders.",
         "fr": "Aide le Roi Crabe à garder son château avec des pièges, des gardes et des blasters contre des vagues d’envahisseurs."
       },
-      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><clipPath id='cc'><circle cx='50' cy='50' r='48'/></clipPath><g clip-path='url(#cc)'><rect width='100' height='100' fill='#8ecae6'/><rect y='72' width='100' height='28' fill='#f4d58d'/></g><rect x='30' y='26' width='40' height='34' fill='#b0bec5' stroke='#455a64' stroke-width='2.5'/><path d='M30 26 L30 18 L36 18 L36 22 L42 22 L42 18 L48 18 L48 22 L52 22 L52 18 L58 18 L58 22 L64 22 L64 18 L70 18 L70 26' fill='#b0bec5' stroke='#455a64' stroke-width='2.5' stroke-linejoin='round'/><path d='M50 18 L50 6' stroke='#455a64' stroke-width='2'/><path d='M50 6 L62 9 L50 12 Z' fill='#ffca28'/><path d='M44 60 L44 50 Q50 42 56 50 L56 60 Z' fill='#37474f'/><path d='M38 58 L36 50 M62 58 L64 50' stroke='#d32f2f' stroke-width='3' stroke-linecap='round'/><circle cx='35' cy='47' r='4.5' fill='#fff' stroke='#7f0000' stroke-width='2'/><circle cx='65' cy='47' r='4.5' fill='#fff' stroke='#7f0000' stroke-width='2'/><circle cx='36' cy='47' r='2' fill='#111'/><circle cx='64' cy='47' r='2' fill='#111'/><path d='M28 76 L18 86 M32 80 L26 92 M72 76 L82 86 M68 80 L74 92' stroke='#c62828' stroke-width='3.5' stroke-linecap='round'/><ellipse cx='50' cy='70' rx='24' ry='13' fill='#e53935' stroke='#7f0000' stroke-width='3'/><path d='M42 72 Q50 78 58 72' stroke='#7f0000' stroke-width='2.5' fill='none' stroke-linecap='round'/><path d='M27 64 Q18 62 14 52' stroke='#c62828' stroke-width='4' fill='none' stroke-linecap='round'/><path d='M73 64 Q82 62 86 52' stroke='#c62828' stroke-width='4' fill='none' stroke-linecap='round'/><path d='M14 52 m-9 -4 a10 10 0 1 1 13 -5 L12 46 Z' fill='#e53935' stroke='#7f0000' stroke-width='2.5' stroke-linejoin='round'/><path d='M86 52 m9 -4 a10 10 0 1 0 -13 -5 L88 46 Z' fill='#e53935' stroke='#7f0000' stroke-width='2.5' stroke-linejoin='round'/><path d='M42 58 L44 52 L47 56 L50 50 L53 56 L56 52 L58 58 Z' fill='#ffca28' stroke='#8d6e00' stroke-width='1.5' stroke-linejoin='round'/></svg>"
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><clipPath id='cc'><circle cx='50' cy='50' r='48'/></clipPath><g clip-path='url(#cc)'><rect width='100' height='100' fill='#8ecae6'/><rect y='72' width='100' height='28' fill='#f4d58d'/></g><rect x='30' y='26' width='40' height='34' fill='#b0bec5' stroke='#455a64' stroke-width='2.5'/><path d='M30 26 L30 18 L36 18 L36 22 L42 22 L42 18 L48 18 L48 22 L52 22 L52 18 L58 18 L58 22 L64 22 L64 18 L70 18 L70 26' fill='#b0bec5' stroke='#455a64' stroke-width='2.5' stroke-linejoin='round'/><path d='M50 18 L50 6' stroke='#455a64' stroke-width='2'/><path d='M50 6 L62 9 L50 12 Z' fill='#ffca28'/><path d='M44 60 L44 50 Q50 42 56 50 L56 60 Z' fill='#37474f'/><path d='M38 58 L36 50 M62 58 L64 50' stroke='#d32f2f' stroke-width='3' stroke-linecap='round'/><circle cx='35' cy='47' r='4.5' fill='#fff' stroke='#7f0000' stroke-width='2'/><circle cx='65' cy='47' r='4.5' fill='#fff' stroke='#7f0000' stroke-width='2'/><circle cx='36' cy='47' r='2' fill='#111'/><circle cx='64' cy='47' r='2' fill='#111'/><path d='M28 76 L18 86 M32 80 L26 92 M72 76 L82 86 M68 80 L74 92' stroke='#c62828' stroke-width='3.5' stroke-linecap='round'/><ellipse cx='50' cy='70' rx='24' ry='13' fill='#e53935' stroke='#7f0000' stroke-width='3'/><path d='M42 72 Q50 78 58 72' stroke='#7f0000' stroke-width='2.5' fill='none' stroke-linecap='round'/><path d='M27 64 Q18 62 14 52' stroke='#c62828' stroke-width='4' fill='none' stroke-linecap='round'/><path d='M73 64 Q82 62 86 52' stroke='#c62828' stroke-width='4' fill='none' stroke-linecap='round'/><path d='M14 52 m-9 -4 a10 10 0 1 1 13 -5 L12 46 Z' fill='#e53935' stroke='#7f0000' stroke-width='2.5' stroke-linejoin='round'/><path d='M86 52 m9 -4 a10 10 0 1 0 -13 -5 L88 46 Z' fill='#e53935' stroke='#7f0000' stroke-width='2.5' stroke-linejoin='round'/><path d='M42 58 L44 52 L47 56 L50 50 L53 56 L56 52 L58 58 Z' fill='#ffca28' stroke='#8d6e00' stroke-width='1.5' stroke-linejoin='round'/></svg>",
+      "category": "family"
+    },
+    {
+      "id": "bloom-hop",
+      "category": "community",
+      "url": "community/play.html?g=bloom-hop",
+      "entry": "bloom-hop/index.html",
+      "latest": "",
+      "input": "touch",
+      "color": "#4fb7a6",
+      "name": {
+        "zh-Hans": "荷塘跳跳蛙 Bloom Hop",
+        "zh-Hant": "荷塘跳跳蛙 Bloom Hop",
+        "en": "Bloom Hop",
+        "fr": "Bloom Hop"
+      },
+      "blurb": {
+        "zh-Hans": "小青蛙跳过每片荷叶、吃掉每只苍蝇，让整个池塘开满花。步步要想好的解谜游戏。",
+        "zh-Hant": "小青蛙跳過每片荷葉、吃掉每隻蒼蠅，讓整個池塘開滿花。步步要想好的解謎遊戲。",
+        "en": "Hop on every lily pad and eat every fly to make the whole pond bloom: a route-planning puzzle.",
+        "fr": "Saute sur chaque nénuphar et mange chaque mouche pour faire fleurir l’étang : un puzzle de parcours."
+      },
+      "credit": {
+        "author": "zeveck",
+        "made": "Claude Code",
+        "license": "MIT",
+        "repo": "https://github.com/zeveck/bloom-hop"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8fd8e8'/><ellipse cx='50' cy='66' rx='34' ry='16' fill='#3f9a4e' stroke='#1f5e2a' stroke-width='3'/><path d='M50 66 L80 58' stroke='#8fd3ff' stroke-width='5'/><circle cx='50' cy='50' r='19' fill='#7cc84a' stroke='#2e6b1c' stroke-width='3'/><circle cx='40' cy='35' r='8' fill='#7cc84a' stroke='#2e6b1c' stroke-width='3'/><circle cx='60' cy='35' r='8' fill='#7cc84a' stroke='#2e6b1c' stroke-width='3'/><circle cx='40' cy='35' r='3.5' fill='#1b1b1b'/><circle cx='60' cy='35' r='3.5' fill='#1b1b1b'/><path d='M41 55 Q50 62 59 55' stroke='#2e6b1c' stroke-width='3' fill='none' stroke-linecap='round'/><circle cx='22' cy='26' r='7' fill='#ff8fb1'/><circle cx='22' cy='26' r='3' fill='#ffe08a'/></svg>"
+    },
+    {
+      "id": "puffling-flight",
+      "category": "community",
+      "url": "community/play.html?g=puffling-flight",
+      "entry": "puffling-flight/index.html",
+      "latest": "",
+      "input": "touch",
+      "color": "#f59a7a",
+      "name": {
+        "zh-Hans": "小海鹦飞飞",
+        "zh-Hant": "小海鸚飛飛",
+        "en": "Puffling Flight",
+        "fr": "Le vol du macareux"
+      },
+      "blurb": {
+        "zh-Hans": "轻点屏幕让小海鹦振翅，穿过海蚀柱。分数越高，天色从清晨变成夜晚。",
+        "zh-Hant": "輕點螢幕讓小海鸚振翅，穿過海蝕柱。分數越高，天色從清晨變成夜晚。",
+        "en": "Tap to flap and guide a little puffin between sea stacks; the sky turns from dawn to night as you score.",
+        "fr": "Touche l’écran pour battre des ailes et guide le petit macareux entre les rochers, de l’aube à la nuit."
+      },
+      "credit": {
+        "author": "connect-world-1985-ai",
+        "made": "Claude + Grok",
+        "license": "MIT",
+        "repo": "https://github.com/connect-world-1985-ai/2026-10-26-puffling-flight-plan-claude-build-grok"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffd2b8'/><rect x='8' y='70' width='84' height='22' fill='#3d6fb6'/><path d='M14 70 L20 40 L30 42 L34 70 Z M70 70 L74 30 L84 34 L88 70 Z' fill='#7a6a8a'/><ellipse cx='50' cy='48' rx='16' ry='13' fill='#222'/><ellipse cx='52' cy='52' rx='9' ry='8' fill='#fff'/><circle cx='56' cy='42' r='6' fill='#fff'/><circle cx='57' cy='42' r='2.5' fill='#111'/><path d='M62 44 L74 47 L62 51 Z' fill='#ff7a3d' stroke='#c2410c' stroke-width='1.5' stroke-linejoin='round'/><path d='M38 46 Q30 36 36 30 Q42 40 46 44 Z' fill='#333'/></svg>"
+    },
+    {
+      "id": "pixel-princess",
+      "category": "community",
+      "url": "community/play.html?g=pixel-princess",
+      "entry": "pixel-princess/index.html",
+      "latest": "",
+      "input": "touch",
+      "color": "#c58cff",
+      "name": {
+        "zh-Hans": "像素公主闯关",
+        "zh-Hant": "像素公主闖關",
+        "en": "Pixel Princess Platformer",
+        "fr": "Pixel Princess Platformer"
+      },
+      "blurb": {
+        "zh-Hans": "选一位公主，跑跳闯过六个世界，最后打败石头守护者。iPad 横屏有触屏按钮。",
+        "zh-Hant": "選一位公主，跑跳闖過六個世界，最後打敗石頭守護者。iPad 橫向有觸控按鈕。",
+        "en": "Pick a heroine, run and jump through six worlds and beat the stone guardian. Landscape touch buttons on iPad.",
+        "fr": "Choisis une héroïne, cours et saute à travers six mondes et bats le gardien de pierre. Boutons tactiles en paysage."
+      },
+      "credit": {
+        "author": "Vito D'Elia",
+        "made": "Claude Code",
+        "license": "MIT",
+        "repo": "https://github.com/VTvito/pixel-princess-platformer"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3a2a6a'/><rect x='22' y='60' width='56' height='14' fill='#7b4a2a'/><rect x='22' y='60' width='56' height='5' fill='#5cc85f'/><path d='M30 50 L30 30 L40 40 L50 24 L60 40 L70 30 L70 50 Z' fill='#ffd23f' stroke='#8d6e00' stroke-width='3' stroke-linejoin='round'/><rect x='46' y='36' width='8' height='8' fill='#ff5c8a'/><rect x='33' y='42' width='6' height='6' fill='#4da3ff'/><rect x='61' y='42' width='6' height='6' fill='#4da3ff'/><rect x='14' y='18' width='5' height='5' fill='#fff'/><rect x='82' y='22' width='4' height='4' fill='#fff'/></svg>"
+    },
+    {
+      "id": "casa-de-gemas",
+      "category": "community",
+      "url": "community/play.html?g=casa-de-gemas",
+      "entry": "casa-de-gemas/index.html",
+      "latest": "",
+      "input": "touch",
+      "color": "#e86fa0",
+      "name": {
+        "zh-Hans": "宝石小屋",
+        "zh-Hant": "寶石小屋",
+        "en": "Casa de Gemas",
+        "fr": "Casa de Gemas"
+      },
+      "blurb": {
+        "zh-Hans": "水彩画的西班牙小院：浇花、摇树枝、点点灯笼，四个季节里找出藏起来的宝石。",
+        "zh-Hant": "水彩畫的西班牙小院：澆花、搖樹枝、點點燈籠，四個季節裡找出藏起來的寶石。",
+        "en": "A watercolor Spanish courtyard: water the plants, shake the branches and find the hidden gems in four seasons.",
+        "fr": "Une cour espagnole à l’aquarelle : arrose, secoue les branches et trouve les gemmes cachées en quatre saisons."
+      },
+      "credit": {
+        "author": "deepujain",
+        "made": "Claude Opus 5.5",
+        "license": "MIT",
+        "repo": "https://github.com/deepujain/casadegema"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffe6ef'/><rect x='26' y='40' width='48' height='44' fill='#fbf6ec' stroke='#8a6d4b' stroke-width='3'/><path d='M20 42 L50 20 L80 42 Z' fill='#d9653b' stroke='#8a3b1c' stroke-width='3' stroke-linejoin='round'/><path d='M44 84 L44 66 Q50 58 56 66 L56 84 Z' fill='#8a5a2b'/><rect x='32' y='50' width='9' height='10' fill='#6fb6e8' stroke='#2f5f8a' stroke-width='2'/><rect x='60' y='50' width='9' height='10' fill='#6fb6e8' stroke='#2f5f8a' stroke-width='2'/><path d='M74 70 L80 64 L86 70 L80 78 Z' fill='#4dd0e1' stroke='#006064' stroke-width='2' stroke-linejoin='round'/><circle cx='22' cy='74' r='6' fill='#e8458f'/><circle cx='18' cy='68' r='4' fill='#ff8fc0'/></svg>"
+    },
+    {
+      "id": "magic-puzzle",
+      "category": "community",
+      "url": "community/play.html?g=magic-puzzle",
+      "entry": "magic-puzzle/index.html",
+      "latest": "",
+      "input": "touch",
+      "color": "#3f6fe0",
+      "name": {
+        "zh-Hans": "魔法滑块拼图",
+        "zh-Hant": "魔法滑塊拼圖",
+        "en": "Magic Sliding Puzzle",
+        "fr": "Taquin magique"
+      },
+      "blurb": {
+        "zh-Hans": "把滑块拼回原图，也可以用自己的照片做拼图。3×3、4×4、5×5 三种难度。",
+        "zh-Hant": "把滑塊拼回原圖，也可以用自己的照片做拼圖。3×3、4×4、5×5 三種難度。",
+        "en": "Slide the tiles back into the picture, or turn your own photo into a puzzle. 3×3, 4×4 or 5×5.",
+        "fr": "Fais glisser les pièces pour refaire l’image, ou transforme ta propre photo en taquin. 3×3, 4×4 ou 5×5."
+      },
+      "credit": {
+        "author": "Maher Khan",
+        "made": "Claude Code",
+        "license": "MIT",
+        "repo": "https://github.com/maherkhan-builds/maher-magic-puzzle"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#dce6ff'/><g stroke='#1d3b8a' stroke-width='3'><rect x='20' y='20' width='19' height='19' rx='3' fill='#ffd23f'/><rect x='41' y='20' width='19' height='19' rx='3' fill='#ff8a65'/><rect x='62' y='20' width='19' height='19' rx='3' fill='#4da3ff'/><rect x='20' y='41' width='19' height='19' rx='3' fill='#4da3ff'/><rect x='41' y='41' width='19' height='19' rx='3' fill='#ffd23f'/><rect x='20' y='62' width='19' height='19' rx='3' fill='#ff8a65'/><rect x='41' y='62' width='19' height='19' rx='3' fill='#4da3ff'/><rect x='62' y='62' width='19' height='19' rx='3' fill='#ffd23f'/></g><path d='M71.5 44 L74 50 L80 50.5 L75.5 54.5 L77 60 L71.5 57 L66 60 L67.5 54.5 L63 50.5 L69 50 Z' fill='#fff'/></svg>"
+    },
+    {
+      "id": "sudoku",
+      "category": "community",
+      "url": "community/play.html?g=sudoku",
+      "entry": "sudoku/index.html",
+      "latest": "",
+      "input": "touch",
+      "color": "#8a2a3a",
+      "name": {
+        "zh-Hans": "数独",
+        "zh-Hant": "數獨",
+        "en": "Sudoku",
+        "fr": "Sudoku"
+      },
+      "blurb": {
+        "zh-Hans": "经典数独，简单、中等、困难三档，可以记笔记、撤销，还能提示填错的格子。",
+        "zh-Hant": "經典數獨，簡單、中等、困難三檔，可以記筆記、復原，還能提示填錯的格子。",
+        "en": "Classic sudoku in easy, medium and hard, with pencil marks, undo and optional mistake checking.",
+        "fr": "Sudoku classique en facile, moyen et difficile, avec notes, annulation et vérification des erreurs."
+      },
+      "credit": {
+        "author": "AI Index (miscusi-crew)",
+        "made": "Claude Code",
+        "license": "MIT",
+        "repo": "https://github.com/miscusi-crew/aiindex-sudoku"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f3e3d3'/><rect x='20' y='20' width='60' height='60' fill='#fff' stroke='#333' stroke-width='3'/><path d='M40 20 V80 M60 20 V80 M20 40 H80 M20 60 H80' stroke='#333' stroke-width='2'/><g font-family='Arial,sans-serif' font-weight='700' font-size='15' text-anchor='middle' fill='#8a2a3a'><text x='30' y='35'>5</text><text x='70' y='35'>3</text><text x='50' y='55'>7</text><text x='30' y='75'>1</text><text x='70' y='75'>9</text></g></svg>"
+    },
+    {
+      "id": "kapadokya-balonu",
+      "category": "community",
+      "url": "community/play.html?g=kapadokya-balonu",
+      "entry": "kapadokya-balonu/index.html",
+      "latest": "",
+      "input": "touch",
+      "color": "#e8590c",
+      "name": {
+        "zh-Hans": "卡帕多奇亚热气球",
+        "zh-Hant": "卡帕多奇亞熱氣球",
+        "en": "Cappadocia Balloon",
+        "fr": "Montgolfière de Cappadoce"
+      },
+      "blurb": {
+        "zh-Hans": "3D 热气球风向谜题：不能转方向，只能加热或放气，找到对的风层飘到目的地。（土耳其语 / 英语）",
+        "zh-Hant": "3D 熱氣球風向謎題：不能轉方向，只能加熱或放氣，找到對的風層飄到目的地。（土耳其語 / 英語）",
+        "en": "A 3D hot-air balloon wind puzzle: no steering, only burner and vent, so ride the right wind layer. (Turkish / English)",
+        "fr": "Puzzle de vent en montgolfière 3D : pas de volant, seulement le brûleur et la soupape. (turc / anglais)"
+      },
+      "credit": {
+        "author": "Furkiozknn",
+        "made": "Claude Opus 5.5",
+        "license": "MIT",
+        "repo": "https://github.com/Furkiozknn/kapadokya-balonu"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffe3b0'/><path d='M10 90 L22 62 L30 90 Z M64 90 L76 58 L88 90 Z' fill='#d9a066' stroke='#8a5a2b' stroke-width='2'/><path d='M50 14 C30 14 24 34 32 48 L44 62 L56 62 L68 48 C76 34 70 14 50 14 Z' fill='#e8590c' stroke='#7f2a05' stroke-width='3'/><path d='M50 14 C42 22 42 50 46 62 M50 14 C58 22 58 50 54 62' stroke='#ffd23f' stroke-width='3' fill='none'/><rect x='44' y='68' width='12' height='9' rx='2' fill='#8a5a2b'/><path d='M45 62 L45 68 M55 62 L55 68' stroke='#5a3a1a' stroke-width='2'/></svg>"
+    },
+    {
+      "id": "karagoz",
+      "category": "community",
+      "url": "community/play.html?g=karagoz",
+      "entry": "karagoz/index.html",
+      "latest": "",
+      "input": "touch",
+      "color": "#b91c1c",
+      "name": {
+        "zh-Hans": "皮影戏光影谜题",
+        "zh-Hant": "皮影戲光影謎題",
+        "en": "Karagöz Shadow Theatre",
+        "fr": "Théâtre d’ombres Karagöz"
+      },
+      "blurb": {
+        "zh-Hans": "土耳其皮影戏：移动木偶和灯，让幕布上的影子和画面对上。（土耳其语 / 英语）",
+        "zh-Hant": "土耳其皮影戲：移動木偶和燈，讓布幕上的影子和畫面對上。（土耳其語 / 英語）",
+        "en": "Turkish shadow theatre: move the puppets and lamps until the shadows match the scene. (Turkish / English)",
+        "fr": "Théâtre d’ombres turc : déplace marionnettes et lampes jusqu’à ce que les ombres collent à la scène. (turc / anglais)"
+      },
+      "credit": {
+        "author": "Furkiozknn",
+        "made": "Claude Opus 5.5",
+        "license": "MIT",
+        "repo": "https://github.com/Furkiozknn/karagoz"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3b1408'/><rect x='18' y='20' width='64' height='54' rx='4' fill='#fff3d6' stroke='#8a3b1c' stroke-width='4'/><path d='M18 20 Q50 34 82 20' fill='#b91c1c'/><circle cx='40' cy='44' r='7' fill='#2b1a10'/><path d='M34 52 L46 52 L48 70 L32 70 Z' fill='#2b1a10'/><circle cx='62' cy='46' r='6' fill='#2b1a10'/><path d='M57 53 L67 53 L70 70 L54 70 Z' fill='#2b1a10'/><path d='M46 58 L56 60' stroke='#2b1a10' stroke-width='3'/><path d='M50 88 L50 80 M44 88 L56 88' stroke='#ffb300' stroke-width='3'/><circle cx='50' cy='79' r='3' fill='#ffd23f'/></svg>"
     }
   ]
 }
