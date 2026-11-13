@@ -1,5 +1,8 @@
 # Drawrassic Park — Changelog
 
+## v3.6 (2026-11-12) — save schema s4 (unchanged)
+- Fixed: two imports running at once (tapping “Load this backup” twice) both cleared the park and then both added their dinos, so every dino appeared twice and was saved that way. Park reloads now run one after another, the import button is locked while importing, and a cloud restore can't start twice.
+
 ## v3.5 (2026-11-12) — save schema s4 (unchanged)
 - ☁️ Automatic cloud backup with Firebase (Google sign-in + Firestore), only on the family games website (https://jacobjkwu.github.io/family-games/drawrassic-park/). In the claude.ai artifact the feature is off and Settings links to the website.
 - Uploads every 2 minutes while someone is playing, and when the page is hidden. Each drawing is uploaded once (`users/{uid}/imgs/{hash}`); park snapshots are kept hourly (last 48) and daily (last 30) under `users/{uid}/games/drawrassic-park/snaps`.

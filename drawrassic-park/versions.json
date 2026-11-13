@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.6",
+      "file": "drawrassic-park-v3.6.html",
+      "date": "2026-11-12",
+      "schema": 4,
+      "switcher": true,
+      "notes": {
+        "en": "Fix: tapping “Load this backup” twice no longer doubles every dino. Restoring from the cloud is also protected.",
+        "fr": "Correctif : toucher deux fois « Charger cette sauvegarde » ne double plus tous les dinos. La restauration depuis le cloud est aussi protégée.",
+        "zh-Hans": "修复：连点两次“载入备份”不会再让恐龙翻倍。从云端恢复也加了同样的保护。",
+        "zh-Hant": "修復：連點兩次「載入備份」不會再讓恐龍翻倍。從雲端恢復也加了同樣的保護。"
+      }
+    },
+    {
       "v": "3.5",
       "file": "drawrassic-park-v3.5.html",
       "date": "2026-11-12",
