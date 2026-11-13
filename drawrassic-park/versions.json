@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.34",
+      "file": "drawrassic-park-v3.34.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🧹 Tidier screen + 🛝 playground: the top bar keeps only amber, coins, ☀️, 💾 and a ☰ menu; the quick bar is slimmer and folds away; the dino card shows 4 buttons and ⋯; speech bubbles stop piling up. New: slide, trampoline, swing, seesaw and bubble machine, 🫧 bubbles that float dinos away, and 🎈 balloons that lift them.",
+        "fr": "🧹 Écran plus clair + 🛝 aire de jeux : la barre du haut garde ambre, pièces, ☀️, 💾 et un menu ☰ ; la barre d’outils est plus fine et se replie ; la fiche du dino montre 4 boutons et ⋯ ; les bulles de paroles ne s’empilent plus. Nouveau : toboggan, trampoline, balançoire, bascule, machine à bulles, 🫧 bulles qui emportent les dinos et 🎈 ballons qui les soulèvent.",
+        "zh-Hans": "🧹 界面变清爽 + 🛝 游乐场：顶部只留琥珀、金币、☀️、💾 和 ☰ 菜单；快捷栏更小还能收起；恐龙卡片只显示 4 个按钮和 ⋯；对话气泡不再叠在一起。新增：滑梯、蹦床、秋千、跷跷板、泡泡机，🫧 魔法泡泡能把恐龙装进去飘走，🎈 气球能把恐龙带上天。",
+        "zh-Hant": "🧹 介面變清爽 + 🛝 遊樂場：頂部只留琥珀、金幣、☀️、💾 和 ☰ 選單；快捷列更小還能收起；恐龍卡片只顯示 4 個按鈕和 ⋯；對話氣泡不再疊在一起。新增：溜滑梯、彈跳床、鞦韆、蹺蹺板、泡泡機，🫧 魔法泡泡能把恐龍裝進去飄走，🎈 氣球能把恐龍帶上天。"
+      }
+    },
+    {
       "v": "3.33",
       "file": "drawrassic-park-v3.33.html",
       "date": "2026-11-13",
