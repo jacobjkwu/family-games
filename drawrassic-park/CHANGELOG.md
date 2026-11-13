@@ -1,5 +1,12 @@
 # Drawrassic Park — Changelog
 
+## v3.21 (2026-11-13) — save schema s7 (unchanged)
+- 🖥️ Adaptive resolution for the park and the arena: when the time between frames stays above 20 ms (under ~50 fps) for a second, the canvas is drawn at 15% lower resolution, down to 50%. The cached background stays sharp; taps and the controller cursor still land in the right place.
+- Each step is checked: if frames don't get faster within 1.5 s (the slowness is in the game logic, or the iPad is capped at 30 fps in Low Power Mode), the step is undone and not retried for 30 s (then 60, 120… up to 10 min). After 6 s of smooth frames the resolution goes back up one step; if that makes it slow again, it steps back down and waits.
+- The arena's old one-way switch to 70% is replaced by the same controller, so it can recover too.
+- 📈 FPS overlay shows the current resolution. Number panel: new 🖥️ Adaptive resolution group (on/off, lowest resolution, step, slow/fast thresholds, timings).
+- Tested in desktop headless Chrome with a simulated GPU-bound load (25 ms per megapixel: 33 ms → 70% resolution, 19 ms) and a simulated logic-bound load (undone after the check). Not measured on a real iPad. Save format unchanged (s7).
+
 ## v3.20 (2026-11-13) — save schema s7 (unchanged)
 - 👥 16 visitor types, each a data entry (age, speed, outfit, hat, props, favourite actions, lines): tourist, family, kid, teen, grandparent, photographer, jogger, scientist, artist, kid in a dino costume, tour guide, chef, firefighter, builder, police officer, astronaut. Every person also gets a random skin tone, hair style and colour, body size, glasses or sunglasses.
 - New drawing and animation: two-part legs with knees and swinging arms, body bob, running lean, smooth start/stop and turning, blinking, head turns. Poses: photo (with flash), selfie, wave, point, jump/cheer, roar, take notes, sketch, eat, panic. Grandparents use a cane and sit on benches, people go into the restrooms and come back out, wave from the lookout tower, cheer at the carousel, and hold the ice cream or burger they bought. Far or crowded people are drawn in a simpler form.

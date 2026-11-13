@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.21",
+      "file": "drawrassic-park-v3.21.html",
+      "date": "2026-11-13",
+      "schema": 7,
+      "switcher": true,
+      "notes": {
+        "en": "🖥️ Smoother when the park gets busy: if frames slow down, the game draws at a slightly lower resolution (down to 50%) and goes back to full sharpness when things calm down.",
+        "fr": "🖥️ Plus fluide quand le parc est chargé : si les images ralentissent, le jeu dessine en résolution un peu plus basse (jusqu’à 50 %) et revient à la pleine netteté quand ça se calme.",
+        "zh-Hans": "🖥️ 公园很热闹时更流畅：画面变卡时，游戏会稍微降低画面清晰度（最低 50%），不卡了再自动变回清晰。",
+        "zh-Hant": "🖥️ 公園很熱鬧時更流暢：畫面變卡時，遊戲會稍微降低畫面清晰度（最低 50%），不卡了再自動變回清晰。"
+      }
+    },
+    {
       "v": "3.20",
       "file": "drawrassic-park-v3.20.html",
       "date": "2026-11-13",
