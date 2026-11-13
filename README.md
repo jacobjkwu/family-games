@@ -1,10 +1,10 @@
 # Family Games
 
-Games built with Claude, hosted on GitHub Pages: https://jacobjkwu.github.io/family-games/
+Games built with Claude: https://family-games-hub.vercel.app/ (main) · https://jacobjkwu.github.io/family-games/ (GitHub Pages, old address)
 
-Also deployed on Vercel from this repo (every push to main): https://family-games-brown.vercel.app/ (testing address; a final custom domain is still to be chosen). Each address is a separate origin with its own browser storage, so moving a device means backup → add the new icon → restore → check → delete the old icon. Keep GitHub Pages running: frozen version files link back to it.
+Vercel deploys this repo on every push to main. GitHub Pages stays up as the old address and fallback. Each address is a separate origin with its own browser storage, so moving a device means backup → add the new icon → restore → check → delete the old icon. Keep GitHub Pages running: frozen version files link back to it.
 - `vercel.json`: `trailingSlash: true` (so `/game` becomes `/game/` and relative paths like `../shared/` work) and `Access-Control-Allow-Origin: *` (copied community games load their images with CORS, as on GitHub Pages).
-- `games.json` links our own games with relative URLs (`goat-mayhem/`), so the hub stays on whichever address it was opened from.
+- `games.json` links our own games with relative URLs (`goat-mayhem/`), so the hub stays on whichever address it was opened from. The friend-request email links to the hub on the address the friend used (`MAIL.hub` in `shared/family-cloud.js`).
 
 - `index.html` + `games.json`: the Game Hub (touch, Xbox controller, mouse, keyboard). Edit `games.json` to add a game or bump its latest version; the hub sorts it onto shelves by `category`, `input` and `genre`.
   - Layout (TV style): a hero card (▶ Continue the last game, or today's pick from our own games), then horizontal shelves: Recently played, My favorites, Our own games, Play with a controller (on Xbox or once a controller is used), one shelf per community genre (games that suit the device first), and keyboard-only games last.

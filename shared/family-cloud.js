@@ -1,5 +1,5 @@
 /* family-cloud.js — automatic cloud backup for every family game on this website.
-   All games live on one origin (jacobjkwu.github.io), so they share localStorage.
+   All games on one address share one origin and localStorage (GitHub Pages and Vercel are separate origins).
    This module backs up each game's keys to Firestore (users/{uid}/ls/{game}),
    keeps hourly/daily history, offers newer progress from other devices, and
    restores a game after backing up the local copy.
@@ -32,7 +32,7 @@ const GAMES = {
 };
 const STATE_KEY = 'family-cloud/state';
 // EmailJS: these three ids are public by design (they are sent from every browser); the family's address is in the template on emailjs.com.
-const MAIL = { url: 'https://api.emailjs.com/api/v1.0/email/send', service: 'service_bek97rc', template: 'template_pc1o6xn', key: 'svOtj7oJPatD7u-rV', hub: 'https://jacobjkwu.github.io/family-games/' };
+const MAIL = { url: 'https://api.emailjs.com/api/v1.0/email/send', service: 'service_bek97rc', template: 'template_pc1o6xn', key: 'svOtj7oJPatD7u-rV', hub: new URL('../', import.meta.url).href };   // the hub on whichever address this page came from (GitHub Pages or Vercel)
 const STR = {
   en: { friendsBtn: '👪 Friends waiting ({n})', friendsNone: 'No one is waiting.', friendsT: '👪 Friends who want to join', reqLine: '{name}\n{email} · asked {t}', approve: '✅ Approve', deny: '❌ Not approved', later: 'Later',
     approved: '✅ {name} can now use the family cloud.', denied: '{name} was not approved.', membersBtn: '👥 Approved friends', membersNone: 'No approved friends yet.', removeT: 'Remove this friend?', removeB: '{name} ({email}) will no longer be able to use the family cloud. Their saves in the cloud are kept.', remove: '🗑️ Remove', removed: '{name} was removed.',
