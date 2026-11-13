@@ -38,6 +38,9 @@ body {
 #hold[hidden] { display: none; }
 #hold i { display: block; height: 6px; margin-top: 0.3em; border-radius: 3px; background: #ff5c5c; width: 0; }
 @media (max-width: 700px) { #credit { display: none; } }
+@media (max-width: 1000px) { #newtab .long { display: none; } }
+#newtab { text-decoration: none; display: inline-flex; align-items: center; }
+#newtab[hidden] { display: none; }
 </style>
 </head>
 <body>
@@ -45,6 +48,7 @@ body {
   <a class="btn home" id="home" href="../index.html"></a>
   <div id="info"><div id="name"></div><div id="credit"></div></div>
   <span id="padHint" hidden><span class="k">B</span><span id="padHintT"></span></span>
+  <a class="btn" id="newtab" target="_blank" rel="noopener noreferrer" hidden></a>
   <button class="btn" id="cloud" type="button" hidden>☁️</button>
   <button class="btn" id="fs" type="button"></button>
 </div>
@@ -62,16 +66,16 @@ const ID_RE = /^[a-z0-9-]{1,40}$/;
 
 /* ===== Strings ===== */
 const STR = {
-  'zh-Hans': { home: '← 游戏大厅', fs: '全屏', exitfs: '退出全屏', loading: '正在打开游戏…', notFound: '找不到这个社区游戏。', loadFail: '读不到游戏清单（games.json）。',
+  'zh-Hans': { newtab: '↗ 新标签页打开', ext: '🔗 外部网站', home: '← 游戏大厅', fs: '全屏', exitfs: '退出全屏', loading: '正在打开游戏…', notFound: '找不到这个社区游戏。', loadFail: '读不到游戏清单（games.json）。',
     by: a => `作者 ${a}`, made: m => `用 ${m} 制作`, src: '源代码', holdB: '按住 B 回大厅', holding: '继续按住 B…',
     conflict: '这个游戏的存档在别的地方（另一个标签页或云端恢复）被改过了。为了不覆盖它，这里先停止存档。', reload: '重新打开', title: '社区游戏' },
-  'zh-Hant': { home: '← 遊戲大廳', fs: '全螢幕', exitfs: '離開全螢幕', loading: '正在打開遊戲…', notFound: '找不到這個社群遊戲。', loadFail: '讀不到遊戲清單（games.json）。',
+  'zh-Hant': { newtab: '↗ 新分頁打開', ext: '🔗 外部網站', home: '← 遊戲大廳', fs: '全螢幕', exitfs: '離開全螢幕', loading: '正在打開遊戲…', notFound: '找不到這個社群遊戲。', loadFail: '讀不到遊戲清單（games.json）。',
     by: a => `作者 ${a}`, made: m => `用 ${m} 製作`, src: '原始碼', holdB: '按住 B 回大廳', holding: '繼續按住 B…',
     conflict: '這個遊戲的存檔在別的地方（另一個分頁或雲端恢復）被改過了。為了不覆蓋它，這裡先停止存檔。', reload: '重新打開', title: '社群遊戲' },
-  en: { home: '← Game Hub', fs: 'Fullscreen', exitfs: 'Exit fullscreen', loading: 'Opening the game…', notFound: 'This community game wasn’t found.', loadFail: 'Couldn’t load the game list (games.json).',
+  en: { newtab: '↗ Open in a new tab', ext: '🔗 external site', home: '← Game Hub', fs: 'Fullscreen', exitfs: 'Exit fullscreen', loading: 'Opening the game…', notFound: 'This community game wasn’t found.', loadFail: 'Couldn’t load the game list (games.json).',
     by: a => `by ${a}`, made: m => `made with ${m}`, src: 'source', holdB: 'Hold B for the hub', holding: 'Keep holding B…',
     conflict: 'This game’s progress was changed somewhere else (another tab or a cloud restore). Saving is paused here so it isn’t overwritten.', reload: 'Reopen', title: 'Community game' },
-  fr: { home: '← Salle de jeux', fs: 'Plein écran', exitfs: 'Quitter le plein écran', loading: 'Ouverture du jeu…', notFound: 'Ce jeu de la communauté est introuvable.', loadFail: 'Impossible de charger la liste des jeux (games.json).',
+  fr: { newtab: '↗ Ouvrir dans un onglet', ext: '🔗 site externe', home: '← Salle de jeux', fs: 'Plein écran', exitfs: 'Quitter le plein écran', loading: 'Ouverture du jeu…', notFound: 'Ce jeu de la communauté est introuvable.', loadFail: 'Impossible de charger la liste des jeux (games.json).',
     by: a => `par ${a}`, made: m => `fait avec ${m}`, src: 'code source', holdB: 'Maintiens B pour la salle', holding: 'Continue d’appuyer sur B…',
     conflict: 'La progression de ce jeu a été modifiée ailleurs (autre onglet ou restauration cloud). La sauvegarde est en pause ici pour ne pas l’écraser.', reload: 'Rouvrir', title: 'Jeu de la communauté' },
 };
@@ -149,7 +153,7 @@ function showConflict() {
 }
 
 /* ===== Start the game in a sandboxed iframe ===== */
-let frame = null;
+let frame = null, cloudGame = false;
 async function start() {
   if (!ID_RE.test(id)) { msg(tr('notFound')); return; }
   let g = null;
@@ -159,7 +163,11 @@ async function start() {
     const d = await r.json();
     g = (d.games || []).find(x => x && x.id === id && x.category === 'community');
   } catch (e) { msg(tr('loadFail')); return; }
-  if (!g || typeof g.entry !== 'string' || !/^[a-z0-9-]+\/[\w./-]+\.html$/.test(g.entry) || g.entry.split('/')[0] !== id || g.entry.includes('..')) { msg(tr('notFound')); return; }
+  let external = null;
+  if (g && typeof g.external === 'string') {
+    try { const u = new URL(g.external); if (u.protocol === 'https:' && u.origin !== location.origin) external = u.href; } catch (e) {}
+    if (!external) { msg(tr('notFound')); return; }
+  } else if (!g || typeof g.entry !== 'string' || !/^[a-z0-9-]+\/[\w./-]+\.html$/.test(g.entry) || g.entry.split('/')[0] !== id || g.entry.includes('..')) { msg(tr('notFound')); return; }
 
   document.title = loc(g.name) + ' · ' + tr('title');
   $('name').textContent = loc(g.name);
@@ -168,22 +176,38 @@ async function start() {
   if (c.author) parts.push(tr('by', c.author));
   if (c.made) parts.push(tr('made', c.made));
   if (c.license) parts.push(c.license);
+  if (external) parts.push(tr('ext'));
   credit.textContent = parts.join(' · ') + (c.repo ? ' · ' : '');
   if (typeof c.repo === 'string' && /^https:\/\/github\.com\//.test(c.repo)) {
     const a = document.createElement('a'); a.href = c.repo; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = tr('src') + ' ↗'; credit.appendChild(a);
   }
 
-  const data = loadSave();
   frame = document.createElement('iframe');
+  frame.setAttribute('allowfullscreen', '');
+  frame.title = loc(g.name);
+  frame.addEventListener('load', () => { $('msg').hidden = true; try { frame.focus(); } catch (e) {} });
+  if (external) {
+    // Another website: it keeps its own storage on its own origin; the sandbox only stops it from navigating this page.
+    const nt = $('newtab'); nt.href = external; nt.textContent = '↗'; nt.title = tr('newtab'); nt.hidden = false;
+    const sp = document.createElement('span'); sp.className = 'long'; sp.textContent = ' ' + tr('newtab').replace(/^↗\s*/, ''); nt.appendChild(sp);
+    frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads allow-orientation-lock');
+    frame.setAttribute('allow', 'fullscreen; gamepad; autoplay; accelerometer; gyroscope; screen-wake-lock; clipboard-write');
+    frame.referrerPolicy = 'no-referrer';
+    frame.src = external;
+    $('stage').appendChild(frame);
+    return;
+  }
+  cloudGame = true;
+  const data = loadSave();
   // No allow-same-origin: the game gets an opaque origin, so it can't reach this site's storage, cookies or cloud sign-in.
   frame.setAttribute('sandbox', 'allow-scripts allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads allow-orientation-lock');
   frame.setAttribute('allow', 'fullscreen; gamepad; autoplay; accelerometer; gyroscope; screen-wake-lock');
-  frame.setAttribute('allowfullscreen', '');
-  frame.title = loc(g.name);
   frame.name = JSON.stringify({ __fgshim: 1, g: id, data });
   frame.src = g.entry;
-  frame.addEventListener('load', () => { $('msg').hidden = true; try { frame.focus(); } catch (e) {} });
   $('stage').appendChild(frame);
+  // family-cloud backs up community/<id>/... (each copied community game is its own entry in its GAMES table)
+  const s = document.createElement('script'); s.type = 'module'; s.src = '../shared/family-cloud.js';
+  s.dataset.games = 'community-' + id; s.dataset.chip = 'none'; document.body.appendChild(s);
 }
 window.addEventListener('message', e => {
   if (!frame || e.source !== frame.contentWindow) return;
@@ -228,15 +252,10 @@ window.addEventListener('keydown', e => { if (e.key === 'Escape' && e.target ===
 
 /* ===== Cloud backup button (family-cloud.js loads below) ===== */
 $('cloud').addEventListener('click', () => { if (window.FamilyCloud) window.FamilyCloud.menu(); });
-const showCloud = () => { if (window.FamilyCloud) $('cloud').hidden = false; else setTimeout(showCloud, 500); };
+const showCloud = () => { if (window.FamilyCloud && cloudGame) $('cloud').hidden = false; else if (!frame || cloudGame) setTimeout(showCloud, 500); };
 showCloud();
 
 start();
-// family-cloud backs up community/<id>/... (each community game is its own entry in its GAMES table)
-if (ID_RE.test(id)) {
-  const s = document.createElement('script'); s.type = 'module'; s.src = '../shared/family-cloud.js';
-  s.dataset.games = 'community-' + id; s.dataset.chip = 'none'; document.body.appendChild(s);
-}
 })();
 </script>
 </body>

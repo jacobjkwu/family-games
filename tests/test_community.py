@@ -10,7 +10,9 @@ from playwright.sync_api import sync_playwright
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = '/tmp/community-shots'
 os.makedirs(OUT, exist_ok=True)
-GAMES = [g for g in json.load(open(f'{ROOT}/games.json'))['games'] if g.get('category') == 'community']
+ALL = [g for g in json.load(open(f'{ROOT}/games.json'))['games'] if g.get('category') == 'community']
+GAMES = [g for g in ALL if 'entry' in g]            # copied into community/
+EMBED = [g for g in ALL if 'external' in g]         # official site shown inside play.html
 PORT = 8768
 
 class H(http.server.SimpleHTTPRequestHandler):
@@ -150,6 +152,36 @@ with sync_playwright() as p:
     check('Controller: a short B press stays in the game', '/community/play.html' in page.url)
     page.evaluate("window.__pads[0].buttons[1].pressed = true"); page.wait_for_timeout(2200)
     check('Controller: holding B for 1.5 s goes back to the hub', page.url.rstrip('/').endswith('/index.html'), page.url)
+    c.close()
+
+    # ---------- 6b. embedded external sites (stubbed: this sandbox can't reach them) ----------
+    STUB = '<!DOCTYPE html><title>stub</title><body>external game stub<script>try{localStorage.setItem("x","1")}catch(e){document.title="nostorage"}; parent.postMessage({__fgshim:1,type:"save",g:location.hostname,data:{evil:"1"}},"*");</script>'
+    for g in EMBED:
+        c = ctx_for(b, 820, 1180)
+        c.route(g['external'].split('?')[0] + '*', lambda r: r.fulfill(status=200, content_type='text/html', body=STUB))
+        page = c.new_page(); errs = []; page.on('pageerror', lambda e: errs.append(str(e)))
+        page.goto(BASE + 'index.html', wait_until='domcontentloaded')
+        page.evaluate("(o) => { for (const k in o) localStorage.setItem(k, o[k]); }", FAMILY_KEYS)
+        page.goto(BASE + 'community/play.html?g=' + g['id'], wait_until='domcontentloaded'); page.wait_for_timeout(900)
+        fr = page.locator('#stage iframe')
+        info = page.evaluate("(() => { const f = document.querySelector('#stage iframe'); return f ? {src: f.src, sb: f.getAttribute('sandbox'), name: f.name} : null; })()")
+        nt = page.locator('#newtab')
+        ls = LS(page)
+        ok = info and info['src'] == g['external'] and 'allow-same-origin' in info['sb'] and 'allow-top-navigation' not in info['sb'] and not info['name']
+        check(f'Embed {g["id"]}: official site in the frame, no top navigation, no shim data passed', ok, info)
+        check(f'Embed {g["id"]}: "open in new tab" shown, cloud button hidden, msg hidden', nt.is_visible() and nt.get_attribute('href') == g['external'] and page.locator('#cloud').is_hidden() and page.locator('#msg').is_hidden())
+        check(f'Embed {g["id"]}: its messages can\'t write our storage', all(ls.get(k) == v for k, v in FAMILY_KEYS.items()) and not any(k.startswith('community/') for k in ls) and not errs, (errs, [k for k in ls if k.startswith('community/')]))
+        bad = page.evaluate("[...document.querySelectorAll('#bar .btn')].filter(e => !e.hidden && (e.getBoundingClientRect().right > innerWidth + 1 || e.getBoundingClientRect().height < 44)).map(e => e.textContent)")
+        check(f'Embed {g["id"]}: bar fits in portrait', not bad, bad)
+        c.close()
+    # bad external urls are refused
+    c = ctx_for(b); page = c.new_page()
+    for badurl in ['javascript:alert(1)', 'http://example.com/', BASE + 'index.html']:
+        body = json.dumps({'games': [{'id': 'x', 'category': 'community', 'url': 'community/play.html?g=x', 'external': badurl}]})
+        page.route('**/games.json', (lambda body: (lambda r: r.fulfill(status=200, content_type='application/json', body=body)))(body))
+        page.goto(BASE + 'community/play.html?g=x', wait_until='domcontentloaded'); page.wait_for_timeout(500)
+        check(f'Embed: refuses external url {badurl[:30]}', page.locator('#stage iframe').count() == 0 and page.locator('#msg').is_visible())
+        page.unroute('**/games.json')
     c.close()
 
     # ---------- 7. the bar in four languages, portrait ----------

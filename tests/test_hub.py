@@ -61,9 +61,10 @@ def new_ctx(b, w, h, pads=0, touch=False, lang='zh-CN'):
     def stub(route):
         opened.append(route.request.url)
         route.fulfill(status=200, content_type='text/html', body='<!DOCTYPE html><title>stub</title>launcher stub')
-    ctx.route('https://jacobjkwu.github.io/**', stub)
+    # every game page is stubbed: our launchers, community/play.html and external game sites (links)
+    ctx.route(lambda u: u.startswith('http') and not u.startswith(BASE) and not any(h in u for h in ('googleapis', 'gstatic', 'google.com')), stub)
+    ctx.route(lambda u: any(h in u for h in ('googleapis', 'gstatic', 'google.com')), lambda r: r.abort())
     ctx.route('**/community/play.html*', stub)
-    ctx.route(lambda u: not u.startswith(BASE) and u.startswith('http') and 'jacobjkwu.github.io' not in u, lambda r: r.abort())
     return ctx, opened
 
 def layout_checks(page, tag, tv=False):
@@ -106,16 +107,25 @@ with sync_playwright() as p:
     errs = []; page.on('pageerror', lambda e: errs.append(str(e)))
     page.goto(URL); page.wait_for_selector('#games .card')
     check(f'TV: all {len(GAMES)} cards loaded from games.json', page.locator('#games .card').count() == len(GAMES))
+    subs = page.locator('h3.sub').all_text_contents()
+    check('TV: community games grouped by input (touch / controller / keyboard)', len(subs) == 3 and '触屏' in subs[0] and '手柄' in subs[1] and '键盘' in subs[2], subs)
+    tags = page.evaluate("[...document.querySelectorAll('#games .card')].map(a => a.dataset.id + ':' + a.querySelector('.tag').className)")
+    want = {g['id']: g['input'] for g in GAMES}
+    check('TV: every card shows its input tag', all(t.split(':')[1].endswith(want[t.split(':')[0]]) for t in tags), [t for t in tags if not t.split(':')[1].endswith(want[t.split(':')[0]])])
+    ext_ok = page.evaluate("[...document.querySelectorAll('#games .card')].filter(a => a.querySelector('.credit') && a.querySelector('.credit').textContent.includes('外部网站')).length")
+    check('TV: embedded and linked games are marked as external sites', ext_ok == len([g for g in COMMUNITY if 'external' in g or g.get('link')]), ext_ok)
     secs = page.locator('h2.sec').all_text_contents()
     check('TV: two sections, ours first, community second', len(secs) == 2 and '自己开发的游戏' in secs[0] and '社区游戏' in secs[1], secs)
     order = page.evaluate("[...document.querySelectorAll('#games .card')].map(a => a.dataset.id)")
-    check('TV: section order matches the categories', order == [g['id'] for g in FAMILY] + [g['id'] for g in COMMUNITY], order)
+    grp = lambda g: 0 if g['input'] in ('touch', 'both') else 1 if g['input'] == 'controller' else 2
+    check('TV: section order matches the categories and input groups', order == [g['id'] for g in FAMILY] + [g['id'] for g in sorted(COMMUNITY, key=grp)], order)
     credit = page.locator(f'[data-key="game-{COMMUNITY[0]["id"]}"] .credit').text_content()
     check('TV: community card shows author and AI tool', COMMUNITY[0]['credit']['author'] in credit and COMMUNITY[0]['credit']['made'] in credit, credit)
     check('TV: no "Continue" before any game was opened', page.locator('#cont').is_hidden())
     press(page, 'A')
     check('TV: first A press only shows the focus ring (opens nothing)', not opened and focused(page) == 'game-' + FAMILY[0]['id'], focused(page))
-    for g in GAMES:
+    sample = FAMILY + [g for g in COMMUNITY if g.get('link')][:2] + [g for g in COMMUNITY if 'external' in g][:2] + [g for g in COMMUNITY if 'entry' in g][:2] + [sorted(COMMUNITY, key=grp)[-1]]
+    for g in sample:
         page.goto(URL); page.wait_for_selector('#games .card')
         press(page, 'down')
         ok = walk_to(page, 'game-' + g['id'])
@@ -128,7 +138,7 @@ with sync_playwright() as p:
     press(page, 'down')
     check('TV: default focus is Continue when present', focused(page) == 'cont', focused(page))
     n0 = len(opened); press(page, 'A'); page.wait_for_timeout(400)
-    check('TV pad: A on Continue opens the last game (a community game)', len(opened) > n0 and opened[-1] == abs_url(GAMES[-1]))
+    check('TV pad: A on Continue opens the last game opened', len(opened) > n0 and opened[-1] == abs_url(sample[-1]))
     page.go_back(); page.wait_for_selector('#games .card')
     press(page, 'down'); ok = walk_to(page, 'lang-en'); press(page, 'A'); page.wait_for_timeout(100)
     check('TV pad: language switch to English by controller', ok and page.locator('h1').text_content() == '🎮 Game Hub')
@@ -159,7 +169,7 @@ with sync_playwright() as p:
         page.goto(URL); page.wait_for_selector('#games .card')
         for i, g in enumerate(GAMES):
             page.goto(URL); page.wait_for_selector('#games .card')
-            c = page.locator('#games .card').nth(i); c.scroll_into_view_if_needed(); c.tap(); page.wait_for_timeout(300)
+            c = page.locator(f'#games .card[data-id="{g["id"]}"]'); c.scroll_into_view_if_needed(); c.tap(); page.wait_for_timeout(300)
             check(f'iPad {w}x{h}: tap opens {g["id"]}', opened and opened[-1] == abs_url(g))
             page.go_back(); page.wait_for_selector('#games .card')
         page.get_by_text('繁體中文').tap(); page.wait_for_timeout(100)

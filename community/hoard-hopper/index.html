@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="../shim.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hoard Hopper: a pixel dragon platformer</title>
+<meta name="description" content="Hop a little red dragon through four scrolling caves, dodge lava and spikes, scoop up treasure, and pile it onto an ever-growing hoard of gold. Free to play in your browser.">
+<link rel="canonical" href="https://hoardhopper.synapticnoise.com/">
+<meta name="theme-color" content="#2b1610">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hoard Hopper">
+<meta property="og:title" content="Hoard Hopper">
+<meta property="og:description" content="A little dragon with big ambitions. Hop through four scrolling caves, dodge lava and spikes, and build a legendary hoard of gold. Free to play in your browser.">
+<meta property="og:url" content="https://hoardhopper.synapticnoise.com/">
+<meta property="og:image" content="https://hoardhopper.synapticnoise.com/social-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A red pixel-art dragon napping on a towering pile of gold under the words Hoard Hopper">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hoard Hopper">
+<meta name="twitter:description" content="A little dragon with big ambitions. Hop through scrolling caves and build a legendary hoard of gold.">
+<meta name="twitter:image" content="https://hoardhopper.synapticnoise.com/social-card.jpg">
+<meta name="twitter:image:alt" content="A red pixel-art dragon napping on a towering pile of gold under the words Hoard Hopper">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preload" href="fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Press Start 2P (SIL Open Font License, see fonts/OFL.txt), bundled so the game works offline */
+  @font-face { font-family: "Press Start 2P"; font-style: normal; font-weight: 400; font-display: swap;
+    src: url(fonts/press-start-2p-latin.woff2) format("woff2"); }
+  :root { --bg: #0b0708; --fg: #f6d58a; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; font-family: "Press Start 2P", monospace; touch-action: none; user-select: none; -webkit-user-select: none; }
+  canvas { image-rendering: pixelated; image-rendering: crisp-edges; display: block; background: #000; }
+  #touch { position: fixed; inset: auto 0 0 0; display: none; justify-content: space-between; padding: 0 16px 16px; pointer-events: none; }
+  #touch .grp { display: flex; gap: 14px; }
+  #touch button { pointer-events: auto; width: 72px; height: 72px; border-radius: 50%; border: 3px solid rgba(246,213,138,.6); background: rgba(40,20,10,.45); color: var(--fg); font: 18px "Press Start 2P", monospace; }
+  #touch button.big { width: 88px; height: 88px; }
+  body.touch #touch { display: flex; }
+  /* Title-screen links. game.js shows them only on the title and lifts them clear of the mute label and touch buttons. */
+  .corner { position: fixed; bottom: calc(env(safe-area-inset-bottom) + var(--lift, 10px)); padding: 6px 4px; font: 11px/1 "Press Start 2P", monospace;
+    color: #e8d3a0; text-decoration: none; text-shadow: 2px 2px 0 rgba(0,0,0,.75); opacity: .7; touch-action: manipulation; }
+  .corner:focus-visible { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+  @media (hover: hover) { .corner:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; } }
+  .corner[hidden] { display: none; }
+  #site-link { left: calc(env(safe-area-inset-left) + 12px); }
+  #gh-link { right: calc(env(safe-area-inset-right) + 12px); }
+  @media (pointer: coarse), (max-width: 700px) { .corner { font-size: 9px; } }
+</style>
+</head>
+<body>
+<canvas id="game" width="960" height="540"></canvas>
+<div id="touch">
+  <div class="grp"><button data-k="left">&#9664;</button><button data-k="right">&#9654;</button></div>
+  <div class="grp"><button data-k="jump" class="big">&#9650;</button></div>
+</div>
+<a id="site-link" class="corner" href="https://synapticnoise.com/" hidden>synapticnoise.com</a>
+<a id="gh-link" class="corner" href="https://github.com/zeveck/hoardhopper" target="_blank" rel="noopener" title="Hoard Hopper on GitHub: how it was made" aria-label="Hoard Hopper on GitHub: how it was made" hidden>GitHub</a>
+<script src="game.js"></script>
+<script>
+  // Offline play. Skipped on localhost so local edits aren't hidden behind a cache (add ?sw to test it there).
+  if ('serviceWorker' in navigator && (!/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || /[?&]sw\b/.test(location.search)))
+    addEventListener('load', () => navigator.serviceWorker.register('sw.js'));
+</script>
+</body>
+</html>

@@ -44,9 +44,10 @@ def main():
     if three:
         vd = os.path.join(dst, 'vendor', 'three')
         os.makedirs(os.path.join(vd, 'build'), exist_ok=True)
-        os.makedirs(os.path.join(vd, 'examples', 'jsm', 'utils'), exist_ok=True)
         shutil.copy2(os.path.join(THREE_SRC, 'build', 'three.module.js'), os.path.join(vd, 'build'))
-        shutil.copy2(os.path.join(THREE_SRC, 'examples', 'jsm', 'utils', 'BufferGeometryUtils.js'), os.path.join(vd, 'examples', 'jsm', 'utils'))
+        # the addon folders these games import from (postprocessing pulls in shaders/)
+        for sub in ('utils', 'geometries', 'postprocessing', 'shaders'):
+            shutil.copytree(os.path.join(THREE_SRC, 'examples', 'jsm', sub), os.path.join(vd, 'examples', 'jsm', sub))
         shutil.copy2(os.path.join(THREE_SRC, 'LICENSE'), os.path.join(vd, 'LICENSE'))
     patched = []
     for root, _, files in os.walk(dst):

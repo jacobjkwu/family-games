@@ -83,5 +83,18 @@
   define(window, 'sessionStorage', session);
   // document.cookie throws in a sandbox; give games a harmless empty cookie jar instead.
   try { Object.defineProperty(document, 'cookie', { get: function () { return ''; }, set: function () {}, configurable: true }); } catch (e) {}
+  // In the sandbox the game's own images count as cross-origin, so a canvas that draws them can't be read back
+  // (getImageData). Load the game's own images with CORS (GitHub Pages answers Access-Control-Allow-Origin: *).
+  try {
+    var home = location.protocol + '//' + location.host;
+    var d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
+    if (d && d.set) Object.defineProperty(HTMLImageElement.prototype, 'src', {
+      configurable: true, enumerable: d.enumerable, get: d.get,
+      set: function (v) {
+        try { if (this.crossOrigin == null && new URL(String(v), document.baseURI).origin === home) this.crossOrigin = 'anonymous'; } catch (e) {}
+        d.set.call(this, v);
+      }
+    });
+  } catch (e) {}
   window.__FAMILY_COMMUNITY__ = { id: gameId, shim: 1 };
 })();

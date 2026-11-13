@@ -1,7 +1,7 @@
 {
   "hub": "game-hub",
   "format": 2,
-  "notes": "Game list for the Game Hub. category: \"family\" (our own games) or \"community\" (open-source AI-made games vendored under community/<id>/, played through community/play.html in a sandbox). input: \"controller\" = 手柄+电视, \"touch\" = 触屏优先. url: the game launcher (absolute, or relative to the hub). Community entries also have entry (start page under community/) and credit {author, made, license, repo}. icon = hand-drawn inline SVG (viewBox 0 0 100 100, single quotes inside).",
+  "notes": "Game list for the Game Hub. category: \"family\" (our own games) or \"community\" (open-source AI-made games vendored under community/<id>/, played through community/play.html in a sandbox). input: \"controller\" = 手柄+电视, \"touch\" = 触屏优先. url: the game launcher (absolute, or relative to the hub). Community entries also have entry (start page under community/) and credit {author, made, license, repo}. icon = hand-drawn inline SVG (viewBox 0 0 100 100, single quotes inside). Community entries are either copied (entry: start page under community/), embedded (external: the official https site, shown inside community/play.html) or links (link: true, url opens the site directly). input: touch | both (touch or controller) | controller | keyboard.",
   "games": [
     {
       "id": "drawrassic-park",
@@ -289,6 +289,980 @@
         "repo": "https://github.com/Furkiozknn/karagoz"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3b1408'/><rect x='18' y='20' width='64' height='54' rx='4' fill='#fff3d6' stroke='#8a3b1c' stroke-width='4'/><path d='M18 20 Q50 34 82 20' fill='#b91c1c'/><circle cx='40' cy='44' r='7' fill='#2b1a10'/><path d='M34 52 L46 52 L48 70 L32 70 Z' fill='#2b1a10'/><circle cx='62' cy='46' r='6' fill='#2b1a10'/><path d='M57 53 L67 53 L70 70 L54 70 Z' fill='#2b1a10'/><path d='M46 58 L56 60' stroke='#2b1a10' stroke-width='3'/><path d='M50 88 L50 80 M44 88 L56 88' stroke='#ffb300' stroke-width='3'/><circle cx='50' cy='79' r='3' fill='#ffd23f'/></svg>"
+    },
+    {
+      "id": "kindle",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#ff9b4a",
+      "name": {
+        "zh-Hans": "点灯人 KINDLE",
+        "zh-Hant": "點燈人 KINDLE",
+        "en": "KINDLE",
+        "fr": "KINDLE"
+      },
+      "blurb": {
+        "zh-Hans": "一颗一分钟就能走一圈的小星球，九座灯塔熄灭了。找到它们、点亮它们，让大地一圈圈复苏。手机上有虚拟摇杆。",
+        "zh-Hant": "一顆一分鐘就能走一圈的小星球，九座燈塔熄滅了。找到它們、點亮它們，讓大地一圈圈復甦。手機上有虛擬搖桿。",
+        "en": "A tiny planet you can walk around in a minute. Find and relight nine beacons so the land comes back to life.",
+        "fr": "Une toute petite planète dont on fait le tour en une minute : rallume neuf phares pour que la terre revive."
+      },
+      "credit": {
+        "author": "Tony Downey",
+        "made": "Claude Opus 5",
+        "license": "MIT",
+        "repo": "https://github.com/TonyDowney/kindle"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ff9b4a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏮</text></svg>",
+      "url": "community/play.html?g=kindle",
+      "entry": "kindle/index.html"
+    },
+    {
+      "id": "hoard-hopper",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#c0392b",
+      "name": {
+        "zh-Hans": "小龙宝藏跳跳",
+        "zh-Hant": "小龍寶藏跳跳",
+        "en": "Hoard Hopper",
+        "fr": "Hoard Hopper"
+      },
+      "blurb": {
+        "zh-Hans": "小龙跳过四个洞穴，收集金币宝石、躲开岩浆和尖刺，飞回家堆起越来越大的宝藏。iPad 横着拿，有屏幕按钮。",
+        "zh-Hant": "小龍跳過四個洞穴，收集金幣寶石、躲開岩漿和尖刺，飛回家堆起越來越大的寶藏。iPad 橫著拿，有螢幕按鈕。",
+        "en": "A little dragon hops through four caves for coins and gems, dodging lava, then piles it all on its hoard. Hold the iPad sideways.",
+        "fr": "Un petit dragon traverse quatre grottes pour des pièces et des gemmes, évite la lave et agrandit son trésor. iPad en paysage."
+      },
+      "credit": {
+        "author": "zeveck",
+        "made": "Claude Opus 5.5",
+        "license": "MIT",
+        "repo": "https://github.com/zeveck/hoardhopper"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#c0392b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐉</text></svg>",
+      "url": "community/play.html?g=hoard-hopper",
+      "entry": "hoard-hopper/index.html"
+    },
+    {
+      "id": "cozy-bakery",
+      "category": "community",
+      "input": "both",
+      "latest": "",
+      "color": "#f6b26b",
+      "name": {
+        "zh-Hans": "温馨面包坊",
+        "zh-Hant": "溫馨麵包坊",
+        "en": "Cozy Bakery",
+        "fr": "Cozy Bakery"
+      },
+      "blurb": {
+        "zh-Hans": "像《胡闹厨房》的合作做饭游戏：在里斯本的十三个厨房做葡式蛋挞，最多四人一起玩，支持触屏和手柄。",
+        "zh-Hant": "像《胡鬧廚房》的合作做飯遊戲：在里斯本的十三個廚房做葡式蛋撻，最多四人一起玩，支援觸控和手把。",
+        "en": "Overcooked-style co-op cooking across 13 Lisbon kitchens, 1–4 players, touch or controllers.",
+        "fr": "Cuisine en coop façon Overcooked dans 13 cuisines de Lisbonne, 1 à 4 joueurs, tactile ou manettes."
+      },
+      "credit": {
+        "author": "goncalo_canhoto",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f6b26b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🥐</text></svg>",
+      "url": "community/play.html?g=cozy-bakery",
+      "external": "https://cozybakery.vercel.app/"
+    },
+    {
+      "id": "cozy-lisbon",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#ffd23f",
+      "name": {
+        "zh-Hans": "悠闲里斯本飞行",
+        "zh-Hant": "悠閒里斯本飛行",
+        "en": "Cozy Lisbon",
+        "fr": "Cozy Lisbon"
+      },
+      "blurb": {
+        "zh-Hans": "开着小黄飞机在手绘的里斯本上空飞，钻桥洞、收集明信片和蛋挞。不会坠毁，也没有时间限制。拖动就能飞。",
+        "zh-Hant": "開著小黃飛機在手繪的里斯本上空飛，鑽橋洞、收集明信片和蛋撻。不會墜毀，也沒有時間限制。拖動就能飛。",
+        "en": "Fly a little yellow plane over ink-drawn Lisbon, collecting postcards. No timer and no crashing; drag to fly.",
+        "fr": "Pilote un petit avion jaune au-dessus de Lisbonne dessinée à l’encre. Pas de chrono, pas de crash."
+      },
+      "credit": {
+        "author": "goncalo_canhoto",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffd23f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>✈️</text></svg>",
+      "url": "community/play.html?g=cozy-lisbon",
+      "external": "https://cozylisbon.vercel.app/"
+    },
+    {
+      "id": "yardclash",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#3fae5a",
+      "name": {
+        "zh-Hans": "后院橄榄球大战",
+        "zh-Hant": "後院橄欖球大戰",
+        "en": "YARDCLASH",
+        "fr": "YARDCLASH"
+      },
+      "blurb": {
+        "zh-Hans": "卡通风格的 7 对 7 街头橄榄球：选战术、传球、晃过防守，单人对电脑，手机平板都能玩。",
+        "zh-Hant": "卡通風格的 7 對 7 街頭橄欖球：選戰術、傳球、晃過防守，單人對電腦，手機平板都能玩。",
+        "en": "Cartoon 7-v-7 street football: call a play, throw, juke the defense. Solo vs AI, works on tablets.",
+        "fr": "Football de rue 7 contre 7 en dessin animé : choisis l’action, passe, dribble. Solo contre l’IA."
+      },
+      "credit": {
+        "author": "AugustCastilIo",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3fae5a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏈</text></svg>",
+      "url": "community/play.html?g=yardclash",
+      "external": "https://yardclash.vercel.app/"
+    },
+    {
+      "id": "giant-leap",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#2c3e7a",
+      "name": {
+        "zh-Hans": "月球一大步",
+        "zh-Hant": "月球一大步",
+        "en": "Giant Leap",
+        "fr": "Giant Leap"
+      },
+      "blurb": {
+        "zh-Hans": "从月球跳回地球：左手走路，右手按住蓄力跳。很温柔的小游戏。",
+        "zh-Hant": "從月球跳回地球：左手走路，右手按住蓄力跳。很溫柔的小遊戲。",
+        "en": "Jump from the Moon to the Earth: left thumb walks, right thumb charges the leap.",
+        "fr": "Saute de la Lune jusqu’à la Terre : pouce gauche pour marcher, pouce droit pour bondir."
+      },
+      "credit": {
+        "author": "handsher_NGU",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#2c3e7a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌕</text></svg>",
+      "url": "community/play.html?g=giant-leap",
+      "external": "https://giant-leap.vercel.app/"
+    },
+    {
+      "id": "tilt-labyrinth",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#a9744f",
+      "name": {
+        "zh-Hans": "木头迷宫滚珠",
+        "zh-Hant": "木頭迷宮滾珠",
+        "en": "Tilt Labyrinth",
+        "fr": "Labyrinthe à bille"
+      },
+      "blurb": {
+        "zh-Hans": "倾斜木板让钢珠绕过洞口滚到终点，三关计时。在屏幕上按住拖动就能倾斜。",
+        "zh-Hant": "傾斜木板讓鋼珠繞過洞口滾到終點，三關計時。在螢幕上按住拖動就能傾斜。",
+        "en": "Tilt the wooden board to roll a steel ball past the holes. Three timed levels; drag to tilt.",
+        "fr": "Incline le plateau pour guider la bille entre les trous. Trois niveaux chronométrés."
+      },
+      "credit": {
+        "author": "mylifcc",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#a9744f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🟤</text></svg>",
+      "url": "community/play.html?g=tilt-labyrinth",
+      "external": "https://blog.silencestar.com/posts/tilt-labyrinth/play/"
+    },
+    {
+      "id": "tree-appreciator",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#7cb342",
+      "name": {
+        "zh-Hans": "找不同的两棵树",
+        "zh-Hant": "找不同的兩棵樹",
+        "en": "Tree Appreciator",
+        "fr": "Tree Appreciator"
+      },
+      "blurb": {
+        "zh-Hans": "同一颗种子长出两棵树，只有几处不一样。转一转、放大看，点出不同的地方，收进标本册。",
+        "zh-Hant": "同一顆種子長出兩棵樹，只有幾處不一樣。轉一轉、放大看，點出不同的地方，收進標本冊。",
+        "en": "Two trees grow from the same seed with a few differences. Turn, zoom and tap the differences.",
+        "fr": "Deux arbres poussent de la même graine avec quelques différences : trouve-les."
+      },
+      "credit": {
+        "author": "Simon Willison",
+        "made": "Claude Opus 5.5"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#7cb342'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌳</text></svg>",
+      "url": "community/play.html?g=tree-appreciator",
+      "external": "https://tools.simonwillison.net/tree-appreciator"
+    },
+    {
+      "id": "yarn-planet",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#e8505b",
+      "name": {
+        "zh-Hans": "毛线星球",
+        "zh-Hant": "毛線星球",
+        "en": "Yarn Planet",
+        "fr": "La planète de laine"
+      },
+      "blurb": {
+        "zh-Hans": "背着大线轴在铅笔画的小星球上散步，走过的路变成彩线；接通电和水，颜色就像水彩一样晕开。有简体、繁体和英文。",
+        "zh-Hant": "背著大線軸在鉛筆畫的小星球上散步，走過的路變成彩線；接通電和水，顏色就像水彩一樣暈開。有簡體、繁體和英文。",
+        "en": "Carry a spool across a pencil-sketch planet; your path becomes a thread, and color floods back as you connect things.",
+        "fr": "Porte une bobine sur une planète crayonnée : ton chemin devient un fil et les couleurs reviennent."
+      },
+      "credit": {
+        "author": "Maker Jackie",
+        "made": "Claude Opus 5.5",
+        "license": "MIT",
+        "repo": "https://github.com/makerjackie/yarn-planet"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#e8505b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🧶</text></svg>",
+      "url": "community/play.html?g=yarn-planet",
+      "external": "https://yarn.ynot.games/"
+    },
+    {
+      "id": "little-flock",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#9ccc65",
+      "name": {
+        "zh-Hans": "小羊慢慢",
+        "zh-Hant": "小羊慢慢",
+        "en": "Little Flock",
+        "fr": "Little Flock"
+      },
+      "blurb": {
+        "zh-Hans": "温馨的 3D 牧羊游戏：养十二种小羊、种菜、盖房子，还能和朋友一起经营农场。界面是简体中文。",
+        "zh-Hant": "溫馨的 3D 牧羊遊戲：養十二種小羊、種菜、蓋房子，還能和朋友一起經營農場。介面是簡體中文。",
+        "en": "A cozy 3D sheep farm: raise twelve breeds, garden and build, alone or with friends. Interface in Simplified Chinese.",
+        "fr": "Ferme de moutons 3D douillette : douze races, jardin, construction. Interface en chinois simplifié."
+      },
+      "credit": {
+        "author": "songkeys",
+        "made": "GPT-6 Astra (Codex)",
+        "license": "MIT",
+        "repo": "https://github.com/songkeys/little-flock"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#9ccc65'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐑</text></svg>",
+      "url": "community/play.html?g=little-flock",
+      "external": "https://sharpherd.song.work/"
+    },
+    {
+      "id": "driftwing",
+      "category": "community",
+      "input": "both",
+      "latest": "",
+      "color": "#5aa9e6",
+      "name": {
+        "zh-Hans": "御风滑翔",
+        "zh-Hant": "御風滑翔",
+        "en": "DRIFTWING",
+        "fr": "DRIFTWING"
+      },
+      "blurb": {
+        "zh-Hans": "没有终点的悠闲飞行，在云海和山谷间滑翔。触屏、手柄都能玩。",
+        "zh-Hant": "沒有終點的悠閒飛行，在雲海和山谷間滑翔。觸控、手把都能玩。",
+        "en": "An ambient, endless flight through clouds and valleys. Touch or controller.",
+        "fr": "Un vol paisible et sans fin entre nuages et vallées. Tactile ou manette."
+      },
+      "credit": {
+        "author": "KyleBuildsAI",
+        "made": "Claude Opus 5.5"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#5aa9e6'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🪽</text></svg>",
+      "url": "community/play.html?g=driftwing",
+      "external": "https://kylebuildsai.github.io/driftwing/"
+    },
+    {
+      "id": "fall-line",
+      "category": "community",
+      "input": "both",
+      "latest": "",
+      "color": "#8ecae6",
+      "name": {
+        "zh-Hans": "自由滑雪山",
+        "zh-Hant": "自由滑雪山",
+        "en": "Fall Line",
+        "fr": "Fall Line"
+      },
+      "blurb": {
+        "zh-Hans": "在雪山上自由滑雪下山，Claude 一个晚上独自做完的作品。触屏、手柄都能玩。",
+        "zh-Hant": "在雪山上自由滑雪下山，Claude 一個晚上獨自做完的作品。觸控、手把都能玩。",
+        "en": "Freeride down a snowy mountain, built by Claude alone in one night. Touch or controller.",
+        "fr": "Descente freeride sur une montagne enneigée, faite par Claude seul en une nuit."
+      },
+      "credit": {
+        "author": "Nipale-ai",
+        "made": "Claude Opus 5.5"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8ecae6'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏂</text></svg>",
+      "url": "community/play.html?g=fall-line",
+      "external": "https://nipale-ai.github.io/opus-5-5-overnight-builds/fall-line/"
+    },
+    {
+      "id": "palmera-bay",
+      "category": "community",
+      "input": "both",
+      "latest": "",
+      "color": "#f28c38",
+      "name": {
+        "zh-Hans": "棕榈湾兜风",
+        "zh-Hant": "棕櫚灣兜風",
+        "en": "Palmera Bay",
+        "fr": "Palmera Bay"
+      },
+      "blurb": {
+        "zh-Hans": "开着敞篷车在夕阳下的热带海滨城市兜风，没有对手、没有目标。平板上有屏幕按钮，也支持手柄。",
+        "zh-Hant": "開著敞篷車在夕陽下的熱帶海濱城市兜風，沒有對手、沒有目標。平板上有螢幕按鈕，也支援手把。",
+        "en": "Cruise a tropical coastal city at sunset in a convertible. No rivals, no goals. On-screen buttons or controller.",
+        "fr": "Balade en cabriolet dans une ville côtière au coucher du soleil, sans rival ni but."
+      },
+      "credit": {
+        "author": "vcahlik",
+        "made": "Claude Opus 5.5"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f28c38'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🚗</text></svg>",
+      "url": "community/play.html?g=palmera-bay",
+      "external": "https://cahlik.net/palmera-bay/"
+    },
+    {
+      "id": "three-cats",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#b388ff",
+      "name": {
+        "zh-Hans": "三只猫解谜",
+        "zh-Hant": "三隻貓解謎",
+        "en": "Moe, Joe & Mr Mews",
+        "fr": "Moe, Joe & Mr Mews"
+      },
+      "blurb": {
+        "zh-Hans": "斜视角解谜：轮流操控三只猫，叠猫塔、用各自的本领走完家里八个房间。平板上有屏幕按钮。",
+        "zh-Hant": "斜視角解謎：輪流操控三隻貓，疊貓塔、用各自的本領走完家裡八個房間。平板上有螢幕按鈕。",
+        "en": "Isometric puzzles for three cats: stack a cat tower and use each cat’s knack through eight rooms.",
+        "fr": "Puzzles isométriques avec trois chats : empile-les et utilise leurs talents dans huit pièces."
+      },
+      "credit": {
+        "author": "lambsubstitute",
+        "made": "Claude Opus 5.5"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#b388ff'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐈</text></svg>",
+      "url": "community/play.html?g=three-cats",
+      "external": "https://lambsubstitute.github.io/three-cats/"
+    },
+    {
+      "id": "fishslop",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#1f8a9e",
+      "name": {
+        "zh-Hans": "深海喂鱼潜艇",
+        "zh-Hant": "深海餵魚潛艇",
+        "en": "Fishslop",
+        "fr": "Fishslop"
+      },
+      "blurb": {
+        "zh-Hans": "开小潜艇在海底遗迹里喂鱼、收金币、养珊瑚，用声呐找神秘的隐形鱼。平板上有虚拟摇杆。",
+        "zh-Hant": "開小潛艇在海底遺跡裡餵魚、收金幣、養珊瑚，用聲吶找神秘的隱形魚。平板上有虛擬搖桿。",
+        "en": "Pilot a little sub through a sunken ruin: feed fish, collect coins, grow the reef, find the hidden Veilfin.",
+        "fr": "Pilote un sous-marin : nourris les poissons, ramasse les pièces, fais pousser le récif."
+      },
+      "credit": {
+        "author": "vasu-devs",
+        "made": "Claude Opus 5.5"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#1f8a9e'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐠</text></svg>",
+      "url": "community/play.html?g=fishslop",
+      "external": "https://vasu-devs.github.io/FishSlop_Opus5.5/"
+    },
+    {
+      "id": "solitaire",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#2e7d32",
+      "name": {
+        "zh-Hans": "纸牌接龙",
+        "zh-Hant": "紙牌接龍",
+        "en": "Solitaire",
+        "fr": "Solitaire"
+      },
+      "blurb": {
+        "zh-Hans": "经典纸牌接龙，点和拖都可以。",
+        "zh-Hant": "經典紙牌接龍，點和拖都可以。",
+        "en": "Classic solitaire; tap or drag the cards.",
+        "fr": "Le solitaire classique : touche ou fais glisser les cartes."
+      },
+      "credit": {
+        "author": "venkatarangan",
+        "made": "GPT-6 Astra"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#2e7d32'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🃏</text></svg>",
+      "url": "community/play.html?g=solitaire",
+      "external": "https://solitaire.mangoidiots.com/"
+    },
+    {
+      "id": "bubble-wrap",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#9ad0f5",
+      "name": {
+        "zh-Hans": "捏泡泡纸",
+        "zh-Hant": "捏泡泡紙",
+        "en": "Bubble Wrap Simulator",
+        "fr": "Papier bulle"
+      },
+      "blurb": {
+        "zh-Hans": "一张捏不完的 3D 泡泡纸，啪啪啪。",
+        "zh-Hant": "一張捏不完的 3D 泡泡紙，啪啪啪。",
+        "en": "Endless 3D bubble wrap to pop.",
+        "fr": "Du papier bulle 3D à éclater sans fin."
+      },
+      "credit": {
+        "author": "finktheartist",
+        "made": "GPT-6 Astra"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#9ad0f5'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🫧</text></svg>",
+      "url": "community/play.html?g=bubble-wrap",
+      "external": "https://bubble-wrap-simulator.vercel.app/"
+    },
+    {
+      "id": "rift-chess",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#6d4c41",
+      "name": {
+        "zh-Hans": "移地国际象棋",
+        "zh-Hant": "移地西洋棋",
+        "en": "Rift Chess",
+        "fr": "Rift Chess"
+      },
+      "blurb": {
+        "zh-Hans": "国际象棋的变体：每回合可以走棋，也可以把脚下的地块滑动。可以两人轮流玩，也可以对电脑。",
+        "zh-Hant": "西洋棋的變體：每回合可以走棋，也可以把腳下的地塊滑動。可以兩人輪流玩，也可以對電腦。",
+        "en": "A chess variant where you may move a piece or slide the ground beneath it. Hotseat or vs the bot.",
+        "fr": "Une variante d’échecs où l’on peut déplacer une pièce ou faire glisser le sol. À deux ou contre l’IA."
+      },
+      "credit": {
+        "author": "HaileyStorm",
+        "made": "GPT-6 Astra",
+        "license": "MIT",
+        "repo": "https://github.com/HaileyStorm/rift-chess"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#6d4c41'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>♟️</text></svg>",
+      "url": "community/play.html?g=rift-chess",
+      "external": "https://haileystorm.github.io/rift-chess/"
+    },
+    {
+      "id": "thunder-valley",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#e0a030",
+      "name": {
+        "zh-Hans": "雷霆谷恐龙追逐",
+        "zh-Hant": "雷霆谷恐龍追逐",
+        "en": "Thunder Valley",
+        "fr": "Thunder Valley"
+      },
+      "blurb": {
+        "zh-Hans": "像素切片堆出来的 3D 山谷里，被恐龙追着跑。",
+        "zh-Hant": "像素切片堆出來的 3D 山谷裡，被恐龍追著跑。",
+        "en": "Run from dinosaurs through a valley built from stacked pixel slices.",
+        "fr": "Fuis les dinosaures dans une vallée faite de tranches de pixels."
+      },
+      "credit": {
+        "author": "loktar00",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#e0a030'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🦖</text></svg>",
+      "url": "community/play.html?g=thunder-valley",
+      "external": "https://loktar00.github.io/llm-test-pages/fable52-dino-chase/"
+    },
+    {
+      "id": "lanternfall",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#ffb300",
+      "name": {
+        "zh-Hans": "灯笼守卫",
+        "zh-Hant": "燈籠守衛",
+        "en": "LANTERNFALL",
+        "fr": "LANTERNFALL"
+      },
+      "blurb": {
+        "zh-Hans": "自动战斗的小游戏：英雄们守着灯笼阵线挡住从黑暗里来的怪物，你负责选队伍、升级、在关键时刻放照明弹。",
+        "zh-Hant": "自動戰鬥的小遊戲：英雄們守著燈籠陣線擋住從黑暗裡來的怪物，你負責選隊伍、升級、在關鍵時刻放照明彈。",
+        "en": "An idle battler: heroes hold a lantern line against monsters; you pick the party, upgrade and fire flares.",
+        "fr": "Combat automatique : des héros tiennent la ligne des lanternes ; choisis l’équipe et lance des fusées."
+      },
+      "credit": {
+        "author": "loktar00",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffb300'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏮</text></svg>",
+      "url": "community/play.html?g=lanternfall",
+      "external": "https://loktar00.github.io/lanternfall/"
+    },
+    {
+      "id": "opus-100",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#455a64",
+      "name": {
+        "zh-Hans": "Opus 的 121 个小作品",
+        "zh-Hant": "Opus 的 121 個小作品",
+        "en": "121 Opus projects",
+        "fr": "121 projets Opus"
+      },
+      "blurb": {
+        "zh-Hans": "Claude 一次做出的 121 个互动小作品合集：魔方、雪花球、肥皂泡、重力高尔夫……界面是俄语，大部分点点看就会玩。",
+        "zh-Hant": "Claude 一次做出的 121 個互動小作品合集：魔術方塊、雪花球、肥皂泡、重力高爾夫……介面是俄語，大部分點點看就會玩。",
+        "en": "121 interactive pieces Claude built in one run: Rubik’s cube, snow globe, soap bubbles, gravity golf… Russian interface.",
+        "fr": "121 créations interactives faites par Claude : Rubik’s cube, boule à neige, bulles… Interface en russe."
+      },
+      "credit": {
+        "author": "swan4er",
+        "made": "Claude Opus 5.5"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#455a64'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🧪</text></svg>",
+      "url": "community/play.html?g=opus-100",
+      "external": "https://swan4er.github.io/opus-100-projects/"
+    },
+    {
+      "id": "cayley",
+      "category": "community",
+      "input": "controller",
+      "latest": "",
+      "color": "#4a6fa5",
+      "name": {
+        "zh-Hans": "Cayley 飞行模拟",
+        "zh-Hant": "Cayley 飛行模擬",
+        "en": "Cayley flight simulator",
+        "fr": "Simulateur Cayley"
+      },
+      "blurb": {
+        "zh-Hans": "真实物理的飞行模拟：九种飞机，在地球任何地方起飞，天气是实时的。键盘或手柄/摇杆。",
+        "zh-Hant": "真實物理的飛行模擬：九種飛機，在地球任何地方起飛，天氣是即時的。鍵盤或手把/搖桿。",
+        "en": "A real-physics flight sim: nine aircraft, anywhere on Earth, live weather. Keyboard or gamepad/joystick.",
+        "fr": "Simulateur de vol réaliste : neuf avions, partout sur Terre, météo réelle. Clavier ou manette."
+      },
+      "credit": {
+        "author": "lionel_mora",
+        "made": "Claude Fable 5.2",
+        "license": "MIT",
+        "repo": "https://github.com/lauramionel/cayley-flight-simulator"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#4a6fa5'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🛩️</text></svg>",
+      "url": "community/play.html?g=cayley",
+      "external": "https://lauramionel.github.io/cayley-flight-simulator/"
+    },
+    {
+      "id": "starry-nightrider",
+      "category": "community",
+      "input": "keyboard",
+      "latest": "",
+      "color": "#1e3a8a",
+      "name": {
+        "zh-Hans": "星夜骑行",
+        "zh-Hant": "星夜騎行",
+        "en": "Starry Nightrider",
+        "fr": "Starry Nightrider"
+      },
+      "blurb": {
+        "zh-Hans": "骑自行车穿过梵高《星夜》里的小镇，收集光球、做空中特技。X 上最火的 AI 游戏之一（1.5 万赞）。",
+        "zh-Hant": "騎腳踏車穿過梵谷《星夜》裡的小鎮，收集光球、做空中特技。X 上最火的 AI 遊戲之一（1.5 萬讚）。",
+        "en": "Ride a bike through Van Gogh’s Starry Night, collect orbs and do air tricks. One of the most-liked AI games on X.",
+        "fr": "À vélo dans La Nuit étoilée de Van Gogh : ramasse des orbes et fais des figures."
+      },
+      "credit": {
+        "author": "ebbyamir",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#1e3a8a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌌</text></svg>",
+      "url": "community/play.html?g=starry-nightrider",
+      "external": "https://starrynightrider.com/"
+    },
+    {
+      "id": "what-the-water-keeps",
+      "category": "community",
+      "input": "keyboard",
+      "latest": "",
+      "color": "#264653",
+      "name": {
+        "zh-Hans": "水所留下的",
+        "zh-Hant": "水所留下的",
+        "en": "What the Water Keeps",
+        "fr": "Ce que garde l’eau"
+      },
+      "blurb": {
+        "zh-Hans": "乘小船穿过八个梦一样的世界，可以自己划，也可以让水流带着走。",
+        "zh-Hant": "乘小船穿過八個夢一樣的世界，可以自己划，也可以讓水流帶著走。",
+        "en": "A small boat drifts through eight dreamlike worlds; steer or let the current carry you.",
+        "fr": "Un petit bateau traverse huit mondes de rêve ; dirige-le ou laisse le courant faire."
+      },
+      "credit": {
+        "author": "kevin_t_ngo",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#264653'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>⛵</text></svg>",
+      "url": "community/play.html?g=what-the-water-keeps",
+      "external": "https://what-the-water-keeps.vercel.app/"
+    },
+    {
+      "id": "waking-river",
+      "category": "community",
+      "input": "keyboard",
+      "latest": "",
+      "color": "#43aa8b",
+      "name": {
+        "zh-Hans": "苏醒之河",
+        "zh-Hant": "甦醒之河",
+        "en": "The Waking River",
+        "fr": "La rivière qui s’éveille"
+      },
+      "blurb": {
+        "zh-Hans": "坐着一片叶子顺流而下，经过的沉睡世界一个个醒来。",
+        "zh-Hant": "坐著一片葉子順流而下，經過的沉睡世界一個個醒來。",
+        "en": "Sail a leaf boat downriver and wake four sleeping worlds as you pass.",
+        "fr": "Descends la rivière sur une feuille et réveille quatre mondes endormis."
+      },
+      "credit": {
+        "author": "flxrnc",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#43aa8b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🍃</text></svg>",
+      "url": "community/play.html?g=waking-river",
+      "external": "https://rivergame-kappa.vercel.app/"
+    },
+    {
+      "id": "turbo-tails",
+      "category": "community",
+      "input": "keyboard",
+      "latest": "",
+      "color": "#f4a261",
+      "name": {
+        "zh-Hans": "毛尾巴卡丁车",
+        "zh-Hant": "毛尾巴卡丁車",
+        "en": "Turbo Tails",
+        "fr": "Turbo Tails"
+      },
+      "blurb": {
+        "zh-Hans": "四条赛道的动物卡丁车：金币、漂移、跳台特技和道具。",
+        "zh-Hant": "四條賽道的動物卡丁車：金幣、甩尾、跳台特技和道具。",
+        "en": "Animal kart racing on four tracks: coins, drifts, ramp tricks and items.",
+        "fr": "Kart d’animaux sur quatre circuits : pièces, dérapages, sauts et objets."
+      },
+      "credit": {
+        "author": "petergyang",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f4a261'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🦊</text></svg>",
+      "url": "community/play.html?g=turbo-tails",
+      "external": "https://turbo-tails.vercel.app/"
+    },
+    {
+      "id": "capybara-delivery",
+      "category": "community",
+      "input": "keyboard",
+      "latest": "",
+      "color": "#c68b59",
+      "name": {
+        "zh-Hans": "水豚送外卖",
+        "zh-Hant": "水豚送外賣",
+        "en": "A Game About Capybaras Delivering Food",
+        "fr": "Les capybaras livreurs"
+      },
+      "blurb": {
+        "zh-Hans": "骑小摩托在水豚城市里送水果，水果会叠成摇摇晃晃的高塔。2026 Vibe Jam 冠军（Claude Code 制作）。",
+        "zh-Hant": "騎小摩托在水豚城市裡送水果，水果會疊成搖搖晃晃的高塔。2026 Vibe Jam 冠軍（Claude Code 製作）。",
+        "en": "Deliver fruit by scooter around a capybara city while the stack wobbles. Vibe Jam 2026 winner.",
+        "fr": "Livre des fruits en scooter dans une ville de capybaras. Gagnant du Vibe Jam 2026."
+      },
+      "credit": {
+        "author": "leocoout",
+        "made": "Claude Code"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#c68b59'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🛵</text></svg>",
+      "url": "community/play.html?g=capybara-delivery",
+      "external": "https://capybara-vibejam26.leocoout.dev/"
+    },
+    {
+      "id": "bwca-canoe",
+      "category": "community",
+      "input": "keyboard",
+      "latest": "",
+      "color": "#2a9d8f",
+      "name": {
+        "zh-Hans": "荒野划独木舟",
+        "zh-Hant": "荒野划獨木舟",
+        "en": "BWCA Canoe",
+        "fr": "Canoë BWCA"
+      },
+      "blurb": {
+        "zh-Hans": "在美国边界水域荒野的真实地形上安静地划独木舟，整片湖区随着你划过去慢慢加载。要键盘鼠标。",
+        "zh-Hant": "在美國邊界水域荒野的真實地形上安靜地划獨木舟，整片湖區隨著你划過去慢慢載入。要鍵盤滑鼠。",
+        "en": "Quiet canoeing on the real terrain of the Boundary Waters wilderness, streamed as you paddle.",
+        "fr": "Canoë paisible sur le vrai terrain des Boundary Waters, chargé au fil de la pagaie."
+      },
+      "credit": {
+        "author": "Gkrumbach07",
+        "made": "Claude Opus 5.5"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#2a9d8f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🛶</text></svg>",
+      "url": "community/play.html?g=bwca-canoe",
+      "external": "https://gkrumbach07.github.io/bwca-canoe/"
+    },
+    {
+      "id": "oil-paint",
+      "category": "community",
+      "input": "controller",
+      "latest": "",
+      "color": "#c97b4a",
+      "name": {
+        "zh-Hans": "油画世界漫步",
+        "zh-Hant": "油畫世界漫步",
+        "en": "Oil Paint",
+        "fr": "Oil Paint"
+      },
+      "blurb": {
+        "zh-Hans": "每一帧都是约 150 万笔油画笔触的 3D 世界：极光雪岭和秋天树林里散步。键盘鼠标或手柄。",
+        "zh-Hant": "每一幀都是約 150 萬筆油畫筆觸的 3D 世界：極光雪嶺和秋天樹林裡散步。鍵盤滑鼠或手把。",
+        "en": "Walk an aurora ridge and an autumn wood painted with ~1.5 million brush strokes per frame. Keyboard/mouse or controller.",
+        "fr": "Promène-toi dans un monde peint à environ 1,5 million de coups de pinceau par image."
+      },
+      "credit": {
+        "author": "BlendiByl",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#c97b4a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🎨</text></svg>",
+      "url": "https://patch.gg/blendi/oil-paint",
+      "link": true
+    },
+    {
+      "id": "patchwork-quilt",
+      "category": "community",
+      "input": "keyboard",
+      "latest": "",
+      "color": "#d4a5a5",
+      "name": {
+        "zh-Hans": "拼布被世界",
+        "zh-Hant": "拼布被世界",
+        "en": "Patchwork Quilt",
+        "fr": "Patchwork Quilt"
+      },
+      "blurb": {
+        "zh-Hans": "定格动画风格的拼布小世界，整张地图都是代码画的。",
+        "zh-Hant": "定格動畫風格的拼布小世界，整張地圖都是程式畫的。",
+        "en": "A stop-motion patchwork world; the whole map is code.",
+        "fr": "Un monde en patchwork façon animation image par image."
+      },
+      "credit": {
+        "author": "BlendiByl",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#d4a5a5'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🧵</text></svg>",
+      "url": "https://patch.gg/blendi/patchwork-quilt",
+      "link": true
+    },
+    {
+      "id": "banana-mine-rush",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#f9d71c",
+      "name": {
+        "zh-Hans": "香蕉矿车冲冲冲",
+        "zh-Hant": "香蕉礦車衝衝衝",
+        "en": "Banana Mine Rush",
+        "fr": "Banana Mine Rush"
+      },
+      "blurb": {
+        "zh-Hans": "坐矿车冲过废弃的香蕉矿：选岔道、跳断轨、低头躲横梁，比小猩猩们先到金桶。",
+        "zh-Hant": "坐礦車衝過廢棄的香蕉礦：選岔道、跳斷軌、低頭躲橫樑，比小猩猩們先到金桶。",
+        "en": "Race a mine cart through the Banana Mine: pick forks, jump gaps, duck beams, beat the apes.",
+        "fr": "Course de wagonnet dans la mine de bananes : aiguillages, sauts et esquives."
+      },
+      "credit": {
+        "author": "0xChuckstock",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f9d71c'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🍌</text></svg>",
+      "url": "https://remix.gg/g/banana-mine-rush",
+      "link": true
+    },
+    {
+      "id": "hoppy-meadow",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#8bc34a",
+      "name": {
+        "zh-Hans": "蹦蹦草地",
+        "zh-Hant": "蹦蹦草地",
+        "en": "Hoppy Meadow",
+        "fr": "Hoppy Meadow"
+      },
+      "blurb": {
+        "zh-Hans": "看起来是普通的跳跃小游戏，跳到旗杆就知道不普通了。",
+        "zh-Hant": "看起來是普通的跳躍小遊戲，跳到旗桿就知道不普通了。",
+        "en": "Looks like a simple platformer until you reach the flagpole.",
+        "fr": "Un petit jeu de plateforme… jusqu’au drapeau."
+      },
+      "credit": {
+        "author": "0xChuckstock",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8bc34a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐰</text></svg>",
+      "url": "https://remix.gg/g/hoppy-meadow",
+      "link": true
+    },
+    {
+      "id": "brix-84",
+      "category": "community",
+      "input": "touch",
+      "latest": "",
+      "color": "#ff4081",
+      "name": {
+        "zh-Hans": "BRIX ’84 打砖块",
+        "zh-Hant": "BRIX ’84 打磚塊",
+        "en": "BRIX ’84",
+        "fr": "BRIX ’84"
+      },
+      "blurb": {
+        "zh-Hans": "复古打砖块，拿到第二个道具以后就开始疯狂。",
+        "zh-Hant": "復古打磚塊，拿到第二個道具以後就開始瘋狂。",
+        "en": "A retro block breaker that goes wild after the second power-up.",
+        "fr": "Un casse-briques rétro qui s’emballe au deuxième bonus."
+      },
+      "credit": {
+        "author": "0xChuckstock",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ff4081'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🧱</text></svg>",
+      "url": "https://remix.gg/g/brix-84",
+      "link": true
+    },
+    {
+      "id": "stray-cat",
+      "category": "community",
+      "input": "keyboard",
+      "latest": "",
+      "color": "#795548",
+      "name": {
+        "zh-Hans": "流浪猫",
+        "zh-Hant": "流浪貓",
+        "en": "Stray Cat",
+        "fr": "Chat errant"
+      },
+      "blurb": {
+        "zh-Hans": "当一只流浪猫：救小猫、对狗哈气、对老公猫喵喵叫。所有声音都是合成的。（claude.ai 作品）",
+        "zh-Hant": "當一隻流浪貓：救小貓、對狗哈氣、對老公貓喵喵叫。所有聲音都是合成的。（claude.ai 作品）",
+        "en": "Be a stray cat: rescue kittens, hiss at dogs, yowl at an old tomcat. (claude.ai artifact)",
+        "fr": "Sois un chat errant : sauve des chatons, crache sur les chiens. (artefact claude.ai)"
+      },
+      "credit": {
+        "author": "aimikoda",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#795548'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐱</text></svg>",
+      "url": "https://claude.ai/artifact/4nPXUKJjQWNsZEHVNmXXCt",
+      "link": true
+    },
+    {
+      "id": "midnight-pass",
+      "category": "community",
+      "input": "keyboard",
+      "latest": "",
+      "color": "#37474f",
+      "name": {
+        "zh-Hans": "午夜山道",
+        "zh-Hant": "午夜山道",
+        "en": "Midnight Pass",
+        "fr": "Midnight Pass"
+      },
+      "blurb": {
+        "zh-Hans": "一个 HTML 文件、603 行、零素材：真实漂移物理，在生成的山道上开夜车。（claude.ai 作品）",
+        "zh-Hant": "一個 HTML 檔、603 行、零素材：真實甩尾物理，在生成的山道上開夜車。（claude.ai 作品）",
+        "en": "One HTML file, 603 lines, zero assets: drift physics on a generated mountain road. (claude.ai artifact)",
+        "fr": "Un seul fichier HTML : dérapages sur une route de montagne générée. (artefact claude.ai)"
+      },
+      "credit": {
+        "author": "andreysuperior",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#37474f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌙</text></svg>",
+      "url": "https://claude.ai/artifact/UD9pGEN4QFA8F5EadRw8eL",
+      "link": true
+    },
+    {
+      "id": "roost",
+      "category": "community",
+      "input": "keyboard",
+      "latest": "",
+      "color": "#8d6e63",
+      "name": {
+        "zh-Hans": "越野摩托 Roost",
+        "zh-Hant": "越野摩托 Roost",
+        "en": "Roost",
+        "fr": "Roost"
+      },
+      "blurb": {
+        "zh-Hans": "3D 越野摩托赛：三条赛道、电脑对手和氮气加速。（claude.ai 作品）",
+        "zh-Hant": "3D 越野摩托賽：三條賽道、電腦對手和氮氣加速。（claude.ai 作品）",
+        "en": "3D dirt-bike racing: three tracks, AI rivals and nitro. (claude.ai artifact)",
+        "fr": "Moto-cross 3D : trois circuits, rivaux IA et nitro. (artefact claude.ai)"
+      },
+      "credit": {
+        "author": "tejas3732",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8d6e63'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏍️</text></svg>",
+      "url": "https://claude.ai/artifact/DLnFodkTwvawCNwurDmSZK?sk=5N6PtC07f1niB7h3I6clZQ",
+      "link": true
+    },
+    {
+      "id": "kart-adventure",
+      "category": "community",
+      "input": "keyboard",
+      "latest": "",
+      "color": "#00897b",
+      "name": {
+        "zh-Hans": "卡丁车开放世界冒险",
+        "zh-Hant": "卡丁車開放世界冒險",
+        "en": "Open-world kart adventure",
+        "fr": "Aventure en kart"
+      },
+      "blurb": {
+        "zh-Hans": "开着卡丁车在开放世界里冒险，主线大约半小时。（claude.ai 作品）",
+        "zh-Hant": "開著卡丁車在開放世界裡冒險，主線大約半小時。（claude.ai 作品）",
+        "en": "An open-world kart adventure with a half-hour main quest. (claude.ai artifact)",
+        "fr": "Une aventure en kart en monde ouvert, quête principale d’une demi-heure. (artefact claude.ai)"
+      },
+      "credit": {
+        "author": "realWeZZard",
+        "made": "Claude Fable 5.2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#00897b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🗺️</text></svg>",
+      "url": "https://claude.ai/artifact/FpdQ81sJs1KiV1a6JCY4jj",
+      "link": true
     }
   ]
 }

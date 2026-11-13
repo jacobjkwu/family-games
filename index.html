@@ -78,6 +78,9 @@ body.show-focus .nav.focused {
 .tag { padding: 0.15em 0.6em; border-radius: 0.6em; font-weight: 700; }
 .tag.touch { background: #4a3a10; color: #ffe08a; }
 .tag.controller { background: #16422c; color: #b9f6ca; }
+.tag.both { background: #1d3b5c; color: #bfe0ff; }
+.tag.keyboard { background: #3a2f4f; color: #e2d4ff; }
+.sub { margin: 0.3em 0 0; font-size: 1em; font-weight: 700; color: var(--dim); }
 .credit { color: var(--dim); overflow-wrap: anywhere; }
 
 /* ===== Messages & hints ===== */
@@ -131,6 +134,7 @@ const CFG = {
 const LANGS = [['en', 'English'], ['fr', 'Français'], ['zh-Hans', '简体中文'], ['zh-Hant', '繁體中文']];
 const STR = {
   'zh-Hans': {
+    both: '👆🎮 触屏或手柄', keyboard: '⌨️ 需要键盘鼠标（电脑）', subTouch: '👆 iPad 触屏能玩', subPad: '🎮 手柄 + 电视', subKeyboard: '⌨️ 要用键盘鼠标（在电脑上玩）', ext: '🔗 外部网站',
     secFamily: '🏠 自己开发的游戏', secCommunity: '🌐 社区游戏', secCommunityNote: '别人用 AI 做的开源游戏', by: a => `作者 ${a}`, made: m => `用 ${m} 制作`,
     title: '🎮 游戏大厅', cont: n => `继续玩：${n}`, latest: '最新版本',
     touch: '👆 触屏优先（用 iPad 投屏）', controller: '🎮 手柄+电视',
@@ -141,6 +145,7 @@ const STR = {
     hintTouch: '点一张卡片就能打开游戏。', hintWake: '用手柄：先按一次 A 叫醒这个页面。',
   },
   'zh-Hant': {
+    both: '👆🎮 觸控或手把', keyboard: '⌨️ 需要鍵盤滑鼠（電腦）', subTouch: '👆 iPad 觸控能玩', subPad: '🎮 手把 + 電視', subKeyboard: '⌨️ 要用鍵盤滑鼠（在電腦上玩）', ext: '🔗 外部網站',
     secFamily: '🏠 自己開發的遊戲', secCommunity: '🌐 社群遊戲', secCommunityNote: '別人用 AI 做的開源遊戲', by: a => `作者 ${a}`, made: m => `用 ${m} 製作`,
     title: '🎮 遊戲大廳', cont: n => `繼續玩：${n}`, latest: '最新版本',
     touch: '👆 觸控優先（用 iPad 投影）', controller: '🎮 手把+電視',
@@ -151,6 +156,7 @@ const STR = {
     hintTouch: '點一張卡片就能打開遊戲。', hintWake: '用手把：先按一次 A 叫醒這個頁面。',
   },
   en: {
+    both: '👆🎮 Touch or controller', keyboard: '⌨️ Keyboard & mouse (computer)', subTouch: '👆 Plays on the iPad by touch', subPad: '🎮 Controller + TV', subKeyboard: '⌨️ Needs a keyboard & mouse (play on a computer)', ext: '🔗 external site',
     secFamily: '🏠 Our own games', secCommunity: '🌐 Community games', secCommunityNote: 'Open-source games other people made with AI', by: a => `by ${a}`, made: m => `made with ${m}`,
     title: '🎮 Game Hub', cont: n => `Continue: ${n}`, latest: 'Latest',
     touch: '👆 Touch-first (mirror the iPad)', controller: '🎮 Controller + TV',
@@ -161,6 +167,7 @@ const STR = {
     hintTouch: 'Tap a card to open a game.', hintWake: 'Controller: press A once to wake this page.',
   },
   fr: {
+    both: '👆🎮 Tactile ou manette', keyboard: '⌨️ Clavier et souris (ordinateur)', subTouch: '👆 Se joue au doigt sur l’iPad', subPad: '🎮 Manette + TV', subKeyboard: '⌨️ Clavier et souris (sur un ordinateur)', ext: '🔗 site externe',
     secFamily: '🏠 Nos propres jeux', secCommunity: '🌐 Jeux de la communauté', secCommunityNote: 'Jeux open source faits avec l’IA par d’autres', by: a => `par ${a}`, made: m => `fait avec ${m}`,
     title: '🎮 Salle de jeux', cont: n => `Continuer : ${n}`, latest: 'Dernière version',
     touch: '👆 Tactile : recopier l’iPad', controller: '🎮 Manette + TV',
@@ -210,7 +217,8 @@ function cleanGame(g) {
     id: g.id, url: url.href, latest: String(g.latest || ''),
     category: g.category === 'community' ? 'community' : 'family',
     credit: { author: String(c.author || ''), made: String(c.made || '') },
-    input: g.input === 'controller' ? 'controller' : 'touch',
+    input: ['controller', 'both', 'keyboard'].includes(g.input) ? g.input : 'touch',
+    ext: typeof g.external === 'string' || g.link === true,
     color: typeof g.color === 'string' ? g.color : '#888',
     name: g.name || { en: g.id }, blurb: g.blurb || {}, icon: typeof g.icon === 'string' ? g.icon : '',
   };
@@ -288,8 +296,16 @@ function render() {
       if (note) { const sm = document.createElement('small'); sm.textContent = note; h.appendChild(sm); }
       box.appendChild(h);
     }
-    const grid = document.createElement('div'); grid.className = 'grid'; box.appendChild(grid);
-    for (const g of list) grid.appendChild(card(g));
+    // community games are grouped by what they can be played with
+    const subs = cat === 'community'
+      ? [['subTouch', list.filter(g => g.input === 'touch' || g.input === 'both')], ['subPad', list.filter(g => g.input === 'controller')], ['subKeyboard', list.filter(g => g.input === 'keyboard')]]
+      : [[null, list]];
+    for (const [sub, items] of subs) {
+      if (!items.length) continue;
+      if (sub && many) { const h = document.createElement('h3'); h.className = 'sub'; h.textContent = tr(sub); box.appendChild(h); }
+      const grid = document.createElement('div'); grid.className = 'grid'; box.appendChild(grid);
+      for (const g of items) grid.appendChild(card(g));
+    }
   }
   renderHint();
   renderPads();
@@ -315,7 +331,7 @@ function card(g) {
   } else a.querySelector('.ver').remove();
   if (g.category === 'community') {
     const cr = document.createElement('div'); cr.className = 'credit';
-    cr.textContent = [g.credit.author && tr('by', g.credit.author), g.credit.made && tr('made', g.credit.made)].filter(Boolean).join(' · ');
+    cr.textContent = [g.credit.author && tr('by', g.credit.author), g.credit.made && tr('made', g.credit.made), g.ext && tr('ext')].filter(Boolean).join(' · ');
     a.insertBefore(cr, a.querySelector('.meta'));
   }
   const tag = a.querySelector('.tag');

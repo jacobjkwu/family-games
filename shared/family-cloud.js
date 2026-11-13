@@ -22,6 +22,8 @@ const GAMES = {
   'community-sudoku': { prefixes: ['community/sudoku/'], exact: [], name: {"en": "🌐 Sudoku", "fr": "🌐 Sudoku", "zh-Hans": "🌐 数独", "zh-Hant": "🌐 數獨"} },
   'community-kapadokya-balonu': { prefixes: ['community/kapadokya-balonu/'], exact: [], name: {"en": "🌐 Cappadocia Balloon", "fr": "🌐 Montgolfière de Cappadoce", "zh-Hans": "🌐 卡帕多奇亚热气球", "zh-Hant": "🌐 卡帕多奇亞熱氣球"} },
   'community-karagoz': { prefixes: ['community/karagoz/'], exact: [], name: {"en": "🌐 Karagöz Shadow Theatre", "fr": "🌐 Théâtre d’ombres Karagöz", "zh-Hans": "🌐 皮影戏光影谜题", "zh-Hant": "🌐 皮影戲光影謎題"} },
+  'community-kindle': { prefixes: ['community/kindle/'], exact: [], name: {"en": "🌐 KINDLE", "fr": "🌐 KINDLE", "zh-Hans": "🌐 点灯人 KINDLE", "zh-Hant": "🌐 點燈人 KINDLE"} },
+  'community-hoard-hopper': { prefixes: ['community/hoard-hopper/'], exact: [], name: {"en": "🌐 Hoard Hopper", "fr": "🌐 Hoard Hopper", "zh-Hans": "🌐 小龙宝藏跳跳", "zh-Hant": "🌐 小龍寶藏跳跳"} },
 };
 const STATE_KEY = 'family-cloud/state';
 const STR = {
