@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.15",
+      "file": "drawrassic-park-v3.15.html",
+      "date": "2026-11-12",
+      "schema": 7,
+      "switcher": true,
+      "notes": {
+        "en": "🌦️ Sky & powers: tap the sun/moon button for time of day, 6 kinds of weather (rain, thunderstorm, snow, wind, fog) and 6 disasters (earthquake, volcano, meteors, flood, tornado, ice age).",
+        "fr": "🌦️ Ciel et pouvoirs : touche le bouton soleil/lune pour l’heure, 6 météos (pluie, orage, neige, vent, brouillard) et 6 catastrophes (séisme, volcan, météores, inondation, tornade, ère glaciaire).",
+        "zh-Hans": "🌦️ 天空与神力：点太阳/月亮按钮，可以选时间、6 种天气（雨、雷雨、雪、大风、大雾）和 6 种灾难（地震、火山、流星雨、洪水、龙卷风、冰河时代）。",
+        "zh-Hant": "🌦️ 天空與神力：點太陽/月亮按鈕，可以選時間、6 種天氣（雨、雷雨、雪、大風、大霧）和 6 種災難（地震、火山、流星雨、洪水、龍捲風、冰河時代）。"
+      }
+    },
+    {
       "v": "3.14",
       "file": "drawrassic-park-v3.14.html",
       "date": "2026-11-12",

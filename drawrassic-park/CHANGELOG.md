@@ -1,5 +1,11 @@
 # Drawrassic Park — Changelog
 
+## v3.15 (2026-11-12) — save schema s7 (unchanged)
+- The ☀️/🌙 button now opens 🌦️ Sky & powers (it shows the current weather or disaster): time of day, weather and disasters.
+- Weather: sunny, rain (bushes regrow twice as fast), thunderstorm (lightning strikes stun dinos nearby), snow (dinos get hungry faster), wind, fog. Rain, storms and snow send visitors home. Optional 🔄 automatic weather changes (every 1.5–3 min, on by default).
+- Disasters: earthquake (shaking, cracks, stunned dinos), volcano (red sky, lava fountain, lava bombs and lava pools), meteor shower (12 meteors with warning circles), flood (water rises, dinos move up and slow down), tornado (lifts dinos and drops them, hurts shadow dinos), ice age (blizzard, everyone slowed). Dinos can be knocked out but never lost; the 🛡️ cheat in the number panel blocks the damage. Each disaster leaves a material gift. Optional ⚠️ random disasters (rare, off by default).
+- The automatic choices are stored in localStorage `drawrassic-park/weather/w1`; weather itself is not saved. Save format unchanged (s7).
+
 ## v3.14 (2026-11-12) — save schema s7 (new)
 - **Schema change s6 → s7:** adds hired rangers `rangers`; decorations can now be facilities, which v3.13 and older don't know (they would drop them), hence the new format. On first start v3.14 copies the s6 save to `save/s7`; s6 is untouched for v3.13. Launcher: Copy progress both ways (s7 → s6 drops rangers and facilities).
 - 🏗️ Facilities tab in the Shop (paid with coins, placed like decorations, half refund when removed): ice-cream cart and burger stand (visitors buy food: +coins), restrooms, bench, lookout tower, dino carousel (animated), dino clinic (heals dinos nearby, knocked-out dinos wake sooner), auto feeder (feeds hungry dinos nearby), lamp post (its light hurts shadow dinos at night), ranger hut (+2 ranger places).
