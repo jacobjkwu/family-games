@@ -2,24 +2,479 @@
 <html lang="zh-Hans">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>Family Games</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>游戏大厅 Game Hub</title>
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;min-height:100%;background:#2c5a34;color:#1d3b25;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","PingFang TC","Microsoft YaHei",system-ui,sans-serif;-webkit-user-select:none;user-select:none}
-main{max-width:760px;margin:0 auto;padding:32px 18px}
-h1{color:#fff8e1;font-size:34px;margin:0 0 20px}
-a.card{display:flex;gap:16px;align-items:center;background:#f3e6bf;border:4px solid #1d3b25;border-radius:22px;box-shadow:0 6px 0 rgba(0,0,0,.3);padding:18px;color:inherit;text-decoration:none;min-height:96px}
-a.card:active{transform:translateY(3px)}
-a.card:focus{outline:6px solid #f59e0b;outline-offset:4px}
-.icon{font-size:56px}.name{font-size:26px;font-weight:800}.blurb{font-size:17px;opacity:.85}
+/* ===== Base ===== */
+:root {
+  --fs: max(17px, 2.6vmin);           /* 28px at 1920x1080 */
+  --bg: #0f1428; --panel: #1c2344; --panel2: #262f5a; --ink: #f5f7ff; --dim: #b4bce0;
+  --focus: #ffd23f; --A: #3ddc84; --B: #ff5c5c; --X: #4da3ff; --Y: #ffd23f;
+}
+* { box-sizing: border-box; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); overscroll-behavior: none; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "PingFang TC", "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "Noto Sans CJK SC", "Noto Sans CJK TC", sans-serif;
+  font-size: var(--fs); line-height: 1.3; touch-action: pan-y; -webkit-text-size-adjust: 100%;
+  background: radial-gradient(ellipse at 50% -20%, #2a3570 0%, var(--bg) 60%) fixed;
+}
+#app {
+  min-height: 100vh; display: flex; flex-direction: column; gap: 0.9em;
+  /* 5% TV safe margin */
+  padding: max(5vh, env(safe-area-inset-top)) max(5vw, env(safe-area-inset-right)) max(5vh, env(safe-area-inset-bottom)) max(5vw, env(safe-area-inset-left));
+}
+button, a { font: inherit; color: inherit; touch-action: manipulation; }
+
+/* ===== Header ===== */
+header { display: flex; align-items: center; gap: 0.5em 0.8em; flex-wrap: wrap; }
+h1 { margin: 0; font-size: 1.7em; font-weight: 800; letter-spacing: 0.02em; white-space: nowrap; }
+.spacer { flex: 1; }
+.row { display: flex; gap: 0.35em; flex-wrap: wrap; align-items: center; }
+.btn {
+  min-height: 44px; min-width: 44px; padding: 0.3em 0.7em; border: 0; border-radius: 0.6em;
+  background: var(--panel2); cursor: pointer; white-space: nowrap;
+}
+.btn[aria-pressed="true"] { background: #4b5bd0; font-weight: 700; }
+#pads { color: var(--dim); white-space: nowrap; }
+
+/* ===== Focus (big, visible on TV) ===== */
+.nav { outline: none; transition: transform 0.12s, box-shadow 0.12s; }
+body.show-focus .nav.focused {
+  box-shadow: 0 0 0 0.2em var(--bg), 0 0 0 0.42em var(--focus), 0 0 1.4em 0.4em rgba(255, 210, 63, 0.45);
+  position: relative; z-index: 2;
+}
+
+/* ===== Continue ===== */
+#cont {
+  display: flex; align-items: center; gap: 0.6em; width: 100%; text-decoration: none;
+  min-height: 2.8em; padding: 0.45em 0.9em; border-radius: 0.8em;
+  background: linear-gradient(135deg, #2f8f46, #1d6b34); font-size: 1.3em; font-weight: 800;
+}
+#cont[hidden] { display: none; }
+#cont .ic { flex: 0 0 1.9em; height: 1.9em; }
+#cont .tx { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+#cont .play { font-size: 1.3em; }
+
+/* ===== Cards ===== */
+#games { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15em), 1fr)); gap: 0.9em; }
+.card {
+  display: flex; flex-direction: column; gap: 0.45em; padding: 0.9em 1em 1em; text-decoration: none;
+  background: var(--panel); border-radius: 1em; border-top: 0.32em solid var(--c, #888); cursor: pointer;
+}
+.card .top { display: flex; align-items: center; gap: 0.7em; }
+.card .ic { flex: 0 0 4.2em; height: 4.2em; }
+.ic svg { width: 100%; height: 100%; display: block; }
+.card .name { font-size: 1.25em; font-weight: 800; line-height: 1.2; overflow-wrap: anywhere; }
+.card .blurb { color: var(--dim); flex: 1; }
+.card .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4em 0.7em; }
+.ver { display: flex; align-items: baseline; gap: 0.3em; white-space: nowrap; }
+.ver span { color: var(--dim); }
+.ver b { font-size: 1.5em; }                       /* ~42px at 1080p */
+.tag { padding: 0.15em 0.6em; border-radius: 0.6em; font-weight: 700; }
+.tag.touch { background: #4a3a10; color: #ffe08a; }
+.tag.controller { background: #16422c; color: #b9f6ca; }
+
+/* ===== Messages & hints ===== */
+#msg { background: var(--panel); border-radius: 1em; padding: 1em; display: flex; gap: 0.8em; align-items: center; flex-wrap: wrap; }
+#msg[hidden] { display: none; }
+footer { margin-top: auto; color: var(--dim); display: flex; flex-wrap: wrap; gap: 0.4em 1.4em; align-items: center; }
+.k {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 1.5em; height: 1.5em; padding: 0 0.3em;
+  border-radius: 999px; font-weight: 800; color: #0b0f1e; vertical-align: middle; margin-right: 0.25em;
+}
+.k.a { background: var(--A); } .k.b { background: var(--B); } .k.d { background: #cfd5f0; border-radius: 0.35em; }
 </style>
 </head>
 <body>
-<main>
-  <h1>🎮 Family Games</h1>
-  <a class="card" href="drawrassic-park/"><span class="icon">🦖</span><span><span class="name">Drawrassic Park</span><br><span class="blurb">画恐龙 · 养恐龙 · 斗兽场 · ☁️ 自动云备份</span></span></a>
-</main>
+<div id="app">
+  <header>
+    <h1 id="title"></h1>
+    <span class="spacer"></span>
+    <div class="row" id="langs"></div>
+    <button class="btn nav" id="fs" type="button"></button>
+    <span id="pads"></span>
+  </header>
+
+  <a id="cont" class="nav" hidden href="#"><span class="ic"></span><span class="tx"></span><span class="play">▶</span></a>
+
+  <div id="msg" hidden><span id="msgText"></span><button class="btn nav" id="retry" type="button"></button></div>
+
+  <main id="games"></main>
+
+  <footer id="hint"></footer>
+</div>
+
+<script>
+(() => {
+'use strict';
+
+/* ===================== Config ===================== */
+const HUB_ID = 'game-hub';
+const KEY_SETTINGS = HUB_ID + '/settings';   // { lang }
+const KEY_LAST = HUB_ID + '/last';           // { id, at }
+const GAMES_URL = 'games.json';
+const CFG = {
+  deadZone: 0.15,      // stick dead zone
+  navThreshold: 0.55,  // stick tilt that counts as a direction
+  repeatDelay: 380,    // ms before a held direction repeats
+  repeatRate: 150,     // ms between repeats
+  crossWeight: 3,      // spatial nav: penalty for sideways distance
+};
+
+/* ===================== Strings ===================== */
+const LANGS = [['en', 'English'], ['fr', 'Français'], ['zh-Hans', '简体中文'], ['zh-Hant', '繁體中文']];
+const STR = {
+  'zh-Hans': {
+    title: '🎮 游戏大厅', cont: n => `继续玩：${n}`, latest: '最新版本',
+    touch: '👆 触屏优先（用 iPad 投屏）', controller: '🎮 手柄+电视',
+    fs: '全屏', exitfs: '退出全屏', fsFail: '✗ 全屏',
+    pads: n => `🎮 ×${n}`, loading: '正在读取游戏清单…',
+    loadFail: '读不到游戏清单（games.json）。', retry: '再试一次', empty: '清单里还没有游戏。',
+    hintMove: '移动', hintOpen: '打开', hintBack: '回到顶部',
+    hintTouch: '点一张卡片就能打开游戏。', hintWake: '用手柄：先按一次 A 叫醒这个页面。',
+  },
+  'zh-Hant': {
+    title: '🎮 遊戲大廳', cont: n => `繼續玩：${n}`, latest: '最新版本',
+    touch: '👆 觸控優先（用 iPad 投影）', controller: '🎮 手把+電視',
+    fs: '全螢幕', exitfs: '離開全螢幕', fsFail: '✗ 全螢幕',
+    pads: n => `🎮 ×${n}`, loading: '正在讀取遊戲清單…',
+    loadFail: '讀不到遊戲清單（games.json）。', retry: '再試一次', empty: '清單裡還沒有遊戲。',
+    hintMove: '移動', hintOpen: '打開', hintBack: '回到頂部',
+    hintTouch: '點一張卡片就能打開遊戲。', hintWake: '用手把：先按一次 A 叫醒這個頁面。',
+  },
+  en: {
+    title: '🎮 Game Hub', cont: n => `Continue: ${n}`, latest: 'Latest',
+    touch: '👆 Touch-first (mirror the iPad)', controller: '🎮 Controller + TV',
+    fs: 'Fullscreen', exitfs: 'Exit fullscreen', fsFail: '✗ Fullscreen',
+    pads: n => `🎮 ×${n}`, loading: 'Loading the game list…',
+    loadFail: 'Couldn’t load the game list (games.json).', retry: 'Try again', empty: 'No games in the list yet.',
+    hintMove: 'Move', hintOpen: 'Open', hintBack: 'Back to top',
+    hintTouch: 'Tap a card to open a game.', hintWake: 'Controller: press A once to wake this page.',
+  },
+  fr: {
+    title: '🎮 Salle de jeux', cont: n => `Continuer : ${n}`, latest: 'Dernière version',
+    touch: '👆 Tactile : recopier l’iPad', controller: '🎮 Manette + TV',
+    fs: 'Plein écran', exitfs: 'Quitter le plein écran', fsFail: '✗ Plein écran',
+    pads: n => `🎮 ×${n}`, loading: 'Chargement de la liste des jeux…',
+    loadFail: 'Impossible de charger la liste des jeux (games.json).', retry: 'Réessayer', empty: 'Aucun jeu dans la liste pour l’instant.',
+    hintMove: 'Se déplacer', hintOpen: 'Ouvrir', hintBack: 'Revenir en haut',
+    hintTouch: 'Touche une carte pour ouvrir un jeu.', hintWake: 'Manette : appuie une fois sur A pour réveiller la page.',
+  },
+};
+
+/* ===================== Storage (never throws) ===================== */
+const store = {
+  get(k) { try { const v = localStorage.getItem(k); return v == null ? null : JSON.parse(v); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+};
+
+function detectLang() {
+  const n = String(navigator.language || '').toLowerCase();
+  if (n.startsWith('zh')) return /^zh-(tw|hk|mo|hant)/.test(n) ? 'zh-Hant' : 'zh-Hans';
+  if (n.startsWith('fr')) return 'fr';
+  return 'en';
+}
+const saved = store.get(KEY_SETTINGS);
+let lang = saved && STR[saved.lang] ? saved.lang : detectLang();
+
+const tr = (key, ...a) => { const v = (STR[lang] && STR[lang][key]) ?? STR.en[key]; return typeof v === 'function' ? v(...a) : v; };
+const loc = o => {
+  if (!o || typeof o !== 'object') return String(o ?? '');
+  const order = lang === 'zh-Hant' ? ['zh-Hant', 'zh-Hans', 'en'] : lang === 'zh-Hans' ? ['zh-Hans', 'zh-Hant', 'en'] : [lang, 'en', 'zh-Hans'];
+  for (const k of order) if (o[k]) return o[k];
+  return Object.values(o)[0] || '';
+};
+
+/* ===================== State ===================== */
+const S = { games: null, status: 'loading', mode: 'none', padSeen: false };
+const $ = id => document.getElementById(id);
+
+/* ===================== Load games.json ===================== */
+function cleanGame(g) {
+  if (!g || typeof g !== 'object' || typeof g.id !== 'string' || typeof g.url !== 'string') return null;
+  if (!/^https:\/\//.test(g.url)) return null;
+  return {
+    id: g.id, url: g.url, latest: String(g.latest || ''),
+    input: g.input === 'controller' ? 'controller' : 'touch',
+    color: typeof g.color === 'string' ? g.color : '#888',
+    name: g.name || { en: g.id }, blurb: g.blurb || {}, icon: typeof g.icon === 'string' ? g.icon : '',
+  };
+}
+async function loadGames() {
+  S.status = 'loading'; render();
+  try {
+    const r = await fetch(GAMES_URL, { cache: 'no-cache' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const d = await r.json();
+    const list = Array.isArray(d) ? d : (d && d.games);
+    if (!Array.isArray(list)) throw new Error('bad format');
+    S.games = list.map(cleanGame).filter(Boolean);
+    S.status = 'ok';
+  } catch (e) {
+    S.status = 'error';
+  }
+  render();
+  if (!focusEl || !document.body.contains(focusEl) || focusEl.offsetParent === null) setFocus(defaultFocus(), false);
+}
+
+/* ===================== Render ===================== */
+function lastGame() {
+  const l = store.get(KEY_LAST);
+  return l && S.games ? S.games.find(g => g.id === l.id) || null : null;
+}
+function remember(id) { store.set(KEY_LAST, { id, at: Date.now() }); }
+
+function render() {
+  const keep = focusEl && (focusEl.dataset.key || focusEl.id);
+  document.documentElement.lang = lang;
+  document.title = tr('title').replace(/^\S+\s/, '');
+  $('title').textContent = tr('title');
+
+  // language switcher (each language in its own name)
+  const langs = $('langs');
+  if (!langs.children.length) {
+    for (const [code, label] of LANGS) {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'btn nav'; b.textContent = label; b.lang = code;
+      b.dataset.key = 'lang-' + code;
+      b.addEventListener('click', () => setLang(code));
+      langs.appendChild(b);
+    }
+  }
+  for (const b of langs.children) b.setAttribute('aria-pressed', String(b.dataset.key === 'lang-' + lang));
+  fsLabel();
+  $('retry').textContent = tr('retry');
+
+  // message
+  const msg = $('msg');
+  if (S.status === 'loading') { msg.hidden = false; $('msgText').textContent = tr('loading'); $('retry').hidden = true; }
+  else if (S.status === 'error') { msg.hidden = false; $('msgText').textContent = tr('loadFail'); $('retry').hidden = false; }
+  else if (!S.games.length) { msg.hidden = false; $('msgText').textContent = tr('empty'); $('retry').hidden = true; }
+  else msg.hidden = true;
+
+  // continue
+  const cont = $('cont'), lg = lastGame();
+  if (lg) {
+    cont.hidden = false; cont.href = lg.url; cont.dataset.id = lg.id;
+    cont.querySelector('.ic').innerHTML = lg.icon;
+    cont.querySelector('.tx').textContent = tr('cont', loc(lg.name));
+  } else cont.hidden = true;
+
+  // cards
+  const box = $('games');
+  box.textContent = '';
+  for (const g of S.games || []) {
+    const a = document.createElement('a');
+    a.className = 'card nav'; a.href = g.url; a.dataset.id = g.id; a.dataset.key = 'game-' + g.id;
+    a.style.setProperty('--c', g.color);
+    a.innerHTML = '<div class="top"><div class="ic"></div><div class="name"></div></div><div class="blurb"></div>' +
+      '<div class="meta"><div class="ver"><span></span><b></b></div><div class="tag"></div></div>';
+    a.querySelector('.ic').innerHTML = g.icon;
+    a.querySelector('.name').textContent = loc(g.name);
+    a.querySelector('.blurb').textContent = loc(g.blurb);
+    a.querySelector('.ver span').textContent = tr('latest');
+    a.querySelector('.ver b').textContent = g.latest;
+    const tag = a.querySelector('.tag');
+    tag.classList.add(g.input); tag.textContent = tr(g.input);
+    box.appendChild(a);
+  }
+  renderHint();
+  renderPads();
+
+  if (keep) {
+    const el = document.querySelector(`[data-key="${keep}"]`) || $(keep);
+    if (el && el.offsetParent !== null) setFocus(el, false);
+  }
+}
+
+function renderHint() {
+  const h = $('hint');
+  if (S.mode === 'pad' || S.mode === 'key') {
+    h.innerHTML = `<span><span class="k d">✥</span><span class="t1"></span></span>` +
+      `<span><span class="k a">A</span><span class="t2"></span></span>` +
+      `<span><span class="k b">B</span><span class="t3"></span></span>`;
+    h.querySelector('.t1').textContent = tr('hintMove');
+    h.querySelector('.t2').textContent = tr('hintOpen');
+    h.querySelector('.t3').textContent = tr('hintBack');
+  } else {
+    h.innerHTML = '<span class="t1"></span>' + (S.padSeen ? '' : '<span class="t2"></span>');
+    h.querySelector('.t1').textContent = tr('hintTouch');
+    if (!S.padSeen) h.querySelector('.t2').textContent = tr('hintWake');
+  }
+}
+
+let padCount = 0;
+function renderPads() { $('pads').textContent = padCount ? tr('pads', padCount) : ''; }
+
+function setLang(code) {
+  if (!STR[code]) return;
+  lang = code;
+  const s = store.get(KEY_SETTINGS);
+  store.set(KEY_SETTINGS, Object.assign(s && typeof s === 'object' ? s : {}, { lang: code }));
+  render();
+}
+
+/* ===================== Fullscreen ===================== */
+const isFs = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+function fsLabel() { $('fs').textContent = isFs() ? tr('exitfs') : tr('fs'); }
+$('fs').addEventListener('click', async () => {
+  try {
+    if (isFs()) await (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    else { const el = document.documentElement; await (el.requestFullscreen || el.webkitRequestFullscreen).call(el); }
+  } catch (e) { $('fs').textContent = tr('fsFail'); }
+});
+document.addEventListener('fullscreenchange', fsLabel);
+document.addEventListener('webkitfullscreenchange', fsLabel);
+$('retry').addEventListener('click', loadGames);
+
+/* Remember the game when any link to it is used (touch, mouse, keyboard or controller). */
+document.addEventListener('click', e => {
+  const a = e.target.closest && e.target.closest('a.nav[data-id]');
+  if (a) remember(a.dataset.id);
+}, true);
+
+/* ===================== Focus & spatial navigation ===================== */
+let focusEl = null;
+const navEls = () => [...document.querySelectorAll('.nav')].filter(e => e.offsetParent !== null && !e.hidden && !e.disabled);
+function defaultFocus() {
+  const c = $('cont');
+  if (!c.hidden) return c;
+  return document.querySelector('#games .card') || (!$('retry').hidden && !$('msg').hidden ? $('retry') : null) || navEls()[0] || null;
+}
+function setFocus(el, scroll = true) {
+  if (!el) return;
+  if (focusEl && focusEl !== el) focusEl.classList.remove('focused');
+  focusEl = el; el.classList.add('focused');
+  try { el.focus({ preventScroll: true }); } catch (e) {}
+  if (scroll) try { el.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' }); } catch (e) { el.scrollIntoView(false); }
+}
+function move(dir) {
+  const els = navEls();
+  if (!els.length) return false;
+  if (!focusEl || !els.includes(focusEl)) { setFocus(defaultFocus() || els[0]); return true; }
+  const r = focusEl.getBoundingClientRect();
+  let best = null, bestScore = Infinity;
+  for (const e of els) {
+    if (e === focusEl) continue;
+    const q = e.getBoundingClientRect();
+    let main, cross;
+    if (dir === 'down')  { main = q.top - r.bottom;  cross = Math.max(0, q.left - r.right, r.left - q.right); if (q.top < r.top + r.height * 0.5) continue; }
+    if (dir === 'up')    { main = r.top - q.bottom;  cross = Math.max(0, q.left - r.right, r.left - q.right); if (q.bottom > r.bottom - r.height * 0.5) continue; }
+    if (dir === 'right') { main = q.left - r.right;  cross = Math.max(0, q.top - r.bottom, r.top - q.bottom); if (q.left < r.left + r.width * 0.5) continue; }
+    if (dir === 'left')  { main = r.left - q.right;  cross = Math.max(0, q.top - r.bottom, r.top - q.bottom); if (q.right > r.right - r.width * 0.5) continue; }
+    // left/right stay on the same row; up/down may slide sideways (header ↔ wide button ↔ cards)
+    if ((dir === 'left' || dir === 'right') && cross > r.height * 0.5) continue;
+    const score = Math.max(0, main) + cross * CFG.crossWeight;
+    if (score < bestScore) { bestScore = score; best = e; }
+  }
+  if (best) { setFocus(best); return true; }
+  return false;
+}
+
+/* ===================== Actions (every input goes through act) ===================== */
+function setMode(m) {
+  if (S.mode === m) return;
+  S.mode = m;
+  document.body.classList.toggle('show-focus', m === 'pad' || m === 'key');
+  renderHint();
+}
+function act(a) {
+  if (window.FamilyCloud && window.FamilyCloud.isModalOpen()) return; // the cloud dialog handles the controller itself
+  // The first controller/keyboard input only reveals the focus ring, so a stray press never opens a game.
+  const showing = S.mode === 'pad' || S.mode === 'key';
+  if (!showing && (a.src === 'pad' || a.src === 'key')) {
+    setMode(a.src);
+    setFocus(focusEl && document.body.contains(focusEl) && focusEl.offsetParent !== null ? focusEl : defaultFocus());
+    return;
+  }
+  switch (a.type) {
+    case 'move':
+      setMode(a.src);
+      if (!focusEl || !document.body.contains(focusEl)) setFocus(defaultFocus());
+      else if (!move(a.dir)) rumble(a.player, 0.15, 40);
+      break;
+    case 'activate':
+      setMode(a.src);
+      if (!focusEl || !document.body.contains(focusEl)) { setFocus(defaultFocus()); break; }
+      rumble(a.player, 0.5, 90);
+      focusEl.click();
+      break;
+    case 'back':
+      setMode(a.src);
+      setFocus(defaultFocus());
+      try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); }
+      break;
+  }
+}
+
+/* ===================== Touch / mouse ===================== */
+window.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse' || S.mode !== 'pad') setMode('touch'); }, { passive: true });
+document.addEventListener('gesturestart', e => e.preventDefault());
+document.addEventListener('dblclick', e => e.preventDefault());
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+/* ===================== Keyboard (optional extra) ===================== */
+const KEYDIR = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' };
+window.addEventListener('keydown', e => {
+  if (KEYDIR[e.key]) { e.preventDefault(); act({ type: 'move', dir: KEYDIR[e.key], player: 'kbd', src: 'key' }); }
+  else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act({ type: 'activate', player: 'kbd', src: 'key' }); }
+  else if (e.key === 'Escape' || e.key === 'Backspace' || e.key === 'GamepadB') { e.preventDefault(); act({ type: 'back', player: 'kbd', src: 'key' }); }
+});
+
+/* ===================== Gamepad ===================== */
+const padState = {};   // index -> { prev: bool[], dir, next }
+function rumble(player, mag, ms) {
+  if (typeof player !== 'number') return;
+  try {
+    const gp = navigator.getGamepads && navigator.getGamepads()[player];
+    if (gp && gp.vibrationActuator) gp.vibrationActuator.playEffect('dual-rumble', { duration: ms, strongMagnitude: mag, weakMagnitude: mag }).catch(() => {});
+  } catch (e) {}
+}
+function padDir(gp, down) {
+  if (down[12]) return 'up'; if (down[13]) return 'down'; if (down[14]) return 'left'; if (down[15]) return 'right';
+  let x = gp.axes[0] || 0, y = gp.axes[1] || 0;
+  if (Math.hypot(x, y) < CFG.deadZone) return null;
+  if (Math.max(Math.abs(x), Math.abs(y)) < CFG.navThreshold) return null;
+  return Math.abs(x) > Math.abs(y) ? (x > 0 ? 'right' : 'left') : (y > 0 ? 'down' : 'up');
+}
+function pollPads(now) {
+  let list = [];
+  try { list = Array.from((navigator.getGamepads && navigator.getGamepads()) || []).filter(Boolean); } catch (e) {}
+  if (list.length !== padCount) { padCount = list.length; renderPads(); }
+  const live = new Set();
+  for (const gp of list) {
+    const i = gp.index; live.add(i);
+    const down = gp.buttons.map(b => !!(b && (b.pressed || b.value > 0.5)));
+    let st = padState[i];
+    if (!st) { st = padState[i] = { prev: down, dir: null, next: 0 }; }  // buttons already held at connect don't fire
+    const rose = b => down[b] && !st.prev[b];
+    const dir = padDir(gp, down);
+    if (dir !== st.dir) {
+      st.dir = dir;
+      if (dir) { act({ type: 'move', dir, player: i, src: 'pad' }); st.next = now + CFG.repeatDelay; }
+    } else if (dir && now >= st.next) {
+      act({ type: 'move', dir, player: i, src: 'pad' }); st.next = now + CFG.repeatRate;
+    }
+    if (rose(0)) act({ type: 'activate', player: i, src: 'pad' });
+    if (rose(1)) act({ type: 'back', player: i, src: 'pad' });
+    if (down.some(Boolean) || dir) { if (!S.padSeen) { S.padSeen = true; } if (S.mode !== 'pad') setMode('pad'); }
+    st.prev = down;
+  }
+  for (const k of Object.keys(padState)) if (!live.has(+k)) delete padState[k];
+}
+window.addEventListener('gamepadconnected', () => { S.padSeen = true; renderHint(); });
+window.addEventListener('gamepaddisconnected', () => { renderPads(); });
+
+function loop(now) { pollPads(now); requestAnimationFrame(loop); }
+
+/* ===================== Start ===================== */
+window.addEventListener('pageshow', () => { if (S.games) render(); });  // back from a game: refresh "Continue"
+document.addEventListener('visibilitychange', () => { if (!document.hidden && S.games) render(); });
+render();
+loadGames();
+requestAnimationFrame(loop);
+})();
+</script>
+<script type="module" src="shared/family-cloud.js" data-games="dragon-gems,crab-castle,game-hub" data-chip="hub"></script>
 </body>
 </html>

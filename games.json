@@ -1,0 +1,67 @@
+{
+  "hub": "game-hub",
+  "format": 1,
+  "notes": "Game list for the Game Hub. To add a game: add one entry to \"games\" and republish this artifact. input: \"controller\" = 手柄+电视, \"touch\" = 触屏优先（用 iPad 投屏）. url = the game's launcher artifact link. icon = hand-drawn inline SVG (viewBox 0 0 100 100, single quotes inside).",
+  "games": [
+    {
+      "id": "drawrassic-park",
+      "url": "https://jacobjkwu.github.io/family-games/drawrassic-park/",
+      "latest": "v3.7",
+      "input": "touch",
+      "color": "#5cc85f",
+      "name": {
+        "zh-Hans": "Drawrassic Park",
+        "zh-Hant": "Drawrassic Park",
+        "en": "Drawrassic Park",
+        "fr": "Drawrassic Park"
+      },
+      "blurb": {
+        "zh-Hans": "自己画恐龙，放进公园里养大、生蛋，还能去斗兽场对战。",
+        "zh-Hant": "自己畫恐龍，放進公園裡養大、生蛋，還能去鬥獸場對戰。",
+        "en": "Draw your own dinos, raise them in your park, and send them to battle in the arena.",
+        "fr": "Dessine tes dinos, élève-les dans ton parc et envoie-les combattre dans l’arène."
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffe08a'/><path d='M8 70 Q20 66 26 58' stroke='#2e7d32' stroke-width='9' fill='none' stroke-linecap='round'/><path d='M30 50 L34 42 L38 50 Z M40 47 L44 39 L48 47 Z M50 47 L54 40 L57 48 Z' fill='#ff8a65'/><ellipse cx='45' cy='60' rx='23' ry='14' fill='#4caf50' stroke='#1b5e20' stroke-width='3'/><path d='M58 54 Q62 38 66 30' stroke='#1b5e20' stroke-width='13' fill='none' stroke-linecap='round'/><path d='M58 54 Q62 38 66 30' stroke='#4caf50' stroke-width='8' fill='none' stroke-linecap='round'/><ellipse cx='71' cy='27' rx='11' ry='8' fill='#4caf50' stroke='#1b5e20' stroke-width='3'/><circle cx='74' cy='24' r='2.6' fill='#1b5e20'/><path d='M76 31 Q79 32 81 30' stroke='#1b5e20' stroke-width='2' fill='none' stroke-linecap='round'/><rect x='31' y='68' width='7' height='14' rx='3' fill='#388e3c' stroke='#1b5e20' stroke-width='2.5'/><rect x='51' y='68' width='7' height='14' rx='3' fill='#388e3c' stroke='#1b5e20' stroke-width='2.5'/><g transform='rotate(40 80 72)'><rect x='76' y='52' width='9' height='28' rx='2' fill='#42a5f5' stroke='#0d47a1' stroke-width='2'/><path d='M76 80 L85 80 L80.5 90 Z' fill='#ffd7a8' stroke='#0d47a1' stroke-width='2' stroke-linejoin='round'/><path d='M79 86.5 L82 86.5 L80.5 90 Z' fill='#263238'/></g></svg>"
+    },
+    {
+      "id": "dragon-gems",
+      "url": "https://jacobjkwu.github.io/family-games/dragon-gems/",
+      "latest": "v2",
+      "input": "touch",
+      "color": "#b388ff",
+      "name": {
+        "zh-Hans": "喷火龙的宝石山",
+        "zh-Hant": "噴火龍的寶石山",
+        "en": "Dragon’s Gem Mountain",
+        "fr": "La Montagne aux Gemmes"
+      },
+      "blurb": {
+        "zh-Hans": "帮喷火龙搬宝石、分糖果，用除法一路闯上宝石山。",
+        "zh-Hant": "幫噴火龍搬寶石、分糖果，用除法一路闖上寶石山。",
+        "en": "Help the dragon carry gems and share candy, and use division to climb Gem Mountain.",
+        "fr": "Aide le dragon à porter des gemmes et à partager des bonbons : grimpe la montagne grâce à la division."
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#2a1b4a'/><circle cx='22' cy='22' r='1.8' fill='#fff'/><circle cx='80' cy='16' r='1.4' fill='#fff'/><circle cx='14' cy='48' r='1.2' fill='#fff'/><path d='M40 34 L30 12 L50 30 Z' fill='#ffd54f' stroke='#8d6e00' stroke-width='2' stroke-linejoin='round'/><path d='M22 62 Q20 40 40 32 Q58 26 72 34 L84 40 Q88 46 82 49 L70 51 Q66 60 52 64 Q34 68 22 62 Z' fill='#e8452c' stroke='#7f1d0f' stroke-width='3' stroke-linejoin='round'/><path d='M30 50 Q38 44 46 50' stroke='#ff8a65' stroke-width='3' fill='none' stroke-linecap='round'/><circle cx='58' cy='40' r='5' fill='#fff'/><circle cx='59.5' cy='40' r='2.6' fill='#1a1a1a'/><circle cx='78' cy='41' r='1.6' fill='#7f1d0f'/><path d='M86 45 Q96 40 94 30 Q92 38 86 39 Q93 32 90 24 Q86 34 84 40 Z' fill='#ffb300' stroke='#e65100' stroke-width='1.5' stroke-linejoin='round'/><path d='M38 76 L50 66 L62 76 L50 92 Z' fill='#4dd0e1' stroke='#006064' stroke-width='2.5' stroke-linejoin='round'/><path d='M38 76 L62 76 M50 66 L45 76 L50 92 L55 76 Z' stroke='#006064' stroke-width='1.5' fill='none' stroke-linejoin='round'/><path d='M44 72 L47 69' stroke='#e0f7fa' stroke-width='2' stroke-linecap='round'/></svg>"
+    },
+    {
+      "id": "crab-castle",
+      "url": "https://jacobjkwu.github.io/family-games/crab-castle/",
+      "latest": "v7",
+      "input": "touch",
+      "color": "#ff6b4a",
+      "name": {
+        "zh-Hans": "巨蟹王城堡保卫战",
+        "zh-Hant": "巨蟹王城堡保衛戰",
+        "en": "Crab King Castle Defense",
+        "fr": "Le Roi Crabe défend son château"
+      },
+      "blurb": {
+        "zh-Hans": "帮巨蟹大王守城堡：布陷阱、派守卫、开枪，挡住一波波入侵者。",
+        "zh-Hant": "幫巨蟹大王守城堡：布陷阱、派守衛、開槍，擋住一波波入侵者。",
+        "en": "Help the Crab King guard his castle with traps, guards and blasters against wave after wave of invaders.",
+        "fr": "Aide le Roi Crabe à garder son château avec des pièges, des gardes et des blasters contre des vagues d’envahisseurs."
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><clipPath id='cc'><circle cx='50' cy='50' r='48'/></clipPath><g clip-path='url(#cc)'><rect width='100' height='100' fill='#8ecae6'/><rect y='72' width='100' height='28' fill='#f4d58d'/></g><rect x='30' y='26' width='40' height='34' fill='#b0bec5' stroke='#455a64' stroke-width='2.5'/><path d='M30 26 L30 18 L36 18 L36 22 L42 22 L42 18 L48 18 L48 22 L52 22 L52 18 L58 18 L58 22 L64 22 L64 18 L70 18 L70 26' fill='#b0bec5' stroke='#455a64' stroke-width='2.5' stroke-linejoin='round'/><path d='M50 18 L50 6' stroke='#455a64' stroke-width='2'/><path d='M50 6 L62 9 L50 12 Z' fill='#ffca28'/><path d='M44 60 L44 50 Q50 42 56 50 L56 60 Z' fill='#37474f'/><path d='M38 58 L36 50 M62 58 L64 50' stroke='#d32f2f' stroke-width='3' stroke-linecap='round'/><circle cx='35' cy='47' r='4.5' fill='#fff' stroke='#7f0000' stroke-width='2'/><circle cx='65' cy='47' r='4.5' fill='#fff' stroke='#7f0000' stroke-width='2'/><circle cx='36' cy='47' r='2' fill='#111'/><circle cx='64' cy='47' r='2' fill='#111'/><path d='M28 76 L18 86 M32 80 L26 92 M72 76 L82 86 M68 80 L74 92' stroke='#c62828' stroke-width='3.5' stroke-linecap='round'/><ellipse cx='50' cy='70' rx='24' ry='13' fill='#e53935' stroke='#7f0000' stroke-width='3'/><path d='M42 72 Q50 78 58 72' stroke='#7f0000' stroke-width='2.5' fill='none' stroke-linecap='round'/><path d='M27 64 Q18 62 14 52' stroke='#c62828' stroke-width='4' fill='none' stroke-linecap='round'/><path d='M73 64 Q82 62 86 52' stroke='#c62828' stroke-width='4' fill='none' stroke-linecap='round'/><path d='M14 52 m-9 -4 a10 10 0 1 1 13 -5 L12 46 Z' fill='#e53935' stroke='#7f0000' stroke-width='2.5' stroke-linejoin='round'/><path d='M86 52 m9 -4 a10 10 0 1 0 -13 -5 L88 46 Z' fill='#e53935' stroke='#7f0000' stroke-width='2.5' stroke-linejoin='round'/><path d='M42 58 L44 52 L47 56 L50 50 L53 56 L56 52 L58 58 Z' fill='#ffca28' stroke='#8d6e00' stroke-width='1.5' stroke-linejoin='round'/></svg>"
+    }
+  ]
+}

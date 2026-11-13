@@ -1,0 +1,24 @@
+{
+  "game": "crab-castle",
+  "versions": [
+    {"v": 7, "file": "crab-castle-v7.html", "date": "2026-11-13", "schema": "s2",
+     "notes": {
+       "zh-Hans": "地图编辑器：自己画路线、选主题和难度、分享码；每波自动存档，可以继续上次。",
+       "zh-Hant": "地圖編輯器：自己畫路線、選主題和難度、分享碼；每波自動存檔，可以繼續上次。",
+       "en": "Map editor: draw your own route, pick theme and difficulty, share codes. Auto-save after each wave with Continue.",
+       "fr": "Éditeur de cartes : tracez votre chemin, choisissez thème et difficulté, codes de partage. Sauvegarde après chaque vague."}},
+    {"v": 6, "file": "crab-castle-v6.html", "date": "2026-11-13", "schema": "s1",
+     "notes": {
+       "zh-Hans": "所有敌人、守卫换成 3D 模型，有走路、攻击和死亡动画；7 个 Boss 专属模型；压力测试按钮。",
+       "zh-Hant": "所有敵人、守衛換成 3D 模型，有走路、攻擊和死亡動畫；7 個 Boss 專屬模型；壓力測試按鈕。",
+       "en": "All enemies and guards are 3D models with walk, attack and death animations; 7 custom boss models; stress test.",
+       "fr": "Ennemis et gardes en modèles 3D animés (marche, attaque, mort) ; 7 boss modélisés ; test de charge."}},
+    {"v": 4, "file": "crab-castle-v4.html", "date": "2026-11-12", "schema": null,
+     "notes": {
+       "zh-Hans": "2D 版最后一版：16 种陷阱、21 种敌人分 5 级、秘籍改金币。没有存档。",
+       "zh-Hant": "2D 版最後一版：16 種陷阱、21 種敵人分 5 級、秘籍改金幣。沒有存檔。",
+       "en": "Last 2D version: 16 traps, 21 enemies in 5 levels, gold cheat. No saves.",
+       "fr": "Dernière version 2D : 16 pièges, 21 ennemis sur 5 niveaux, triche d'or. Pas de sauvegarde."}}
+  ],
+  "missing": [1, 2, 3, 5]
+}

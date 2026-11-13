@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<title>喷火龙的宝石山</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;background:#20123f}
+body{position:fixed;inset:0;font-family:"PingFang SC","Hiragino Sans GB","Heiti SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;color:#3a2a17;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+#app{position:absolute;inset:0;touch-action:none;overflow:hidden}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);overflow:hidden}
+input{-webkit-user-select:text;user-select:text;font:inherit;font-size:22px;padding:10px 14px;border-radius:14px;border:3px solid #ffb347;width:220px;text-align:center;color:#3a2a17;background:#fff}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+.hidden{display:none!important}
+.scroll{overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain}
+b{color:#d9581c}
+/* buttons */
+.btn{font:inherit;font-weight:800;font-size:21px;border:none;border-radius:18px;padding:10px 18px;min-height:54px;min-width:54px;color:#fff;background:linear-gradient(#ffb347,#ff7a1a);--sh:#c4520a;box-shadow:0 5px 0 var(--sh),0 8px 14px rgba(0,0,0,.22);transition:transform .06s;line-height:1.2;touch-action:manipulation}
+.btn b{color:inherit}
+.btn.pressed{transform:translateY(4px);box-shadow:0 1px 0 var(--sh)}
+.btn.green{background:linear-gradient(#72e38f,#2fb457);--sh:#1d7f3a}
+.btn.blue{background:linear-gradient(#6ec3ff,#2f8be0);--sh:#1b5fa3}
+.btn.purple{background:linear-gradient(#c49bff,#8a4fe6);--sh:#5b2aa8}
+.btn.red{background:linear-gradient(#ff7a6b,#e8352a);--sh:#a31d14}
+.btn.gray{background:linear-gradient(#c9c2b8,#9b9187);--sh:#6e665d}
+.btn.big{font-size:25px;min-height:64px;padding:12px 26px}
+.btn.huge{font-size:30px;min-height:96px;padding:16px 30px}
+.btn.sm{font-size:18px;min-height:50px;padding:8px 12px}
+.btn[disabled]{filter:grayscale(.85);opacity:.55}
+.ibtn{font:inherit;width:52px;height:52px;border-radius:14px;border:none;background:rgba(255,255,255,.2);font-size:24px;color:#fff;flex:none;touch-action:manipulation}
+.ibtn.pressed{background:rgba(255,255,255,.4)}
+/* top bar */
+.top{position:relative;z-index:4;display:flex;align-items:center;gap:10px;padding:6px 12px;background:rgba(0,0,0,.28);color:#fff;min-height:64px;flex:none}
+.ttl{font-size:21px;font-weight:800;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.ttl small{font-size:14px;background:#ffd23f;color:#5a3a12;border-radius:999px;padding:2px 10px;margin-left:6px;vertical-align:middle}
+.res{display:flex;gap:6px;flex:none}
+.res span{background:rgba(0,0,0,.32);border-radius:999px;padding:6px 11px;font-size:18px;font-weight:800;white-space:nowrap;display:inline-block}
+.res span.bump{animation:pulse .5s}
+/* bubbles & dialog */
+.bubble{background:#fff;border-radius:20px;padding:10px 16px;font-size:19px;line-height:1.5;position:relative;box-shadow:0 4px 0 rgba(0,0,0,.12);color:#3a2a17}
+.bubble.pop{animation:pop .3s}
+#dlg{position:fixed;inset:0;z-index:60;background:rgba(20,10,40,.62);display:flex;align-items:center;justify-content:center;padding:20px;touch-action:none}
+.dbox{background:#fff8e8;border-radius:28px;padding:22px 24px;max-width:min(600px,94vw);max-height:90%;overflow:auto;text-align:center;font-size:21px;line-height:1.55;box-shadow:0 0 0 6px #ffd27a,0 20px 40px rgba(0,0,0,.4);animation:pop .35s;color:#3a2a17}
+.dbox h3{margin:4px 0 10px;font-size:27px}
+.dbox p{margin:8px 0}
+.dbtns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.fbub{position:fixed;z-index:45;transform:translate(-50%,-110%);background:#fff;color:#3a2a17;border-radius:16px;padding:10px 14px;font-size:18px;font-weight:700;max-width:270px;box-shadow:0 6px 16px rgba(0,0,0,.3);pointer-events:none;animation:pop .3s;line-height:1.45;text-align:center}
+.fbub.out{opacity:0;transition:opacity .4s}
+.flyer{position:fixed;z-index:40;pointer-events:none;transform:translate(-50%,-50%);font-size:24px;line-height:1}
+/* gems & candy */
+.gem{display:inline-block;width:var(--gs,26px);height:var(--gs,26px);clip-path:polygon(25% 6%,75% 6%,100% 38%,50% 100%,0 38%);background:linear-gradient(135deg,#fff 0 14%,var(--c) 32%,var(--d) 100%);margin:1px;font-style:normal}
+.g0{--c:#5ad1ff;--d:#1a7fd6}.g1{--c:#ff6fae;--d:#c21e6a}.g2{--c:#7df07b;--d:#20a03a}.g3{--c:#ffd84a;--d:#d99a00}.g4{--c:#c08cff;--d:#6a2fd0}.g5{--c:#ff8a5c;--d:#d63a10}
+.bag{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:50px;height:50px;border-radius:42% 42% 46% 46%;background:radial-gradient(circle at 35% 30%,#c79bff,#6b3fd0);color:#fff;font-weight:900;font-style:normal;font-size:17px;margin:2px;box-shadow:0 3px 0 #43218f;line-height:1}
+.bag::before{content:'💎';font-size:13px}
+.bag.cb{background:radial-gradient(circle at 35% 30%,#ffb3d6,#e0509a);box-shadow:0 3px 0 #a3276a}
+.bag.cb::before{content:'🍬'}
+.cd{font-style:normal;line-height:1;margin:1px;display:inline-block}
+/* characters */
+.dragon{position:relative;width:100%;container-type:inline-size}
+.dragon svg{width:100%;height:auto;display:block;overflow:visible}
+.acc{position:absolute;line-height:1;pointer-events:none}
+.acc.head{left:72%;top:16%;font-size:26cqw;transform:translate(-50%,-75%) rotate(10deg)}
+.acc.face{left:75%;top:35%;font-size:17cqw;transform:translate(-50%,-50%)}
+.esvg{width:100%;height:auto;display:block;overflow:visible}
+.gsvg{width:100%;height:auto;display:block}
+.emo{display:inline-block;line-height:1}
+.flip{transform:scaleX(-1)}
+/* animations */
+@keyframes bob{50%{transform:translateY(-4%)}}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-12%)}}
+@keyframes jump{0%,100%{transform:translateY(0) rotate(0)}40%{transform:translateY(-30%) rotate(-8deg)}60%{transform:translateY(-30%) rotate(8deg)}}
+@keyframes pop{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes popin{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+@keyframes marchOut{to{transform:translateX(110vw)}}
+@keyframes walkin{from{transform:translateX(-70vw)}}
+@keyframes hit{0%{filter:none}25%{filter:brightness(2.2) saturate(2);transform:translateX(14px)}55%{transform:translateX(-8px)}100%{filter:none}}
+@keyframes dance{0%,100%{transform:rotate(-12deg) translateY(0)}50%{transform:rotate(12deg) translateY(-18%)}}
+@keyframes leaveL{to{transform:translateX(-90vw)}}
+@keyframes pulse{50%{transform:scale(1.18)}}
+@keyframes boomfx{0%,100%{transform:scale(.8) rotate(0)}50%{transform:scale(1.25) rotate(15deg)}}
+@keyframes drift{from{transform:translateX(-8vw)}to{transform:translateX(25vw)}}
+@keyframes starIn{0%{transform:scale(0) rotate(-200deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes stomp{0%,100%{transform:translateY(0)}50%{transform:translateY(-3%) rotate(-2deg)}}
+@keyframes wob{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+@keyframes glow{50%{filter:drop-shadow(0 0 18px #ffe680)}}
+.bob{animation:bob 2.2s ease-in-out infinite}
+.hop{animation:hop 1.1s ease-in-out infinite}
+.jump{animation:jump .8s ease-in-out infinite}
+.dance{animation:dance .5s ease-in-out infinite}
+.pop{animation:pop .35s}
+.shake{animation:shake .45s}
+.talk{animation:hop .6s ease-in-out infinite}
+.walkin{animation:walkin 1.6s ease-out}
+.boomfx{animation:boomfx .5s ease-in-out infinite}
+.boomfx.d2{animation-delay:.25s}
+.hit{animation:hit .45s}
+.stomp{animation:stomp 1s ease-in-out infinite}
+/* scenes */
+.bg-meadow,.bg-battle,.bg-mount{background:linear-gradient(#7fd0ff,#d4f1ff 72%)}
+.bg-cave{background:radial-gradient(ellipse at 50% 75%,#5b3a7a,#2a1640 60%,#160a24)}
+.ground{position:absolute;left:0;right:0;bottom:0;height:27%;background:linear-gradient(#8fd66a,#5cb043);border-top:6px solid #6cc04f}
+.bg-battle .ground{background:linear-gradient(#b9c96a,#8a9e43);border-top-color:#a3b552}
+.sun{position:absolute;right:7%;top:24%;width:13vmin;height:13vmin;border-radius:50%;background:radial-gradient(#fff6a8,#ffd23f);box-shadow:0 0 40px #ffe680}
+.cloud{position:absolute;width:20vmin;height:6vmin;background:#fff;border-radius:999px;opacity:.92;animation:drift 30s linear infinite alternate}
+.cloud::before{content:'';position:absolute;width:9vmin;height:9vmin;border-radius:50%;background:#fff;left:4vmin;top:-4.5vmin}
+.c1{top:26%;left:8%}.c2{top:36%;left:50%;animation-duration:44s}
+.flowers{position:absolute;bottom:1.5%;left:0;right:0;display:flex;justify-content:space-around;font-size:5vmin}
+.tree{position:absolute;bottom:24%;font-size:19vmin;line-height:1}.t1{left:1%}.t2{right:2%}
+.mount{position:absolute;left:18%;right:18%;bottom:24%;height:62%;background:linear-gradient(#a99c90,#6e625a);clip-path:polygon(50% 0,62% 14%,100% 100%,0 100%,38% 14%)}
+.cavedoor{position:absolute;left:50%;bottom:0;width:26%;height:36%;transform:translateX(-50%);border-radius:50% 50% 0 0;background:#120818;overflow:hidden}
+.cavedoor::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,#8b5a2b 0 18%,#6b4220 18% 20%);border-radius:inherit;transform-origin:left;transition:transform 1s}
+.cavedoor.open::after{transform:perspective(400px) rotateY(-85deg)}
+.cavedoor.open{box-shadow:0 0 60px 20px #ffe680 inset}
+.stal{position:absolute;top:0;left:0;right:0;height:9vmin;background:conic-gradient(from -25deg at 50% 100%,#140820 50deg,transparent 0) 0 0/7vmin 100% repeat-x;opacity:.9;pointer-events:none}
+.story .stage{position:absolute;inset:0}
+.actor{position:absolute}
+.storybox{position:absolute;left:3%;right:3%;top:calc(2% + env(safe-area-inset-top));background:rgba(255,255,255,.96);border-radius:22px;padding:12px 20px;font-size:clamp(19px,1.6vmin + 12px,30px);line-height:1.55;box-shadow:0 6px 0 rgba(0,0,0,.15);z-index:5;animation:pop .3s}
+.who{font-weight:900;color:#d9581c;font-size:.85em}
+.tapnext{text-align:right;font-size:15px;color:#a08a6a;animation:blink 1.4s infinite}
+.sbtn{display:flex;justify-content:center;margin-top:10px}
+.skip{position:absolute;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));width:auto;padding:0 14px;font-size:17px;z-index:7;background:rgba(0,0,0,.35)}
+.cage{width:14vmin;height:15vmin;border-radius:40% 40% 8px 8px;background:repeating-linear-gradient(90deg,transparent 0 1.6vmin,#555 1.6vmin 2.2vmin);border:.7vmin solid #555;display:flex;align-items:flex-end;justify-content:center;font-size:10vmin;line-height:1;background-color:rgba(255,255,255,.25)}
+.hp{font-size:4.5vmin;background:rgba(255,255,255,.85);border-radius:999px;padding:4px 12px;white-space:nowrap}
+.fallen .flip{transform:scaleX(-1) rotate(170deg) translateY(-30%)}
+.leaveL{display:flex;align-items:flex-end;gap:1vmin;animation:leaveL 3.2s ease-in .6s forwards}
+.parade{display:flex;justify-content:space-between;align-items:flex-end}
+.parade .pe{width:12%;text-align:center}
+.parade .pl{font-size:clamp(11px,1.6vmin,16px);color:#fff;font-weight:800;white-space:nowrap;text-shadow:0 2px 2px #000}
+/* tower */
+.tower{display:flex;flex-direction:column;height:100%;width:100%;gap:3px;padding:4px;background:rgba(0,0,0,.25);border-radius:12px}
+.floor{flex:1;position:relative;border:3px solid #3d2560;border-radius:8px;background:rgba(0,0,0,.35);overflow:hidden;min-height:14px}
+.fl-fill{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);background:radial-gradient(circle at 20% 30%,#5ad1ff 0 11%,transparent 12%),radial-gradient(circle at 62% 70%,#ff6fae 0 11%,transparent 12%),radial-gradient(circle at 85% 25%,#ffd84a 0 11%,transparent 12%),radial-gradient(circle at 40% 82%,#7df07b 0 9%,transparent 10%),linear-gradient(#b48cff,#7b4fd6);background-size:34px 30px,34px 30px,34px 30px,34px 30px,100% 100%;box-shadow:inset 0 0 12px rgba(255,255,255,.5);transition:width .6s}
+.fl-n{position:absolute;left:5px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:900;color:#fff;text-shadow:0 1px 3px #000}
+.fl-gift{position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:16px}
+.fl-amt{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:13px;font-weight:900;color:#fff;text-shadow:0 1px 3px #000}
+/* title */
+.title{align-items:center;justify-content:center}
+.tbox{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.tbox h1{margin:0;font-size:clamp(40px,8vmin,84px);line-height:1.1;color:#fff;text-shadow:0 5px 0 #d9581c,0 10px 20px rgba(0,0,0,.3)}
+.tbox h1 span{color:#ffe14a}
+.tdragon{width:min(42vmin,340px)}
+.tsub{font-size:22px;font-weight:800;color:#3a2a17;background:rgba(255,255,255,.85);padding:6px 16px;border-radius:999px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.chip{font:inherit;font-size:19px;font-weight:800;border:none;border-radius:999px;padding:10px 16px;min-height:46px;background:#fff;color:#d9581c;box-shadow:0 3px 0 #e0c48a}
+.chip.pressed{transform:translateY(3px)}
+/* hub */
+.hubmain{flex:1;display:grid;grid-template-columns:minmax(150px,22%) 1fr minmax(170px,24%);grid-template-rows:1fr auto;grid-template-areas:"tower center gp" "elves elves elves";gap:8px;padding:8px 14px 0;position:relative;min-height:0}
+.hub-tower{grid-area:tower;display:flex;flex-direction:column;align-items:center;min-height:0;gap:4px;z-index:2}
+.tlabel{color:#fff;font-size:16px;font-weight:800;text-align:center}
+.tlabel b{color:#ffe14a}
+.hub-tower .tower{flex:1;max-width:230px;min-height:0}
+.hub-center{grid-area:center;position:relative;display:flex;align-items:flex-end;justify-content:center;min-height:0}
+.hub-dragon{width:min(46vmin,92%);position:relative;z-index:2}
+.mybed{display:flex;flex-wrap:wrap;justify-content:center;margin-top:-6%;padding:0 10%;position:relative;z-index:-1}
+.baby{position:absolute;right:2%;bottom:4%;width:min(15vmin,24%);z-index:3}
+.hub-gp{grid-area:gp;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px;min-height:0;z-index:2}
+.hub-gp .gsvg{width:min(17vmin,140px)}
+.hub-gp .bubble{font-size:17px}
+.hub-elves{grid-area:elves;display:flex;justify-content:center;gap:1.2%;align-items:flex-end;z-index:2}
+.he{width:min(9vmin,10%)}
+.hubbar{display:flex;gap:14px;justify-content:center;padding:10px 12px 14px;flex:none;z-index:2}
+.deco{position:absolute;font-size:7vmin;line-height:1;pointer-events:none;z-index:1;filter:drop-shadow(0 0 8px rgba(255,230,128,.5))}
+@media (orientation:portrait){
+ .hubmain{grid-template-columns:36% 1fr;grid-template-rows:auto 1fr auto;grid-template-areas:"gp gp" "tower center" "elves elves"}
+ .hub-gp{flex-direction:row-reverse;align-items:flex-end}
+ .hub-gp .gsvg{width:100px;flex:none}
+ .hub-gp .bubble{flex:1}
+ .he{width:10%}
+}
+/* step screens */
+.stepbg{background:linear-gradient(#3b2163,#22123f)}
+.stepmain{flex:1;display:grid;grid-template-columns:1.3fr 1fr;gap:12px;padding:12px;min-height:0}
+.panel{border-radius:24px;position:relative;overflow:hidden;min-height:0}
+.scenep{display:flex;flex-direction:column;gap:8px;padding:12px}
+.sky2{background:linear-gradient(#a8e0ff,#e6f7ff 58%,#c5ea9f 58%,#8fd16a)}
+.cavep{background:radial-gradient(ellipse at 50% 80%,#6b468f,#341d55 70%)}
+.gpline{display:flex;align-items:flex-start;gap:8px;flex:none}
+.gpm{width:72px;flex:none}
+.gpline .bubble{flex:1;font-size:18px;padding:8px 14px}
+.pilebox{flex:1.1;display:flex;flex-direction:column;align-items:center;min-height:0;background:rgba(255,255,255,.35);border-radius:18px;padding:6px}
+.cavep .pilebox{background:rgba(255,255,255,.1)}
+.pilecount{font-size:22px;font-weight:900;color:#3a2a17;background:#fff;border-radius:999px;padding:2px 16px;flex:none}
+.pilecount span{color:#d9581c;font-size:28px}
+.pile{flex:1;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;overflow:hidden;width:100%;padding:4px}
+.pile.glow{animation:glow 1s 2}
+.teamline{display:flex;align-items:center;gap:12px;flex:none;background:rgba(255,255,255,.6);border-radius:18px;padding:4px 12px}
+.teamelf{width:86px}
+.teaminfo{font-size:18px;line-height:1.45}
+.road{flex:1;display:flex;flex-wrap:wrap;align-content:flex-start;justify-content:center;gap:4px 6px;min-height:0;padding-top:12px;overflow:hidden}
+.re{width:var(--es,60px);position:relative}
+.re .tag{position:absolute;top:-4px;right:-6px;background:#e33;color:#fff;border-radius:10px;font-size:12px;padding:1px 6px;font-weight:900}
+.re .tag.ok{background:#2fb457}
+.re.bad{animation:shake .5s 2}
+.plates{flex:1.3;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:8px 10px;min-height:0;overflow:hidden}
+.pl{width:var(--es,64px);display:flex;flex-direction:column;align-items:center;position:relative}
+.pl .cnt{background:#fff;border-radius:999px;font-weight:900;font-size:15px;padding:1px 8px;margin-top:-4px;color:#d9581c;box-shadow:0 2px 0 rgba(0,0,0,.2);white-space:nowrap}
+.pl .cnt::before{content:'🍬'}
+.pl.angry .cnt{background:#e33;color:#fff}
+.pl.angry .pe{animation:shake .5s 3}
+.pl .pe{width:100%}
+.qp{background:#fff8e8;box-shadow:inset 0 0 0 4px #ffd27a;padding:14px;display:flex;flex-direction:column;gap:12px}
+.qbox{display:flex;flex-direction:column;gap:10px;background:#fff;border-radius:18px;padding:12px 14px;flex:none}
+.qrow{font-size:25px;font-weight:800;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.ans{display:inline-flex;min-width:88px;height:60px;border:4px dashed #ffb347;border-radius:14px;align-items:center;justify-content:center;font-size:36px;color:#d9581c;background:#fffaf0;padding:0 8px}
+.ans.on{border-style:solid;border-color:#ff7a1a;box-shadow:0 0 0 5px rgba(255,122,26,.25)}
+.ans.on:empty::after{content:'?';color:#ffcf9a;animation:blink 1s infinite}
+.ans.bad{border-color:#e33;animation:shake .4s}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:8px;flex:1;min-height:0;max-height:420px}
+.key{font:inherit;font-size:30px;font-weight:900;border:none;border-radius:16px;background:#fff;color:#5a3a12;box-shadow:0 4px 0 #e0c48a;min-height:52px;touch-action:manipulation}
+.key.pressed{transform:translateY(3px);box-shadow:0 1px 0 #e0c48a;background:#fff1d6}
+.key[disabled]{opacity:.5}
+.acts{display:flex;flex-direction:column;gap:10px;flex:none}
+.row2{display:flex;gap:10px}.row2 .btn{flex:1}
+.qp.alt{display:flex;flex-direction:column;justify-content:center}
+.manual{display:flex;flex-direction:column;gap:14px;align-items:stretch;text-align:center}
+.mtitle{font-size:26px;font-weight:900}
+.mnote{font-size:19px;line-height:1.5}
+.mstat{font-size:22px;font-weight:900;color:#d9581c;background:#fff;border-radius:16px;padding:8px}
+.win{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;animation:pop .4s}
+.wt{font-size:30px;font-weight:900;color:#2fb457}
+.stars{font-size:52px;letter-spacing:6px;line-height:1}
+.st{color:#ddd;display:inline-block}
+.st.on{color:#ffc61a;text-shadow:0 3px 0 #d99a00;animation:starIn .5s backwards}
+.eq{display:flex;align-items:flex-start;justify-content:center;gap:6px;background:#fff;border-radius:18px;padding:10px 14px;box-shadow:0 4px 0 #e0c48a;flex-wrap:wrap}
+.eq .t{display:flex;flex-direction:column;align-items:center}
+.eq .t b{font-size:38px;line-height:1.1;color:#3a2a17}
+.eq .t i{font-style:normal;font-size:13px;color:#a08a6a}
+.eq .op{font-size:34px;font-weight:900;color:#d9581c;line-height:1.2}
+.chk{font-size:17px;color:#2f8b4a;font-weight:800}
+.wnote{font-size:18px;line-height:1.5}
+@media (orientation:portrait){
+ .stepmain{grid-template-columns:1fr;grid-template-rows:1fr auto}
+ .qp:not(.alt){display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr;grid-template-areas:"q k" "a k"}
+ .qp:not(.alt) .qbox{grid-area:q}.qp:not(.alt) .keypad{grid-area:k;max-height:none}.qp:not(.alt) .acts{grid-area:a;justify-content:flex-end}
+ .qrow{font-size:22px}
+ .ans{min-width:76px;height:56px}
+ .scenep{padding:10px}
+}
+@media (max-height:700px) and (orientation:landscape){.teamline{display:none}.gpm{width:54px}}
+/* market */
+.mkt{flex:1;display:flex;flex-direction:column;gap:12px;padding:12px;min-height:0;overflow:hidden}
+.town{background:linear-gradient(#a8e0ff,#e6f7ff 60%,#c5ea9f 60%,#8fd16a);border-radius:22px;padding:10px;position:relative;flex:none;text-align:center}
+.houses{font-size:min(9vmin,60px);line-height:1.1;letter-spacing:4px}
+.villagers{font-size:min(6vmin,40px)}
+.mk-elves{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;margin-top:6px}
+.mk-elves .re{width:min(6vmin,48px)}
+.receipt{background:#fff8e8;border-radius:18px;padding:8px 16px;font-size:20px;box-shadow:inset 0 0 0 4px #ffd27a;flex:none}
+.rl{padding:6px 0;border-bottom:2px dashed #f0d9a8}
+.rl:last-child{border-bottom:none}
+.thx{font-size:16px;color:#2f8b4a}
+.bagsec{display:flex;flex-direction:column;gap:10px;flex:1;min-height:0}
+.bags{display:flex;gap:14px;flex:1;min-height:0}
+.bagcard{flex:1;min-width:0;font:inherit;background:#fff;border:none;border-radius:22px;padding:10px;box-shadow:0 6px 0 #e0c48a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#3a2a17;touch-action:manipulation;animation:pop .4s backwards}
+.bagcard.pressed{transform:translateY(5px);box-shadow:0 1px 0 #e0c48a}
+.bagimg{font-size:min(12vmin,80px);line-height:1;position:relative}
+.bn{font-size:28px;font-weight:900;color:#d9581c}
+.bp{font-size:19px;font-weight:800}
+/* summary, shop, book */
+.center{flex:1;display:flex;align-items:center;justify-content:center;padding:14px;min-height:0}
+.card{background:#fff8e8;border-radius:28px;padding:20px 26px;box-shadow:0 0 0 6px #ffd27a,0 16px 30px rgba(0,0,0,.35);max-width:640px;width:100%;max-height:100%;overflow:auto;animation:pop .4s;text-align:center}
+.card h2{margin:4px 0 6px;font-size:32px}
+.srow{display:flex;justify-content:space-between;font-size:20px;padding:6px 4px;border-bottom:2px dashed #f0d9a8;gap:10px;text-align:left}
+.srow span:last-child{font-weight:900;white-space:nowrap}
+.lvmsg{margin:10px 0;font-size:20px;font-weight:800;padding:8px;border-radius:14px;background:#e8ffe9;color:#1d7f3a}
+.lvmsg.down{background:#eef4ff;color:#1b5fa3}
+.shopwrap{flex:1;display:grid;grid-template-columns:30% 1fr;gap:12px;padding:12px;min-height:0}
+.shopprev{background:radial-gradient(ellipse at 50% 70%,#6b468f,#341d55);border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;gap:10px}
+.shopprev .dragon{width:90%;max-width:300px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{font:inherit;font-size:19px;font-weight:800;border:none;border-radius:14px;padding:10px 16px;min-height:50px;background:rgba(255,255,255,.25);color:#fff}
+.tab.on{background:#fff;color:#d9581c}
+.shopright{display:flex;flex-direction:column;gap:10px;min-height:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;flex:1;min-height:0;align-content:start;padding:4px 4px 20px}
+.item{background:#fff8e8;border-radius:20px;padding:10px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 4px 0 #e0c48a}
+.item .ii{font-size:48px;line-height:1.1;height:56px;display:flex;align-items:center}
+.item .in{font-size:18px;font-weight:900}
+.item .btn{width:100%;font-size:17px;min-height:48px;padding:6px}
+.swatch{width:48px;height:48px;border-radius:50%;border:4px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+@media (orientation:portrait){.shopwrap{grid-template-columns:1fr;grid-template-rows:auto 1fr}.shopprev{flex-direction:row}.shopprev .dragon{width:200px}}
+.book{flex:1;padding:14px;min-height:0}
+.bookin{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;padding-bottom:30px}
+.bk{background:#fff8e8;border-radius:22px;padding:14px 18px;font-size:19px;line-height:1.6;box-shadow:0 4px 0 #e0c48a}
+.bk h3{margin:0 0 6px;font-size:23px}
+.eqlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}
+.eqlist div{background:#fff;border-radius:10px;padding:4px 10px;font-weight:800;font-size:18px}
+.bar{height:16px;background:#eadbc0;border-radius:999px;overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#ffd23f,#ff7a1a)}
+.hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px;text-align:left;max-height:46vh;padding:4px}
+.hgrid div{background:#fff;border-radius:10px;padding:4px 10px;font-size:18px}
+.brief .bel{width:120px;margin:0 auto}
+.flav{color:#8a6a40;font-size:18px}
+.rw .rwi{font-size:90px;line-height:1.1;animation:pop .5s}
+.rw .rwi.egg{animation:wob .4s infinite}
+.rwbaby{width:220px;margin:0 auto}
+.got{font-size:24px;font-weight:900;color:#2fb457}
+#rotTip{display:none}
+.sub{font-size:15px;color:#b9a8e8;text-align:left;padding:2px 4px 6px;border-bottom:2px dashed rgba(255,255,255,.15)}
+/* ===== arcade style layer ===== */
+:root{--ink:#1b0b26;--fd:"ZCOOL QingKe HuangYou","PingFang SC","Hiragino Sans GB","Heiti SC",sans-serif;--neon:#5ee7ff;--gold:#ffd23f}
+.btn,.key,.ttl,h1,h2,h3,.ans,.pilecount,.mtitle,.wt,.bn,.res span,.tab,.chip,.eq .t b,.mstat,.who,.stars,.bp,.in{font-family:var(--fd);font-weight:400;letter-spacing:.5px}
+.btn{border:3px solid var(--ink);border-radius:16px;text-shadow:0 2px 0 rgba(0,0,0,.45)}
+.btn,.btn.green,.btn.blue,.btn.purple,.btn.red,.btn.gray{--sh:var(--ink)}
+.btn{box-shadow:0 6px 0 var(--ink)}.btn.pressed{box-shadow:0 2px 0 var(--ink)}
+.btn.big{font-size:27px}.btn.huge{font-size:34px}
+b{color:#ff7a1a}
+.bubble{border:3px solid var(--ink);box-shadow:4px 5px 0 var(--ink);border-radius:18px;font-weight:700}
+.storybox{border:4px solid var(--ink);box-shadow:6px 7px 0 var(--ink);font-weight:700}
+.who{display:inline-block;background:var(--gold);color:var(--ink);border:3px solid var(--ink);border-radius:10px;padding:0 12px;transform:rotate(-3deg);margin:-26px 0 2px -6px;font-size:.95em;box-shadow:3px 3px 0 var(--ink)}
+.dbox{background:linear-gradient(#2e1b5c,#170c33);color:#fff;border:4px solid var(--ink);box-shadow:0 0 0 4px var(--neon),0 0 36px rgba(94,231,255,.55),0 20px 40px rgba(0,0,0,.5)}
+.dbox b,.card b,.bk b,.wnote b,.qp b,.manual b,.receipt b,.teaminfo b{color:var(--gold)}
+.dbox h3{color:#fff;text-shadow:0 3px 0 var(--ink)}
+.flav{color:#c9b8ff}
+.top{background:linear-gradient(#2c155c,#190a3a);border-bottom:3px solid var(--ink);box-shadow:0 3px 0 rgba(94,231,255,.45)}
+.res span{background:#0d0620;border:2px solid rgba(94,231,255,.45)}
+.res span.combo{border-color:#ff7a1a;color:#ffcf3f;box-shadow:0 0 12px rgba(255,122,26,.6)}
+.stepbg{background:repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 22px,transparent 22px 44px),radial-gradient(ellipse at 50% 0,#4a2a8a,#170b33 70%)}
+.panel{border:3px solid var(--ink)}
+.sky2{background:linear-gradient(#4fc3ff,#a6e7ff 56%,#79d158 56%,#3f9e33)}
+.cavep{background:radial-gradient(circle at 15% 85%,rgba(94,231,255,.25),transparent 30%),radial-gradient(circle at 85% 80%,rgba(255,80,200,.22),transparent 30%),radial-gradient(ellipse at 50% 80%,#5e3a8a,#25124a 75%)}
+.bg-cave{background:radial-gradient(circle at 10% 85%,rgba(94,231,255,.22),transparent 26%),radial-gradient(circle at 90% 75%,rgba(255,80,200,.2),transparent 26%),radial-gradient(ellipse at 50% 75%,#5b3a7a,#2a1640 60%,#140820)}
+.qp{background:linear-gradient(160deg,#2c1a5a,#150a2e);box-shadow:inset 0 0 0 3px var(--neon),0 0 22px rgba(94,231,255,.25);color:#fff}
+.qbox{background:rgba(255,255,255,.05);border:2px solid rgba(94,231,255,.35)}
+.qrow{color:#fff}
+.ans{background:#0d0620;border-color:var(--neon);color:#ffe14a;font-size:40px}
+.ans.on{border-color:#ffe14a;box-shadow:0 0 0 4px rgba(255,225,74,.3),0 0 20px rgba(255,225,74,.55)}
+.ans.on:empty::after{color:rgba(255,225,74,.45)}
+.key{background:linear-gradient(#45307f,#2a1a58);color:#fff;border:3px solid var(--ink);box-shadow:0 5px 0 var(--ink);font-size:34px}
+.key.pressed{background:#6a4bc4;box-shadow:0 1px 0 var(--ink)}
+.pilecount{background:#0d0620;color:#fff;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
+.pilecount span{color:#ffe14a;font-size:32px}
+.pilebox{background:rgba(13,6,32,.25)}
+.teamline{background:rgba(13,6,32,.8);color:#fff;border:2px solid var(--ink)}
+.nick{display:inline-block;background:#ff3d7f;color:#fff;border:2px solid var(--ink);border-radius:8px;padding:0 8px;font-size:15px;transform:rotate(-2deg);font-family:var(--fd)}
+.win .wt{color:#7dff8a;text-shadow:0 3px 0 var(--ink);font-size:38px}
+.wnote{color:#e8deff}
+.eq{background:#0d0620;border:3px solid var(--gold);box-shadow:0 0 20px rgba(255,210,63,.35)}
+.eq .t b{color:#fff;font-size:42px}.eq .t i{color:#b9a8e8}.eq .op{color:#ff7a1a}
+.chk{color:#7dff8a}
+.manual{color:#fff}.mstat{background:#0d0620;color:#ffe14a;border:2px solid var(--gold)}
+.card{background:linear-gradient(#2e1b5c,#170c33);color:#fff;box-shadow:0 0 0 4px var(--gold),0 0 34px rgba(255,210,63,.45),0 16px 30px rgba(0,0,0,.5);border:4px solid var(--ink)}
+.card h2{text-shadow:0 3px 0 var(--ink);color:#fff}
+.srow{border-bottom-color:rgba(255,255,255,.15)}
+.lvmsg{background:rgba(125,255,138,.15);color:#7dff8a}.lvmsg.down{background:rgba(94,231,255,.15);color:var(--neon)}
+.receipt{background:#1d1040;color:#fff;box-shadow:inset 0 0 0 3px var(--neon)}
+.rl{border-bottom-color:rgba(255,255,255,.15)}.thx{color:#7dff8a}
+.town{border:3px solid var(--ink)}
+.bagcard{background:linear-gradient(#45307f,#24154c);color:#fff;border:3px solid var(--ink);box-shadow:0 6px 0 var(--ink)}
+.bagcard.pressed{box-shadow:0 1px 0 var(--ink)}
+.bn{color:#ffe14a;font-size:32px}
+.item{background:linear-gradient(#45307f,#24154c);color:#fff;border:3px solid var(--ink);box-shadow:0 5px 0 var(--ink)}
+.bk{background:linear-gradient(#2e1b5c,#170c33);color:#fff;border:3px solid var(--ink);box-shadow:0 5px 0 var(--ink)}
+.eqlist div,.hgrid div{background:#0d0620;color:#fff}
+.bar{background:#0d0620}
+.tab{border:3px solid var(--ink)}
+.title{background:radial-gradient(ellipse at 50% 120%,#ff7a1a 0,#c0306a 22%,#4a1a7e 50%,#120826 85%)}
+.title::before{content:'';position:absolute;inset:0;background-image:radial-gradient(2px 2px at 20% 30%,#fff,transparent),radial-gradient(2px 2px at 70% 20%,#fff,transparent),radial-gradient(1.5px 1.5px at 40% 60%,#fff,transparent),radial-gradient(2px 2px at 85% 45%,#fff,transparent),radial-gradient(1.5px 1.5px at 10% 70%,#fff,transparent),radial-gradient(1.5px 1.5px at 55% 12%,#fff,transparent);opacity:.8}
+.tbox h1{font-weight:400;-webkit-text-stroke:4px var(--ink);paint-order:stroke fill;text-shadow:0 7px 0 var(--ink),0 0 40px rgba(255,122,26,.9);font-size:clamp(46px,9.5vmin,100px)}
+.tbox h1 span{color:var(--gold)}
+.tagline{font-family:var(--fd);color:var(--neon);font-size:clamp(18px,2.6vmin,26px);letter-spacing:3px;text-shadow:0 2px 0 var(--ink)}
+.tsub{background:#0d0620;color:#fff;border:2px solid var(--neon)}
+.chip{background:#2c1a5a;color:#fff;border:3px solid var(--ink);box-shadow:0 3px 0 var(--ink)}
+input{background:#0d0620;color:#ffe14a;border-color:var(--neon);font-family:var(--fd)}
+.dragon svg{filter:drop-shadow(0 0 10px rgba(255,140,40,.35))}
+.tflame{animation:flick .25s ease-in-out infinite alternate;transform-origin:10px 74px;transform-box:view-box}
+@keyframes flick{from{transform:scale(1,1)}to{transform:scale(.85,1.15)}}
+.banner{position:fixed;left:50%;top:42%;z-index:55;pointer-events:none;font-family:var(--fd);font-size:clamp(50px,11vmin,120px);line-height:1.05;color:#ffe14a;-webkit-text-stroke:5px var(--ink);paint-order:stroke fill;text-shadow:0 8px 0 var(--ink),0 0 46px rgba(255,200,0,.85);white-space:nowrap;text-align:center;transform:translate(-50%,-50%);animation:slam 1.5s forwards}
+.banner small{display:block;font-size:.42em;-webkit-text-stroke:3px var(--ink);color:#fff}
+.banner.bad{color:#ff5d5d;text-shadow:0 8px 0 var(--ink),0 0 46px rgba(255,60,60,.7)}
+.banner.cyan{color:var(--neon);text-shadow:0 8px 0 var(--ink),0 0 46px rgba(94,231,255,.8)}
+@keyframes slam{0%{transform:translate(-50%,-50%) scale(3) rotate(-8deg);opacity:0}14%{transform:translate(-50%,-50%) scale(.92) rotate(-4deg);opacity:1}22%{transform:translate(-50%,-50%) scale(1.06) rotate(-4deg)}80%{transform:translate(-50%,-50%) scale(1) rotate(-4deg);opacity:1}100%{transform:translate(-50%,-62%) scale(1) rotate(-4deg);opacity:0}}
+.quake{animation:quake .4s}
+@keyframes quake{20%{transform:translate(-7px,3px)}40%{transform:translate(7px,-3px)}60%{transform:translate(-4px,2px)}80%{transform:translate(3px,-1px)}}
+.bg-battle{background:linear-gradient(#ff9a5a,#ffcf8a 45%,#ffe6b0 72%)}
+.bg-battle .sun{background:radial-gradient(#fff3b0,#ff8a3d);box-shadow:0 0 60px #ff7a1a;top:30%}
+.hp{border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);font-family:var(--fd)}
+.tlabel{font-family:var(--fd);font-size:18px;text-shadow:0 2px 0 var(--ink)}
+.parade .pl{font-family:var(--fd)}
+
+</style>
+</head>
+<body>
+<div id="app"></div>
+<canvas id="fx"></canvas>
+<div id="dlg" class="hidden"></div>
+<script>
+'use strict';
+/* ========== helpers ========== */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const app=$('#app');
+new MutationObserver(()=>{document.querySelectorAll('.fbub').forEach(b=>b.remove())}).observe(app,{childList:true});
+function ctr(el){const r=el.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2,r}}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+/* ========== save ========== */
+const KEY='dragonGemMountain.v1';
+const TOWER=1400, FLOOR=200;
+function fresh(){return{name:'火火',day:1,coins:0,jar:0,myGems:0,stars:0,level:1,good:0,bad:0,tower:TOWER,round:1,floorsGot:0,owned:{},head:null,face:null,color:'orange',prologue:false,sound:true,hist:[],right:0,total:0,baby:0,tipI:0,combo:0,best:0}}
+let S=fresh();
+function load(){try{const t=localStorage.getItem(KEY);if(t){S=Object.assign(fresh(),JSON.parse(t));return true}}catch(e){}return false}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+let hasSave=load()&&S.prologue;
+
+/* ========== audio (starts after first tap) ========== */
+let AC=null;
+function unlockAudio(){try{if(!AC){const C=window.AudioContext||window.webkitAudioContext;if(!C)return;AC=new C()}if(AC.state==='suspended')AC.resume()}catch(e){}}
+function tone(f,d=.15,type='sine',v=.12,t0=0,f2=null){if(!AC||!S.sound)return;const t=AC.currentTime+t0;const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+d+.03)}
+function noise(d=.4,v=.2,f1=1200,f2=200){if(!AC||!S.sound)return;const t=AC.currentTime,len=Math.floor(AC.sampleRate*d),b=AC.createBuffer(1,len,AC.sampleRate),ch=b.getChannelData(0);for(let i=0;i<len;i++)ch[i]=Math.random()*2-1;const s=AC.createBufferSource();s.buffer=b;const fl=AC.createBiquadFilter();fl.type='lowpass';fl.frequency.setValueAtTime(f1,t);fl.frequency.exponentialRampToValueAtTime(f2,t+d);const g=AC.createGain();g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);s.connect(fl).connect(g).connect(AC.destination);s.start(t)}
+const SFX={
+ tap:()=>tone(660,.06,'triangle',.07),
+ key:()=>tone(520+Math.random()*80,.06,'square',.035),
+ gem:()=>tone(1400+Math.random()*600,.12,'sine',.07),
+ candy:()=>tone(900+Math.random()*300,.08,'triangle',.07),
+ coin:()=>{tone(988,.08,'square',.045);tone(1319,.16,'square',.045,.07)},
+ good:()=>[523,659,784,1047].forEach((f,i)=>tone(f,.2,'triangle',.12,i*.09)),
+ bad:()=>{tone(320,.16,'sawtooth',.045,0,240);tone(240,.24,'sawtooth',.045,.14,170)},
+ fire:()=>noise(.5,.25,2600,300),
+ pop:()=>tone(380,.1,'sine',.09,0,880),
+ star:()=>tone(1568,.22,'sine',.09,0,2093),
+ fanfare:()=>[392,523,659,784,659,784,1047].forEach((f,i)=>tone(f,.24,'triangle',.11,i*.12)),
+ boom:()=>{noise(.6,.32,900,60);tone(130,.4,'sine',.18,0,45)},
+};
+function sfx(n){try{SFX[n]&&SFX[n]()}catch(e){}}
+
+/* ========== particles (Retina, DPR capped at 2) ========== */
+const fx=$('#fx'),fxc=fx.getContext('2d');let P=[],fxOn=false,lastT=0;
+function resizeFx(){const d=Math.min(window.devicePixelRatio||1,2);fx.width=Math.round(innerWidth*d);fx.height=Math.round(innerHeight*d);fxc.setTransform(d,0,0,d,0,0)}
+addEventListener('resize',resizeFx);addEventListener('orientationchange',()=>setTimeout(resizeFx,300));resizeFx();
+function addP(p){p.max=p.life;P.push(p);if(!fxOn){fxOn=true;lastT=0;requestAnimationFrame(fxLoop)}}
+function fxLoop(t){const dt=lastT?Math.min(.05,(t-lastT)/1000):.016;lastT=t;fxc.clearRect(0,0,innerWidth,innerHeight);
+ P=P.filter(p=>{p.life-=dt;if(p.life<=0)return false;if(p.drag)p.vx*=p.drag,p.vy*=p.drag;p.vy+=(p.g||0)*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.rot=(p.rot||0)+(p.vr||0)*dt;fxc.globalAlpha=Math.min(1,p.life/(p.fade||.4));
+  if(p.txt){fxc.save();fxc.translate(p.x,p.y);fxc.rotate(p.rot);fxc.font=(p.bold?'900 ':'')+p.size+'px "ZCOOL QingKe HuangYou",sans-serif';fxc.textAlign='center';fxc.textBaseline='middle';if(p.c){fxc.lineWidth=6;fxc.strokeStyle='#1b0b26';fxc.strokeText(p.txt,0,0);fxc.fillStyle=p.c}fxc.fillText(p.txt,0,0);fxc.restore()}
+  else if(p.rect){fxc.save();fxc.translate(p.x,p.y);fxc.rotate(p.rot);fxc.fillStyle=p.c;fxc.fillRect(-p.size/2,-p.size/4,p.size,p.size/2);fxc.restore()}
+  else{const s=p.grow?p.size*(1+(p.max-p.life)*p.grow):p.size;fxc.fillStyle=p.c;fxc.beginPath();fxc.arc(p.x,p.y,s,0,7);fxc.fill()}
+  return true});
+ fxc.globalAlpha=1;if(P.length)requestAnimationFrame(fxLoop);else{fxOn=false;fxc.clearRect(0,0,innerWidth,innerHeight)}}
+function confetti(x=innerWidth/2,y=innerHeight/3,n=80){const cs=['#ff5d8f','#ffd23f','#3ec1ff','#7cf06b','#b98bff','#ff8a3d'];for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,s=180+Math.random()*420;addP({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-260,g:760,drag:.985,life:1.5+Math.random(),fade:.6,c:pick(cs),size:10+Math.random()*8,rect:1,rot:Math.random()*6,vr:(Math.random()-.5)*12})}}
+function fireStream(x,y,tx,ty,n=40){const cs=['#fff3a0','#ffd23f','#ff9f1c','#ff5d1c','#e63900'],dx=tx-x,dy=ty-y,d=Math.hypot(dx,dy)||1,sp=d/.42;for(let i=0;i<n;i++)setTimeout(()=>{const a=Math.atan2(dy,dx)+(Math.random()-.5)*.28,s=sp*(.8+Math.random()*.4);addP({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:.42+Math.random()*.15,fade:.25,c:pick(cs),size:5+Math.random()*7,grow:2.6})},i*8)}
+function sparkles(x,y,n=16,txt='✨',spread=160){for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,s=40+Math.random()*spread;addP({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-60,g:120,life:.9+Math.random()*.6,fade:.5,txt,size:18+Math.random()*14})}}
+function banner(h,cls=''){$$('.banner').forEach(b=>b.remove());const b=document.createElement('div');b.className='banner '+cls;b.innerHTML=h;document.body.appendChild(b);setTimeout(()=>b.remove(),1600)}
+function quake(){app.classList.remove('quake');void app.offsetWidth;app.classList.add('quake')}
+function dmg(x,y,txt,c='#ffe14a',size=46){addP({x,y,vx:(Math.random()-.5)*140,vy:-300,g:420,life:1.1,fade:.4,txt,size,c,bold:1})}
+const RIGHT=['绝绝子！','YYDS！','666666！','泰酷辣！','稳如老狗！','神操作！','格局打开！','这波满分！'];
+const WRONG=['芭比Q了…','啊这…','我真的会谢','破防了…','CPU干烧了','离了个大谱'];
+const NICK={2:'小萌新',3:'三头六臂·打折版',4:'四手联弹',5:'五指山',6:'六六六',7:'七手八脚',8:'八爪鱼本鱼',9:'九阴白骨爪'};
+function mouth(el){const r=el.getBoundingClientRect();return{x:r.left+r.width*.975,y:r.top+r.height*.5}}
+
+/* ========== input: Pointer Events, one finger, no hover/right-click ========== */
+const ACT={};let downEl=null,downId=null;
+document.addEventListener('pointerdown',e=>{unlockAudio();if(!e.isPrimary)return;if(downEl)return;const el=e.target.closest('[data-act]');if(!el||el.disabled)return;downEl=el;downId=e.pointerId;el.classList.add('pressed')},{passive:true});
+document.addEventListener('pointerup',e=>{if(e.pointerId!==downId)return;const el=downEl;downEl=null;downId=null;if(!el)return;el.classList.remove('pressed');const u=document.elementFromPoint(e.clientX,e.clientY);if(u&&(el===u||el.contains(u))){const f=ACT[el.dataset.act];if(f){if(!el.dataset.quiet)sfx('tap');try{f(el,e)}catch(err){console.error(err)}}}});
+document.addEventListener('pointercancel',e=>{if(downEl&&e.pointerId===downId){downEl.classList.remove('pressed');downEl=null;downId=null}});
+document.addEventListener('touchmove',e=>{if(!e.target.closest('.scroll'))e.preventDefault()},{passive:false});
+document.addEventListener('touchstart',e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});
+['gesturestart','gesturechange','gestureend','dblclick','contextmenu','selectstart'].forEach(t=>document.addEventListener(t,e=>{if(!(e.target.closest&&e.target.closest('input')))e.preventDefault()},{passive:false}));
+let lastTouchEnd=0;document.addEventListener('touchend',e=>{const n=Date.now();if(n-lastTouchEnd<350&&!e.target.closest('input'))e.preventDefault();lastTouchEnd=n},{passive:false});
+
+/* ========== dialogs (in-page, never alert/confirm/prompt) ========== */
+let dlgCbs=[];
+function dialog(html,btns=[{t:'好的'}]){return new Promise(res=>{const d=$('#dlg');dlgCbs=btns.map((b,i)=>()=>{const vals={};$$('input',d).forEach(inp=>vals[inp.id]=inp.value);d.classList.add('hidden');d.innerHTML='';dlgCbs=[];res({i,vals})});d.innerHTML=`<div class="dbox">${html}<div class="dbtns">${btns.map((b,i)=>`<button class="btn ${b.c||''}" data-act="dlg" data-i="${i}">${b.t}</button>`).join('')}</div></div>`;d.classList.remove('hidden')})}
+ACT.dlg=el=>{const f=dlgCbs[+el.dataset.i];f&&f()};
+function floatBubble(el,txt,ms=2400){$$('.fbub').forEach(b=>b.remove());const r=el.getBoundingClientRect(),b=document.createElement('div');b.className='fbub';b.innerHTML=txt;document.body.appendChild(b);b.style.left=clamp(r.left+r.width/2,140,innerWidth-140)+'px';b.style.top=Math.max(90,r.top+8)+'px';setTimeout(()=>b.classList.add('out'),ms);setTimeout(()=>b.remove(),ms+500)}
+function fly(html,from,to,dur=500){const d=document.createElement('div');d.className='flyer';d.innerHTML=html;document.body.appendChild(d);d.style.left=from.x+'px';d.style.top=from.y+'px';const dx=to.x-from.x,dy=to.y-from.y;let done=false;return new Promise(r=>{const fin=()=>{if(done)return;done=true;d.remove();r()};try{const an=d.animate([{transform:'translate(-50%,-50%) translate(0,0) scale(1)'},{transform:`translate(-50%,-50%) translate(${dx*.5}px,${dy*.5-60}px) scale(1.2)`,offset:.5},{transform:`translate(-50%,-50%) translate(${dx}px,${dy}px) scale(.8)`}],{duration:dur,easing:'ease-in-out',fill:'forwards'});an.onfinish=fin}catch(e){}setTimeout(fin,dur+250)})}
+
+/* ========== art ========== */
+const DCOL={orange:['#ff8a3d','#d9581c','#ffe3a6','#ffb066'],green:['#4ccf6e','#23914a','#e8ffc8','#8ee6a0'],blue:['#4aa8ff','#1f6fd1','#d9f0ff','#9ccfff'],pink:['#ff7eb9','#d4448a','#ffe3f1','#ffb3d6'],purple:['#a675ff','#6b3fd0','#ece0ff','#c9a8ff'],gold:['#ffcc33','#c98e00','#fff4c2','#ffe17a'],evil:['#6b3f9e','#3d1f63','#a98bc9','#4e2a78'],baby:['#ff9ecb','#e0609d','#fff0f7','#ffc4e0']};
+function dragonSVG(col='orange',evil=false){let[m,d,b,w]=DCOL[col]||DCOL.orange;const K='#1b0b26';
+ return `<svg viewBox="0 0 200 160">${evil?'':`<g class="tflame"><path d="M8 76 C-8 64 4 50 -2 38 C10 46 20 58 14 74 Z" fill="#ff5d1c" stroke="${K}" stroke-width="2.5"/><path d="M8 72 C2 64 8 56 6 50 C12 56 15 64 12 72 Z" fill="#ffe14a"/></g>`}<path d="M60 118 C30 124 14 104 9 84 L2 72 L18 77 L13 62 C25 88 40 102 62 100 Z" fill="${m}" stroke="${K}" stroke-width="3.6" stroke-linejoin="round"/>
+ <path d="M84 84 C70 44 58 26 46 18 C68 22 84 30 94 40 C100 30 108 27 116 29 C112 46 108 62 104 80 Z" fill="${w}" stroke="${K}" stroke-width="3.6" stroke-linejoin="round"/>
+ <path d="M58 86 L64 70 L72 82 L80 66 L88 80 L96 64 L104 78" fill="${b}" stroke="${K}" stroke-width="3" stroke-linejoin="round"/>
+ <ellipse cx="95" cy="110" rx="50" ry="38" fill="${m}" stroke="${K}" stroke-width="3.6"/>
+ <ellipse cx="110" cy="117" rx="27" ry="25" fill="${b}"/>
+ <path d="M90 108 Q110 104 130 108 M88 120 Q110 116 132 120 M92 132 Q110 128 128 132" stroke="${d}" stroke-width="1.5" fill="none" opacity=".35"/>
+ <ellipse cx="72" cy="145" rx="14" ry="9" fill="${m}" stroke="${K}" stroke-width="3.6"/><ellipse cx="120" cy="147" rx="14" ry="9" fill="${m}" stroke="${K}" stroke-width="3.6"/>
+ <path d="M128 102 q14 4 16 16" stroke="${d}" stroke-width="7" fill="none" stroke-linecap="round"/>
+ <circle cx="145" cy="62" r="33" fill="${m}" stroke="${K}" stroke-width="3.6"/>
+ <path d="M127 36 L118 12 L139 30 Z" fill="${b}" stroke="${K}" stroke-width="3" stroke-linejoin="round"/><path d="M150 30 L153 5 L164 32 Z" fill="${b}" stroke="${K}" stroke-width="3" stroke-linejoin="round"/>
+ <ellipse cx="172" cy="74" rx="24" ry="17" fill="${m}" stroke="${K}" stroke-width="3.6"/>
+ <circle cx="186" cy="68" r="2.6" fill="${d}"/><circle cx="177" cy="66" r="2.6" fill="${d}"/>
+ ${evil?`<path d="M158 82 Q175 90 194 80" stroke="${K}" stroke-width="3.6" fill="none" stroke-linecap="round"/><path d="M170 86 L173 95 L176 87 M182 84 L185 93 L188 83" fill="#fff" stroke="#fff" stroke-width="1"/>`:`<path d="M160 82 Q176 93 193 80" stroke="${K}" stroke-width="3.6" fill="none" stroke-linecap="round"/><ellipse cx="160" cy="77" rx="6" ry="4" fill="#ff6b8a" opacity=".5"/>`}
+ <ellipse cx="148" cy="55" rx="10" ry="12" fill="#fff" stroke="${d}" stroke-width="2"/><circle cx="151" cy="56" r="6" fill="${evil?'#d11':'#2a1a0a'}"/><circle cx="153.5" cy="53" r="2.2" fill="#fff"/>
+ ${evil?`<path d="M134 38 L162 48" stroke="#2a1040" stroke-width="6" stroke-linecap="round"/>`:`<path d="M137 41 Q149 36 161 43" stroke="${K}" stroke-width="4" fill="none" stroke-linecap="round"/>`}</svg>`}
+const ITEMS=[
+ {id:'flower',cat:'wear',slot:'head',icon:'🌸',name:'小花',p:50,cur:'coins'},
+ {id:'bow',cat:'wear',slot:'head',icon:'🎀',name:'蝴蝶结',p:60,cur:'coins'},
+ {id:'shades',cat:'wear',slot:'face',icon:'🕶️',name:'酷墨镜',p:120,cur:'coins'},
+ {id:'tophat',cat:'wear',slot:'head',icon:'🎩',name:'绅士帽',p:180,cur:'coins'},
+ {id:'grad',cat:'wear',slot:'head',icon:'🎓',name:'博士帽',p:240,cur:'coins'},
+ {id:'crown',cat:'wear',slot:'head',icon:'👑',name:'王冠',p:30,cur:'jar'},
+ {id:'c_orange',cat:'color',col:'orange',name:'火焰橙',p:0,cur:'coins'},
+ {id:'c_green',cat:'color',col:'green',name:'翠绿龙',p:150,cur:'coins'},
+ {id:'c_blue',cat:'color',col:'blue',name:'天蓝龙',p:150,cur:'coins'},
+ {id:'c_pink',cat:'color',col:'pink',name:'草莓龙',p:180,cur:'coins'},
+ {id:'c_purple',cat:'color',col:'purple',name:'紫晶龙',p:220,cur:'coins'},
+ {id:'c_gold',cat:'color',col:'gold',name:'黄金龙',p:40,cur:'gems'},
+ {id:'torch',cat:'deco',icon:'🔥',name:'火把',p:50,cur:'coins',pos:'left:24%;top:6%'},
+ {id:'mush',cat:'deco',icon:'🍄',name:'蘑菇灯',p:80,cur:'coins',pos:'left:30%;bottom:16%'},
+ {id:'plant',cat:'deco',icon:'🪴',name:'盆栽',p:60,cur:'coins',pos:'left:66%;bottom:16%'},
+ {id:'lantern',cat:'deco',icon:'🏮',name:'红灯笼',p:100,cur:'coins',pos:'right:27%;top:6%'},
+ {id:'star',cat:'deco',icon:'⭐',name:'星星灯',p:150,cur:'coins',pos:'left:48%;top:2%'},
+ {id:'bed',cat:'deco',icon:'🛏️',name:'精灵小床',p:250,cur:'coins',pos:'right:25%;bottom:30%'},
+ {id:'lolli',cat:'deco',icon:'🍭',name:'棒棒糖树',p:20,cur:'jar',pos:'left:24%;bottom:32%'},
+ {id:'cake',cat:'deco',icon:'🎂',name:'大蛋糕',p:40,cur:'jar',pos:'left:37%;bottom:16%'},
+ {id:'rainbow',cat:'deco',icon:'🌈',name:'彩虹灯',p:30,cur:'gems',pos:'left:36%;top:4%'},
+ {id:'trophy',cat:'deco',icon:'🏆',name:'金奖杯',p:50,cur:'gems',pos:'right:26%;top:36%'},
+];
+const ITEM={};ITEMS.forEach(i=>ITEM[i.id]=i);
+const CUR={coins:'🪙',jar:'🍬',gems:'💎'};
+function dragonHTML(o={}){const col=o.col||S.color,head='head' in o?o.head:S.head,face='face' in o?o.face:S.face,H=ITEM[head],F=ITEM[face];
+ return `<div class="dragon ${o.cls||''}">${dragonSVG(col,o.evil)}${H?`<span class="acc head">${H.icon}</span>`:''}${F?`<span class="acc face">${F.icon}</span>`:''}</div>`}
+const ECOL=['#ff6b6b','#ff9f43','#f6b93b','#1dd1a1','#48b9fb','#5f7bff','#a55eea','#ff6bcb','#10ac84','#ee5253'];
+const GC=['#5ad1ff','#ff6fae','#7df07b','#ffd84a','#c08cff','#ff8a5c'];
+function elfSVG(age,o={}){const hold=o.hold||0,mood=o.mood||'happy',col=ECOL[age%ECOL.length],skin='#ffdcb5',sk2='#d9965c',cx=50,cy=74,nL=Math.ceil(age/2),nR=age-nL,angs=[],f=v=>v.toFixed(1);
+ const fan=(n,a0,a1)=>{for(let i=0;i<n;i++)angs.push(n===1?(a0+a1)/2:a0+(a1-a0)*i/(n-1))};fan(nL,120,215);fan(nR,60,-35);
+ const order=[];for(let i=0;i<Math.max(nL,nR);i++){if(i<nL)order.push(i);if(i<nR)order.push(nL+i)}
+ let arms='',items='';
+ order.forEach((ai,idx)=>{const a=angs[ai]*Math.PI/180,c=Math.cos(a),s=Math.sin(a),x1=cx+c*10,y1=cy-s*8,x2=cx+c*40,y2=cy-s*30,mx=cx+c*26,my=cy-s*20-5;
+  arms+=`<path d="M${f(x1)} ${f(y1)} Q${f(mx)} ${f(my)} ${f(x2)} ${f(y2)}" stroke="${sk2}" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="${f(x2)}" cy="${f(y2)}" r="4.6" fill="${skin}" stroke="${sk2}" stroke-width="1.5"/>`;
+  if(idx<hold){if(o.item==='candy')items+=`<circle cx="${f(x2)}" cy="${f(y2-6)}" r="4.6" fill="${GC[idx%6]}" stroke="#fff" stroke-width="1.5"/>`;else items+=`<polygon points="${f(x2-4)},${f(y2-12)} ${f(x2+4)},${f(y2-12)} ${f(x2+7.5)},${f(y2-8)} ${f(x2)},${f(y2-1)} ${f(x2-7.5)},${f(y2-8)}" fill="${GC[idx%6]}" stroke="#fff" stroke-width="1.2"/>`}});
+ let mo,br='';
+ if(mood==='sad')mo='<path d="M45 57 Q50 52 55 57" stroke="#7a3b1a" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M41 50 q-1 4 1 6" stroke="#5ad1ff" stroke-width="2" fill="none"/>';
+ else if(mood==='angry'){mo='<path d="M45 57 Q50 52 55 57" stroke="#7a3b1a" stroke-width="2.4" fill="none" stroke-linecap="round"/>';br='<path d="M39 41 L47 45 M61 41 L53 45" stroke="#7a3b1a" stroke-width="2.6" stroke-linecap="round"/>'}
+ else mo='<path d="M44 52 Q50 60 56 52 Z" stroke="#7a3b1a" stroke-width="1.6" fill="#ff8a8a" stroke-linejoin="round"/>';
+ return `<svg class="esvg" viewBox="2 -2 96 106">${arms}<ellipse cx="43" cy="96" rx="6" ry="3.5" fill="#6b4226"/><ellipse cx="57" cy="96" rx="6" ry="3.5" fill="#6b4226"/><path d="M34 94 Q32 66 50 62 Q68 66 66 94 Z" fill="${col}" stroke="#1b0b26" stroke-width="2.2"/><text x="50" y="88" text-anchor="middle" font-size="17" font-weight="900" fill="#fff" font-family="Arial,sans-serif">${age}</text><path d="M37 46 L22 37 L38 53Z" fill="${skin}" stroke="${sk2}" stroke-width="1.2"/><path d="M63 46 L78 37 L62 53Z" fill="${skin}" stroke="${sk2}" stroke-width="1.2"/><circle cx="50" cy="48" r="14" fill="${skin}" stroke="#1b0b26" stroke-width="2"/><circle cx="44.5" cy="47" r="2.4" fill="#2a1a0a"/><circle cx="55.5" cy="47" r="2.4" fill="#2a1a0a"/><circle cx="40" cy="52" r="2.6" fill="#ff8fa3" opacity=".6"/><circle cx="60" cy="52" r="2.6" fill="#ff8fa3" opacity=".6"/>${br}${mo}<path d="M35 40 Q50 33 65 40 L53 6 Q50 2 47 6 Z" fill="#2fb36b" stroke="#1b0b26" stroke-width="2"/><ellipse cx="50" cy="40" rx="16" ry="3.6" fill="#1f8f55"/><circle cx="50" cy="5" r="4" fill="#ffe14a"/>${items}</svg>`}
+function grandpaSVG(){return `<svg class="gsvg" viewBox="0 -6 100 136"><path d="M22 128 Q24 72 50 66 Q76 72 78 128Z" fill="#7a4fd0"/><path d="M50 70 L50 128" stroke="#5a35a8" stroke-width="2"/><line x1="86" y1="60" x2="86" y2="128" stroke="#8b5a2b" stroke-width="5" stroke-linecap="round"/><circle cx="86" cy="56" r="7" fill="#5ad1ff" stroke="#fff" stroke-width="2"/><circle cx="80" cy="90" r="6" fill="#ffdcb5"/><path d="M34 50 L18 40 L36 58Z" fill="#ffdcb5" stroke="#d9965c"/><path d="M66 50 L82 40 L64 58Z" fill="#ffdcb5" stroke="#d9965c"/><circle cx="50" cy="52" r="18" fill="#ffdcb5" stroke="#d9965c"/><path d="M31 58 Q50 122 69 58 Q50 70 31 58Z" fill="#fff" stroke="#ddd"/><path d="M38 63 Q50 56 62 63 Q50 67 38 63" fill="#fff" stroke="#ddd"/><circle cx="43" cy="50" r="5.5" fill="rgba(255,255,255,.4)" stroke="#333" stroke-width="1.8"/><circle cx="57" cy="50" r="5.5" fill="rgba(255,255,255,.4)" stroke="#333" stroke-width="1.8"/><line x1="48.5" y1="50" x2="51.5" y2="50" stroke="#333" stroke-width="1.8"/><circle cx="43" cy="50" r="1.9" fill="#333"/><circle cx="57" cy="50" r="1.9" fill="#333"/><circle cx="50" cy="58" r="3.2" fill="#ffad8a"/><path d="M30 42 Q50 32 70 42 L58 12 Q56 2 74 -2 Q52 -4 46 12Z" fill="#e8413c"/><ellipse cx="50" cy="42" rx="21" ry="5" fill="#b8231f"/><circle cx="74" cy="-2" r="4.5" fill="#ffe14a"/></svg>`}
+function towerHTML(){let h='<div class="tower">';for(let f=7;f>=1;f--){const amt=clamp(S.tower-(f-1)*FLOOR,0,FLOOR),pct=amt/FLOOR*100;h+=`<div class="floor"><div class="fl-fill" style="width:${pct}%"></div><span class="fl-n">${f}楼</span>${amt>0&&amt<FLOOR?`<span class="fl-amt">${amt}</span>`:''}${amt>0?`<span class="fl-gift">${f===1?'❓':'🎁'}</span>`:''}</div>`}return h+'</div>'}
+const A=(html,css,cls='')=>`<div class="actor ${cls}" style="${css}">${html}</div>`;
+const E=(ch,size)=>`<span class="emo" style="font-size:${size}vmin">${ch}</span>`;
+const NM=()=>esc(S.name);
+
+/* ========== resources display ========== */
+let D=null,busy=false,IN={v:['',''],f:0};
+function disp(){const a=D&&D.active;return{c:S.coins+(a?D.coinD:0),j:S.jar+(a?D.jarD:0),g:S.myGems+(a?D.gemD:0),s:S.stars+(a?D.starD:0)}}
+function resHTML(){const v=disp();return `<div class="res"><span id="rc">🪙 ${v.c}</span><span id="rj">🍬 ${v.j}</span><span id="rg">💎 ${v.g}</span><span id="rs">⭐ ${v.s}</span>${S.combo>1?`<span class="combo">🔥${S.combo}连击</span>`:''}</div>`}
+function refreshRes(which){const v=disp(),m={rc:'🪙 '+v.c,rj:'🍬 '+v.j,rg:'💎 '+v.g,rs:'⭐ '+v.s};Object.keys(m).forEach(k=>{const e=$('#'+k);if(e&&e.textContent!==m[k]){e.textContent=m[k];if(!which||which===k){e.classList.remove('bump');void e.offsetWidth;e.classList.add('bump')}}})}
+function topHTML(t){return `<div class="top"><button class="ibtn" data-act="home">🏠</button><div class="ttl">${t}</div>${resHTML()}</div>`}
+const TITLES=[[0,'见习龙大王'],[15,'小小龙大王'],[45,'宝石管家'],[90,'分糖小能手'],[150,'除法高手'],[240,'余数大师'],[360,'传说中的龙王']];
+function titleOf(){let t=TITLES[0];TITLES.forEach(x=>{if(S.stars>=x[0])t=x});return t}
+const LVNAME=['','入门','初级','表内除法','表内进阶','两位数的商','大数除法','传说难度'];
+
+/* ========== title ========== */
+function meadowDeco(bg){if(bg==='meadow'||bg==='battle')return `<div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="ground"></div><div class="flowers"><span>🌼</span><span>🌷</span><span>🌼</span><span>🌱</span><span>🌸</span><span>🌼</span><span>🌷</span></div>${bg==='meadow'?'<div class="tree t1">🌳</div><div class="tree t2">🌲</div>':'<div class="tree t2">⛰️</div>'}`;
+ if(bg==='mount')return `<div class="sun"></div><div class="cloud c1"></div><div class="ground"></div><div class="mount"><div class="cavedoor" id="cdoor"></div></div>`;
+ if(bg==='cave')return `<div class="stal"></div>`;return ''}
+function renderTitle(){D=null;
+ app.innerHTML=`<div class="screen title bg-meadow">${meadowDeco('meadow')}<div class="tbox"><h1>喷火龙的<br><span>宝石山</span></h1><div class="tagline">打恶龙 · 搬宝石 · 分糖果</div><div class="tdragon">${dragonHTML({cls:'bob'})}</div>
+ ${hasSave?`<div class="tsub">欢迎回来，龙大王 ${NM()}！</div><button class="btn big green" data-act="continue">▶ 继续（第 ${S.day} 天）</button><button class="btn sm gray" data-act="newgame">重新开始</button>`
+ :`<div class="tsub">给你的喷火龙起个名字吧：</div><input id="nm" maxlength="6" value="${NM()}" autocomplete="off" autocorrect="off"><div class="chips">${['火火','小炎','闪闪','豆豆','旺旺'].map(n=>`<button class="chip" data-act="nm" data-n="${n}">${n}</button>`).join('')}</div><button class="btn big green" data-act="startStory">🔥 开始冒险</button>`}</div></div>`}
+ACT.nm=el=>{const i=$('#nm');if(i)i.value=el.dataset.n};
+ACT.startStory=()=>{const i=$('#nm');const n=(i&&i.value.trim())||'火火';if(i)i.blur();S.name=n.slice(0,6);save();storyReplay=false;story(0)};
+ACT.continue=()=>renderHub();
+ACT.newgame=async()=>{const r=await dialog('<h3>真的要重新开始吗？</h3><p>所有的宝石、糖果和装扮都会清空哦。</p>',[{t:'算了'},{t:'重新开始',c:'red'}]);if(r.i===1){S=fresh();save();hasSave=false;renderTitle()}};
+
+/* ========== story ========== */
+let PS=0,storyReplay=false,hp=6,fightBusy=false;
+function battleHTML(m=''){const down=['down','saved','leave'].includes(m),meBig=['me','fight','down','saved','leave'].includes(m);
+ let h=A(dragonHTML({cls:m==='fight'?'':'bob'}),`left:1%;bottom:20%;width:min(${meBig?28:20}vmin,${meBig?26:20}%)`,'me'+(m==='me'?' talk':''));
+ if(down)h+=A(`<div class="flip">${dragonHTML({col:'evil',evil:1,head:null,face:null})}</div>`,'right:4%;bottom:14%;width:min(36vmin,32%)','evil fallen')+A(E('🪢',8),'right:22%;bottom:25%')+A(E('🪢',8),'right:9%;bottom:22%')+A(E('💫',7),'right:28%;bottom:32%','boomfx');
+ else h+=A(`<div class="flip">${dragonHTML({col:'evil',evil:1,head:null,face:null})}</div>`,'right:3%;bottom:21%;width:min(40vmin,34%)','evil '+(m==='fight'?'':m==='evil'?'talk':'stomp'))+A(`<div class="cage">👸</div>`,'right:2%;bottom:56%')+A(E('💥',9),'left:52%;bottom:38%','boomfx')+A(E('⚔️',7),'left:46%;bottom:50%','boomfx d2');
+ if(m==='leave')h+=A(`<div class="leaveL">${E('🤴',12)}${E('👸',11)}${E('🤺',10)}${E('🤺',10)}${E('🤺',10)}</div>`,'left:30%;bottom:21%');
+ else if(m==='saved')h+=A(E('🤴',13),'left:30%;bottom:21%','talk')+A(E('👸',12),'left:40%;bottom:21%','bob')+A(E('🤺',10),'right:38%;bottom:21%')+A(E('🤺',10),'right:30%;bottom:34%')+A(E('🤺',10),'right:6%;bottom:36%');
+ else if(down)h+=A(E('🤴',13),'left:30%;bottom:21%')+A(E('🤺',10),'right:38%;bottom:21%','jump')+A(E('🤺',10),'right:30%;bottom:34%','jump')+A(E('🤺',10),'right:6%;bottom:36%','jump');
+ else h+=A(E('🤴',13),'left:24%;bottom:21%',m==='king'?'talk':'')+A(E('🤺',10),'left:34%;bottom:22%',m==='knight'?'talk':'stomp')+A(E('🤺',10),'left:41%;bottom:25%','stomp')+A(E('🤺',10),'left:47%;bottom:21%','stomp');
+ if(m==='fight')h+=A(`<div class="hp" id="hp">${'❤️'.repeat(6)}</div>`,'right:12%;bottom:66%');
+ return h}
+function caveIntro(n){return A(towerHTML(),'left:50%;bottom:30%;transform:translateX(-50%);height:44%;width:min(26vmin,24%)')+A(dragonHTML({cls:'bob'}),'left:2%;bottom:5%;width:min(26vmin,24%)')+A(grandpaSVG(),'right:3%;bottom:5%;width:min(16vmin,15%)','talk')+(n>=2?A(`<div class="parade">${[2,3,4,5,6,7,8,9].map((a,i)=>`<div class="pe ${n===4?'jump':'hop'}" style="animation-delay:${i*.12}s">${elfSVG(a,{hold:n===3?a:0})}<div class="pl">${a}岁·${a}只手</div></div>`).join('')}</div>`,'left:26%;right:19%;bottom:4%'):'')}
+const STORY=[
+ ()=>({bg:'meadow',html:A(dragonHTML({cls:'bob'}),'left:8%;bottom:19%;width:min(36vmin,40%)','walkin'),text:`这是一只喷火龙，名叫 <b>${NM()}</b>。今天天气好到离谱，${NM()} 决定出门溜达溜达！`}),
+ ()=>({bg:'meadow',html:A(dragonHTML(),'left:16%;bottom:19%;width:min(34vmin,38%)')+A(E('💥',10),'right:12%;bottom:38%','boomfx')+A(E('⚔️',8),'right:24%;bottom:50%','boomfx d2')+A(E('❗',8),'left:30%;bottom:56%','talk'),who:NM(),text:'咦？前面怎么叮叮当当的？吃瓜要趁热，我去看看！🍉'}),
+ ()=>({bg:'battle',html:battleHTML(),text:'好家伙！前面打起来了！一边是<b>国王和骑士们</b>，另一边是一只超凶的<b>大恶龙</b>。'}),
+ ()=>({bg:'battle',html:battleHTML('king'),who:'👑 国王',text:'可恶的恶龙！快把我的女儿——<b>公主</b>还回来！我真的会谢！'}),
+ ()=>({bg:'battle',html:battleHTML('evil'),who:'😈 恶龙',text:'我宣布个事儿：公主是我的！宝石也是我的！就你们？打得过我？不可能，绝对不可能！'}),
+ ()=>({bg:'battle',html:battleHTML('knight'),who:'🛡️ 骑士',text:'陛下……打不过，根本打不过！我们打了三天三夜，盔甲都打出包浆了……'}),
+ ()=>({bg:'battle',html:battleHTML('me'),who:NM(),text:'抢别人家公主？这能忍？路见不平一声吼，该出手时就出手！',noTap:1,btn:`<button class="btn huge red" data-act="snext">🔥 帮助国王！</button>`}),
+ ()=>({bg:'battle',html:battleHTML('fight'),text:'快！<b>狂点恶龙</b>，用火焰把它打趴下！（还差 6 下）',tapAct:'hitEvil',after:()=>{hp=6;fightBusy=false}}),
+ ()=>({bg:'battle',html:battleHTML('down'),text:'<b>K.O.！</b>恶龙被打倒在地，眼冒金星。骑士们七手八脚冲上去，把恶龙捆成了一个大粽子！',after:()=>{sfx('boom');const e=$('.evil');if(e){const c=ctr(e);sparkles(c.x,c.y,10,'⭐')}}}),
+ ()=>({bg:'battle',html:battleHTML('saved'),who:'👑 国王',text:'太好了！<b>公主我们救回来了！</b>喷火龙，你就是我们的超级英雄！',after:()=>{sfx('fanfare');confetti()}}),
+ ()=>({bg:'battle',html:battleHTML('saved'),who:'👑 国王',text:'这只恶龙常年在这里作恶，抢了很多金银财宝，全都藏在它的山洞里。这个山洞我们不要了，<b>就送给你吧！</b>格局打开！'}),
+ ()=>({bg:'battle',html:battleHTML('leave'),text:'国王带着骑士和公主，高高兴兴回家了。恶龙被押走时还在嘟囔：「我还会回来的……」'}),
+ ()=>({bg:'mount',html:A(dragonHTML({cls:'bob'}),'left:3%;bottom:12%;width:min(30vmin,30%)'),who:NM(),text:'这就是恶龙的山洞？开箱时刻到了！',noTap:1,btn:`<button class="btn huge" data-act="openCave">🚪 打开山洞</button>`}),
+ ()=>({bg:'cave',html:A(towerHTML(),'left:50%;bottom:5%;transform:translateX(-50%);height:68%;width:min(36vmin,34%)','towerbig')+A(dragonHTML({cls:'jump'}),'left:2%;bottom:4%;width:min(28vmin,28%)'),who:NM(),text:'哇——！！！宝石堆得像<b>六七层楼</b>那么高！这……这都是我的了？？？',after:()=>{sfx('fanfare');const t=$('.towerbig');if(t){const c=ctr(t);for(let i=0;i<4;i++)setTimeout(()=>sparkles(c.x,c.y,14,'✨',260),i*400)}}}),
+ ()=>({bg:'cave',html:caveIntro(1),who:'🧙 精灵爷爷',text:'新主人！你终于来了！我等得胡子都长了三米！我是这里的精灵爷爷。'}),
+ ()=>({bg:'cave',html:caveIntro(1),who:'🧙 精灵爷爷',text:'恶龙在这里经营了好多年，攒了满满一洞宝石，一共有<b>七层楼</b>那么高。现在，这些宝石都是您的啦！'}),
+ ()=>({bg:'cave',html:caveIntro(2),who:'🧙 精灵爷爷',text:'恶龙还养了我们一大群精灵。我们精灵很特别：<b>几岁就有几只手！</b>2岁精灵2只手，一次搬2颗；9岁精灵9只手，一次搬9颗——外号「九阴白骨爪」！'}),
+ ()=>({bg:'cave',html:caveIntro(3),who:'🧙 精灵爷爷',text:'我们每天干两件事：<br>① 把宝石搬下山换成钱，给村民买东西，再给精灵们买糖果 🍬<br>② 回到山洞，请龙大王给精灵们<b>分糖果</b>。'}),
+ ()=>({bg:'cave',html:caveIntro(2),who:'🧙 精灵爷爷',text:'重点来了：精灵们最在乎<b>公平</b>！分多分少都行，但必须<b>每只一样多</b>！谁少一颗——当场破防！分不完剩下的，归龙大王。'}),
+ ()=>({bg:'cave',html:caveIntro(4),who:NM(),text:'没问题！公平分糖，我是专业的！😎',noTap:1,btn:`<button class="btn huge green" data-act="storyDone">${storyReplay?'🏠 回山洞':'☀️ 开始第一天！'}</button>`}),
+];
+function story(i){PS=i;const st=STORY[i]();const act=st.tapAct||(st.noTap?'':'snext');
+ app.innerHTML=`<div class="screen story bg-${st.bg}" ${act?`data-act="${act}" data-quiet="1"`:''}>${meadowDeco(st.bg)}<div class="stage">${st.html}</div>${st.text?`<div class="storybox">${st.who?`<div class="who">${st.who}</div>`:''}<div class="stext">${st.text}</div>${act==='snext'?'<div class="tapnext">点屏幕继续 ▶</div>':''}${st.btn?`<div class="sbtn">${st.btn}</div>`:''}</div>`:''}${S.prologue?'<button class="ibtn skip" data-act="skipStory">跳过 ⏭</button>':''}</div>`;
+ st.after&&st.after()}
+ACT.snext=()=>{if(PS<STORY.length-1){sfx('pop');story(PS+1)}};
+ACT.skipStory=()=>ACT.storyDone();
+ACT.hitEvil=async()=>{if(fightBusy||hp<=0)return;fightBusy=true;const me=$('.story .me .dragon'),ev=$('.story .evil');if(!me||!ev){fightBusy=false;return}
+ const m=mouth(me),t=ctr(ev);sfx('fire');fireStream(m.x,m.y,t.x,t.y,36);await sleep(380);hp--;ev.classList.remove('hit');void ev.offsetWidth;ev.classList.add('hit');sfx('boom');quake();sparkles(t.x,t.y,8,'💥',120);dmg(t.x+rnd(-40,40),t.y-40,pick(['-999','-666','-888','暴击！-9999','-520']),hp<=1?'#ff5d5d':'#ffe14a');
+ const h=$('#hp');if(h)h.textContent='❤️'.repeat(hp)+'🖤'.repeat(6-hp);
+ const tx=$('.stext');if(tx)tx.innerHTML=hp>0?`${pick(['恶龙：嗷！烫烫烫！','恶龙：你干嘛~哎哟！','恶龙：这不科学！','恶龙：我的龙鳞！','骑士：666！'])}（还差 ${hp} 下）`:'恶龙被打败啦！';
+ await sleep(150);fightBusy=false;if(hp<=0){fightBusy=true;banner('K.O.!');sfx('fanfare');await sleep(1200);story(PS+1)}};
+ACT.openCave=async()=>{const d=$('#cdoor');if(d)d.classList.add('open');sfx('boom');await sleep(1100);story(PS+1)};
+ACT.storyDone=()=>{if(storyReplay||S.prologue){storyReplay=false;S.prologue=true;save();renderHub();return}S.prologue=true;hasSave=true;save();ACT.startDay()};
+
+/* ========== hub ========== */
+const TIPS=['余数一定要比除数小！要是剩下的还够再分一次，那就是还没分完哦。','验算小妙招：<b>商 × 除数 + 余数 = 被除数</b>。','派几只精灵？想一想：几乘手的数量，<b>最接近</b>宝石数，又<b>不超过</b>它？','点一点精灵，他们会告诉你自己有几只手！','一颗都不剩的时候，叫「正好分完」，余数是 0。','宝石山每搬空一层，就会发现一件宝贝！🎁','私房宝石 💎 和糖罐 🍬 可以在商店买特别的东西哦！','点一点龙大王，会喷火！🔥','答对不出错能攒「连击」🔥，连击越高，奖励金币越多！','8 岁精灵外号「八爪鱼本鱼」，因为他有 8 只手～','9 只手的 9 岁精灵最能搬，一次 9 颗！'];
+function hubTip(){return S.day<=1?`欢迎来到你的山洞，${NM()}！准备好了就点「开始」吧！`:TIPS[S.tipI%TIPS.length]}
+function renderHub(){D=null;busy=false;const t=titleOf();
+ const decos=ITEMS.filter(i=>i.cat==='deco'&&S.owned[i.id]).map(i=>`<div class="deco" style="${i.pos}">${i.icon}</div>`).join('');
+ const bedN=Math.min(S.myGems,36);let bed='';for(let i=0;i<bedN;i++)bed+=`<i class="gem g${i%6}" style="--gs:14px"></i>`;
+ app.innerHTML=`<div class="screen hub bg-cave"><div class="stal"></div>
+ <div class="top"><div class="ttl">🐉 ${NM()} <small>${t[1]}</small></div>${resHTML()}<button class="ibtn" data-act="settings">⚙️</button></div>
+ <div class="hubmain">${decos}
+  <div class="hub-tower"><div class="tlabel">宝石山 · 还剩 <b>${S.tower}</b> 颗</div>${towerHTML()}</div>
+  <div class="hub-center"><div class="hub-dragon" data-act="pokeDragon" data-quiet="1">${dragonHTML({cls:'bob'})}<div class="mybed">${bed}</div></div>${S.baby?`<div class="baby" data-act="pokeBaby">${dragonHTML({col:'baby',head:null,face:null,cls:'hop'})}</div>`:''}</div>
+  <div class="hub-gp" data-act="pokeGp"><div class="bubble" id="hubTip">${hubTip()}</div>${grandpaSVG()}</div>
+  <div class="hub-elves">${[2,3,4,5,6,7,8,9].map(a=>`<div class="he hop" style="animation-delay:${(a*.17)%1}s" data-act="pokeElf" data-a="${a}">${elfSVG(a)}</div>`).join('')}</div>
+ </div>
+ <div class="hubbar"><button class="btn big green" data-act="startDay">☀️ 开始第 ${S.day} 天</button><button class="btn purple big" data-act="shop">🛍️ 商店</button><button class="btn blue big" data-act="book">📒 本子</button></div></div>`}
+ACT.pokeDragon=el=>{const d=$('.dragon',el);const m=mouth(d);sfx('fire');fireStream(m.x,m.y,m.x+Math.min(260,innerWidth*.22),m.y-30,30);floatBubble(d,pick(['呼——🔥！帅到喷火！','别戳了别戳了，再戳要喷了！','宝石？我全都要！','我，龙大王，今天也是公平的一天😎','嗝……喷多了。']),1600)};
+ACT.pokeBaby=el=>{sfx('pop');floatBubble(el,pick(['咿呀～','我也要分糖！','爸爸妈妈是龙大王！']),1500)};
+ACT.pokeElf=el=>{const a=+el.dataset.a;sfx('pop');el.classList.remove('hop');void el.offsetWidth;el.classList.add('jump');setTimeout(()=>{el.classList.remove('jump');el.classList.add('hop')},900);floatBubble(el,`我是 ${a} 岁精灵，外号「${NICK[a]}」！<br><b>${a}</b> 只手，一次搬 <b>${a}</b> 颗！`)};
+ACT.pokeGp=()=>{S.tipI++;save();const b=$('#hubTip');if(b){b.innerHTML=TIPS[S.tipI%TIPS.length];b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop')}};
+ACT.home=async()=>{if(busy)return;if(D&&D.active){const r=await dialog('<h3>要回山洞吗？</h3><p>今天的活还没干完，回去的话今天要<b>重新开始</b>哦。</p>',[{t:'继续干活',c:'green'},{t:'回山洞',c:'gray'}]);if(r.i!==1)return}renderHub()};
+ACT.settings=async()=>{const r=await dialog(`<h3>⚙️ 设置</h3><p>声音：<b>${S.sound?'开着':'关着'}</b></p><p>龙的名字：<br><input id="rn" maxlength="6" value="${NM()}"></p>`,[{t:S.sound?'🔇 关声音':'🔊 开声音',c:'blue'},{t:'✔ 保存',c:'green'},{t:'🗑 重新开始',c:'gray'}]);
+ const n=(r.vals.rn||'').trim();if(n)S.name=n.slice(0,6);if(r.i===0)S.sound=!S.sound;save();
+ if(r.i===2){await ACT.newgame();if(!hasSave)return}renderHub()};
+
+/* ========== day generation ========== */
+const LV=[null,{k:[2,3],q:[2,5],m:[2,5]},{k:[2,5],q:[2,6],m:[2,6]},{k:[2,9],q:[2,9],m:[2,9]},{k:[3,9],q:[4,9],m:[3,9]},{k:[2,6],q:[10,15],m:[2,6]},{k:[3,9],q:[10,20],m:[2,7]},{k:[4,9],q:[12,25],m:[3,8]}];
+const FLAV=['他们刚吃完早饭，元气满满！','有一只精灵把帽子戴反了，还说这叫潮流。','队长发誓今天一颗都不掉——昨天他也这么说。','一只精灵说他昨晚梦见自己有 100 只手。','有一只精灵还在打哈欠：「上班？上班是不可能上班的……」','听说山下的糖果店进了新口味：辣条味！','他们排队时自带 BGM：咚咚咚哒！'];
+function newDay(){const tut=S.day===1;let k,q,r;
+ if(tut){k=3;q=3;r=1}else{const L=LV[S.level];k=rnd(...L.k);q=rnd(...L.q);r=Math.random()<.82?rnd(1,k-1):0}
+ let N=k*q+r;
+ if(N>S.tower){N=S.tower;k=clamp(k,2,Math.max(2,Math.floor(N/2)));q=Math.floor(N/k);r=N%k}
+ return{N,k,q,r,E:q,gemTries:0,candyTries:0,gemStars:0,candyStars:0,perfect:false,tut,active:true,coinD:0,jarD:0,gemD:0,starD:0,earn:0,supply:0,bagPrice:0}}
+ACT.startDay=async()=>{D=newDay();
+ await dialog(`<div class="brief"><div class="bel hop">${elfSVG(D.k,{hold:D.k})}</div><h3>☀️ 第 ${S.day} 天早上</h3><p>今天值班的是 <b>${D.k} 岁精灵小队</b>！<br><span class="nick">外号：${NICK[D.k]}</span><br>每只精灵有 <b>${D.k}</b> 只手。</p><p class="flav">${pick(FLAV)}</p></div>`,[{t:'💪 开工！',c:'green'}]);
+ if(D.tut)await dialog(`<h3>📜 搬宝石的规矩</h3><p>每只精灵必须<b>把每只手都拿满</b>才能出发，拿不满会在山路上摔跤！</p><p>${D.k} 岁精灵有 ${D.k} 只手，每只就必须拿 <b>${D.k} 颗</b>。</p><p>不够拿满的宝石就<b>留在洞里</b>，归龙大王 💎！</p>`,[{t:'明白了！',c:'green'}]);
+ renderGem()};
+
+/* ========== shared step pieces ========== */
+function talk(h){const t=$('#talk');if(t){t.innerHTML=h;t.classList.remove('pop');void t.offsetWidth;t.classList.add('pop')}}
+function shakeEl(el){if(!el)return;el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake')}
+function setBtns(on){$$('#qp .btn,#qp .key').forEach(b=>b.disabled=!on)}
+function markBad(i){const a=$('#a'+i);if(a){a.classList.remove('bad');void a.offsetWidth;a.classList.add('bad')}}
+function qHTML(rows,goLbl,goAct,extra){return `<div class="qbox">${rows.map((r,i)=>`<div class="qrow">${r[0]}<span class="ans ${i===IN.f?'on':''}" data-act="focus" data-quiet="1" data-f="${i}" id="a${i}">${IN.v[i]}</span>${r[1]}</div>`).join('')}</div>
+ <div class="keypad">${[1,2,3,4,5,6,7,8,9,'⌫',0,'下一个'].map(k=>`<button class="key" data-act="key" data-quiet="1" data-k="${k}" ${k==='下一个'?'style="font-size:20px"':''}>${k}</button>`).join('')}</div>
+ <div class="acts"><button class="btn big green" data-act="${goAct}">${goLbl}</button><div class="row2">${extra}</div></div>`}
+ACT.key=el=>{if(busy)return;sfx('key');const k=el.dataset.k;if(k==='⌫')IN.v[IN.f]=IN.v[IN.f].slice(0,-1);else if(k==='下一个')IN.f=(IN.f+1)%2;else if(IN.v[IN.f].length<3)IN.v[IN.f]=(IN.v[IN.f]==='0'?'':IN.v[IN.f])+k;updAns()};
+ACT.focus=el=>{IN.f=+el.dataset.f;sfx('key');updAns()};
+function updAns(){[0,1].forEach(i=>{const a=$('#a'+i);if(a){a.textContent=IN.v[i];a.classList.toggle('on',i===IN.f);a.classList.remove('bad')}})}
+function renderPile(n,type='gem'){const p=$('#pile');if(!p)return;const pn=$('#pileN');if(pn)pn.textContent=n;let h='';const big=n>60,tens=big?Math.floor(n/10):0,ones=big?n%10:n,sz=n<=12?48:n<=20?40:n<=36?30:n<=60?22:26;
+ for(let i=0;i<tens;i++)h+=`<i class="bag ${type==='gem'?'':'cb'}">10</i>`;
+ for(let i=0;i<ones;i++)h+=type==='gem'?`<i class="gem g${i%6}" style="--gs:${sz}px"></i>`:`<i class="cd" style="font-size:${sz}px">🍬</i>`;
+ p.innerHTML=h}
+function eqHTML(a,b,q,r){return `<div class="eq"><span class="t"><b>${a}</b><i>被除数</i></span><span class="op">÷</span><span class="t"><b>${b}</b><i>除数</i></span><span class="op">=</span><span class="t"><b>${q}</b><i>商</i></span>${r?`<span class="op">……</span><span class="t"><b>${r}</b><i>余数</i></span>`:''}</div><div class="chk">验算：${q} × ${b}${r?` + ${r}`:''} = ${a} ✔</div>`}
+function winCard(o){return `<div class="win"><div class="wt">${o.title}</div><div class="stars">${[1,2,3].map(i=>`<span class="st ${i<=o.stars?'on':''}" style="animation-delay:${i*.25}s">★</span>`).join('')}</div>${o.eq}<div class="wnote">${o.note}</div>${o.btn}</div>`}
+function refreshCombo(){const r=$('.res');if(!r)return;let c=$('.res .combo');if(S.combo>1){if(!c){r.insertAdjacentHTML('beforeend','<span class="combo"></span>');c=$('.res .combo')}c.textContent=`🔥${S.combo}连击`;c.classList.remove('bump');void c.offsetWidth;c.classList.add('bump')}else if(c)c.remove()}
+function winCombo(manual,tries,perfect){const first=!manual&&tries===1;if(first){S.combo++;S.best=Math.max(S.best||0,S.combo);const bonus=Math.min(S.combo,10);D.coinD+=bonus;D.comboBonus=(D.comboBonus||0)+bonus;refreshCombo();setTimeout(()=>refreshRes('rc'),300)}
+ const h=perfect?'PERFECT!':first?pick(RIGHT):pick(['过关！','搞定！','稳了！']);banner(h+(first&&S.combo>1?`<small>🔥 ${S.combo} 连击！金币 +${Math.min(S.combo,10)}</small>`:''),perfect?'cyan':'')}
+function starsFor(tries,manual){return manual?1:tries===1?3:tries===2?2:1}
+function elfSize(n,box){return n<=6?Math.min(74,box):n<=10?60:n<=16?50:n<=24?42:34}
+ACT.hint=el=>{if(busy)return;const gem=el.dataset.t==='gem',d=gem?D.k:D.E,total=gem?D.N:D.C,n=clamp(Math.floor(total/d)+2,9,40);let rows='';
+ for(let i=1;i<=n;i++)rows+=gem?`<div>${i} 只精灵 → <b>${i*d}</b> 颗</div>`:`<div>每只 ${i} 颗 → 要 <b>${i*d}</b> 颗</div>`;
+ dialog(`<h3>📜 ${gem?`${d} 岁精灵口诀卡`:`${d} 只精灵分糖卡`}</h3><div class="hgrid scroll">${rows}</div><p>找一找：哪一行<b>最接近 ${total}</b>，又<b>不超过 ${total}</b>？<br>然后算算还剩几颗！</p>`,[{t:'知道啦',c:'green'}])};
+
+/* ========== step 1: carry gems ========== */
+function gemTalk(){return `今天要把 <b>${D.N}</b> 颗宝石送下山${D.N>60?'（一个小袋子里装 10 颗）':''}。精灵必须<b>把手拿满</b>才能出发！<br>要派几只精灵？还剩几颗？${D.tut?'<br>💡 不会算？点「📜 口诀卡」看看！':''}`}
+function gemQ(){return qHTML([['派 ',` 只 ${D.k} 岁精灵`],['剩 ',' 颗宝石']],'🚀 出发！','goGem',`<button class="btn sm blue" data-act="hint" data-t="gem">📜 口诀卡</button><button class="btn sm gray" data-act="manualGem">🖐 一只一只派</button>`)}
+function renderGem(){IN={v:['',''],f:0};busy=false;
+ app.innerHTML=`<div class="screen step stepbg">${topHTML(`第 ${S.day} 天 · ① 搬宝石下山`)}<div class="stepmain"><div class="panel scenep sky2">
+  <div class="gpline"><div class="gpm">${grandpaSVG()}</div><div class="bubble" id="talk">${gemTalk()}</div></div>
+  <div class="pilebox"><div class="pilecount"><span id="pileN">${D.N}</span> 颗宝石</div><div class="pile" id="pile"></div></div>
+  <div class="teamline"><div class="teamelf">${elfSVG(D.k,{hold:D.k})}</div><div class="teaminfo"><b>${D.k} 岁精灵小队</b> <span class="nick">${NICK[D.k]}</span><br>每只 <b>${D.k}</b> 只手，必须拿满 <b>${D.k}</b> 颗</div></div>
+  <div class="road" id="road"></div></div><div class="panel qp" id="qp">${gemQ()}</div></div></div>`;
+ renderPile(D.N,'gem')}
+async function addGemElf(take,idx,per){const road=$('#road');const w=document.createElement('div');w.className='re pop';w.innerHTML=elfSVG(D.k);road.appendChild(w);sfx('pop');await sleep(per*.3);
+ const pile=$('#pile'),from=ctr(pile),to=ctr(w),fl=[];for(let j=0;j<Math.min(take,9);j++)fl.push(fly(`<i class="gem g${j%6}" style="--gs:18px"></i>`,{x:from.x+rnd(-50,50),y:from.y+rnd(-20,20)},to,per*.85+j*15));
+ return {w,fl}}
+async function sendElves(a){const road=$('#road');road.innerHTML='';road.style.setProperty('--es',elfSize(Math.max(a,D.q),70)+'px');let left=D.N;renderPile(left);const per=clamp(3000/a,110,480);
+ for(let i=0;i<a;i++){const take=Math.min(D.k,left);const {w,fl}=await addGemElf(take,i,per);left-=take;renderPile(left);if(take)sfx('gem');await Promise.all(fl);
+  w.innerHTML=elfSVG(D.k,{hold:take,mood:take<D.k?'sad':'happy'})+`<div class="tag ${take<D.k?'':'ok'}">${take<D.k?take+'/'+D.k:i+1}</div>`;if(take<D.k)w.classList.add('bad')}
+ return left}
+ACT.goGem=async()=>{if(busy)return;if(IN.v[0]===''||IN.v[1]===''){talk('先把两个空格都填上数字哦～<br>点一下空格就能选中它，再按数字键。');shakeEl($('#qp .qbox'));sfx('bad');return}
+ const a=+IN.v[0],b=+IN.v[1];busy=true;setBtns(false);D.gemTries++;
+ if(a===0){talk('一只精灵都不派，宝石可没法自己走下山呀！');sfx('bad');markBad(0);busy=false;setBtns(true);return}
+ talk(`派 ${a} 只精灵，出发！`);const left=await sendElves(Math.min(a,D.q+2));let msg='';
+ if(a>D.q){msg=`啪叽！第 <b>${D.q+1}</b> 只精灵手没拿满，在山路上摔了个狗啃泥：「你礼貌吗？」😤<br>${D.q} 只要拿 ${D.q*D.k} 颗，${D.q+1} 只就要 ${(D.q+1)*D.k} 颗，可我们只有 ${D.N} 颗。`;markBad(0);IN.f=0}
+ else if(a<D.q){msg=`宝石堆里还有 <b>${left}</b> 颗在躺平！还够再派一只 ${D.k} 岁精灵呢，派少啦～`;markBad(0);IN.f=0;$('#pile').classList.add('glow');setTimeout(()=>{const p=$('#pile');p&&p.classList.remove('glow')},2100)}
+ else if(b!==D.r){msg=b>=D.k?`精灵派对啦！可是剩 ${b} 颗的话，${b} 不比 ${D.k} 小，还能再派一只呀。<br>看看宝石堆，真正剩下几颗？`:`精灵派对啦！👍 再数一数，宝石堆里还剩几颗？`;markBad(1);IN.f=1}
+ else{await gemWin(false);return}
+ sfx('bad');quake();banner(pick(WRONG),'bad');S.combo=0;refreshCombo();if(D.gemTries>=2)msg+='<br>💡 可以看「📜 口诀卡」，或者「🖐 一只一只派」！';talk(msg);updAns();$$('#qp .ans').forEach(x=>{});markBad(IN.f);busy=false;setBtns(true)};
+async function gemWin(manual){busy=true;winCombo(manual,D.gemTries);D.gemStars=starsFor(D.gemTries,manual);D.gemManual=manual;D.starD+=D.gemStars;D.gemD=D.r;S.total++;if(!manual&&D.gemTries===1)S.right++;
+ sfx('good');const rd=ctr($('#road'));confetti(rd.x,rd.y,60);
+ talk(pick(['一只都没派错，稳！','精灵们排好队出发啦，冲冲冲！','龙大王这波操作 666！'])+(D.r?` 剩下的 <b>${D.r}</b> 颗归龙大王 💎！`:' 一颗都没剩，正好分完！'));
+ $$('#road .re').forEach((e,i)=>{e.style.animation=`marchOut 1.6s ${.6+i*.04}s ease-in forwards`});
+ if(D.r){const p=ctr($('#pile')),g=ctr($('#rg'));for(let i=0;i<D.r;i++)fly(`<i class="gem g${i%6}" style="--gs:22px"></i>`,{x:p.x+rnd(-30,30),y:p.y},g,700+i*90);setTimeout(()=>{renderPile(0);refreshRes('rg')},750+D.r*90)}
+ setTimeout(()=>refreshRes('rs'),400);
+ S.hist.unshift(`${D.N} ÷ ${D.k} = ${D.q}${D.r?' …… '+D.r:''}`);
+ const qp=$('#qp');qp.classList.add('alt');qp.innerHTML=winCard({title:'🎉 出发成功！',stars:D.gemStars,eq:eqHTML(D.N,D.k,D.q,D.r),note:`派 <b>${D.q}</b> 只 ${D.k} 岁精灵，每只拿 ${D.k} 颗，${D.r?`剩 <b>${D.r}</b> 颗归龙大王。`:'正好拿完！'}`,btn:`<button class="btn big green" data-act="toMarket">🏘️ 跟着精灵去山下集市</button>`});
+ [1,2,3].forEach(i=>{if(i<=D.gemStars)setTimeout(()=>sfx('star'),i*250)});busy=false}
+ACT.manualGem=()=>{if(busy)return;D.mLeft=D.N;D.mCount=0;const road=$('#road');road.innerHTML='';road.style.setProperty('--es',elfSize(D.q,70)+'px');renderPile(D.N);
+ const qp=$('#qp');qp.classList.add('alt');qp.innerHTML=`<div class="manual"><div class="mtitle">🖐 一只一只派</div><div class="mnote">每点一下，就派一只 ${D.k} 岁精灵来拿 <b>${D.k}</b> 颗宝石。<br>剩下的不够拿满时，就点「收工」！</div><button class="btn huge green" data-act="mSendOne">👉 派一只精灵</button><div class="mstat" id="mstat">已派 0 只 · 剩 ${D.N} 颗</div><button class="btn blue" data-act="mDoneGem">✋ 剩下的不够了，收工！</button><button class="btn sm gray" data-act="backGem">↩ 我还是自己算</button></div>`;
+ talk(`点「派一只精灵」，一只一只来。剩下的宝石不够 ${D.k} 颗的时候，就点「收工」！`)};
+ACT.backGem=()=>{if(busy)return;const qp=$('#qp');qp.classList.remove('alt');IN={v:['',''],f:0};qp.innerHTML=gemQ();$('#road').innerHTML='';renderPile(D.N);talk(gemTalk())};
+ACT.mSendOne=async()=>{if(busy)return;if(D.mLeft<D.k){sfx('bad');talk(`只剩 <b>${D.mLeft}</b> 颗了，不够 ${D.k} 颗，精灵拿不满，不肯出发！<br>该点「收工」啦～`);shakeEl($('#pile'));return}
+ busy=true;const per=420;const {w,fl}=await addGemElf(D.k,D.mCount,per);D.mLeft-=D.k;D.mCount++;renderPile(D.mLeft);sfx('gem');await Promise.all(fl);w.innerHTML=elfSVG(D.k,{hold:D.k})+`<div class="tag ok">${D.mCount}</div>`;
+ const s=$('#mstat');if(s)s.textContent=`已派 ${D.mCount} 只 · 剩 ${D.mLeft} 颗`;busy=false};
+ACT.mDoneGem=()=>{if(busy)return;if(D.mLeft>=D.k){sfx('bad');talk(`还剩 <b>${D.mLeft}</b> 颗，还够一只精灵拿满 ${D.k} 颗呢！再派一只吧。`);return}D.gemTries=Math.max(1,D.gemTries);gemWin(true)};
+
+/* ========== step 2: market ========== */
+function makeBags(E){const L=LV[S.level],used=new Set(),out=[];const mP=rnd(...L.m);out.push(E*mP);used.add(E*mP);let g=0;
+ while(out.length<3&&g++<80){const m=rnd(...L.m),r=rnd(1,E-1),c=E*m+r;if(!used.has(c)){used.add(c);out.push(c)}}
+ while(out.length<3){const c=E*(out.length+2)+1;if(!used.has(c)){used.add(c);out.push(c)}}
+ return shuffle(out).map(c=>({c,p:Math.ceil(c/5)+1}))}
+ACT.toMarket=()=>{if(busy)return;renderMarket()};
+async function renderMarket(){busy=true;const carried=D.q*D.k;D.earn=carried*3;D.supply=2+S.level;D.bags=makeBags(D.E);
+ const shown=Math.min(D.E,14);
+ app.innerHTML=`<div class="screen step stepbg">${topHTML(`第 ${S.day} 天 · ② 山下集市`)}<div class="mkt">
+ <div class="town"><div class="houses">🏠🏪🏡⛪🏡🏠</div><div class="villagers">🧑‍🌾 👵 🧒 👨‍🍳 🧑‍🌾</div><div class="mk-elves walkin">${Array.from({length:shown},()=>`<div class="re hop">${elfSVG(D.k,{hold:D.k})}</div>`).join('')}${D.E>shown?`<b style="align-self:center">+${D.E-shown}</b>`:''}</div></div>
+ <div class="receipt" id="rcpt"></div>
+ <div class="bagsec hidden" id="bagsec"><div class="bubble" id="talk">今天下山的有 <b>${D.E}</b> 只精灵。挑一袋糖带回去分吧！<br>💡 能挑到<b>正好平均分完、一颗不剩</b>的那袋，精灵们会跳「完美舞」，还多送一颗 ⭐！</div>
+ <div class="bags">${D.bags.map((b,i)=>`<button class="bagcard" style="animation-delay:${i*.12}s" data-act="pickBag" data-i="${i}"><div class="bagimg">🛍️</div><div class="bn">${b.c} 颗糖</div><div class="bp">${b.p} 🪙</div></button>`).join('')}</div></div></div></div>`;
+ const r=$('#rcpt');const lines=[`💎 卖掉 <b>${carried}</b> 颗宝石 → <b>+${D.earn}</b> 🪙`,`🍞🥕 给村民买了面包、蔬菜和布 → <b>-${D.supply}</b> 🪙 <span class="thx">村民们：龙大王 YYDS！🙌</span>`];
+ await sleep(500);for(let i=0;i<lines.length;i++){if(!$('#rcpt'))return;r.insertAdjacentHTML('beforeend',`<div class="rl pop">${lines[i]}</div>`);D.coinD+=i===0?D.earn:-D.supply;refreshRes('rc');sfx('coin');await sleep(800)}
+ const bs=$('#bagsec');if(bs)bs.classList.remove('hidden');busy=false}
+ACT.pickBag=el=>{if(busy)return;const b=D.bags[+el.dataset.i];D.C=b.c;D.bagPrice=b.p;D.cq=Math.floor(D.C/D.E);D.cr=D.C%D.E;D.coinD-=b.p;sfx('coin');renderCandy()};
+
+/* ========== step 3: share candy ========== */
+function candyTalk(){return `${D.E} 只精灵排好队，等着分 <b>${D.C}</b> 颗糖${D.C>60?'（一袋装 10 颗）':''}。每只要<b>一样多</b>！<br>每只分几颗？还剩几颗？`}
+function candyQ(){return qHTML([['每只分 ',' 颗'],['剩 ',' 颗糖']],'🍬 分糖！','goCandy',`<button class="btn sm blue" data-act="hint" data-t="candy">📜 分糖卡</button><button class="btn sm gray" data-act="manualCandy">🖐 一轮一轮发</button>`)}
+function renderCandy(){IN={v:['',''],f:0};busy=false;const es=elfSize(D.E,74);
+ app.innerHTML=`<div class="screen step stepbg">${topHTML(`第 ${S.day} 天 · ③ 回山洞分糖果`)}<div class="stepmain"><div class="panel scenep cavep">
+  <div class="gpline"><div class="gpm">${grandpaSVG()}</div><div class="bubble" id="talk">${candyTalk()}</div></div>
+  <div class="pilebox"><div class="pilecount"><span id="pileN">${D.C}</span> 颗糖</div><div class="pile" id="pile"></div></div>
+  <div class="plates" id="plates" style="--es:${es}px">${Array.from({length:D.E},(_,i)=>`<div class="pl" id="pl${i}"><div class="pe">${elfSVG(D.k)}</div><div class="cnt">0</div></div>`).join('')}</div>
+ </div><div class="panel qp" id="qp">${candyQ()}</div></div></div>`;
+ renderPile(D.C,'candy');if(D.tut)startManualCandy(true)}
+function resetPlates(){$$('#plates .pl').forEach(p=>{p.classList.remove('angry','dance');p.querySelector('.pe').innerHTML=elfSVG(D.k);p.querySelector('.cnt').textContent='0'})}
+async function dealRound(left,per,cnt){const pls=$$('#plates .pl'),give=Math.min(D.E,left),from=ctr($('#pile')),fl=[];
+ for(let i=0;i<give;i++)fl.push(fly('🍬',{x:from.x+rnd(-30,30),y:from.y},ctr(pls[i]),per*.8));left-=give;renderPile(left,'candy');sfx('candy');await Promise.all(fl);
+ for(let i=0;i<give;i++){cnt[i]++;pls[i].querySelector('.cnt').textContent=cnt[i]}return{left,give}}
+async function deal(a){resetPlates();let left=D.C;renderPile(left,'candy');const cnt=Array(D.E).fill(0),per=clamp(2600/a,160,520);
+ for(let r=0;r<a;r++){if(left<=0){angry(0);return{left,unfair:D.E}}const g=await dealRound(left,per,cnt);left=g.left;if(g.give<D.E){angry(g.give);return{left,unfair:D.E-g.give}}await sleep(per*.25)}
+ return{left,unfair:0}}
+function angry(from){$$('#plates .pl').forEach((p,i)=>{if(i>=from){p.classList.add('angry');p.querySelector('.pe').innerHTML=elfSVG(D.k,{mood:'angry'})}})}
+ACT.goCandy=async()=>{if(busy)return;if(IN.v[0]===''||IN.v[1]===''){talk('先把两个空格都填上数字哦～');shakeEl($('#qp .qbox'));sfx('bad');return}
+ const a=+IN.v[0],b=+IN.v[1];busy=true;setBtns(false);D.candyTries++;
+ if(a===0){talk('一颗都不分？精灵们会哭的！😭');sfx('bad');markBad(0);busy=false;setBtns(true);return}
+ talk(`每只分 ${a} 颗，开始发糖！`);const res=await deal(Math.min(a,D.cq+1));let msg='';
+ if(a>D.cq){msg=`糖不够啦！<b>${res.unfair}</b> 只精灵没拿到第 ${D.cq+1} 颗，当场破防：「家人们谁懂啊！就我少一颗！退！退！退！」<br>每只 ${a} 颗要 ${a*D.E} 颗糖，可只有 ${D.C} 颗。`;IN.f=0}
+ else if(a<D.cq){msg=`还剩 <b>${res.left}</b> 颗糖！精灵们眼巴巴：「还够每只再分一颗吧？球球了🥺」`;IN.f=0}
+ else if(b!==D.cr){msg=b>=D.E?`每只 ${D.cq} 颗分对了！可是剩 ${b} 颗的话，${b} 不比 ${D.E} 小，还够每只再分一颗呀。<br>看看糖堆，真正剩下几颗？`:`每只分对了！👍 再数一数，还剩几颗糖？`;IN.f=1}
+ else{await candyWin(false);return}
+ sfx('bad');quake();banner(pick(WRONG),'bad');S.combo=0;refreshCombo();if(D.candyTries>=2)msg+='<br>💡 可以看「📜 分糖卡」，或者「🖐 一轮一轮发」！';talk(msg);updAns();markBad(IN.f);busy=false;setBtns(true)};
+async function candyWin(manual){busy=true;winCombo(manual&&!D.tut,D.tut?1:D.candyTries,D.cr===0);D.candyStars=D.tut?3:starsFor(D.candyTries,manual);D.perfect=D.cr===0;D.starD+=D.candyStars+(D.perfect?1:0);D.jarD=D.cr;if(!D.tut){S.total++;if(!manual&&D.candyTries===1)S.right++}
+ sfx('good');$$('#plates .pl').forEach((p,i)=>{p.classList.remove('angry');p.querySelector('.pe').innerHTML=elfSVG(D.k,{hold:Math.min(D.cq,D.k),item:'candy'});p.style.animationDelay=(i%5)*.08+'s';p.classList.add(D.perfect?'dance':'hop')});
+ const pc=ctr($('#plates'));confetti(pc.x,pc.y,D.perfect?140:60);
+ if(D.perfect){setTimeout(()=>sfx('fanfare'),300);talk(`<b>完美！</b>一颗不剩，正好分完！精灵们原地开跳「完美舞」💃 绝绝子！额外 +1 ⭐`)}
+ else{talk(`每只 <b>${D.cq}</b> 颗，一样多！精灵们：「公平！YYDS！」 剩下的 <b>${D.cr}</b> 颗放进龙大王的糖罐 🍬`);const p=ctr($('#pile')),j=ctr($('#rj'));for(let i=0;i<D.cr;i++)fly('🍬',{x:p.x+rnd(-30,30),y:p.y},j,700+i*90);setTimeout(()=>{renderPile(0,'candy');refreshRes('rj')},750+D.cr*90)}
+ setTimeout(()=>refreshRes('rs'),400);
+ S.hist.unshift(`${D.C} ÷ ${D.E} = ${D.cq}${D.cr?' …… '+D.cr:''}`);if(S.hist.length>40)S.hist.length=40;
+ let note=`${D.E} 只精灵，每只 <b>${D.cq}</b> 颗，${D.cr?`剩 <b>${D.cr}</b> 颗进糖罐。`:'正好分完！'}`;
+ if(manual)note=`一共发了 <b>${D.cq}</b> 轮，所以每只 ${D.cq} 颗，剩 ${D.cr} 颗。<br>这就是<b>除法</b>！下次直接算出来，又快又能拿 3 颗 ⭐！`;
+ const qp=$('#qp');qp.classList.add('alt');qp.innerHTML=winCard({title:D.perfect?'💃 完美分糖！':'🎉 分得真公平！',stars:D.candyStars,eq:eqHTML(D.C,D.E,D.cq,D.cr),note,btn:`<button class="btn big green" data-act="toSummary">🌙 结束今天的工作</button>`});
+ [1,2,3].forEach(i=>{if(i<=D.candyStars)setTimeout(()=>sfx('star'),i*250)});busy=false}
+function startManualCandy(tut){D.mLeft=D.C;D.mRounds=0;resetPlates();renderPile(D.C,'candy');D.mCnt=Array(D.E).fill(0);
+ const qp=$('#qp');qp.classList.add('alt');qp.innerHTML=`<div class="manual"><div class="mtitle">🖐 一轮一轮发</div><div class="mnote">每发<b>一轮</b>，每只精灵拿 <b>1</b> 颗。<br>剩下的不够每只一颗时，就停下！</div><button class="btn huge green" data-act="mRound">🍬 发一轮</button><div class="mstat" id="mstat">已发 0 轮 · 剩 ${D.C} 颗</div><button class="btn blue" data-act="mDoneCandy">✋ 不够每只一颗了，收工！</button>${tut?'':'<button class="btn sm gray" data-act="backCandy">↩ 我还是自己算</button>'}</div>`;
+ talk(tut?'第一次分糖，我们<b>一轮一轮</b>地发：每发一轮，每只精灵拿一颗。不够每只一颗的时候，就收工！':'点「发一轮」，每只精灵拿一颗。不够每只一颗时，就点「收工」！')}
+ACT.manualCandy=()=>{if(busy)return;startManualCandy(false)};
+ACT.backCandy=()=>{if(busy)return;const qp=$('#qp');qp.classList.remove('alt');IN={v:['',''],f:0};qp.innerHTML=candyQ();resetPlates();renderPile(D.C,'candy');talk(candyTalk())};
+ACT.mRound=async()=>{if(busy)return;if(D.mLeft<D.E){sfx('bad');talk(`只剩 <b>${D.mLeft}</b> 颗，不够每只一颗了！硬要分的话，有的精灵会没有——不公平！<br>点「收工」吧。`);shakeEl($('#pile'));return}
+ busy=true;const g=await dealRound(D.mLeft,480,D.mCnt);D.mLeft=g.left;D.mRounds++;const s=$('#mstat');if(s)s.textContent=`已发 ${D.mRounds} 轮 · 剩 ${D.mLeft} 颗`;busy=false};
+ACT.mDoneCandy=()=>{if(busy)return;if(D.mLeft>=D.E){sfx('bad');talk(`还剩 <b>${D.mLeft}</b> 颗，还够每只再发一颗呢！再发一轮吧。`);return}candyWin(true)};
+
+/* ========== summary, floors, egg ========== */
+const REWARDS=[
+ {icon:'💰',txt:'7 楼的宝石搬空啦！宝石底下藏着<b>一箱金币</b>！',fn(){S.coins+=100;return'+100 🪙'}},
+ {icon:'⭐',txt:'6 楼搬空啦！角落里有一盏<b>星星灯</b>，已经挂在洞里了！',deco:'star'},
+ {icon:'🍬',txt:'5 楼搬空啦！发现了一个<b>超大糖果罐</b>！',fn(){S.jar+=30;return'+30 🍬'}},
+ {icon:'👑',txt:'4 楼搬空啦！一顶<b>闪闪发光的王冠</b>，已经给你戴上啦！',deco:'crown',wear:1},
+ {icon:'🌈',txt:'3 楼搬空啦！墙上挂着一道<b>彩虹灯</b>！',deco:'rainbow'},
+ {icon:'💎',txt:'2 楼搬空啦！一个装满<b>私房宝石</b>的小箱子！',fn(){S.myGems+=30;return'+30 💎'}},
+];
+function applyReward(n){const r=REWARDS[n-1];if(r.fn)return r.fn();if(S.owned[r.deco]){S.coins+=80;return'已经有了，换成 +80 🪙'}S.owned[r.deco]=1;if(r.wear)S.head=r.deco;return'获得！'}
+ACT.toSummary=async()=>{if(busy||!D||D.done)return;D.done=true;D.active=false;
+ const st=D.gemStars+D.candyStars+(D.perfect?1:0),bonus=st*2,cb=D.comboBonus||0,coinD=D.earn-D.supply-D.bagPrice+bonus+cb;
+ S.coins=Math.max(0,S.coins+coinD);S.myGems+=D.r;S.jar+=D.cr;S.stars+=st;S.tower=Math.max(0,S.tower-D.N);
+ let lv='';if(!D.tut){const base=D.gemStars+D.candyStars;if(base>=6){S.good++;S.bad=0;if(S.good>=2&&S.level<7){S.level++;S.good=0;lv='up'}}else if(base<=3){S.bad++;S.good=0;if(S.bad>=2&&S.level>1){S.level--;S.bad=0;lv='down'}}}
+ let tail=0;if(S.tower>0&&S.tower<12){tail=S.tower;S.myGems+=tail;S.tower=0}
+ const cleared=7-Math.ceil(S.tower/FLOOR),nf=[];while(S.floorsGot<cleared){S.floorsGot++;nf.push(S.floorsGot)}
+ const gots=nf.map(n=>n<7?applyReward(n):null);const dayNo=S.day;S.day++;save();
+ const row=(a,b)=>`<div class="srow"><span>${a}</span><span>${b}</span></div>`,stars=n=>'★'.repeat(n)+'☆'.repeat(3-n);
+ app.innerHTML=`<div class="screen bg-cave"><div class="stal"></div>${topHTML(`第 ${dayNo} 天 · 收工啦`)}<div class="center"><div class="card scroll"><h2>🌙 第 ${dayNo} 天 · 结算</h2><div style="font-family:var(--fd);font-size:22px;color:var(--gold)">${st>=7?'👑 MVP！完美的一天！':st>=6?'😎 全对！稳如老狗！':st>=4?'👍 干得不错！':'💪 明天继续冲！'}</div>
+ ${row('① 搬宝石',`<span style="color:#ffb400">${stars(D.gemStars)}</span>`)}${row('③ 分糖果',`<span style="color:#ffb400">${stars(D.candyStars)}</span>`)}${D.perfect?row('💃 完美分糖','+1 ⭐'):''}
+ ${row('🪙 金币',`${coinD>=0?'+':''}${coinD}`)}<div class="sub">卖宝石 +${D.earn} · 物资 -${D.supply} · 糖 -${D.bagPrice} · 星星奖励 +${bonus}${cb?` · 连击 +${cb}`:''}</div>${S.combo>1?row('🔥 当前连击',`${S.combo}（最高 ${S.best}）`):''}
+ ${row('💎 私房宝石',`+${D.r+tail}`)}${row('🍬 糖罐',`+${D.cr}`)}${row('⛰️ 宝石山还剩',`${S.tower} 颗`)}
+ ${lv==='up'?`<div class="lvmsg">🚀 你太厉害了！精灵爷爷决定给你<b>更大的挑战</b>：${LVNAME[S.level]}</div>`:lv==='down'?`<div class="lvmsg down">🌱 精灵爷爷说：我们先练练小一点的数，稳稳的！</div>`:''}
+ <div style="margin-top:14px"><button class="btn big green" data-act="toHub">🏠 回山洞</button></div></div></div></div>`;
+ sfx('fanfare');confetti(innerWidth/2,innerHeight*.3,60);
+ busy=true;await sleep(1100);for(let i=0;i<nf.length;i++){if(nf[i]<7){const r=REWARDS[nf[i]-1];sfx('fanfare');confetti();await dialog(`<div class="rw"><div class="rwi">${r.icon}</div><p>${r.txt}</p><p class="got">${gots[i]}</p></div>`,[{t:'🎉 太好了！',c:'green'}])}else await eggEnding()}busy=false};
+async function eggEnding(){sfx('fanfare');await dialog(`<div class="rw"><div class="rwi egg">🥚</div><h3>宝石山全部搬空啦！</h3><p>在洞底最深的地方，发现了一颗<b>神秘的蛋</b>……它好像在动！</p></div>`,[{t:'👀 快看看！',c:'green'}]);
+ sfx('boom');confetti(innerWidth/2,innerHeight/2,160);S.baby=(S.baby||0)+1;S.tower=TOWER;S.floorsGot=0;S.round++;save();
+ await dialog(`<div class="rw"><div class="rwbaby">${dragonHTML({col:'baby',head:null,face:null,cls:'hop'})}</div><h3>咔嚓！一只小龙宝宝出生啦！</h3><p>它会住在山洞里一直陪着你。</p><p>精灵爷爷：「快看！洞底又冒出了新宝石，<b>宝石山又长回来啦！</b>」</p></div>`,[{t:'🎉 太好了！',c:'green'}])}
+ACT.toHub=()=>{if(busy)return;renderHub()};
+
+/* ========== shop ========== */
+let shopTab='wear';
+function canPay(it){const have=it.cur==='coins'?S.coins:it.cur==='jar'?S.jar:S.myGems;return have>=it.p?0:it.p-have}
+function owned(it){return it.p===0||!!S.owned[it.id]}
+function renderShop(){const list=ITEMS.filter(i=>i.cat===shopTab);
+ app.innerHTML=`<div class="screen stepbg">${topHTML('🛍️ 龙大王商店')}<div class="shopwrap"><div class="shopprev">${dragonHTML({cls:'bob'})}<div class="bubble" style="font-size:16px">金币 🪙 卖宝石赚；糖 🍬 和私房宝石 💎 来自每天的<b>余数</b>！</div></div>
+ <div class="shopright"><div class="tabs">${[['wear','🎩 装扮'],['color','🎨 龙的颜色'],['deco','🏮 洞穴装饰']].map(t=>`<button class="tab ${shopTab===t[0]?'on':''}" data-act="tab" data-t="${t[0]}">${t[1]}</button>`).join('')}</div>
+ <div class="grid scroll">${list.map(it=>{const o=owned(it),lack=canPay(it);let b;
+  if(it.cat==='wear')b=o?(S[it.slot]===it.id?`<button class="btn sm gray" data-act="wear" data-id="${it.id}">摘下</button>`:`<button class="btn sm green" data-act="wear" data-id="${it.id}">戴上</button>`):lack?`<button class="btn sm" disabled>还差 ${lack} ${CUR[it.cur]}</button>`:`<button class="btn sm" data-act="buy" data-id="${it.id}">买 ${it.p} ${CUR[it.cur]}</button>`;
+  else if(it.cat==='color')b=o?(S.color===it.col?`<button class="btn sm gray" disabled>使用中</button>`:`<button class="btn sm green" data-act="wear" data-id="${it.id}">换上</button>`):lack?`<button class="btn sm" disabled>还差 ${lack} ${CUR[it.cur]}</button>`:`<button class="btn sm" data-act="buy" data-id="${it.id}">买 ${it.p} ${CUR[it.cur]}</button>`;
+  else b=o?`<button class="btn sm gray" disabled>✓ 已摆好</button>`:lack?`<button class="btn sm" disabled>还差 ${lack} ${CUR[it.cur]}</button>`:`<button class="btn sm" data-act="buy" data-id="${it.id}">买 ${it.p} ${CUR[it.cur]}</button>`;
+  const icon=it.cat==='color'?`<div class="swatch" style="background:${DCOL[it.col][0]}"></div>`:it.icon;
+  return `<div class="item"><div class="ii">${icon}</div><div class="in">${it.name}</div>${b}</div>`}).join('')}</div></div></div></div>`}
+ACT.shop=()=>{shopTab='wear';renderShop()};
+ACT.tab=el=>{shopTab=el.dataset.t;renderShop()};
+ACT.buy=el=>{const it=ITEM[el.dataset.id];if(!it||owned(it)||canPay(it))return;if(it.cur==='coins')S.coins-=it.p;else if(it.cur==='jar')S.jar-=it.p;else S.myGems-=it.p;S.owned[it.id]=1;if(it.cat==='wear')S[it.slot]=it.id;if(it.cat==='color')S.color=it.col;save();sfx('coin');sfx('good');const c=ctr(el);confetti(c.x,c.y,40);renderShop()};
+ACT.wear=el=>{const it=ITEM[el.dataset.id];if(!it||!owned(it))return;if(it.cat==='color')S.color=it.col;else S[it.slot]=S[it.slot]===it.id?null:it.id;save();sfx('pop');renderShop()};
+
+/* ========== book ========== */
+ACT.book=()=>{const t=titleOf(),i=TITLES.indexOf(t),nx=TITLES[i+1],pct=S.total?Math.round(S.right/S.total*100):0;
+ app.innerHTML=`<div class="screen stepbg">${topHTML('📒 龙大王的本子')}<div class="book scroll"><div class="bookin">
+ <div class="bk"><h3>🏅 我的称号：${t[1]}</h3>一共得到 <b>${S.stars}</b> 颗 ⭐ ${nx?`· 再得 <b>${nx[0]-S.stars}</b> 颗就能成为「${nx[1]}」<div class="bar"><i style="width:${clamp((S.stars-t[0])/(nx[0]-t[0])*100,0,100)}%"></i></div>`:'· 你已经是最厉害的龙王啦！'}</div>
+ <div class="bk"><h3>📊 工作记录</h3>已经工作了 <b>${S.day-1}</b> 天 · 第 ${S.round} 座宝石山<br>一次就答对：<b>${S.right}</b> / ${S.total} 次（${pct}%）<br>最高连击：<b>${S.best||0}</b> 🔥<br>现在的难度：<b>${LVNAME[S.level]}</b>（精灵爷爷会根据你的表现自动调整）</div>
+ <div class="bk"><h3>🧮 我做过的除法</h3>${S.hist.length?`<div class="eqlist">${S.hist.slice(0,24).map(e=>`<div>${e}</div>`).join('')}</div>`:'还没有记录，快去干活吧！'}</div>
+ <div class="bk"><h3>📜 精灵爷爷的除法秘籍</h3>
+ ① <b>被除数 ÷ 除数 = 商 …… 余数</b><br>　宝石数 ÷ 每只拿几颗 = 派几只精灵 …… 剩几颗<br>　糖果数 ÷ 精灵只数 = 每只几颗 …… 剩几颗<br>
+ ② <b>余数一定比除数小</b>。如果剩下的还够再分一次，就说明还没分完！<br>
+ ③ <b>验算</b>：商 × 除数 + 余数 = 被除数<br>
+ ④ 想商的时候，用乘法口诀找：<b>最接近、又不超过</b>被除数的那个数。</div>
+ <div class="row2"><button class="btn purple" data-act="replay">📖 重看开场故事</button><button class="btn gray" data-act="settings">⚙️ 设置</button></div>
+ </div></div></div>`};
+ACT.replay=()=>{storyReplay=true;story(0)};
+
+/* ========== boot ========== */
+renderTitle();
+</script>
+</body>
+</html>

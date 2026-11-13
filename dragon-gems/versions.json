@@ -1,0 +1,27 @@
+[
+ {
+  "v": 2,
+  "file": "dragon-gems-v2.html",
+  "date": "2026-11-13",
+  "schema": 2,
+  "notes": {
+   "zh-Hans": "全新暗黑奇幻画风（夜空、晶洞、发光精灵）；四种语言；开发者/作弊面板；存档备份与导出导入；版本切换。",
+   "en": "New dark-fantasy art (night skies, crystal caves, glowing elves); 4 languages; dev/cheat panel; save backup, export/import; version switching.",
+   "fr": "Nouveau style dark fantasy (ciels nocturnes, grottes de cristal, lutins lumineux) ; 4 langues ; panneau dev/triche ; sauvegarde, export/import ; changement de version.",
+   "zh-Hant": "全新暗黑奇幻畫風（夜空、晶洞、發光精靈）；四種語言；開發者/作弊面板；存檔備份與匯出匯入；版本切換。"
+  }
+ },
+ {
+  "v": 1,
+  "file": "dragon-gems-v1.html",
+  "date": "2026-11-12",
+  "schema": 1,
+  "noSwitch": true,
+  "notes": {
+   "zh-Hans": "第一版：开场故事、搬宝石（有余数的除法）、集市挑糖、分糖果、商店、宝石山与龙蛋；街机卡通画风。",
+   "en": "First version: story intro, gem carrying (division with remainders), candy market, candy sharing, shop, Gem Mountain and dragon egg; arcade cartoon style.",
+   "fr": "Première version : histoire, transport des gemmes (division avec reste), marché, partage des bonbons, boutique, Montagne et œuf de dragon ; style cartoon arcade.",
+   "zh-Hant": "第一版：開場故事、搬寶石（有餘數的除法）、集市挑糖、分糖果、商店、寶石山與龍蛋；街機卡通畫風。"
+  }
+ }
+]

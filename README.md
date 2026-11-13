@@ -2,6 +2,9 @@
 
 Games built with Claude, hosted on GitHub Pages: https://jacobjkwu.github.io/family-games/
 
+- `index.html` + `games.json`: the Game Hub (touch and controller). Edit `games.json` to add a game or bump its latest version.
+- `dragon-gems/`, `crab-castle/`: copied unchanged from their claude.ai artifacts on 2026-11-13. Only each launcher `index.html` gained one line that loads `shared/family-cloud.js`.
+- `shared/family-cloud.js`: automatic cloud backup for every localStorage game (one Google sign-in per device covers all games, because they share this origin). Load it with `data-games` (list of game ids) and `data-chip` (`hub`, `float` or `none`).
 - `drawrassic-park/`: Drawrassic Park. `index.html` is the version launcher, `versions.json` lists the versions, each version is `drawrassic-park-vN.html` (old versions are frozen), and `CHANGELOG.md` is the changelog.
 - `vendor/firebase-lite.js`: Firebase JS SDK 13.3.0 (app, auth, firestore), bundled with esbuild, so the games don't depend on a CDN.
 
