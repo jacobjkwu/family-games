@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.35",
+      "file": "drawrassic-park-v3.35.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🏄 Surfing, 🛷 sledding and 🏰 sandcastles: draw a surfboard and a dino rides the waves (tap it for tricks, careful of wipeouts); draw a sled and heap up a snow hill for dinos and kids; draw a sandcastle — kids decorate it, big dinos stomp it.",
+        "fr": "🏄 Surf, 🛷 luge et 🏰 châteaux de sable : dessine une planche et un dino surfe les vagues (touche-le pour des figures, gare aux plongeons) ; dessine une luge et fais une colline de neige ; dessine un château — les enfants le décorent, les gros dinos l’écrasent.",
+        "zh-Hans": "🏄 冲浪、🛷 雪橇和 🏰 沙堡：画一块冲浪板，恐龙就去湖里冲浪（点它耍特技，小心翻船）；画一个雪橇，堆一座雪坡给恐龙和小朋友滑；画一个沙堡——小朋友会来装饰，大恐龙会来一脚踩塌。",
+        "zh-Hant": "🏄 衝浪、🛷 雪橇和 🏰 沙堡：畫一塊衝浪板，恐龍就去湖裡衝浪（點牠耍特技，小心翻船）；畫一個雪橇，堆一座雪坡給恐龍和小朋友滑；畫一個沙堡——小朋友會來裝飾，大恐龍會來一腳踩塌。"
+      }
+    },
+    {
       "v": "3.34",
       "file": "drawrassic-park-v3.34.html",
       "date": "2026-11-13",
