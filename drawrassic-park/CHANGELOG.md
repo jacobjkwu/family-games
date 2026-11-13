@@ -1,5 +1,13 @@
 # Drawrassic Park — Changelog
 
+## v3.51 (2026-11-13) — save schema s8 (unchanged)
+- 🗺️ Endless expedition (quick bar 🗺️, added once together with 🎲 events which v3.49 failed to add; also ☰ → 🗺️): pick up to 8 park dinos (⭐ strongest 8), drag to walk, auto-battle, tap a monster to focus, ⚡ team super move, 🏠 home with loot (everyone knocked out = half loot).
+- Seeded endless world of 640 px areas in 8 lands (meadow, forest, desert, snow, volcano, swamp, crystal caves, night woods); danger level rises with distance. Monster packs, giant bosses (park boss looks, ground-slam warning, boss bar), chests, springs, campfires, trader, mystery eggs, portals, rainbows (double XP), lonely wild dinos that join; happenings every ~50 s: coin thief, meteor shower, ambush, gold rain, storm.
+- Rewards at home: coins, amber, materials, XP for the team, eggs hatch and new friends move in (📦 box when full). Records in `drawrassic-park/exp/e1` (+/bak, tolerant loader) and backup codes (`ex`). Save schema unchanged (s8).
+- Controller: left stick walk, A super move, X nearest monster, B home, Y/Menu pause; hint bar shows these; pauses if the controller drops. TV: HUD scaled, 5% safe margin.
+- 🎮 settings: new 🗺️ Expedition section (happenings on/off and 9 numbers).
+- Tests: 4 languages × both iPad sizes, every find and happening, TV with mocked controller, corrupt/bad-field records, v3.50↔v3.51 data round trip. 1,000 monsters: ~1.2 ms update + ~3.8 ms draw per frame in headless Chrome (not an iPad number).
+
 ## v3.50 (2026-11-13) — save schema s8 (unchanged)
 - 🎮 Game settings panel (quick bar 🎮, added to the bar once; also ☰ → 🎮): 9 sections — 🌙 Night & bosses, 🌿 Wild dinos, 👑 Hero bosses, 🎲 Random events, 🦖 Dino life, 👥 Visitors, 🌦️ Weather & time, 🎨 Picture & motion, 🛠️ Cheats — with 23 on/off switches, 25 per-event switches and 55 numbers (slider and − / +, a ● when it differs from normal; a switch's numbers show while it is on). 🔍 search filters rules, each section has ↺ Normal, and ↺ Everything normal asks first. Changes work at once and are kept in the number-panel config (drawrassic-park/config/c1; automatic weather and disasters in weather/w1).
 - New switches (all on by default): shadow dinos at night, night bosses, Dark Quetzalcoatlus, boss ultimates, boss rage, wild dinos in the Wild Lands, taming knocked-out wild dinos (off: they run home), hero bosses, park dinos fighting each other, eggs and babies, hunger, visitors, dino chatter, cartoon marks, and one per random event (manual starts from the 🎲 panel still work). New numbers: XP × (0–10) and seconds in one day + night (60–3600, was fixed at 360). heroBarRange and heroBarHold now have proper ranges.

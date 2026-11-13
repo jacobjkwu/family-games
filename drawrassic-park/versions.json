@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.51",
+      "file": "drawrassic-park-v3.51.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🗺️ Endless expedition: take up to 8 dinos into a never-ending world with 8 lands, little monsters, giant bosses, treasure, springs, campfires, a trader, mystery eggs, portals, rainbows, new dino friends and surprise happenings. The farther you go, the harder (and richer) it gets.",
+        "fr": "🗺️ Expédition sans fin : emmène jusqu’à 8 dinos dans un monde infini avec 8 contrées, des petits monstres, des boss géants, des trésors, des sources, des feux de camp, un marchand, des œufs mystère, des portails, des arcs-en-ciel, de nouveaux amis dinos et des surprises. Plus tu vas loin, plus c’est dur (et riche).",
+        "zh-Hans": "🗺️ 无尽探险：带最多 8 只恐龙去一个永远走不完的世界。有 8 种地形、小怪、巨大 Boss、宝箱、泉水、篝火、商人、神秘蛋、传送门、彩虹、新恐龙朋友和随机事件。走得越远越难，奖励也越多。",
+        "zh-Hant": "🗺️ 無盡探險：帶最多 8 隻恐龍去一個永遠走不完的世界。有 8 種地形、小怪、巨大 Boss、寶箱、泉水、篝火、商人、神秘蛋、傳送門、彩虹、新恐龍朋友和隨機事件。走得越遠越難，獎勵也越多。"
+      }
+    },
+    {
       "v": "3.50",
       "file": "drawrassic-park-v3.50.html",
       "date": "2026-11-13",
