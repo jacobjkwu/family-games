@@ -4,6 +4,27 @@
   "notes": "Game list for the Game Hub. category: \"family\" (our own games) or \"community\" (open-source AI-made games vendored under community/<id>/, played through community/play.html in a sandbox). input: \"controller\" = 手柄+电视, \"touch\" = 触屏优先. url: the game launcher (absolute, or relative to the hub). Community entries also have entry (start page under community/) and credit {author, made, license, repo}. icon = hand-drawn inline SVG (viewBox 0 0 100 100, single quotes inside). Community entries are either copied (entry: start page under community/), embedded (external: the official https site, shown inside community/play.html) or links (link: true, url opens the site directly). input: touch | both (touch or controller) | controller | keyboard.",
   "games": [
     {
+      "id": "goat-mayhem",
+      "category": "family",
+      "url": "https://jacobjkwu.github.io/family-games/goat-mayhem/",
+      "latest": "v1",
+      "input": "controller",
+      "color": "#7ac8ff",
+      "name": {
+        "zh-Hans": "疯狂山羊",
+        "zh-Hant": "瘋狂山羊",
+        "en": "Goat Mayhem",
+        "fr": "Chèvre en Folie"
+      },
+      "blurb": {
+        "zh-Hans": "当一只山羊，在 3D 小镇里顶人、舔东西、放屁、开大炮，把一切搞得一团糟。",
+        "zh-Hant": "當一隻山羊，在 3D 小鎮裡頂人、舔東西、放屁、開大砲，把一切搞得一團亂。",
+        "en": "Be a goat in a 3D town: headbutt, lick, prank and cannon-launch your way into total chaos.",
+        "fr": "Sois une chèvre dans une ville 3D : coups de tête, coups de langue, farces et canon à chèvre pour un chaos total."
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#7ac8ff'/><path d='M2 70 Q50 60 98 70 L98 100 L2 100 Z' fill='#6aa94c'/><circle cx='78' cy='24' r='9' fill='#ffd84a' stroke='#c08a00' stroke-width='2'/><path d='M74 30 L82 30 L78 36 Z' fill='#c08a00'/><ellipse cx='46' cy='58' rx='22' ry='13' fill='#f4efe6' stroke='#5a4a3a' stroke-width='3'/><rect x='30' y='66' width='6' height='16' rx='3' fill='#e8e0d0' stroke='#5a4a3a' stroke-width='2.5'/><rect x='54' y='66' width='6' height='16' rx='3' fill='#e8e0d0' stroke='#5a4a3a' stroke-width='2.5'/><path d='M60 52 L68 36' stroke='#5a4a3a' stroke-width='13' stroke-linecap='round'/><path d='M60 52 L68 36' stroke='#f4efe6' stroke-width='8' stroke-linecap='round'/><ellipse cx='72' cy='32' rx='10' ry='8' fill='#f4efe6' stroke='#5a4a3a' stroke-width='3'/><path d='M66 25 Q60 14 70 12' stroke='#8a7b66' stroke-width='4' fill='none' stroke-linecap='round'/><path d='M74 25 Q72 13 82 14' stroke='#8a7b66' stroke-width='4' fill='none' stroke-linecap='round'/><circle cx='75' cy='30' r='2.4' fill='#222'/><path d='M74 39 L72 46 L77 40 Z' fill='#d6ccbb' stroke='#5a4a3a' stroke-width='1.5'/><path d='M80 34 Q86 38 84 46' stroke='#ff7a9a' stroke-width='4' fill='none' stroke-linecap='round'/><path d='M14 40 l6 -10 l4 8 l8 -6 l-2 10 l8 2 l-9 5 l3 8 l-9 -4 l-5 8 l-1 -9 l-9 -1 z' fill='#ff8a1a' stroke='#c03a00' stroke-width='2' stroke-linejoin='round'/></svg>"
+    },
+    {
       "id": "drawrassic-park",
       "url": "https://jacobjkwu.github.io/family-games/drawrassic-park/",
       "latest": "v3.18",

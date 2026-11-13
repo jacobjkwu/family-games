@@ -12,6 +12,7 @@ const CFG = { checkEveryMs: 60000, keepHourly: 48, keepDaily: 30, maxChars: 9000
 const GAMES = {
   'dragon-gems': { prefixes: ['dragon-gems/'], exact: ['dragonGemMountain.v1'], name: { en: "Dragon's Gem Mountain", fr: 'La Montagne aux Gemmes', 'zh-Hans': '喷火龙的宝石山', 'zh-Hant': '噴火龍的寶石山' } },
   'crab-castle': { prefixes: ['crab-castle/'], exact: ['crab3d'], name: { en: 'Crab King Castle Defense', fr: 'Le Roi Crabe défend son château', 'zh-Hans': '巨蟹王城堡保卫战', 'zh-Hant': '巨蟹王城堡保衛戰' } },
+  'goat-mayhem': { prefixes: ['goat-mayhem/'], exact: [], name: { en: 'Goat Mayhem', fr: 'Chèvre en Folie', 'zh-Hans': '疯狂山羊', 'zh-Hant': '瘋狂山羊' } },
   'game-hub': { prefixes: ['game-hub/'], exact: [], name: { en: 'Game Hub settings', fr: 'Réglages de la salle de jeux', 'zh-Hans': '游戏大厅设置', 'zh-Hant': '遊戲大廳設定' } },
   // community games (community/play.html): each one saves under community/<id>/
   'community-bloom-hop': { prefixes: ['community/bloom-hop/'], exact: [], name: {"en": "🌐 Bloom Hop", "fr": "🌐 Bloom Hop", "zh-Hans": "🌐 荷塘跳跳蛙 Bloom Hop", "zh-Hant": "🌐 荷塘跳跳蛙 Bloom Hop"} },
@@ -59,7 +60,7 @@ const STR = {
 /* ---------- helpers ---------- */
 const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } },
   del(k) { try { localStorage.removeItem(k); } catch (e) {} }, keys() { try { return Object.keys(localStorage); } catch (e) { return []; } } };
-function lang() { let l = null; for (const k of ['game-hub/settings', 'drawrassic-park/settings', 'dragon-gems/settings', 'crab-castle/settings']) { try { const o = JSON.parse(ls.get(k) || 'null'); if (o && STR[o.lang]) { l = o.lang; break; } } catch (e) {} }
+function lang() { let l = null; for (const k of ['game-hub/settings', 'drawrassic-park/settings', 'dragon-gems/settings', 'crab-castle/settings', 'goat-mayhem/settings']) { try { const o = JSON.parse(ls.get(k) || 'null'); if (o && STR[o.lang]) { l = o.lang; break; } } catch (e) {} }
   if (l) return l; const n = navigator.language || 'en'; if (/^zh-(TW|HK|MO)|^zh-Hant/i.test(n)) return 'zh-Hant'; if (/^zh/i.test(n)) return 'zh-Hans'; if (/^fr/i.test(n)) return 'fr'; return 'en'; }
 const T = (k, v = {}) => { const L = STR[lang()] || STR.en; return String(L[k] != null ? L[k] : STR.en[k]).replace(/\{(\w+)\}/g, (m, x) => v[x] != null ? v[x] : m); };
 const gName = g => (GAMES[g].name[lang()] || GAMES[g].name.en);

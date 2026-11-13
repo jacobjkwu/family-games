@@ -1,0 +1,5 @@
+# 疯狂山羊 Goat Mayhem (goat-mayhem) — changelog
+
+Folder layout: `index.html` is the version launcher, `versions.json` lists versions, each version is `goat-mayhem-vN.html` (frozen once published). The game loads three.js r160 from `../vendor/three-0.160.min.js` (CDN fallback) and cloud backup from `../shared/family-cloud.js`.
+
+- **v1** (2026-11-13) `goat-mayhem-v1.html` · save schema **s1** (key `goat-mayhem/save/s1`, backup `…/bak`, daily copies `…/day-YYYYMMDD` ×7). First version: 3D open-world town (plaza, water tower, skyscraper, parking lot, gas station, construction crane, pond, trampolines, soccer goal, bowling, skate park, farm with barn/silo/windmill/hedge maze, forest treehouse, funfair with goat cannon, bouncy castle and ferris wheel). Headbutt, lick-and-drag/throw, jump + flips, flop (ragdoll), bleat, 8 prank powers, 9 goat skins, 17 gear items, 22 golden bells, 34 tasks, combo chaos score, Chaos Rush (timed). Shared settings `goat-mayhem/settings`, presets `goat-mayhem/presets`, dev config `goat-mayhem/devcfg`, backup time `goat-mayhem/meta`.

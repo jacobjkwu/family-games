@@ -1,0 +1,11 @@
+{
+  "game": "goat-mayhem",
+  "versions": [
+    {"v": 1, "file": "goat-mayhem-v1.html", "date": "2026-11-13", "schema": "s1",
+     "notes": {
+       "en": "First version: 3D goat sandbox town with headbutt, lick-and-drag, flips, flop, 8 prank powers, 9 goats, 17 gear items, 22 golden bells, 34 tasks, funfair with goat cannon, Chaos Rush.",
+       "fr": "Première version : ville bac à sable 3D avec coups de tête, langue qui traîne, saltos, chutes, 8 pouvoirs farceurs, 9 chèvres, 17 équipements, 22 cloches dorées, 34 défis, fête foraine avec canon à chèvre, Rush du chaos.",
+       "zh-Hans": "第一版：3D 山羊捣乱小镇。顶、舔着拖、空翻、摔倒，8 种恶搞能力、9 种山羊、17 件装备、22 个金铃铛、34 个任务，游乐场山羊大炮，捣乱挑战。",
+       "zh-Hant": "第一版：3D 山羊搗亂小鎮。頂、舔著拖、空翻、摔倒，8 種惡搞能力、9 種山羊、17 件裝備、22 個金鈴鐺、34 個任務，遊樂場山羊大砲，搗亂挑戰。"}}
+  ]
+}

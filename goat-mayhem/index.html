@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Goat Mayhem · versions</title>
+<style>
+*{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+html{font-size:clamp(16px,2.6vmin,30px)}
+html,body{margin:0;min-height:100%;background:linear-gradient(#3a8ae0,#1c3f7a);color:#fff;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","PingFang TC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;overscroll-behavior:none}
+body{padding:max(4vmin,env(safe-area-inset-top)) max(4vmin,env(safe-area-inset-right)) 6vh max(4vmin,env(safe-area-inset-left))}
+.wrap{max-width:900px;margin:0 auto}
+button,select{font:inherit;font-size:1rem;font-weight:800;color:#fff;border:3px solid rgba(255,255,255,.3);border-radius:.8em;background:rgba(255,255,255,.14);padding:.45em .9em;min-height:max(44px,2.3em);cursor:pointer;touch-action:manipulation}
+select{font-size:max(16px,1rem);appearance:none;-webkit-appearance:none;background:#244a8a}
+button:active{transform:scale(.96)}
+.gp-focus{outline:5px solid #ffe34a!important;outline-offset:3px;box-shadow:0 0 0 9px rgba(255,227,74,.35)!important}
+h1{text-align:center;font-size:2.4rem;margin:.1em 0;background:linear-gradient(#fff6a0,#ffb030);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #6a2a00)}
+.logo{text-align:center;font-size:3.2rem}
+.langs{display:flex;gap:.4em;justify-content:center;flex-wrap:wrap;margin:.5em 0 1em}.langs button.on{background:#ffcf3d;color:#3a2200}
+.cont{display:block;width:100%;font-size:1.5rem;padding:.6em;background:linear-gradient(#5be36b,#1fa23a);color:#032a0c;border-color:#c8ffd0;margin:.3em 0 1em}
+.ver{background:rgba(255,255,255,.1);border:3px solid rgba(255,255,255,.2);border-radius:1em;padding:.7em;margin-bottom:.6em;display:flex;gap:.8em;align-items:center;flex-wrap:wrap}
+.ver.latest{border-color:#ffd84a;box-shadow:0 0 18px rgba(255,216,74,.35)}.ver .info{flex:1;min-width:12em}.ver .t{font-size:1.3rem;font-weight:900}
+.badge{display:inline-block;background:#ffd84a;color:#3a2200;border-radius:.4em;padding:.05em .45em;font-size:.8rem;font-weight:900;margin-left:.4em;vertical-align:middle}
+.meta{font-size:.8rem;opacity:.8;margin:.2em 0}.notes{font-size:.9rem;line-height:1.45}
+.open{background:linear-gradient(#ffb341,#ff7a1a);color:#3a1600;border-color:#ffe0b0}
+.box{background:rgba(0,0,0,.22);border-radius:1em;padding:.8em;margin-top:1em}.box h2{margin:0 0 .4em;font-size:1.2rem}
+.row{display:flex;gap:.5em;align-items:center;flex-wrap:wrap}.small{font-size:.8rem;opacity:.85;line-height:1.45}
+.bk{display:flex;gap:.5em;align-items:center;justify-content:space-between;background:rgba(255,255,255,.07);border-radius:.6em;padding:.3em .6em;margin-top:.4em;flex-wrap:wrap}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:5vmin;z-index:10}.modal.show{display:flex}
+.panel{background:linear-gradient(160deg,#2c4a8a,#182a58);border:3px solid #ffcf3d;border-radius:1em;padding:1em;max-width:34em;width:100%}.panel .msg{white-space:pre-line;line-height:1.5;margin-bottom:1em}
+#toast{position:fixed;left:50%;bottom:6vh;transform:translateX(-50%);background:rgba(0,0,0,.85);border:3px solid #7cff8a;border-radius:1em;padding:.5em 1em;font-weight:800;opacity:0;transition:opacity .3s;pointer-events:none;z-index:20;max-width:90vw}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">🐐💥</div>
+  <h1 id="title"></h1>
+  <div class="langs" id="langs"></div>
+  <button class="cont" id="cont"></button>
+  <div id="list"></div>
+  <div class="box"><h2 id="cpTitle"></h2><div class="small" id="cpHelp"></div>
+    <div class="row" style="margin-top:.5em"><select id="cpFrom"></select><span>→</span><select id="cpTo"></select><button id="cpGo"></button></div></div>
+  <div class="box"><h2 id="rcTitle"></h2><div class="small" id="rcHelp"></div><div id="recover"></div></div>
+</div>
+<div class="modal" id="dlg"><div class="panel"><div class="msg" id="dlgMsg"></div><div class="row" style="justify-content:flex-end"><button id="dlgNo"></button><button id="dlgYes" style="background:#c0392b"></button></div></div></div>
+<div id="toast"></div>
+<script>
+'use strict';
+const GAME = 'goat-mayhem';
+const $ = id => document.getElementById(id);
+const STR = {
+  en: { title: 'Goat Mayhem', cont: '▶ Continue v{v}', open: 'Open', latest: 'latest', date: 'Date', schema: 'Save format', cpTitle: '📋 Copy progress', cpHelp: 'Copy coins, tasks, bells and unlocked items from one version to another. The save that gets replaced is backed up first.', cpGo: 'Copy',
+    same: 'Pick two different versions.', empty: 'v{v} has no save yet: nothing to copy.', confirm: 'Copy progress from v{a} to v{b}?\n\nThis v{b} save will be replaced:\n{what}\n\nIt is backed up first and can be restored below.', nothing: '(v{b} has no save yet)', noDown: 'v{b} uses an older save format and can’t take v{a}’s save (no downgrade exists).',
+    summary: '🪙 {c} coins · ✅ {t} tasks · 🔔 {b} bells · saved {d}', yes: 'Yes, replace it', no: 'Cancel', done: '✅ Copied. The old save was backed up.', rcTitle: '🛟 Recover saves', rcHelp: 'Every save copy still on this device. Restoring one first backs up the current save.', restore: 'Restore', restoreQ: 'Restore this copy as the v{v} save?\n{what}\n\nThe current save is backed up first.', restored: '✅ Restored', none: 'No save copies on this device yet.',
+    kind_main: 'current save', kind_bak: 'previous save', kind_day: 'daily copy {d}', kind_copy: 'backup before copy/restore', kind_broken: 'damaged data (kept)', unreadable: 'unreadable' },
+  fr: { title: 'Chèvre en Folie', cont: '▶ Continuer v{v}', open: 'Ouvrir', latest: 'récente', date: 'Date', schema: 'Format de sauvegarde', cpTitle: '📋 Copier la progression', cpHelp: 'Copie pièces, défis, cloches et objets débloqués d’une version à l’autre. La sauvegarde remplacée est d’abord gardée en copie.', cpGo: 'Copier',
+    same: 'Choisis deux versions différentes.', empty: 'La v{v} n’a pas de sauvegarde : rien à copier.', confirm: 'Copier la progression de la v{a} vers la v{b} ?\n\nCette sauvegarde de la v{b} sera remplacée :\n{what}\n\nElle est d’abord copiée et peut être restaurée plus bas.', nothing: '(la v{b} n’a pas encore de sauvegarde)', noDown: 'La v{b} utilise un format plus ancien et ne peut pas prendre la sauvegarde de la v{a} (pas de conversion vers l’arrière).',
+    summary: '🪙 {c} pièces · ✅ {t} défis · 🔔 {b} cloches · sauvé {d}', yes: 'Oui, remplacer', no: 'Annuler', done: '✅ Copié. L’ancienne sauvegarde est gardée.', rcTitle: '🛟 Récupérer des sauvegardes', rcHelp: 'Toutes les copies encore sur cet appareil. Restaurer garde d’abord la sauvegarde actuelle.', restore: 'Restaurer', restoreQ: 'Restaurer cette copie comme sauvegarde de la v{v} ?\n{what}\n\nLa sauvegarde actuelle est d’abord gardée.', restored: '✅ Restaurée', none: 'Aucune copie sur cet appareil.',
+    kind_main: 'sauvegarde actuelle', kind_bak: 'sauvegarde précédente', kind_day: 'copie du jour {d}', kind_copy: 'copie avant copie/restauration', kind_broken: 'données abîmées (gardées)', unreadable: 'illisible' },
+  'zh-Hans': { title: '疯狂山羊', cont: '▶ 继续 v{v}', open: '打开', latest: '最新', date: '日期', schema: '存档格式', cpTitle: '📋 复制进度', cpHelp: '把一个版本的金币、任务、铃铛和解锁的东西复制到另一个版本。被替换的存档会先备份。', cpGo: '复制',
+    same: '请选两个不同的版本。', empty: 'v{v} 还没有存档，没有可复制的。', confirm: '把 v{a} 的进度复制到 v{b}？\n\n将被替换的 v{b} 存档：\n{what}\n\n替换前会先备份，可以在下面恢复。', nothing: '（v{b} 还没有存档）', noDown: 'v{b} 用的是更旧的存档格式，不能接收 v{a} 的存档（没有往回转换的方法）。',
+    summary: '🪙 {c} 金币 · ✅ {t} 个任务 · 🔔 {b} 个铃铛 · 保存于 {d}', yes: '确定替换', no: '取消', done: '✅ 复制好了，旧存档已备份。', rcTitle: '🛟 找回存档', rcHelp: '这台设备上还留着的所有存档副本。恢复前会先备份现在的存档。', restore: '恢复', restoreQ: '用这份副本恢复 v{v} 的存档？\n{what}\n\n现在的存档会先备份。', restored: '✅ 已恢复', none: '这台设备上还没有存档副本。',
+    kind_main: '当前存档', kind_bak: '上一次的存档', kind_day: '每日副本 {d}', kind_copy: '复制/恢复前的备份', kind_broken: '损坏的数据（保留着）', unreadable: '读不出来' },
+  'zh-Hant': { title: '瘋狂山羊', cont: '▶ 繼續 v{v}', open: '打開', latest: '最新', date: '日期', schema: '存檔格式', cpTitle: '📋 複製進度', cpHelp: '把一個版本的金幣、任務、鈴鐺和解鎖的東西複製到另一個版本。被替換的存檔會先備份。', cpGo: '複製',
+    same: '請選兩個不同的版本。', empty: 'v{v} 還沒有存檔，沒有可複製的。', confirm: '把 v{a} 的進度複製到 v{b}？\n\n將被替換的 v{b} 存檔：\n{what}\n\n替換前會先備份，可以在下面恢復。', nothing: '（v{b} 還沒有存檔）', noDown: 'v{b} 用的是更舊的存檔格式，不能接收 v{a} 的存檔（沒有往回轉換的方法）。',
+    summary: '🪙 {c} 金幣 · ✅ {t} 個任務 · 🔔 {b} 個鈴鐺 · 保存於 {d}', yes: '確定替換', no: '取消', done: '✅ 複製好了，舊存檔已備份。', rcTitle: '🛟 找回存檔', rcHelp: '這台裝置上還留著的所有存檔副本。恢復前會先備份現在的存檔。', restore: '恢復', restoreQ: '用這份副本恢復 v{v} 的存檔？\n{what}\n\n現在的存檔會先備份。', restored: '✅ 已恢復', none: '這台裝置上還沒有存檔副本。',
+    kind_main: '目前存檔', kind_bak: '上一次的存檔', kind_day: '每日副本 {d}', kind_copy: '複製/恢復前的備份', kind_broken: '損壞的資料（保留著）', unreadable: '讀不出來' },
+};
+const LANGS = [['en', 'English'], ['fr', 'Français'], ['zh-Hans', '简体中文'], ['zh-Hant', '繁體中文']];
+const FALLBACK = { game: GAME, versions: [{ v: 1, file: 'goat-mayhem-v1.html', date: '2026-11-13', schema: 's1', notes: {} }] };
+const get = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const set = (k, v) => { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } };
+const keys = () => { try { return Object.keys(localStorage); } catch (e) { return []; } };
+const parse = s => { try { return JSON.parse(s); } catch (e) { return null; } };
+const SETK = GAME + '/settings';
+function pickLang() { const s = (parse(get(SETK)) || {}).lang; if (STR[s]) return s; const n = navigator.language || 'en'; if (/^zh-(TW|HK|MO)/i.test(n) || /hant/i.test(n)) return 'zh-Hant'; if (/^zh/i.test(n)) return 'zh-Hans'; if (/^fr/i.test(n)) return 'fr'; return 'en'; }
+let LANG = pickLang();
+const T = (k, p) => (STR[LANG][k] || STR.en[k] || k).replace(/\{(\w+)\}/g, (_, x) => p && p[x] !== undefined ? p[x] : '');
+// save formats & migrations — must match the game files (s1 = goat-mayhem-v1)
+const SAVE_KEY = s => `${GAME}/save/${s}`; const ORDER = ['s1']; const UP = {}; const DOWN = {};
+function convert(d, from, to) { let i = ORDER.indexOf(from), j = ORDER.indexOf(to); while (i < j) { const f = UP[ORDER[i] + '_' + ORDER[i + 1]]; if (!f) return null; d = f(d); i++; } while (i > j) { const f = DOWN[ORDER[i] + '_' + ORDER[i - 1]]; if (!f) return null; d = f(d); i--; } return d; }
+function readSave(s) { const d = parse(get(SAVE_KEY(s))); if (d && d.game === GAME) return d; const b = parse(get(SAVE_KEY(s) + '/bak')); return b && b.game === GAME ? b : null; }
+function describe(d) { if (!d || typeof d !== 'object') return T('unreadable'); return T('summary', { c: Math.floor(d.coins || 0), t: Object.keys(d.tasks || {}).length, b: Object.keys(d.bells || {}).length, d: d.savedAt ? new Date(d.savedAt).toLocaleString() : '—' }); }
+let VERS = FALLBACK;
+function toast(t) { const el = $('toast'); el.textContent = t; el.style.opacity = 1; clearTimeout(toast.t); toast.t = setTimeout(() => el.style.opacity = 0, 2600); }
+function ask(msg, yes) { $('dlgMsg').textContent = msg; $('dlgYes').textContent = T('yes'); $('dlgNo').textContent = T('no'); $('dlg').classList.add('show'); setFocus($('dlgNo'));
+  $('dlgYes').onclick = () => { $('dlg').classList.remove('show'); yes(); }; $('dlgNo').onclick = () => $('dlg').classList.remove('show'); }
+function go(v) { set(GAME + '/launcher/last', String(v.v)); location.href = v.file; }
+function render() {
+  document.documentElement.lang = LANG === 'zh-Hans' ? 'zh-CN' : LANG === 'zh-Hant' ? 'zh-TW' : LANG; $('title').textContent = T('title'); document.title = T('title');
+  $('langs').innerHTML = LANGS.map(([k, n]) => `<button data-l="${k}" class="${k === LANG ? 'on' : ''}">${n}</button>`).join('');
+  const vs = VERS.versions.slice().sort((a, b) => b.v - a.v), latest = vs[0], last = vs.find(v => String(v.v) === get(GAME + '/launcher/last')) || latest;
+  $('cont').textContent = T('cont', { v: last.v }); $('cont').onclick = () => go(last);
+  $('list').innerHTML = vs.map(v => `<div class="ver ${v === latest ? 'latest' : ''}"><div class="info"><div class="t">v${v.v}${v === latest ? `<span class="badge">${T('latest')}</span>` : ''}</div>
+    <div class="meta">${T('date')} ${v.date} · ${T('schema')}: ${v.schema}</div><div class="notes">${(v.notes && (v.notes[LANG] || v.notes.en)) || ''}</div></div><button class="open" data-v="${v.v}">${T('open')} v${v.v}</button></div>`).join('');
+  $('cpTitle').textContent = T('cpTitle'); $('cpHelp').textContent = T('cpHelp'); $('cpGo').textContent = T('cpGo'); $('rcTitle').textContent = T('rcTitle'); $('rcHelp').textContent = T('rcHelp');
+  const f = +$('cpFrom').value || (vs[1] || vs[0]).v, t = +$('cpTo').value || vs[0].v; const opts = sel => vs.map(v => `<option value="${v.v}" ${v.v === sel ? 'selected' : ''}>v${v.v}</option>`).join('');
+  $('cpFrom').innerHTML = opts(f); $('cpTo').innerHTML = opts(t); renderRecover(); }
+function kindOf(k) { if (/\/bak$/.test(k)) return T('kind_bak'); const d = k.match(/\/day-(\d{8})$/); if (d) return T('kind_day', { d: d[1].replace(/(\d{4})(\d\d)(\d\d)/, '$1-$2-$3') }); if (/copy-backup-/.test(k)) return T('kind_copy'); if (/broken-/.test(k)) return T('kind_broken'); return T('kind_main'); }
+function renderRecover() { const ks = keys().filter(k => /^goat-mayhem\/save\/s\d+(\/.*)?$/.test(k)).sort().reverse();
+  $('recover').innerHTML = ks.length ? ks.map(k => { const s = k.match(/save\/(s\d+)/)[1], v = (VERS.versions.filter(x => x.schema === s).sort((a, b) => b.v - a.v)[0] || {}).v || s; const main = k === SAVE_KEY(s);
+    return `<div class="bk"><span>v${v} · ${kindOf(k)}<br><span class="small">${describe(parse(get(k)))}</span></span>${main ? '' : `<button data-r="${k}">${T('restore')}</button>`}</div>`; }).join('') : `<div class="small">${T('none')}</div>`; }
+document.addEventListener('click', ev => {
+  const l = ev.target.closest('[data-l]'); if (l) { LANG = l.dataset.l; const s = parse(get(SETK)) || {}; s.lang = LANG; set(SETK, JSON.stringify(s)); render(); return; }
+  const o = ev.target.closest('[data-v]'); if (o) { go(VERS.versions.find(v => v.v === +o.dataset.v)); return; }
+  const r = ev.target.closest('[data-r]'); if (r) { const k = r.dataset.r, s = k.match(/save\/(s\d+)/)[1], v = (VERS.versions.find(x => x.schema === s) || {}).v, d = parse(get(k));
+    if (!d || d.game !== GAME) { toast(T('unreadable')); return; }
+    ask(T('restoreQ', { v, what: describe(d) }), () => { const cur = get(SAVE_KEY(s)); if (cur) set(`${SAVE_KEY(s)}/copy-backup-${Date.now()}`, cur); d.wid = 'restored-' + Date.now(); set(SAVE_KEY(s), JSON.stringify(d)); toast(T('restored')); renderRecover(); }); }
+});
+$('cpGo').onclick = () => { const A = VERS.versions.find(v => v.v === +$('cpFrom').value), B = VERS.versions.find(v => v.v === +$('cpTo').value);
+  if (!A || !B || A === B) return toast(T('same')); const src = readSave(A.schema); if (!src) return toast(T('empty', { v: A.v }));
+  const out = A.schema === B.schema ? src : convert(src, A.schema, B.schema); if (!out) return toast(T('noDown', { a: A.v, b: B.v }));
+  if (A.schema === B.schema) return toast(T('done'));
+  ask(T('confirm', { a: A.v, b: B.v, what: readSave(B.schema) ? describe(readSave(B.schema)) : T('nothing', { b: B.v }) }), () => { const raw = get(SAVE_KEY(B.schema)); if (raw) set(`${SAVE_KEY(B.schema)}/copy-backup-${Date.now()}`, raw); out.wid = 'copied-' + Date.now(); if (set(SAVE_KEY(B.schema), JSON.stringify(out))) toast(T('done')); renderRecover(); }); };
+// controller & keyboard navigation (D-pad / stick moves, A confirms, B goes back)
+let cur = null; function setFocus(el) { if (cur) cur.classList.remove('gp-focus'); cur = el; if (el) { el.classList.add('gp-focus'); el.scrollIntoView({ block: 'nearest' }); } }
+function focusables() { const dl = $('dlg').classList.contains('show'); return [...document.querySelectorAll(dl ? '#dlg button' : 'button,select')].filter(e => e.offsetParent !== null); }
+function move(dx, dy) { const f = focusables(); if (!cur || !f.includes(cur)) { setFocus(f[0]); return; } if (cur.tagName === 'SELECT' && dx) { cur.selectedIndex = (cur.selectedIndex + dx + cur.options.length) % cur.options.length; return; }
+  const r = cur.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2; let best = null, bs = 1e9;
+  for (const e of f) { if (e === cur) continue; const q = e.getBoundingClientRect(), vx = q.left + q.width / 2 - cx, vy = q.top + q.height / 2 - cy, al = vx * dx + vy * dy; if (al <= 4) continue; const s = al + Math.abs(vx * dy - vy * dx) * 2.5; if (s < bs) { bs = s; best = e; } } if (best) setFocus(best); }
+function press() { if (cur && cur.tagName !== 'SELECT') cur.click(); }
+function back() { if ($('dlg').classList.contains('show')) $('dlg').classList.remove('show'); }
+window.addEventListener('keydown', e => { const m = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] }[e.key]; if (m) { move(...m); e.preventDefault(); } else if (e.key === 'Enter' && cur) { press(); e.preventDefault(); } else if (e.key === 'Escape') back(); });
+const prev = {}; let navT = 0, lastStick = '';
+function poll(t) { requestAnimationFrame(poll); let gps = []; try { gps = navigator.getGamepads ? navigator.getGamepads() : []; } catch (e) {}
+  for (const gp of gps) { if (!gp || !gp.connected) continue; const B = i => !!(gp.buttons[i] && gp.buttons[i].pressed), E = i => B(i) && !prev[gp.index + ':' + i];
+    if (E(12)) move(0, -1); if (E(13)) move(0, 1); if (E(14)) move(-1, 0); if (E(15)) move(1, 0); if (E(0)) { if (!cur) move(0, 1); else press(); } if (E(1)) back();
+    const ax = gp.axes[0] || 0, ay = gp.axes[1] || 0, sx = Math.abs(ax) > 0.55 ? Math.sign(ax) : 0, sy = Math.abs(ay) > 0.55 ? Math.sign(ay) : 0, key = sx + ',' + sy;
+    if ((sx || sy) && (key !== lastStick || t - navT > 180)) { move(sx, sy); navT = t + (key !== lastStick ? 220 : 0); } lastStick = key;
+    for (let i = 0; i < gp.buttons.length; i++) prev[gp.index + ':' + i] = B(i); } }
+requestAnimationFrame(poll);
+document.addEventListener('gesturestart', e => e.preventDefault());
+render();
+fetch('versions.json', { cache: 'no-store' }).then(r => r.json()).then(j => { if (j && Array.isArray(j.versions)) { VERS = j; render(); } }).catch(() => {});
+</script>
+<script type="module" src="../shared/family-cloud.js" data-games="goat-mayhem" data-chip="float"></script>
+</body>
+</html>
