@@ -29,6 +29,7 @@ threading.Thread(target=srv.serve_forever, daemon=True).start()
 BASE = f'http://127.0.0.1:{PORT}/'
 URL = BASE + 'index.html'
 def abs_url(g): return g['url'] if g['url'].startswith('http') else BASE + g['url']
+FAMILY_URLS = {abs_url(g) for g in FAMILY}
 
 PAD_MOCK = """
 (() => {
@@ -77,7 +78,7 @@ def new_ctx(b, w, h, pads=0, touch=False, lang='zh-CN', ua=None):
     def stub(route):
         opened.append(route.request.url)
         route.fulfill(status=200, content_type='text/html', body='<!DOCTYPE html><title>stub</title>game stub')
-    ctx.route(lambda u: u.startswith('http') and not u.startswith(BASE), stub)    # family launchers + linked sites
+    ctx.route(lambda u: u.startswith('http') and (not u.startswith(BASE) or u.split('?')[0].split('#')[0] in FAMILY_URLS), stub)    # family launchers (relative URLs) + linked sites
     ctx.route('**/community/play.html*', stub)                                     # sandboxed community games
     ctx.route('**/vendor/firebase-lite.js', lambda r: r.abort())                   # cloud backup: offline here
     return ctx, opened

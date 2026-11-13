@@ -6,7 +6,7 @@
     {
       "id": "goat-mayhem",
       "category": "family",
-      "url": "https://jacobjkwu.github.io/family-games/goat-mayhem/",
+      "url": "goat-mayhem/",
       "latest": "v9",
       "input": "both",
       "color": "#7ac8ff",
@@ -36,7 +36,7 @@
     },
     {
       "id": "drawrassic-park",
-      "url": "https://jacobjkwu.github.io/family-games/drawrassic-park/",
+      "url": "drawrassic-park/",
       "latest": "v3.51",
       "input": "both",
       "color": "#5cc85f",
@@ -67,7 +67,7 @@
     },
     {
       "id": "dragon-gems",
-      "url": "https://jacobjkwu.github.io/family-games/dragon-gems/",
+      "url": "dragon-gems/",
       "latest": "v2",
       "input": "touch",
       "color": "#b388ff",
@@ -98,7 +98,7 @@
     },
     {
       "id": "crab-castle",
-      "url": "https://jacobjkwu.github.io/family-games/crab-castle/",
+      "url": "crab-castle/",
       "latest": "v11",
       "input": "both",
       "color": "#ff6b4a",
