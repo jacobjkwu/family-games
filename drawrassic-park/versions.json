@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.32",
+      "file": "drawrassic-park-v3.32.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "☁️ Weather remote: draw your own cloud (or roll a random one), pick what it does — rain, thunder, snow, rainbow, snacks, frogs, flowers or coins — and put it in the park. It floats with the wind, you can drag it with a finger, tap it to squeeze it, and steer all clouds with the remote. Puddles, umbrellas, snowmen and rainbows.",
+        "fr": "☁️ Télécommande météo : dessine ton nuage (ou un nuage au hasard), choisis ce qu’il fait — pluie, orage, neige, arc-en-ciel, goûters, grenouilles, fleurs ou pièces — et pose-le dans le parc. Il suit le vent, tu peux le traîner du doigt, le presser d’une touche et piloter tous les nuages. Flaques, parapluies, bonshommes de neige et arcs-en-ciel.",
+        "zh-Hans": "☁️ 天气遥控器：自己画一朵云（或者随机一朵），选它干什么——下雨、打雷、下雪、彩虹、掉零食、掉青蛙、开花或掉金币——放到公园里。云会跟着风飘，你可以用手指拖着它走，点它会挤出一阵雨，还能用遥控器指挥所有的云。还有水坑、雨伞、雪人和彩虹。",
+        "zh-Hant": "☁️ 天氣遙控器：自己畫一朵雲（或者隨機一朵），選它幹什麼——下雨、打雷、下雪、彩虹、掉零食、掉青蛙、開花或掉金幣——放到公園裡。雲會跟著風飄，你可以用手指拖著它走，點它會擠出一陣雨，還能用遙控器指揮所有的雲。還有水坑、雨傘、雪人和彩虹。"
+      }
+    },
+    {
       "v": "3.31",
       "file": "drawrassic-park-v3.31.html",
       "date": "2026-11-13",

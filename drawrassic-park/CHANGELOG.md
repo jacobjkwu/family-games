@@ -1,5 +1,14 @@
 # Drawrassic Park — Changelog
 
+## v3.32 (2026-11-13) — save schema s8 (unchanged)
+- ☁️ Weather remote: 🌦️ Sky → ☁️ Draw a cloud (also ☁️ in the quick bar). A drawing pad with soft cloud brushes (6 colours, 3 sizes), 🧽 clear and 🎲 random cloud; pick what the cloud does, then tap the park to put it down. Every drawn cloud gets a face (blinking eyes; angry brows on thunder clouds).
+- 8 cloud types (data entries): 🌧️ rain, ⛈️ thunder (lightning strikes under it), 🌨️ snow, 🌈 rainbow, 🍬 snacks (drops up to 10 snacks that start snack races), 🐸 frogs (they hop around; meat-eaters snap them up), 🌸 flowers (flowers sprout, bushes regrow berries), 💰 coins (2 amber, drops up to 10 coins).
+- A cloud only acts on the ground under it (its shadow shows where). It floats with the wind; drag it with a finger (or the controller cursor + A) anywhere, tap it to squeeze out a burst (a thunder cloud strikes, a snack cloud drops a snack). The ☁️ remote panel: wind ⬅️ ⏸️ ➡️, ⚡ thunder, 💥 downpour (4 s, four times the rain), ➕ another cloud, 🗑️ remove all, 👀 look at the newest cloud. Up to 6 clouds (dev panel: clMax, clLife, clWind, clRain).
+- Rain leaves puddles that splash when dinos walk through (kids jump in them); visitors under rain, snow or frogs open umbrellas; plant-eaters and swimmers love rain; dinos under snow shiver and snow piles grow into ⛄ snowmen; dinos under a rainbow cheer up and visitors take photos; when a rain cloud leaves, a rainbow appears.
+- ☀️ Clear sky also removes drawn clouds. The last 8 hand-drawn clouds are kept under “My clouds” in their own key drawrassic-park/clouds/c1 (+ /bak; damaged entries are skipped, a full storage only skips the library). They are not part of the 💾 backup code. Clouds, puddles, frogs, flowers and snowmen are never saved.
+- Controller: the drawing pad is touch-first; with a controller use 🎲 random cloud, the cloud types, ☁️ Put it in the park and the cursor + A. The remote panel and the 🍱 snack bar are now reachable with the D-pad in the park.
+- Save format unchanged (s8). Measured in desktop headless Chrome with 6 clouds in a downpour (~690 drops): 1.8 ms median per frame. Not tested on a real iPad or Xbox.
+
 ## v3.31 (2026-11-13) — save schema s8 (unchanged)
 - 🐛 Fixed: in 🌦️ Sky & powers a disaster could not be stopped once started (its button did nothing until it ended by itself, and the other disaster buttons were ignored), and tapping the lit weather again did nothing.
 - Now: tap the lit weather again to go back to sunny; tap the lit disaster again (or the red ⛔ Stop button) to end it at once — pending meteors and lava bombs are removed, the flood drains, the tornado and cracks disappear, an ice age also stops the snow (no gift for a stopped disaster); tapping another disaster swaps to it; a green ☀️ Clear sky button stops everything. A hint line explains it, and the top-bar sky icon updates right away.
