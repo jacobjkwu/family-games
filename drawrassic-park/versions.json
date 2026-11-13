@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.54",
+      "file": "drawrassic-park-v3.54.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "📚 Dino Encyclopedia: all 141 species with when they lived, how big and heavy (compared with buses, elephants and cats), where they were found, what the name means, a fun fact, and their game numbers. Filter by group, era, rarity, food, size or “in my park”, search and sort.",
+        "fr": "📚 Encyclopédie des dinos : les 141 espèces, avec leur époque, leur taille et leur poids (comparés à des bus, des éléphants et des chats), où on les a trouvées, le sens du nom, une anecdote et leurs chiffres dans le jeu. Filtres par groupe, époque, rareté, nourriture, taille ou « dans mon parc », recherche et tri.",
+        "zh-Hans": "📚 恐龙图鉴：141 种恐龙，每种都有生活的时代、多长多重（和校车、大象、猫比一比）、在哪里发现、名字的意思、冷知识，还有在游戏里的数值。可以按类别、时代、稀有度、吃什么、大小和「我公园里有的」筛选，还能搜索和排序。",
+        "zh-Hant": "📚 恐龍圖鑑：141 種恐龍，每種都有生活的時代、多長多重（和校車、大象、貓比一比）、在哪裡發現、名字的意思、冷知識，還有在遊戲裡的數值。可以按類別、時代、稀有度、吃什麼、大小和「我公園裡有的」篩選，還能搜尋和排序。"
+      }
+    },
+    {
       "v": "3.53",
       "file": "drawrassic-park-v3.53.html",
       "date": "2026-11-13",

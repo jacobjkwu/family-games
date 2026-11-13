@@ -1,5 +1,11 @@
 # Drawrassic Park — Changelog
 
+## v3.54 (2026-11-13) — save schema s8 (unchanged)
+- 📚 Dino Encyclopedia (☰ → 📚, quick bar 📚, and the tutorial's drawing chapter): a page for each of the 141 species: four names, rarity, group, food, movement, size; era and million years ago; length (wingspan for pterosaurs) and weight with comparisons (school buses, cars, kids, cats / elephants, cows, kids, cats, apples); where fossils were found; what the name means; a fun fact; ⚠️ not a dinosaur (pterosaurs, sea reptiles, Dimetrodon…) or 🎮 a type made for the game; game numbers (health and attack at level 1 → 10, special move), how many are in this park, blueprint cost. ✏️ draw one with that template, 🔍 find it in the park, ◀ ▶ through the current list.
+- Filters: group, era (Triassic / Jurassic / Cretaceous / other), rarity, food, size, 📍 in my park; sort by name, length, weight, oldest, rarity; search across the four names, places, name meanings and facts. Pictures are light versions of the game sprites drawn a few per frame (opens in ~15 ms in desktop Chrome).
+- Facts are typical published estimates written for kids in English, French and Simplified Chinese (Traditional by OpenCC), kept as data in enc/facts.py; every page notes that sizes are estimates. Save schema unchanged (s8).
+- Not tested on a real iPad or Xbox.
+
 ## v3.53 (2026-11-13) — save schema s8 (unchanged)
 - 🎨 My Dino Gallery (☰ → 🎨, quick bar 🎨, and in 🌍): every dino you drew, shared by all maps, in IndexedDB gallery/g1 (+/bak, drawings by hash). Drawings join when released or saved (✅ Release, 💾 Save, 📦 Save while drawing); on first start each map is searched once (game-drawn sprites, babies, adopted and expedition dinos are left out) and 🔍 does it again any time. Pick dinos → ➕ copies into this park (full park → Dino Box), ⭐ all the missing ones, ✓ marks dinos already here, 🗑️ only changes the gallery. New maps: 🎨 bring my dinos all / I pick / none (instead of the random starter crew).
 - 📖 Tutorial (☰ → 📖, quick bar 📖, and on the help screen): 20 chapters in 9 groups covering every feature, in 4 languages (Traditional Chinese converted with OpenCC), search with highlights, ◀ ▶, “▶️ Try it” buttons that open the feature, last chapter remembered (drawrassic-park/tut/t1). Works by controller.
