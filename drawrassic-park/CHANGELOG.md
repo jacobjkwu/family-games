@@ -1,5 +1,12 @@
 # Drawrassic Park — Changelog
 
+## v3.53 (2026-11-13) — save schema s8 (unchanged)
+- 🎨 My Dino Gallery (☰ → 🎨, quick bar 🎨, and in 🌍): every dino you drew, shared by all maps, in IndexedDB gallery/g1 (+/bak, drawings by hash). Drawings join when released or saved (✅ Release, 💾 Save, 📦 Save while drawing); on first start each map is searched once (game-drawn sprites, babies, adopted and expedition dinos are left out) and 🔍 does it again any time. Pick dinos → ➕ copies into this park (full park → Dino Box), ⭐ all the missing ones, ✓ marks dinos already here, 🗑️ only changes the gallery. New maps: 🎨 bring my dinos all / I pick / none (instead of the random starter crew).
+- 📖 Tutorial (☰ → 📖, quick bar 📖, and on the help screen): 20 chapters in 9 groups covering every feature, in 4 languages (Traditional Chinese converted with OpenCC), search with highlights, ◀ ▶, “▶️ Try it” buttons that open the feature, last chapter remembered (drawrassic-park/tut/t1). Works by controller.
+- Fix: the quick-bar buttons added in v3.50–v3.52 (explore, pause, camp, tidy, maps) showed their code names; all buttons now have names in all 4 languages (a test checks every button).
+- Backup codes now also carry the 🏕️ camp (`cp`, missing in v3.52) and the gallery (`gl`); a drawing already in the code is stored once. The in-game cloud “open the website” link no longer uses a fixed address. Save schema unchanged (s8).
+- Not tested on a real iPad or Xbox.
+
 ## v3.52 (2026-11-13) — save schema s8 (unchanged)
 - 🏕️ New Friends Camp (☰ → 🏕️, quick bar 🏕️ with a count): a wild dino tamed in a fight still gets its name, records and rewards, then moves to the camp instead of the park (switch 🎮 → 🌿 campOn). In the camp: ✅ keep (into the current map's park, or the 📦 Dino Box when full), 🌿 back to the wild (↩️ undo 60 s), keep all / all back. “Bring adopted dinos” pre-picks adopted dinos and game-drawn dinos (not your drawings, not Map 1's first starters) in the tidy panel. Stored in IndexedDB camp/c1 (+/bak), shared by all maps.
 - 🌿 Taming limit: at most 2 wild dinos adopted from fights per park day (🎮 → 🌿 tameDay, 0–20); after that they run home with a message. Since v3.46 the Wild Lands refilled without end, so strong parks kept adopting dinos. Net catching is not limited.

@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.53",
+      "file": "drawrassic-park-v3.53.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎨 My Dino Gallery: every dino you drew, shared by all maps; put copies into any park, or bring them all to a new map. 📖 Tutorial: 20 chapters about every feature, with search and “try it” buttons. Quick-bar buttons added in v3.50–v3.52 now have proper names in every language.",
+        "fr": "🎨 Ma galerie de dinos : tous tes dessins, communs à toutes les cartes ; mets-en des copies dans n’importe quel parc, ou emmène-les tous sur une nouvelle carte. 📖 Tutoriel : 20 chapitres sur tout le jeu, avec recherche et boutons « essayer ». Les boutons ajoutés en v3.50–v3.52 ont enfin leur nom dans chaque langue.",
+        "zh-Hans": "🎨 我的恐龙画廊：你画的恐龙都收在这里，所有地图共用，可以复制进任何公园，新地图也能一键全部带上。📖 教程：20 章，介绍所有玩法，能搜索，还有「去试试」按钮。修好了快捷栏按钮名字中英文混杂的问题。",
+        "zh-Hant": "🎨 我的恐龍畫廊：你畫的恐龍都收在這裡，所有地圖共用，可以複製進任何公園，新地圖也能一鍵全部帶上。📖 教學：20 章，介紹所有玩法，能搜尋，還有「去試試」按鈕。修好了快捷列按鈕名字中英文混雜的問題。"
+      }
+    },
+    {
       "v": "3.52",
       "file": "drawrassic-park-v3.52.html",
       "date": "2026-11-13",
