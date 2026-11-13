@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.16",
+      "file": "drawrassic-park-v3.16.html",
+      "date": "2026-11-12",
+      "schema": 7,
+      "switcher": true,
+      "notes": {
+        "en": "⚔️ Army Battle for 2 players on one iPad: each builds an army with 100 points, then both armies fight; each player has Charge, Defend and Super move buttons on their own side.",
+        "fr": "⚔️ Bataille d’armées à 2 sur un iPad : chacun construit une armée avec 100 points, puis les armées s’affrontent ; chaque joueur a Charge, Défense et Super attaque de son côté.",
+        "zh-Hans": "⚔️ 军团大战（同一台 iPad 双人）：每人用 100 点组建军团，然后两军开战；每位玩家在自己那一边有冲锋、防守、必杀技按钮。",
+        "zh-Hant": "⚔️ 軍團大戰（同一台 iPad 雙人）：每人用 100 點組建軍團，然後兩軍開戰；每位玩家在自己那一邊有衝鋒、防守、必殺技按鈕。"
+      }
+    },
+    {
       "v": "3.15",
       "file": "drawrassic-park-v3.15.html",
       "date": "2026-11-12",

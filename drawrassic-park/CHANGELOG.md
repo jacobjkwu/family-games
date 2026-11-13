@@ -1,5 +1,11 @@
 # Drawrassic Park — Changelog
 
+## v3.16 (2026-11-12) — save schema s7 (unchanged)
+- ⚔️ Army Battle (Arena → ⚔️ Army battle, 2 players): players sit top/bottom in portrait or left/right in landscape; each half of the screen is turned to face its player. Each player taps dinos (24 species) to build an army with 100 points (common 5, rare 8, epic 12, legendary 20; up to 30 dinos), or 🎲 random army, then ✅ Ready. Both players can touch at the same time.
+- In the colosseum the red and blue armies line up and fight. Each player has three powers on their side: ⚡ Charge (faster and +40% damage for 4 s, 10 s cooldown), 🛡️ Defend (half damage for 4 s, 12 s cooldown), 🌟 Super move (every dino uses its special move now, 20 s cooldown).
+- Result: ⚔️ Rematch, 🔄 Swap sides, 🏞️ Back to the park. Army battles use generated dinos, not park dinos, and give no rewards. Save format unchanged (s7).
+- Next multiplayer step: online army battles by room code.
+
 ## v3.15 (2026-11-12) — save schema s7 (unchanged)
 - The ☀️/🌙 button now opens 🌦️ Sky & powers (it shows the current weather or disaster): time of day, weather and disasters.
 - Weather: sunny, rain (bushes regrow twice as fast), thunderstorm (lightning strikes stun dinos nearby), snow (dinos get hungry faster), wind, fog. Rain, storms and snow send visitors home. Optional 🔄 automatic weather changes (every 1.5–3 min, on by default).
