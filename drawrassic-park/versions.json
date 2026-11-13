@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.30",
+      "file": "drawrassic-park-v3.30.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🍱 Snack Bar: 37 foods, from steak to a super-hot chili (red head, steam, fire breath), spider (web-shooting spider dino), giant mushroom, shrink candy, beans, coffee, ghost jelly, twin cherries and more. Feed people too, snatch snacks, banana peels, snack races, snack rain and a chili contest. Wild dinos get a 🌿 Wild tag.",
+        "fr": "🍱 Bar à goûters : 37 aliments, du steak au piment de l’enfer (tête rouge, fumée, souffle de feu), araignée (dino-araignée qui lance des toiles), champi géant, bonbon rétrécissant, haricots, café, gelée fantôme, cerises jumelles… On nourrit aussi les visiteurs, on se vole les goûters, peaux de banane, courses au goûter, pluie de goûters et concours de piment. Les dinos sauvages ont une étiquette 🌿.",
+        "zh-Hans": "🍱 零食大全：37 种食物，从牛排到变态辣辣椒（头变红冒烟喷火）、蜘蛛（变成会吐丝的蜘蛛龙）、变大蘑菇、缩小糖、豆子、咖啡、幽灵软糖、分身樱桃……还能喂游客、半路抢食、香蕉皮滑倒、抢食大战、零食雨和辣椒王挑战。野生恐龙有 🌿 野生 标记。",
+        "zh-Hant": "🍱 零食大全：37 種食物，從牛排到變態辣辣椒（頭變紅冒煙噴火）、蜘蛛（變成會吐絲的蜘蛛龍）、變大蘑菇、縮小糖、豆子、咖啡、幽靈軟糖、分身櫻桃……還能餵遊客、半路搶食、香蕉皮滑倒、搶食大戰、零食雨和辣椒王挑戰。野生恐龍有 🌿 野生 標記。"
+      }
+    },
+    {
       "v": "3.29",
       "file": "drawrassic-park-v3.29.html",
       "date": "2026-11-13",
