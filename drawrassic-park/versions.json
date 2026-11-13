@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.48",
+      "file": "drawrassic-park-v3.48.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "👑 Hero Bosses: when one of your dinos reaches level 10 it becomes a boss, with its own boss health bar, its name and a round portrait cut from its own drawing, and 3 boss skills you choose from 12 (dino card → ⋯ → 👑 Boss skills). Its skills only hit enemies.",
+        "fr": "👑 Boss héros : quand un de tes dinos atteint le niveau 10, il devient un boss, avec sa barre de vie de boss, son nom et un portrait rond découpé dans son propre dessin, et 3 attaques de boss que tu choisis parmi 12 (fiche du dino → ⋯ → 👑 Attaques boss). Ses attaques ne touchent que les ennemis.",
+        "zh-Hans": "👑 英雄 Boss：你的恐龙升到 10 级就会变成 Boss，有自己的 Boss 血条、名字，还有用它自己的画剪出来的圆形头像；它有 3 个 Boss 技能，可以从 12 个里自己选（恐龙卡片 → ⋯ → 👑 Boss 技能）。技能只打敌人。",
+        "zh-Hant": "👑 英雄 Boss：你的恐龍升到 10 級就會變成 Boss，有自己的 Boss 血條、名字，還有用牠自己的畫剪出來的圓形頭像；牠有 3 個 Boss 技能，可以從 12 個裡自己選（恐龍卡片 → ⋯ → 👑 Boss 技能）。技能只打敵人。"
+      }
+    },
+    {
       "v": "3.47",
       "file": "drawrassic-park-v3.47.html",
       "date": "2026-11-13",

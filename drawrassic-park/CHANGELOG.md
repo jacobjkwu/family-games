@@ -1,5 +1,11 @@
 # Drawrassic Park — Changelog
 
+## v3.48 (2026-11-13) — save schema s8 (unchanged)
+- 👑 Hero Bosses: a park dino at level 10 (🦖 heroLv) becomes a Hero Boss. It is announced with a big title, fanfare and sparkles (dinos already at level 10 when v3.48 first opens are announced once, together), gets a golden ring at its feet and a 👑 Boss tag on its card, and shows its own boss health bar at the bottom centre — gold, with its name, level, health and a round portrait cut from its own drawing around its eye, with a crown — while it fights (or while its card is open). At most two hero bars at once, stacked above any night-boss bars.
+- 12 hero skills (data entries): 💥 Shock Stomp, ⚡ Chain Lightning, ☄️ Meteor Rain, 🌟 Sky Beams, 💎 Crystal Burst, 🌋 Eruption, 🐾 Gale Claws, 🪶 Feather Storm, 🏃 Hero Charge, 🚀 Missile Barrage, ❄️ Ice Spikes, 🦁 King’s Roar. A hero uses its 3 skills in turn every ~6 s (🦖 heroCD) when shadow dinos, a night boss or wild dinos it is fighting are within reach; damage is its attack × 0.8–2.2 (🦖 heroDmg). Skills only hit enemies, never park dinos; a boss’s Iron/Mirror Shell blocks them.
+- Choose the skills: dino card → ⋯ → 👑 Boss skills — 12 chips, pick 3 (numbered 1–3; tapping a 4th replaces the oldest). Works before level 10 too. Without a choice, 3 skills are picked from the dino’s id. Stored in drawrassic-park/hero/h1 (+/bak, damaged data kept under /broken-…) with which heroes were announced, and in backup codes ("hs").
+- Save schema unchanged (s8). Not tested on a real iPad or Xbox.
+
 ## v3.47 (2026-11-13) — save schema s8 (unchanged)
 - 🐛 Fixed (since v3.44): a dino picked up while it was in a raid or an on-sight fight, or napping after losing one, stayed in the air after being let go — the raid code kept setting its state every frame (fighting: “wander”, napping: “sleep”), so the normal falling and landing never ran. Now a carried dino is never driven by the raid code: picking up a fighter takes it out of the fight (a wild one waits 40 s before attacking again), a napping dino continues its nap after it lands, and a falling dino lands normally. Checked by dragging with the mouse in Chrome at iPad size: normal, fighting and napping dinos all fall and land (altitude back to 0).
 - Save schema unchanged (s8). Not tested on a real iPad or Xbox.
