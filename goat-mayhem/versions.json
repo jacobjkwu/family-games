@@ -2,6 +2,18 @@
   "game": "goat-mayhem",
   "versions": [
     {
+      "v": 4,
+      "file": "goat-mayhem-v4.html",
+      "date": "2026-11-13",
+      "schema": "s2",
+      "notes": {
+        "en": "Smash the town: every building wall panel, floor and roof, street lamps, trees, bushes, walls, stairs and statues can break; knock out the bottom and what's above falls; whole buildings can collapse. Rubble, dust, falling trees and lamps. Repair town button. 5 new tasks. New save format s2 (your v1–v3 progress is copied in).",
+        "fr": "Démolis la ville : chaque pan de mur, étage et toit, les lampadaires, arbres, buissons, murets, escaliers et statues peuvent casser ; casse le bas et le haut s’écroule ; des immeubles entiers peuvent s’effondrer. Gravats, poussière, arbres et lampadaires qui tombent. Bouton Réparer la ville. 5 nouveaux défis. Nouveau format de sauvegarde s2 (ta progression v1–v3 est copiée).",
+        "zh-Hans": "拆了整个小镇：楼房的每一块墙、每层楼板和屋顶，还有路灯、树、灌木、矮墙、楼梯、雕像都能撞坏；撞掉下面，上面就会塌下来，整栋楼都能塌。有碎块、灰尘，树和路灯会倒下。新增“修好小镇”按钮和 5 个新任务。新存档格式 s2（会自动把 v1–v3 的进度复制过来）。",
+        "zh-Hant": "拆了整個小鎮：樓房的每一塊牆、每層樓板和屋頂，還有路燈、樹、灌木、矮牆、樓梯、雕像都能撞壞；撞掉下面，上面就會塌下來，整棟樓都能塌。有碎塊、灰塵，樹和路燈會倒下。新增「修好小鎮」按鈕和 5 個新任務。新存檔格式 s2（會自動把 v1–v3 的進度複製過來）。"
+      }
+    },
+    {
       "v": 3,
       "file": "goat-mayhem-v3.html",
       "date": "2026-11-13",

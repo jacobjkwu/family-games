@@ -1,0 +1,74 @@
+{
+ "game": "goat-mayhem",
+ "schema": 2,
+ "wid": "mweqlmz24tx9qs",
+ "born": 1794559843909,
+ "savedAt": 1794559850894,
+ "ver": 4,
+ "coins": 1300,
+ "stats": {
+  "butts": 0,
+  "people": 0,
+  "bestDrag": 0,
+  "bestFlips": 0,
+  "booms": 0,
+  "bestChain": 0,
+  "carsFlown": 0,
+  "bestBounce": 0,
+  "tower": 0,
+  "crane": 0,
+  "swim": 0,
+  "strikes": 0,
+  "bestCombo": 0,
+  "bestFall": 0,
+  "bestBleat": 0,
+  "chickens": 0,
+  "bestThrow": 0,
+  "pumps": 0,
+  "bestAir": 0,
+  "fountain": 0,
+  "goals": 0,
+  "maze": 0,
+  "skyscraper": 0,
+  "rushBest": 0,
+  "totalChaos": 0,
+  "playTime": 0,
+  "broken": 0,
+  "chickenified": 0,
+  "cannon": 0,
+  "pinatas": 0,
+  "bestDance": 0,
+  "slips": 0,
+  "lampsDown": 0,
+  "treesDown": 0,
+  "wallsDown": 0,
+  "blocksDown": 0,
+  "collapses": 0
+ },
+ "tasks": {
+  "first_butt": 1
+ },
+ "bells": {
+  "3": 1
+ },
+ "owned": {
+  "classic": 1,
+  "fart": 1,
+  "partyhat": 1
+ },
+ "power": "fart",
+ "equip": {
+  "head": "partyhat",
+  "face": null,
+  "back": null,
+  "feet": null,
+  "body": null
+ },
+ "skin": "classic",
+ "pos": [
+  -17.5,
+  0.65,
+  -27,
+  3.141592653589793
+ ]
+}
