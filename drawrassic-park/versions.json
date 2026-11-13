@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.50",
+      "file": "drawrassic-park-v3.50.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎮 Game settings panel: every game rule in one place with an on/off switch and its numbers (night shadows, bosses, ultimates, wild dinos, raids, taming, hero bosses, each of the 25 events, fights, eggs, hunger, visitors, weather, day length, effects, cheats…), with search and ↺ Normal.",
+        "fr": "🎮 Panneau des réglages du jeu : toutes les règles au même endroit avec un interrupteur et leurs nombres (ombres, boss, ultimes, sauvages, attaques, apprivoisement, boss héros, chacun des 25 événements, combats, œufs, faim, visiteurs, météo, durée du jour, effets, triches…), avec recherche et ↺ Normal.",
+        "zh-Hans": "🎮 游戏设置面板：所有规则都在一个地方，每条都能开关，数字也能调（影子恐龙、Boss、大招、野生恐龙、闯园、收服、英雄 Boss、25 个事件每个都能单独开关、打架、下蛋、饥饿、游客、天气、一天多长、特效、作弊……），还能搜索和恢复默认。",
+        "zh-Hant": "🎮 遊戲設定面板：所有規則都在一個地方，每條都能開關，數字也能調（影子恐龍、Boss、大招、野生恐龍、闖園、收服、英雄 Boss、25 個事件每個都能單獨開關、打架、下蛋、飢餓、遊客、天氣、一天多長、特效、作弊……），還能搜尋和恢復預設。"
+      }
+    },
+    {
       "v": "3.49",
       "file": "drawrassic-park-v3.49.html",
       "date": "2026-11-13",
