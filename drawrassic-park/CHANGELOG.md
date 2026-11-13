@@ -1,5 +1,16 @@
 # Drawrassic Park — Changelog
 
+## v3.24 (2026-11-13) — save schema s7 (unchanged)
+- 🦖 Dino drawings are baked once when they load: a dark outline, light from above and a soft shade underneath (the original drawing is kept for analysis and fusion). Soft contact shadows for everything (one pre-drawn sprite).
+- 🏔️ Far background: two layers of mountains (snow caps, shaded faces, haze toward the horizon), lit volcanoes with ridges and a glowing crater, shaded tree line. Clouds are pre-drawn with light tops and blue undersides, cross-fade to a night version, and float in front of the mountains.
+- ☀️ Sky: deeper gradient, sun glow and slow rays, moon with craters and halo, twinkling coloured stars with sparkles, orange horizon at sunset.
+- 🌿 Ground tiles: soft film grain, sun dapples, flower patches and pebbles in the meadow, haze near the horizon and a darker foreground. New painters for palms (ringed trunks, two-tone fronds, coconuts), jungle trees, berry bushes, ferns and boulders (faceted with moss).
+- 💧 Lakes with a wet sand edge, depth colour, sky reflection, sparkles and moving foam; mountains you build get light and shadow sides, cracks and outlines; amber glows; coins shine.
+- 💡 Light: warm sunset grading, soft god rays in the morning (sunny weather only), lamp posts and the visitor center glow at night, gentle vignette, floating pollen by day.
+- 👥 People: outlined and shaded bodies and heads, eyes with whites and a shine up close, rosy cheeks, shiny hair.
+- Number panel: 🎨 Picture quality (on/off, outline, shading, light, vignette, rays, ground texture); changes re-bake drawings and the ground live.
+- Measured in desktop headless Chrome with 312 dinos + 103 visitors: draw 4.5–4.8 ms per frame (v3.23: 3.7 ms). Not measured on a real iPad. Save format unchanged (s7).
+
 ## v3.23 (2026-11-13) — save schema s7 (unchanged)
 - 🎞️ Dino animation: the drawing is split into head / body / tail bands that move separately (head bob, tail swing, breathing), squash on landing, hop when petted, spin on level-up, roar at battle start, lean into lunges and recoil from hits, KO roll onto the back with kicking legs, belly drop and folded legs when asleep, blinking eyes found automatically on the drawing (✕ eyes when KO). Number panel: 🎞️ Dino animation.
 - 💬 Line library: ~350 new kid-friendly lines, jokes, facts, riddles and visitor↔dino exchanges in all four languages, picked by context (weather, time of day, hunger, group, personality, nearby dino) with no repeats; rare golden lines. Visitors no longer talk over each other. Number panel: 💬 Lines & jokes.

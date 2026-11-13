@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.24",
+      "file": "drawrassic-park-v3.24.html",
+      "date": "2026-11-13",
+      "schema": 7,
+      "switcher": true,
+      "notes": {
+        "en": "🎨 Better pictures: outlined and shaded dinos, layered snowy mountains, a glowing volcano, fluffy shaded clouds, sun rays in the morning, warm sunsets, sparkling lakes, flowers, nicer trees, bushes, rocks, amber and coins, and people with eyes, outlines and shading.",
+        "fr": "🎨 De plus belles images : dinos avec contour et ombres, montagnes enneigées en couches, volcan lumineux, nuages ombrés, rayons du soleil le matin, couchers de soleil chauds, lacs scintillants, fleurs, arbres, buissons, rochers, ambre et pièces plus jolis, et des visiteurs avec des yeux, des contours et des ombres.",
+        "zh-Hans": "🎨 画面升级：恐龙有了描边和明暗，层层雪山、发光的火山、立体的云、早晨的阳光光束、暖暖的夕阳、闪闪发光的湖、小花，树、灌木、石头、琥珀和金币都更好看了，游客也有了眼睛、描边和明暗。",
+        "zh-Hant": "🎨 畫面升級：恐龍有了描邊和明暗，層層雪山、發光的火山、立體的雲、早晨的陽光光束、暖暖的夕陽、閃閃發光的湖、小花，樹、灌木、石頭、琥珀和金幣都更好看了，遊客也有了眼睛、描邊和明暗。"
+      }
+    },
+    {
       "v": "3.23",
       "file": "drawrassic-park-v3.23.html",
       "date": "2026-11-13",
