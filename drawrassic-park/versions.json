@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.18",
+      "file": "drawrassic-park-v3.18.html",
+      "date": "2026-11-13",
+      "schema": 7,
+      "switcher": true,
+      "notes": {
+        "en": "🌐 The whole game in four languages: English, Français, 简体中文, 繁體中文 — menus, shop, lab, arena, help and the dinos' jokes. Switch in Help or ⚙️ Settings.",
+        "fr": "🌐 Tout le jeu en quatre langues : English, Français, 简体中文, 繁體中文 — menus, boutique, labo, arène, aide et blagues des dinos. Change dans l’aide ou ⚙️ Réglages.",
+        "zh-Hans": "🌐 整个游戏支持四种语言：English、Français、简体中文、繁體中文——菜单、商店、实验室、竞技场、帮助和恐龙的笑话都翻译了。在帮助或 ⚙️ 设置里切换。",
+        "zh-Hant": "🌐 整個遊戲支援四種語言：English、Français、简体中文、繁體中文——選單、商店、實驗室、競技場、說明和恐龍的笑話都翻譯了。在說明或 ⚙️ 設定裡切換。"
+      }
+    },
+    {
       "v": "3.17",
       "file": "drawrassic-park-v3.17.html",
       "date": "2026-11-12",

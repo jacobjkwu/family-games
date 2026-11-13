@@ -1,5 +1,10 @@
 # Drawrassic Park — Changelog
 
+## v3.18 (2026-11-13) — save schema s7 (unchanged)
+- 🌐 Four-language UI for the whole game (English, Français, 简体中文, 繁體中文): menus, buttons, shop, lab, arena, army and online dialogs, sky panel, number panel, ticker messages, signposts, floating text and the help screen. The dinos' speech, jokes and riddles (397 lines) are translated too; species names use the 141-species name table.
+- Language buttons in the help screen and in ⚙️ Settings; the choice applies at once (no reload) and is stored in the shared settings key, so the launcher and every version use the same language. First launch picks from the device language (zh-TW/HK/MO/Hant → 繁體, other zh → 简体, fr → Français, else English).
+- Dino names you typed are never translated. Save format unchanged (s7).
+
 ## v3.17 (2026-11-12) — save schema s7 (unchanged)
 - 🌐 Online army battle (Arena → 🌐 Online battle): ➕ Create a room shows a 5-character code (no look-alike letters) and 📋 Copy link (`?room=CODE` opens the game and joins). The friend types the code or opens the link. Each player builds their own army on their own screen and sees the friend's progress; when both are ✅ ready, the battle starts.
 - The room creator (player 1, red) runs the battle and sends the fighters' positions about 15 times a second; player 2 (blue) sends only their power buttons (⚡ 🛡️ 🌟). Both see the same result. Rematch is started by player 1.
