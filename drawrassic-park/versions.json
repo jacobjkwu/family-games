@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.7",
+      "file": "drawrassic-park-v3.7.html",
+      "date": "2026-11-12",
+      "schema": 4,
+      "switcher": true,
+      "notes": {
+        "en": "Fix: duplicate dinos made by a double import are removed automatically when the park opens (copies have the same id).",
+        "fr": "Correctif : les dinos en double créés par un double import sont retirés automatiquement à l’ouverture du parc (les copies ont le même identifiant).",
+        "zh-Hans": "修复：之前重复导入多出来的恐龙，打开公园时会自动清除（重复的恐龙编号相同）。",
+        "zh-Hant": "修復：之前重複匯入多出來的恐龍，打開公園時會自動清除（重複的恐龍編號相同）。"
+      }
+    },
+    {
       "v": "3.6",
       "file": "drawrassic-park-v3.6.html",
       "date": "2026-11-12",

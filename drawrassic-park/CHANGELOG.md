@@ -1,5 +1,8 @@
 # Drawrassic Park — Changelog
 
+## v3.7 (2026-11-12) — save schema s4 (unchanged)
+- Self-healing loader: dinos, eggs and Dino Box items with an id already seen are dropped on load (a v3.5 double import saved every dino twice with the same id; a backup taken afterwards carried the copies too). A toast says how many were removed, and the cleaned park is saved.
+
 ## v3.6 (2026-11-12) — save schema s4 (unchanged)
 - Fixed: two imports running at once (tapping “Load this backup” twice) both cleared the park and then both added their dinos, so every dino appeared twice and was saved that way. Park reloads now run one after another, the import button is locked while importing, and a cloud restore can't start twice.
 
