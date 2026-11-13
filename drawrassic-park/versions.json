@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.27",
+      "file": "drawrassic-park-v3.27.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🏭 Crazy Mix Factory: build monsters from 16 heads, 12 bodies, 10 legs, 10 tails, 8 wings and 10 hats (2–3 heads, more legs, long necks, size), by slot machine, cooking pot, words, capsule or blind relay; names, special moves and stats come from the parts. Plus a 🔀 head-swap event and 🤖 merging 3 dinos into a giant.",
+        "fr": "🏭 Usine à monstres : 16 têtes, 12 corps, 10 pattes, 10 queues, 8 ailes et 10 chapeaux (2–3 têtes, plus de pattes, long cou, taille), par machine à sous, marmite, mots, capsule ou relais à l’aveugle ; le nom, l’attaque spéciale et les stats viennent des morceaux. Et un événement 🔀 échange de têtes et la 🤖 fusion de 3 dinos en géant.",
+        "zh-Hans": "🏭 疯狂混搭工厂：16 种头、12 种身体、10 种腿、10 种尾巴、8 种翅膀、10 种帽子（还能有 2–3 个头、更多腿、长脖子、变大变小），可以用老虎机、料理锅、写字、扭蛋或蒙眼接龙来做；名字、必杀技和能力值都由部件决定。还有 🔀 换头随机事件和 🤖 三只恐龙合体成巨兽。",
+        "zh-Hant": "🏭 瘋狂混搭工廠：16 種頭、12 種身體、10 種腿、10 種尾巴、8 種翅膀、10 種帽子（還能有 2–3 個頭、更多腿、長脖子、變大變小），可以用老虎機、料理鍋、寫字、扭蛋或矇眼接龍來做；名字、必殺技和能力值都由部件決定。還有 🔀 換頭隨機事件和 🤖 三隻恐龍合體成巨獸。"
+      }
+    },
+    {
       "v": "3.26",
       "file": "drawrassic-park-v3.26.html",
       "date": "2026-11-13",
