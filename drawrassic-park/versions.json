@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.31",
+      "file": "drawrassic-park-v3.31.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🌦️ Sky fix: weather and disasters can be turned off. Tap a lit button again to stop it, use ⛔ Stop for a disaster, or ☀️ Clear sky to stop everything at once.",
+        "fr": "🌦️ Correctif du ciel : on peut arrêter la météo et les catastrophes. Touche encore un bouton allumé, utilise ⛔ Arrêter pour une catastrophe, ou ☀️ Ciel dégagé pour tout arrêter.",
+        "zh-Hans": "🌦️ 修好天气：天气和灾难都能取消了。再点一次亮着的按钮就停；灾难有 ⛔ 停止按钮；☀️ 一键放晴能全部停止。",
+        "zh-Hant": "🌦️ 修好天氣：天氣和災難都能取消了。再點一次亮著的按鈕就停；災難有 ⛔ 停止按鈕；☀️ 一鍵放晴能全部停止。"
+      }
+    },
+    {
       "v": "3.30",
       "file": "drawrassic-park-v3.30.html",
       "date": "2026-11-13",

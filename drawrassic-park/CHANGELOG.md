@@ -1,5 +1,11 @@
 # Drawrassic Park — Changelog
 
+## v3.31 (2026-11-13) — save schema s8 (unchanged)
+- 🐛 Fixed: in 🌦️ Sky & powers a disaster could not be stopped once started (its button did nothing until it ended by itself, and the other disaster buttons were ignored), and tapping the lit weather again did nothing.
+- Now: tap the lit weather again to go back to sunny; tap the lit disaster again (or the red ⛔ Stop button) to end it at once — pending meteors and lava bombs are removed, the flood drains, the tornado and cracks disappear, an ice age also stops the snow (no gift for a stopped disaster); tapping another disaster swaps to it; a green ☀️ Clear sky button stops everything. A hint line explains it, and the top-bar sky icon updates right away.
+- After you pick the weather yourself, the automatic weather waits about twice as long before changing it.
+- Save format unchanged (s8). Not tested on a real iPad or Xbox.
+
 ## v3.30 (2026-11-13) — save schema s8 (unchanged)
 - 🍱 Snack Bar: 37 foods as data entries in 4 groups — food (meat, steak, drumstick, fish, bug, lettuce, strawberry, corn, watermelon, apple, carrot, banana), treats (pizza, burger, donut, ice cream, popcorn, chocolate, party cake), silly food (super-hot chili, spider, giant mushroom, shrink candy, beans, triple coffee, brain-freeze slush, balloon gum, super-sour lemon, stinky garlic, sleepy tea, cactus) and magic food (ghost jelly, rainbow lollipop, twin cherries, lightning fruit, star fruit for 2 amber, mystery box).
 - 22 effects, each a data entry that works on dinos and on people: 🌶️ red-hot head with steam and fire breath, running around screaming; 🕷️ spider dino with eight legs that webs visitors and dinos, then climbs a thread and hangs upside down; giant ×1.8 (stomps shake the screen) or tiny ×0.4; fart jumps; coffee zoom then a crash nap; frozen in an ice block; floating balloon that pops; sour squish; stink clouds that make people flee; instant sleep; cactus ouch-hops; see-through ghost that scares visitors; rainbow colours with a sparkle trail; two clones for 15 s; lightning that zaps shadow dinos; golden star (level up + shield); sugar dance; party (nearby dinos dance, visitors cheer); round belly after junk food; popcorn popping; banana peel left on the ground.
