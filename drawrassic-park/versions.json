@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.33",
+      "file": "drawrassic-park-v3.33.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🪁 Kites and silly clouds: 🎲 now rolls 24 silly cloud shapes (dino, bunny, cat, poop swirl, underpants, mustache, teapot…) that can morph when squeezed. Draw a kite (or roll one of 8 designs) and give it to a dino: it runs with it in the wind, the kite climbs, loops when tapped, and a strong gust can lift a small dino.",
+        "fr": "🪁 Cerfs-volants et nuages rigolos : 🎲 donne 24 formes de nuages rigolotes (dino, lapin, chat, tortillon, slip, moustache, théière…) qui peuvent se transformer quand on les presse. Dessine un cerf-volant (ou 8 modèles au hasard) et donne-le à un dino : il court dans le vent, le cerf-volant monte, fait un looping quand on le touche, et un coup de vent peut soulever un petit dino.",
+        "zh-Hans": "🪁 风筝和搞怪云：🎲 现在会随机出 24 种奇形怪状的云（恐龙、兔子、猫、便便、内裤、大胡子、茶壶……），挤一挤还会变形。画一只风筝（或者随机 8 种图案）交给恐龙，它会顶着风跑，风筝越飞越高，点风筝会翻跟头，大风还能把小恐龙拉上天。",
+        "zh-Hant": "🪁 風箏和搞怪雲：🎲 現在會隨機出 24 種奇形怪狀的雲（恐龍、兔子、貓、便便、內褲、大鬍子、茶壺……），擠一擠還會變形。畫一隻風箏（或者隨機 8 種圖案）交給恐龍，牠會頂著風跑，風箏越飛越高，點風箏會翻跟頭，大風還能把小恐龍拉上天。"
+      }
+    },
+    {
       "v": "3.32",
       "file": "drawrassic-park-v3.32.html",
       "date": "2026-11-13",
