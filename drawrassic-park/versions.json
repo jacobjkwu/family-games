@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.45",
+      "file": "drawrassic-park-v3.45.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "👹 3 more bosses (13 in all): 🤖 Mecha Morph Carno (missiles, turns into a race car, eye laser), ☣️ Toxic Fang Para (acid pools, grabbing tendrils, toxic fog) and 🌌 Abyss Dragon (violet breath, obsidian pillars, void orb), each with a full-screen ultimate.",
+        "fr": "👹 3 boss de plus (13 en tout) : 🤖 Carno Méca-Morph (missiles, se change en bolide, laser des yeux), ☣️ Para Croc-Toxique (flaques d’acide, tentacules, brouillard toxique) et 🌌 Dragon des abysses (souffle violet, piliers d’obsidienne, orbe du vide), chacun avec une ultime plein écran.",
+        "zh-Hans": "👹 又来 3 只 Boss（一共 13 只）：🤖 机甲变形龙（导弹、变成赛车、眼部激光）、☣️ 剧毒獠牙龙（酸液池、毒藤缠抓、剧毒迷雾）、🌌 深渊魔龙（紫焰吐息、黑曜石柱、虚空魔球），每只都有全屏大招。",
+        "zh-Hant": "👹 又來 3 隻 Boss（一共 13 隻）：🤖 機甲變形龍（導彈、變成賽車、眼部雷射）、☣️ 劇毒獠牙龍（酸液池、毒藤纏抓、劇毒迷霧）、🌌 深淵魔龍（紫焰吐息、黑曜石柱、虛空魔球），每隻都有全螢幕大招。"
+      }
+    },
+    {
       "v": "3.44",
       "file": "drawrassic-park-v3.44.html",
       "date": "2026-11-13",
