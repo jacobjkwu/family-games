@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.10",
+      "file": "drawrassic-park-v3.10.html",
+      "date": "2026-11-12",
+      "schema": 5,
+      "switcher": true,
+      "notes": {
+        "en": "141 dino species with rarity (common to legendary); set health, attack, stamina and hunger in the 🎛️ number panel or per dino. A boss every night from night 5; the Mutant Dark Quetzalcoatlus from night 9.",
+        "fr": "141 espèces de dinos avec rareté (commun à légendaire) ; règle santé, attaque, endurance et faim dans le 🎛️ tableau des nombres ou par dino. Un boss chaque nuit dès la nuit 5 ; le Quetzalcoatlus des ténèbres mutant dès la nuit 9.",
+        "zh-Hans": "141 种恐龙，有稀有度（普通到传说）；血量、攻击、体力、饥饿可以在 🎛️ 数值面板或每只恐龙的属性里设置。第 5 夜起每晚都有 Boss，第 9 夜起出现变异·暗黑风神翼龙。",
+        "zh-Hant": "141 種恐龍，有稀有度（普通到傳說）；血量、攻擊、體力、飢餓可以在 🎛️ 數值面板或每隻恐龍的屬性裡設定。第 5 夜起每晚都有 Boss，第 9 夜起出現變異·暗黑風神翼龍。"
+      }
+    },
+    {
       "v": "3.9",
       "file": "drawrassic-park-v3.9.html",
       "date": "2026-11-12",
