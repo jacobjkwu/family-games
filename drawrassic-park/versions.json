@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.13",
+      "file": "drawrassic-park-v3.13.html",
+      "date": "2026-11-12",
+      "schema": 6,
+      "switcher": true,
+      "notes": {
+        "en": "🧪 Lab: 10 materials to collect, 5 things to make (energy juice, XP candy, mystery, legend and dark eggs), 🧬 fusion of two dinos (head of one, body of the other) and the 📖 Fusion Book.",
+        "fr": "🧪 Labo : 10 matériaux à collecter, 5 choses à fabriquer (jus d’énergie, bonbon d’XP, œufs mystère, légendaire et noir), 🧬 fusion de deux dinos (la tête de l’un, le corps de l’autre) et le 📖 livre des fusions.",
+        "zh-Hans": "🧪 实验室：收集 10 种材料，制作 5 种道具（能量果汁、经验糖、神秘蛋、传说蛋、暗黑蛋），🧬 融合两只恐龙（一只的头 + 另一只的身体），还有 📖 融合图鉴。",
+        "zh-Hant": "🧪 實驗室：收集 10 種材料，製作 5 種道具（能量果汁、經驗糖、神秘蛋、傳說蛋、暗黑蛋），🧬 融合兩隻恐龍（一隻的頭 + 另一隻的身體），還有 📖 融合圖鑑。"
+      }
+    },
+    {
       "v": "3.12",
       "file": "drawrassic-park-v3.12.html",
       "date": "2026-11-12",

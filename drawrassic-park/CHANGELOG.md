@@ -1,5 +1,11 @@
 # Drawrassic Park — Changelog
 
+## v3.13 (2026-11-12) — save schema s6 (new)
+- **Schema change s5 → s6:** adds materials `mats` {id: count}, the Fusion Book `book` (name, parents, species, date, small picture for the newest 60) and a per-dino fusion count `fz`. On first start v3.13 copies the s5 save to `save/s6` (s5 is left untouched for v3.10–v3.12). Launcher: Copy progress both ways (s6 → s5 drops materials, book and fusion counts).
+- 10 materials: 🦴 fossil bone and 🪶 ancient feather (sparkly finds in the Wild Lands — tap them — and from catching wild dinos), 🍃 magic leaf (plant-eaters grazing bushes), 🔮 shadow shard (defeated shadow dinos, collected by themselves after 12 s), 🐉 dino scale (arena and Boss Altar wins), and one boss material per boss (🌋 lava core, ❄️ ice crystal, ⚡ thunder plume, 👑 shadow crown, ☠️ dark wing bone) from park boss fights and Boss Altar wins.
+- 🧪 Lab (new toolbar button) with four tabs: 🎒 Materials (counts and where to find each), 🧪 Make (energy juice: all dinos full stamina, less hungry; XP candy: +40 XP for the 5 lowest-level dinos; mystery egg: a rare/epic/legendary species; legend egg: a legendary species; dark egg: a pitch-black legendary dino), 🧬 Fusion (pick a head dino and a body dino, see a live preview, fuse for 🔮×2 🦴×2; both parents stay), 📖 Fusion Book (every fusion with picture, parents and date).
+
+
 ## v3.12 (2026-11-12) — save schema s5 (unchanged)
 - 💬 Talk and tapping a dino: 30% of the time it tells a riddle, then the punchline 2.6 s later (a nearby dino often laughs or groans).
 - New lines for each dino group (meat-eaters, raptors, long-necks, horns, armour, duck-bills, flyers, swimmers) and for 40 species.
