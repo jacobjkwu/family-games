@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.47",
+      "file": "drawrassic-park-v3.47.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🐛 Fix: a dino you picked up while it was in a wild fight (or napping after one) stayed stuck in the air when you let go. Picking a dino up now takes it out of the fight, and it drops normally.",
+        "fr": "🐛 Correctif : un dino pris en main pendant un combat sauvage (ou sa sieste après) restait coincé en l’air quand on le lâchait. Le prendre le sort maintenant du combat, et il retombe normalement.",
+        "zh-Hans": "🐛 修复：恐龙正在和野生恐龙打架（或打输后在睡觉）时被拎起来，放手后会卡在半空中下不来。现在拎起来就会退出战斗，放手后正常落地。",
+        "zh-Hant": "🐛 修復：恐龍正在和野生恐龍打架（或打輸後在睡覺）時被拎起來，放手後會卡在半空中下不來。現在拎起來就會退出戰鬥，放手後正常落地。"
+      }
+    },
+    {
       "v": "3.46",
       "file": "drawrassic-park-v3.46.html",
       "date": "2026-11-13",

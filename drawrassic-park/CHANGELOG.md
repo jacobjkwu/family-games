@@ -1,5 +1,9 @@
 # Drawrassic Park — Changelog
 
+## v3.47 (2026-11-13) — save schema s8 (unchanged)
+- 🐛 Fixed (since v3.44): a dino picked up while it was in a raid or an on-sight fight, or napping after losing one, stayed in the air after being let go — the raid code kept setting its state every frame (fighting: “wander”, napping: “sleep”), so the normal falling and landing never ran. Now a carried dino is never driven by the raid code: picking up a fighter takes it out of the fight (a wild one waits 40 s before attacking again), a napping dino continues its nap after it lands, and a falling dino lands normally. Checked by dragging with the mouse in Chrome at iPad size: normal, fighting and napping dinos all fall and land (altitude back to 0).
+- Save schema unchanged (s8). Not tested on a real iPad or Xbox.
+
 ## v3.46 (2026-11-13) — save schema s8 (unchanged)
 - ⚠️ Wild dinos attack on sight (number panel 👹 wildAggro, wildSight 420): a wild dino that sees one of your dinos — in the Wild Lands, or in the park near the wall (it jumps over) — charges at it. Your dino fights back (“You want a fight? Here I come!”); if the wild one is 1.3× stronger, up to 3 friends nearby join. A wild dino knocked out in such a fight is tamed and becomes yours (named, walks into the park, or the 📦 Dino Box when full); your dino that loses naps and recovers as in v3.44 raids. At most 4 wild dinos fight at once, and a wild dino waits 40 s after a fight before attacking again. Fighters with no one left to fight go back to normal after 3 s (wild ones in the park jump back over the wall).
 - Fix: the raid message no longer says “wild” twice.
