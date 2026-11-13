@@ -8,7 +8,7 @@
 - 🔀 Head swap random event: two dinos trade heads for 25 s; tap one to swap back early (+4 coins).
 - The baked dino look now remembers its original drawing, so fusion and cut-ups use the clean drawing. Save format unchanged (s8). Not tested on a real iPad or Xbox.
 
-## v3.26 (2026-11-13) — save schema s8 (unchanged)
+## v3.26 (2026-11-13) — save schema s8 (new)
 - **Schema change s7 → s8:** park dinos may carry rig markers `rig` {eye, hu, tu, leg} (sprite space 0–1), a voice pitch `voice` (0.5–2) and a chosen special move `special` (an arena skill key). On first start v3.26 copies save/s7 to save/s8; s7 stays untouched for v3.25 and older. Launcher: Copy progress both ways (s8 → s7 drops the three fields). Loaders clamp bad values. The Dino Box format is unchanged (box/s2), so a dino stored in the box keeps only its drawing and basics. Fixtures: drawrassic-park/fixtures/s7.json and s8.json.
 - 🧸 Easy mode: ① pick one of the species shapes and a colour, ✨ paints the body with an outline, light/shade and a belly and stamps the eye; ② 18 parts placed automatically from the drawing's outline (back spikes, plates, sail, wings behind the body, horns, unicorn horn, frill, mohawk, crest, feathers, tail club, tail spikes, big teeth, claws, big eye, fire breath, antennae, crown); ③ 10 patterns that stay inside the body (spots, stripes, scales, stars, hearts, zigzag, polka dots, light belly, rainbow, sparkles) and 9 stickers (glasses, sunglasses, bow, blush, mustache, scar, bandana, star badge, flower).
 - 🖌️ 15 brushes in both modes: round, marker, pencil, airbrush, calligraphy and magic stamps (scales, stars, hearts, leaves, flames, bubbles, fur, rainbow, sparkles, spikes); Apple Pencil pressure changes the size.
