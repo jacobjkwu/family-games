@@ -164,6 +164,11 @@ async function start() {
     g = (d.games || []).find(x => x && x.id === id && x.category === 'community');
   } catch (e) { msg(tr('loadFail')); return; }
   let external = null;
+  if (g && g.link === true && typeof g.url === 'string') {
+    // a game that opens on its own website (old bookmarks and "Continue" can still point here)
+    try { const u = new URL(g.url); if (u.protocol === 'https:' && u.origin !== location.origin) { location.replace(u.href); return; } } catch (e) {}
+    msg(tr('notFound')); return;
+  }
   if (g && typeof g.external === 'string') {
     try { const u = new URL(g.external); if (u.protocol === 'https:' && u.origin !== location.origin) external = u.href; } catch (e) {}
     if (!external) { msg(tr('notFound')); return; }

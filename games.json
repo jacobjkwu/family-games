@@ -1,7 +1,7 @@
 {
   "hub": "game-hub",
   "format": 2,
-  "notes": "Game list for the Game Hub. category: \"family\" (our own games) or \"community\" (open-source AI-made games vendored under community/<id>/, played through community/play.html in a sandbox). input: \"controller\" = 手柄+电视, \"touch\" = 触屏优先. url: the game launcher (absolute, or relative to the hub). Community entries also have entry (start page under community/) and credit {author, made, license, repo}. icon = hand-drawn inline SVG, single quotes inside (our own games: 320x180 key art with preserveAspectRatio slice and the subject centred, so a square crop still works). art = the 16:9 cover picture as a WebP under shared/hub-art/ (relative to the hub): official promo art or a real in-game frame where the game has one, otherwise a designed illustration with no baked-in text; 960x540 for community games, 1280x720 for our own. Every game needs one; the icon is only the fallback. logo = title lettering for key-art tiles and the hero {fill:[top,mid,bottom], stroke, glow}; the title itself stays translatable text. Community entries are either copied (entry: start page under community/), embedded (external: the official https site, shown inside community/play.html) or links (link: true, url opens the site directly). input: touch | both (touch or controller) | controller | keyboard. genre: board | puzzle | racing | adventure | build | arcade | cozy (hub filter chips).",
+  "notes": "Game list for the Game Hub. category: \"family\" (our own games) or \"community\" (open-source AI-made games vendored under community/<id>/, played through community/play.html in a sandbox). input: \"controller\" = 手柄+电视, \"touch\" = 触屏优先. url: the game launcher (absolute, or relative to the hub). Community entries also have entry (start page under community/) and credit {author, made, license, repo}. icon = hand-drawn inline SVG, single quotes inside (our own games: 320x180 key art with preserveAspectRatio slice and the subject centred, so a square crop still works). art = the 16:9 cover picture as a WebP under shared/hub-art/ (relative to the hub): official promo art or a real in-game frame where the game has one, otherwise a designed illustration with no baked-in text; 960x540 for community games, 1280x720 for our own. Every game needs one; the icon is only the fallback. logo = title lettering for key-art tiles and the hero {fill:[top,mid,bottom], stroke, glow}; the title itself stays translatable text. Community entries are either copied (entry: start page under community/), links (link: true, url opens the official site directly). Embedding other sites in a frame was dropped on 2026-11-13: many send X-Frame-Options (e.g. Yarn Planet, Little Flock) and showed nothing. input: touch | both (touch or controller) | controller | keyboard. genre: board | puzzle | racing | adventure | build | arcade | cozy (hub filter chips).",
   "games": [
     {
       "id": "goat-mayhem",
@@ -450,10 +450,10 @@
         "made": "Claude Fable 5.2"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f6b26b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🥐</text></svg>",
-      "url": "community/play.html?g=cozy-bakery",
-      "external": "https://cozybakery.vercel.app/",
+      "url": "https://cozybakery.vercel.app/",
       "genre": "arcade",
-      "art": "shared/hub-art/cozy-bakery.webp"
+      "art": "shared/hub-art/cozy-bakery.webp",
+      "link": true
     },
     {
       "id": "cozy-lisbon",
@@ -478,10 +478,10 @@
         "made": "Claude Fable 5.2"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffd23f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>✈️</text></svg>",
-      "url": "community/play.html?g=cozy-lisbon",
-      "external": "https://cozylisbon.vercel.app/",
+      "url": "https://cozylisbon.vercel.app/",
       "genre": "racing",
-      "art": "shared/hub-art/cozy-lisbon.webp"
+      "art": "shared/hub-art/cozy-lisbon.webp",
+      "link": true
     },
     {
       "id": "yardclash",
@@ -506,10 +506,10 @@
         "made": "Claude Fable 5.2"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3fae5a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏈</text></svg>",
-      "url": "community/play.html?g=yardclash",
-      "external": "https://yardclash.vercel.app/",
+      "url": "https://yardclash.vercel.app/",
       "genre": "arcade",
-      "art": "shared/hub-art/yardclash.webp"
+      "art": "shared/hub-art/yardclash.webp",
+      "link": true
     },
     {
       "id": "giant-leap",
@@ -534,10 +534,10 @@
         "made": "Claude Fable 5.2"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#2c3e7a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌕</text></svg>",
-      "url": "community/play.html?g=giant-leap",
-      "external": "https://giant-leap.vercel.app/",
+      "url": "https://giant-leap.vercel.app/",
       "genre": "adventure",
-      "art": "shared/hub-art/giant-leap.webp"
+      "art": "shared/hub-art/giant-leap.webp",
+      "link": true
     },
     {
       "id": "tilt-labyrinth",
@@ -562,10 +562,10 @@
         "made": "Claude Fable 5.2"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#a9744f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🟤</text></svg>",
-      "url": "community/play.html?g=tilt-labyrinth",
-      "external": "https://blog.silencestar.com/posts/tilt-labyrinth/play/",
+      "url": "https://blog.silencestar.com/posts/tilt-labyrinth/play/",
       "genre": "puzzle",
-      "art": "shared/hub-art/tilt-labyrinth.webp"
+      "art": "shared/hub-art/tilt-labyrinth.webp",
+      "link": true
     },
     {
       "id": "tree-appreciator",
@@ -590,10 +590,10 @@
         "made": "Claude Opus 5.5"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#7cb342'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌳</text></svg>",
-      "url": "community/play.html?g=tree-appreciator",
-      "external": "https://tools.simonwillison.net/tree-appreciator",
+      "url": "https://tools.simonwillison.net/tree-appreciator",
       "genre": "cozy",
-      "art": "shared/hub-art/tree-appreciator.webp"
+      "art": "shared/hub-art/tree-appreciator.webp",
+      "link": true
     },
     {
       "id": "yarn-planet",
@@ -620,10 +620,10 @@
         "repo": "https://github.com/makerjackie/yarn-planet"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#e8505b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🧶</text></svg>",
-      "url": "community/play.html?g=yarn-planet",
-      "external": "https://yarn.ynot.games/",
+      "url": "https://yarn.ynot.games/",
       "genre": "adventure",
-      "art": "shared/hub-art/yarn-planet.webp"
+      "art": "shared/hub-art/yarn-planet.webp",
+      "link": true
     },
     {
       "id": "little-flock",
@@ -650,10 +650,10 @@
         "repo": "https://github.com/songkeys/little-flock"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#9ccc65'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐑</text></svg>",
-      "url": "community/play.html?g=little-flock",
-      "external": "https://sharpherd.song.work/",
+      "url": "https://sharpherd.song.work/",
       "genre": "build",
-      "art": "shared/hub-art/little-flock.webp"
+      "art": "shared/hub-art/little-flock.webp",
+      "link": true
     },
     {
       "id": "driftwing",
@@ -678,10 +678,10 @@
         "made": "Claude Opus 5.5"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#5aa9e6'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🪽</text></svg>",
-      "url": "community/play.html?g=driftwing",
-      "external": "https://kylebuildsai.github.io/driftwing/",
+      "url": "https://kylebuildsai.github.io/driftwing/",
       "genre": "racing",
-      "art": "shared/hub-art/driftwing.webp"
+      "art": "shared/hub-art/driftwing.webp",
+      "link": true
     },
     {
       "id": "fall-line",
@@ -706,10 +706,10 @@
         "made": "Claude Opus 5.5"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8ecae6'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏂</text></svg>",
-      "url": "community/play.html?g=fall-line",
-      "external": "https://nipale-ai.github.io/opus-5-5-overnight-builds/fall-line/",
+      "url": "https://nipale-ai.github.io/opus-5-5-overnight-builds/fall-line/",
       "genre": "racing",
-      "art": "shared/hub-art/fall-line.webp"
+      "art": "shared/hub-art/fall-line.webp",
+      "link": true
     },
     {
       "id": "palmera-bay",
@@ -734,10 +734,10 @@
         "made": "Claude Opus 5.5"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f28c38'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🚗</text></svg>",
-      "url": "community/play.html?g=palmera-bay",
-      "external": "https://cahlik.net/palmera-bay/",
+      "url": "https://cahlik.net/palmera-bay/",
       "genre": "racing",
-      "art": "shared/hub-art/palmera-bay.webp"
+      "art": "shared/hub-art/palmera-bay.webp",
+      "link": true
     },
     {
       "id": "three-cats",
@@ -762,10 +762,10 @@
         "made": "Claude Opus 5.5"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#b388ff'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐈</text></svg>",
-      "url": "community/play.html?g=three-cats",
-      "external": "https://lambsubstitute.github.io/three-cats/",
+      "url": "https://lambsubstitute.github.io/three-cats/",
       "genre": "puzzle",
-      "art": "shared/hub-art/three-cats.webp"
+      "art": "shared/hub-art/three-cats.webp",
+      "link": true
     },
     {
       "id": "fishslop",
@@ -790,10 +790,10 @@
         "made": "Claude Opus 5.5"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#1f8a9e'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐠</text></svg>",
-      "url": "community/play.html?g=fishslop",
-      "external": "https://vasu-devs.github.io/FishSlop_Opus5.5/",
+      "url": "https://vasu-devs.github.io/FishSlop_Opus5.5/",
       "genre": "cozy",
-      "art": "shared/hub-art/fishslop.webp"
+      "art": "shared/hub-art/fishslop.webp",
+      "link": true
     },
     {
       "id": "solitaire",
@@ -818,10 +818,10 @@
         "made": "GPT-6 Astra"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#2e7d32'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🃏</text></svg>",
-      "url": "community/play.html?g=solitaire",
-      "external": "https://solitaire.mangoidiots.com/",
+      "url": "https://solitaire.mangoidiots.com/",
       "genre": "board",
-      "art": "shared/hub-art/solitaire.webp"
+      "art": "shared/hub-art/solitaire.webp",
+      "link": true
     },
     {
       "id": "bubble-wrap",
@@ -846,10 +846,10 @@
         "made": "GPT-6 Astra"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#9ad0f5'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🫧</text></svg>",
-      "url": "community/play.html?g=bubble-wrap",
-      "external": "https://bubble-wrap-simulator.vercel.app/",
+      "url": "https://bubble-wrap-simulator.vercel.app/",
       "genre": "cozy",
-      "art": "shared/hub-art/bubble-wrap.webp"
+      "art": "shared/hub-art/bubble-wrap.webp",
+      "link": true
     },
     {
       "id": "rift-chess",
@@ -876,10 +876,10 @@
         "repo": "https://github.com/HaileyStorm/rift-chess"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#6d4c41'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>♟️</text></svg>",
-      "url": "community/play.html?g=rift-chess",
-      "external": "https://haileystorm.github.io/rift-chess/",
+      "url": "https://haileystorm.github.io/rift-chess/",
       "genre": "board",
-      "art": "shared/hub-art/rift-chess.webp"
+      "art": "shared/hub-art/rift-chess.webp",
+      "link": true
     },
     {
       "id": "thunder-valley",
@@ -904,10 +904,10 @@
         "made": "Claude Fable 5.2"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#e0a030'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🦖</text></svg>",
-      "url": "community/play.html?g=thunder-valley",
-      "external": "https://loktar00.github.io/llm-test-pages/fable52-dino-chase/",
+      "url": "https://loktar00.github.io/llm-test-pages/fable52-dino-chase/",
       "genre": "arcade",
-      "art": "shared/hub-art/thunder-valley.webp"
+      "art": "shared/hub-art/thunder-valley.webp",
+      "link": true
     },
     {
       "id": "lanternfall",
@@ -932,10 +932,10 @@
         "made": "Claude Fable 5.2"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffb300'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏮</text></svg>",
-      "url": "community/play.html?g=lanternfall",
-      "external": "https://loktar00.github.io/lanternfall/",
+      "url": "https://loktar00.github.io/lanternfall/",
       "genre": "arcade",
-      "art": "shared/hub-art/lanternfall.webp"
+      "art": "shared/hub-art/lanternfall.webp",
+      "link": true
     },
     {
       "id": "opus-100",
@@ -960,10 +960,10 @@
         "made": "Claude Opus 5.5"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#455a64'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🧪</text></svg>",
-      "url": "community/play.html?g=opus-100",
-      "external": "https://swan4er.github.io/opus-100-projects/",
+      "url": "https://swan4er.github.io/opus-100-projects/",
       "genre": "cozy",
-      "art": "shared/hub-art/opus-100.webp"
+      "art": "shared/hub-art/opus-100.webp",
+      "link": true
     },
     {
       "id": "cayley",
@@ -990,10 +990,10 @@
         "repo": "https://github.com/lauramionel/cayley-flight-simulator"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#4a6fa5'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🛩️</text></svg>",
-      "url": "community/play.html?g=cayley",
-      "external": "https://lauramionel.github.io/cayley-flight-simulator/",
+      "url": "https://lauramionel.github.io/cayley-flight-simulator/",
       "genre": "racing",
-      "art": "shared/hub-art/cayley.webp"
+      "art": "shared/hub-art/cayley.webp",
+      "link": true
     },
     {
       "id": "starry-nightrider",
@@ -1018,10 +1018,10 @@
         "made": "Claude Fable 5.2"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#1e3a8a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌌</text></svg>",
-      "url": "community/play.html?g=starry-nightrider",
-      "external": "https://starrynightrider.com/",
+      "url": "https://starrynightrider.com/",
       "genre": "adventure",
-      "art": "shared/hub-art/starry-nightrider.webp"
+      "art": "shared/hub-art/starry-nightrider.webp",
+      "link": true
     },
     {
       "id": "what-the-water-keeps",
@@ -1046,10 +1046,10 @@
         "made": "Claude Fable 5.2"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#264653'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>⛵</text></svg>",
-      "url": "community/play.html?g=what-the-water-keeps",
-      "external": "https://what-the-water-keeps.vercel.app/",
+      "url": "https://what-the-water-keeps.vercel.app/",
       "genre": "adventure",
-      "art": "shared/hub-art/what-the-water-keeps.webp"
+      "art": "shared/hub-art/what-the-water-keeps.webp",
+      "link": true
     },
     {
       "id": "waking-river",
@@ -1074,10 +1074,10 @@
         "made": "Claude Fable 5.2"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#43aa8b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🍃</text></svg>",
-      "url": "community/play.html?g=waking-river",
-      "external": "https://rivergame-kappa.vercel.app/",
+      "url": "https://rivergame-kappa.vercel.app/",
       "genre": "adventure",
-      "art": "shared/hub-art/waking-river.webp"
+      "art": "shared/hub-art/waking-river.webp",
+      "link": true
     },
     {
       "id": "turbo-tails",
@@ -1102,10 +1102,10 @@
         "made": "Claude Fable 5.2"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f4a261'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🦊</text></svg>",
-      "url": "community/play.html?g=turbo-tails",
-      "external": "https://turbo-tails.vercel.app/",
+      "url": "https://turbo-tails.vercel.app/",
       "genre": "racing",
-      "art": "shared/hub-art/turbo-tails.webp"
+      "art": "shared/hub-art/turbo-tails.webp",
+      "link": true
     },
     {
       "id": "capybara-delivery",
@@ -1130,10 +1130,10 @@
         "made": "Claude Code"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#c68b59'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🛵</text></svg>",
-      "url": "community/play.html?g=capybara-delivery",
-      "external": "https://capybara-vibejam26.leocoout.dev/",
+      "url": "https://capybara-vibejam26.leocoout.dev/",
       "genre": "racing",
-      "art": "shared/hub-art/capybara-delivery.webp"
+      "art": "shared/hub-art/capybara-delivery.webp",
+      "link": true
     },
     {
       "id": "bwca-canoe",
@@ -1158,10 +1158,10 @@
         "made": "Claude Opus 5.5"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#2a9d8f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🛶</text></svg>",
-      "url": "community/play.html?g=bwca-canoe",
-      "external": "https://gkrumbach07.github.io/bwca-canoe/",
+      "url": "https://gkrumbach07.github.io/bwca-canoe/",
       "genre": "adventure",
-      "art": "shared/hub-art/bwca-canoe.webp"
+      "art": "shared/hub-art/bwca-canoe.webp",
+      "link": true
     },
     {
       "id": "oil-paint",
@@ -1440,9 +1440,9 @@
         "repo": "https://github.com/patricker/treant"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#5d4037'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>♟️</text></svg>",
-      "url": "community/play.html?g=board-arcade",
-      "external": "https://mcts.dev/arcade/",
-      "art": "shared/hub-art/board-arcade.webp"
+      "url": "https://mcts.dev/arcade/",
+      "art": "shared/hub-art/board-arcade.webp",
+      "link": true
     },
     {
       "id": "chess-3d",
@@ -1469,9 +1469,9 @@
         "repo": "https://github.com/yortch/chess3dastra"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8d6e63'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>♞</text></svg>",
-      "url": "community/play.html?g=chess-3d",
-      "external": "https://yortch.github.io/chess3dastra/",
-      "art": "shared/hub-art/chess-3d.webp"
+      "url": "https://yortch.github.io/chess3dastra/",
+      "art": "shared/hub-art/chess-3d.webp",
+      "link": true
     },
     {
       "id": "claude-chess",
@@ -1498,9 +1498,9 @@
         "repo": "https://github.com/mglass222/claude-chess-web"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#455a64'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>♔</text></svg>",
-      "url": "community/play.html?g=claude-chess",
-      "external": "https://mglass222.github.io/claude-chess-web/",
-      "art": "shared/hub-art/claude-chess.webp"
+      "url": "https://mglass222.github.io/claude-chess-web/",
+      "art": "shared/hub-art/claude-chess.webp",
+      "link": true
     },
     {
       "id": "airgap-games",
@@ -1527,9 +1527,9 @@
         "repo": "https://github.com/JakeAve/airgap"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#00796b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>📶</text></svg>",
-      "url": "community/play.html?g=airgap-games",
-      "external": "https://jakeave.github.io/airgap/",
-      "art": "shared/hub-art/airgap-games.webp"
+      "url": "https://jakeave.github.io/airgap/",
+      "art": "shared/hub-art/airgap-games.webp",
+      "link": true
     },
     {
       "id": "gabriels-studio",
@@ -1556,9 +1556,9 @@
         "repo": "https://github.com/gberry747-lab/gabriels-animation-studio"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ff8a65'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>✏️</text></svg>",
-      "url": "community/play.html?g=gabriels-studio",
-      "external": "https://gberry747-lab.github.io/gabriels-animation-studio/",
-      "art": "shared/hub-art/gabriels-studio.webp"
+      "url": "https://gberry747-lab.github.io/gabriels-animation-studio/",
+      "art": "shared/hub-art/gabriels-studio.webp",
+      "link": true
     },
     {
       "id": "silent-meridian",
@@ -1585,9 +1585,9 @@
         "repo": "https://github.com/stackloomdev/silent-meridian"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3949ab'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🕰️</text></svg>",
-      "url": "community/play.html?g=silent-meridian",
-      "external": "https://silent-meridian.stackloom.org/",
-      "art": "shared/hub-art/silent-meridian.webp"
+      "url": "https://silent-meridian.stackloom.org/",
+      "art": "shared/hub-art/silent-meridian.webp",
+      "link": true
     },
     {
       "id": "citymaker-2048",
@@ -1614,9 +1614,9 @@
         "repo": "https://github.com/derek-wangpch/OpenCityMaker"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#26a69a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏙️</text></svg>",
-      "url": "community/play.html?g=citymaker-2048",
-      "external": "https://citymaker.0to1app.com/",
-      "art": "shared/hub-art/citymaker-2048.webp"
+      "url": "https://citymaker.0to1app.com/",
+      "art": "shared/hub-art/citymaker-2048.webp",
+      "link": true
     },
     {
       "id": "aperture-flight",
@@ -1643,9 +1643,9 @@
         "repo": "https://github.com/565353780/fly-around-sculpture"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#7e57c2'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🗿</text></svg>",
-      "url": "community/play.html?g=aperture-flight",
-      "external": "https://565353780.github.io/fly-around-sculpture/",
-      "art": "shared/hub-art/aperture-flight.webp"
+      "url": "https://565353780.github.io/fly-around-sculpture/",
+      "art": "shared/hub-art/aperture-flight.webp",
+      "link": true
     },
     {
       "id": "skysprout",
@@ -1672,9 +1672,9 @@
         "repo": "https://github.com/DUBSOpenHub/skysprout"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#66bb6a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌱</text></svg>",
-      "url": "community/play.html?g=skysprout",
-      "external": "https://dubsopenhub.github.io/skysprout/",
-      "art": "shared/hub-art/skysprout.webp"
+      "url": "https://dubsopenhub.github.io/skysprout/",
+      "art": "shared/hub-art/skysprout.webp",
+      "link": true
     },
     {
       "id": "microstride",
@@ -1701,9 +1701,9 @@
         "repo": "https://github.com/565353780/run-on-shoes"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ef6c00'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>👟</text></svg>",
-      "url": "community/play.html?g=microstride",
-      "external": "https://565353780.github.io/run-on-shoes/",
-      "art": "shared/hub-art/microstride.webp"
+      "url": "https://565353780.github.io/run-on-shoes/",
+      "art": "shared/hub-art/microstride.webp",
+      "link": true
     },
     {
       "id": "2048-siege",
@@ -1730,9 +1730,9 @@
         "repo": "https://github.com/jun0e/2048-siege"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f9a825'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏰</text></svg>",
-      "url": "community/play.html?g=2048-siege",
-      "external": "https://jun0e.github.io/2048-siege/",
-      "art": "shared/hub-art/2048-siege.webp"
+      "url": "https://jun0e.github.io/2048-siege/",
+      "art": "shared/hub-art/2048-siege.webp",
+      "link": true
     },
     {
       "id": "seaside-scoop",
@@ -1759,9 +1759,9 @@
         "repo": "https://github.com/pawanp3/renderwolf-fable5-chart-toppers"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#4fc3f7'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🍦</text></svg>",
-      "url": "community/play.html?g=seaside-scoop",
-      "external": "https://pawanp3.github.io/renderwolf-fable5-chart-toppers/",
-      "art": "shared/hub-art/seaside-scoop.webp"
+      "url": "https://pawanp3.github.io/renderwolf-fable5-chart-toppers/",
+      "art": "shared/hub-art/seaside-scoop.webp",
+      "link": true
     },
     {
       "id": "gridwatch-match",
@@ -1788,9 +1788,9 @@
         "repo": "https://github.com/remeadows/GridWatchMatchWeb"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#00bcd4'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>💠</text></svg>",
-      "url": "community/play.html?g=gridwatch-match",
-      "external": "https://gridwatchmatchweb.warsignallabs.net/",
-      "art": "shared/hub-art/gridwatch-match.webp"
+      "url": "https://gridwatchmatchweb.warsignallabs.net/",
+      "art": "shared/hub-art/gridwatch-match.webp",
+      "link": true
     },
     {
       "id": "gridwatch-breach",
@@ -1817,9 +1817,9 @@
         "repo": "https://github.com/remeadows/gridwatch-signal-breach"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#0097a7'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>📡</text></svg>",
-      "url": "community/play.html?g=gridwatch-breach",
-      "external": "https://gridwatch-signalbreach.warsignallabs.net/",
-      "art": "shared/hub-art/gridwatch-breach.webp"
+      "url": "https://gridwatch-signalbreach.warsignallabs.net/",
+      "art": "shared/hub-art/gridwatch-breach.webp",
+      "link": true
     },
     {
       "id": "skylark-run",
@@ -1846,9 +1846,9 @@
         "repo": "https://github.com/jackpepper-vibe/SkylarkRun"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#29b6f6'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🛩️</text></svg>",
-      "url": "community/play.html?g=skylark-run",
-      "external": "https://skylark-run.vercel.app/",
-      "art": "shared/hub-art/skylark-run.webp"
+      "url": "https://skylark-run.vercel.app/",
+      "art": "shared/hub-art/skylark-run.webp",
+      "link": true
     },
     {
       "id": "long-silence",
@@ -1875,9 +1875,9 @@
         "repo": "https://github.com/achimala/TheLongSilence"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#1a237e'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🪐</text></svg>",
-      "url": "community/play.html?g=long-silence",
-      "external": "https://longsilence.anshu.dev/",
-      "art": "shared/hub-art/long-silence.webp"
+      "url": "https://longsilence.anshu.dev/",
+      "art": "shared/hub-art/long-silence.webp",
+      "link": true
     },
     {
       "id": "azura",
@@ -1904,9 +1904,9 @@
         "repo": "https://github.com/Orgxsm/azura"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ff7043'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏝️</text></svg>",
-      "url": "community/play.html?g=azura",
-      "external": "https://orgxsm.github.io/azura/",
-      "art": "shared/hub-art/azura.webp"
+      "url": "https://orgxsm.github.io/azura/",
+      "art": "shared/hub-art/azura.webp",
+      "link": true
     },
     {
       "id": "haggis-hub",
@@ -1933,9 +1933,9 @@
         "repo": "https://github.com/Giftedx/ha-ggis-hub"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#558b2f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏴</text></svg>",
-      "url": "community/play.html?g=haggis-hub",
-      "external": "https://ha.ggis.xyz/",
-      "art": "shared/hub-art/haggis-hub.webp"
+      "url": "https://ha.ggis.xyz/",
+      "art": "shared/hub-art/haggis-hub.webp",
+      "link": true
     },
     {
       "id": "neon-snake",
@@ -1962,9 +1962,9 @@
         "repo": "https://github.com/kinncj/neon-snake"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#d500f9'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐍</text></svg>",
-      "url": "community/play.html?g=neon-snake",
-      "external": "https://kinncj.github.io/neon-snake/claude-code-fable/",
-      "art": "shared/hub-art/neon-snake.webp"
+      "url": "https://kinncj.github.io/neon-snake/claude-code-fable/",
+      "art": "shared/hub-art/neon-snake.webp",
+      "link": true
     },
     {
       "id": "retro-games",
@@ -1991,9 +1991,9 @@
         "repo": "https://github.com/barneyfin/twisted-retro-fit"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ff5252'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🕹️</text></svg>",
-      "url": "community/play.html?g=retro-games",
-      "external": "https://barneyfin.github.io/twisted-retro-fit/",
-      "art": "shared/hub-art/retro-games.webp"
+      "url": "https://barneyfin.github.io/twisted-retro-fit/",
+      "art": "shared/hub-art/retro-games.webp",
+      "link": true
     },
     {
       "id": "outpace",
@@ -2020,9 +2020,9 @@
         "repo": "https://github.com/ethanplusai/outpace"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#d97757'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>⌨️</text></svg>",
-      "url": "community/play.html?g=outpace",
-      "external": "https://outpace.ethanplus.ai/",
-      "art": "shared/hub-art/outpace.webp"
+      "url": "https://outpace.ethanplus.ai/",
+      "art": "shared/hub-art/outpace.webp",
+      "link": true
     },
     {
       "id": "sunset-rush",
@@ -2049,9 +2049,9 @@
         "repo": "https://github.com/DaikiKobayashi/sonnet-5-5-web-game-samples"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ff8f00'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌅</text></svg>",
-      "url": "community/play.html?g=sunset-rush",
-      "external": "https://daikikobayashi.github.io/sonnet-5-5-web-game-samples/games/sunset-rush/max/",
-      "art": "shared/hub-art/sunset-rush.webp"
+      "url": "https://daikikobayashi.github.io/sonnet-5-5-web-game-samples/games/sunset-rush/max/",
+      "art": "shared/hub-art/sunset-rush.webp",
+      "link": true
     },
     {
       "id": "dynamite-mole",
@@ -2078,9 +2078,9 @@
         "repo": "https://github.com/DaikiKobayashi/sonnet-5-5-web-game-samples"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8d6e63'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>💣</text></svg>",
-      "url": "community/play.html?g=dynamite-mole",
-      "external": "https://daikikobayashi.github.io/sonnet-5-5-web-game-samples/games/dynamite-mole/max/",
-      "art": "shared/hub-art/dynamite-mole.webp"
+      "url": "https://daikikobayashi.github.io/sonnet-5-5-web-game-samples/games/dynamite-mole/max/",
+      "art": "shared/hub-art/dynamite-mole.webp",
+      "link": true
     },
     {
       "id": "mouse2-games",
@@ -2107,9 +2107,9 @@
         "repo": "https://github.com/hokita/mouse2"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ab47bc'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🎮</text></svg>",
-      "url": "community/play.html?g=mouse2-games",
-      "external": "https://mouse2-0357d0.web.app/",
-      "art": "shared/hub-art/mouse2-games.webp"
+      "url": "https://mouse2-0357d0.web.app/",
+      "art": "shared/hub-art/mouse2-games.webp",
+      "link": true
     },
     {
       "id": "fable-3d-games",
@@ -2136,9 +2136,9 @@
         "repo": "https://github.com/shironagasu-ai/claude-fable5-3D-games"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3d5afe'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🚀</text></svg>",
-      "url": "community/play.html?g=fable-3d-games",
-      "external": "https://shironagasu-ai.github.io/claude-fable5-3D-games/",
-      "art": "shared/hub-art/fable-3d-games.webp"
+      "url": "https://shironagasu-ai.github.io/claude-fable5-3D-games/",
+      "art": "shared/hub-art/fable-3d-games.webp",
+      "link": true
     },
     {
       "id": "web-grand-prix",
@@ -2165,9 +2165,9 @@
         "repo": "https://github.com/GatoArtStudio/f1-opus-5.5"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#e53935'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏎️</text></svg>",
-      "url": "community/play.html?g=web-grand-prix",
-      "external": "https://f1-demo.gatoartstudio.com/",
-      "art": "shared/hub-art/web-grand-prix.webp"
+      "url": "https://f1-demo.gatoartstudio.com/",
+      "art": "shared/hub-art/web-grand-prix.webp",
+      "link": true
     },
     {
       "id": "slide-rush",
@@ -2194,9 +2194,9 @@
         "repo": "https://github.com/KJLKurt/waterslide-game-opus-5.5"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#03a9f4'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌊</text></svg>",
-      "url": "community/play.html?g=slide-rush",
-      "external": "https://kjlkurt.github.io/waterslide-game-opus-5.5/",
-      "art": "shared/hub-art/slide-rush.webp"
+      "url": "https://kjlkurt.github.io/waterslide-game-opus-5.5/",
+      "art": "shared/hub-art/slide-rush.webp",
+      "link": true
     },
     {
       "id": "putt-quest",
@@ -2223,9 +2223,9 @@
         "repo": "https://github.com/leonvanzyl/3d-golf-sonnet"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#43a047'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>⛳</text></svg>",
-      "url": "community/play.html?g=putt-quest",
-      "external": "https://3d-golf-sonnet.vercel.app/",
-      "art": "shared/hub-art/putt-quest.webp"
+      "url": "https://3d-golf-sonnet.vercel.app/",
+      "art": "shared/hub-art/putt-quest.webp",
+      "link": true
     },
     {
       "id": "breakneck-baseball",
@@ -2252,9 +2252,9 @@
         "repo": "https://github.com/hynding/breakneck-baseball"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#1565c0'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>⚾</text></svg>",
-      "url": "community/play.html?g=breakneck-baseball",
-      "external": "https://hynding.github.io/breakneck-baseball/",
-      "art": "shared/hub-art/breakneck-baseball.webp"
+      "url": "https://hynding.github.io/breakneck-baseball/",
+      "art": "shared/hub-art/breakneck-baseball.webp",
+      "link": true
     },
     {
       "id": "recess-sports",
@@ -2281,9 +2281,9 @@
         "repo": "https://github.com/srgirsky/recess-sports"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#fb8c00'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🧢</text></svg>",
-      "url": "community/play.html?g=recess-sports",
-      "external": "https://srgirsky.github.io/recess-sports/",
-      "art": "shared/hub-art/recess-sports.webp"
+      "url": "https://srgirsky.github.io/recess-sports/",
+      "art": "shared/hub-art/recess-sports.webp",
+      "link": true
     },
     {
       "id": "brothers",
@@ -2310,9 +2310,9 @@
         "repo": "https://github.com/david-a-wheeler/brothers"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#6d4c41'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🤝</text></svg>",
-      "url": "community/play.html?g=brothers",
-      "external": "https://brothers.dwheeler.com/",
-      "art": "shared/hub-art/brothers.webp"
+      "url": "https://brothers.dwheeler.com/",
+      "art": "shared/hub-art/brothers.webp",
+      "link": true
     },
     {
       "id": "buildyourtown",
@@ -2339,9 +2339,9 @@
         "repo": "https://github.com/Rapsody09/buildyourtown"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#7cb342'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏘️</text></svg>",
-      "url": "community/play.html?g=buildyourtown",
-      "external": "https://buildyourtown.com/",
-      "art": "shared/hub-art/buildyourtown.webp"
+      "url": "https://buildyourtown.com/",
+      "art": "shared/hub-art/buildyourtown.webp",
+      "link": true
     },
     {
       "id": "lastlight",
@@ -2368,9 +2368,9 @@
         "repo": "https://github.com/ben-gy/lastlight"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffb74d'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🔥</text></svg>",
-      "url": "community/play.html?g=lastlight",
-      "external": "https://lastlight.benrichardson.dev/",
-      "art": "shared/hub-art/lastlight.webp"
+      "url": "https://lastlight.benrichardson.dev/",
+      "art": "shared/hub-art/lastlight.webp",
+      "link": true
     },
     {
       "id": "free-game-village",
@@ -2397,9 +2397,9 @@
         "repo": "https://github.com/LucasMarquesShiva/the-free-game"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#a1887f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🍇</text></svg>",
-      "url": "community/play.html?g=free-game-village",
-      "external": "https://vale-dos-vinhedos.lucas579686.chatgpt.site/",
-      "art": "shared/hub-art/free-game-village.webp"
+      "url": "https://vale-dos-vinhedos.lucas579686.chatgpt.site/",
+      "art": "shared/hub-art/free-game-village.webp",
+      "link": true
     },
     {
       "id": "hellas",
@@ -2426,9 +2426,9 @@
         "repo": "https://github.com/MXMX0811/gpt-6-astra-game"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#1e88e5'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏛️</text></svg>",
-      "url": "community/play.html?g=hellas",
-      "external": "https://astra-civilization-v-hellas.pages.dev/",
-      "art": "shared/hub-art/hellas.webp"
+      "url": "https://astra-civilization-v-hellas.pages.dev/",
+      "art": "shared/hub-art/hellas.webp",
+      "link": true
     },
     {
       "id": "city-crisis",
@@ -2455,9 +2455,9 @@
         "repo": "https://github.com/hlforever11/gpt6-city-crisis"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#c62828'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🚨</text></svg>",
-      "url": "community/play.html?g=city-crisis",
-      "external": "https://hlforever11.github.io/gpt6-city-crisis/",
-      "art": "shared/hub-art/city-crisis.webp"
+      "url": "https://hlforever11.github.io/gpt6-city-crisis/",
+      "art": "shared/hub-art/city-crisis.webp",
+      "link": true
     },
     {
       "id": "finao",
@@ -2484,9 +2484,9 @@
         "repo": "https://github.com/dan-lee-odinson/failure-is-not-an-option"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#37474f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🛰️</text></svg>",
-      "url": "community/play.html?g=finao",
-      "external": "https://finaogame.com/demo/",
-      "art": "shared/hub-art/finao.webp"
+      "url": "https://finaogame.com/demo/",
+      "art": "shared/hub-art/finao.webp",
+      "link": true
     },
     {
       "id": "sql-boss",
@@ -2513,9 +2513,9 @@
         "repo": "https://github.com/raishaldhawan23/SQL-Boss-Battle-Game-"
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#5c6bc0'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🗄️</text></svg>",
-      "url": "community/play.html?g=sql-boss",
-      "external": "https://raishaldhawan23.github.io/SQL-Boss-Battle-Game-/",
-      "art": "shared/hub-art/sql-boss.webp"
+      "url": "https://raishaldhawan23.github.io/SQL-Boss-Battle-Game-/",
+      "art": "shared/hub-art/sql-boss.webp",
+      "link": true
     }
   ]
 }

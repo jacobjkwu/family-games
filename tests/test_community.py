@@ -12,7 +12,8 @@ OUT = '/tmp/community-shots'
 os.makedirs(OUT, exist_ok=True)
 ALL = [g for g in json.load(open(f'{ROOT}/games.json'))['games'] if g.get('category') == 'community']
 GAMES = [g for g in ALL if 'entry' in g]            # copied into community/
-EMBED = [g for g in ALL if 'external' in g]         # official site shown inside play.html
+EMBED = [g for g in ALL if 'external' in g]         # official site shown inside play.html (none since 2026-11-13)
+LINKS = [g for g in ALL if g.get('link')]
 PORT = 8768
 
 class H(http.server.SimpleHTTPRequestHandler):
@@ -174,6 +175,13 @@ with sync_playwright() as p:
         bad = page.evaluate("[...document.querySelectorAll('#bar .btn')].filter(e => !e.hidden && (e.getBoundingClientRect().right > innerWidth + 1 || e.getBoundingClientRect().height < 44)).map(e => e.textContent)")
         check(f'Embed {g["id"]}: bar fits in portrait', not bad, bad)
         c.close()
+    # old bookmarks / Continue to play.html?g=<a linked game> go straight to the game's site
+    for g in LINKS[:5]:
+        c = ctx_for(b); c.route(g['url'].split('?')[0] + '*', lambda r: r.fulfill(status=200, content_type='text/html', body='<title>site</title>ok'))
+        page = c.new_page(); page.goto(BASE + 'community/play.html?g=' + g['id'], wait_until='domcontentloaded'); page.wait_for_timeout(800)
+        check(f'Link {g["id"]}: play.html sends an old bookmark to the official site', page.url == g['url'], page.url)
+        c.close()
+    check('Links: every external game opens directly (no frames)', len(EMBED) == 0 and all(g['url'].startswith('https://') for g in LINKS), len(EMBED))
     # bad external urls are refused
     c = ctx_for(b); page = c.new_page()
     for badurl in ['javascript:alert(1)', 'http://example.com/', BASE + 'index.html']:
