@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.52",
+      "file": "drawrassic-park-v3.52.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🏕️ New Friends Camp: tamed wild dinos wait there instead of crowding the park (keep or send back to the wild), and at most 2 a day are tamed. 🧹 Tidy up: pick dinos by species or origin and move them to the camp, the Dino Box or another map, or remove them (with undo). ⏸️ Pause button. 🌍 Many maps / save slots with 7 looks, 📑 copy a save, 🚚 move dinos between maps.",
+        "fr": "🏕️ Camp des nouveaux amis : les dinos sauvages apprivoisés y attendent au lieu d’encombrer le parc (garder ou relâcher), et 2 au plus par jour. 🧹 Ranger : choisis des dinos par espèce ou origine et mets-les au camp, dans la boîte, sur une autre carte, ou retire-les (avec annulation). ⏸️ Bouton pause. 🌍 Plusieurs cartes / sauvegardes avec 7 styles, 📑 copier une sauvegarde, 🚚 déménager des dinos.",
+        "zh-Hans": "🏕️ 新朋友营地：收服的野生恐龙先住营地，不再挤进公园（可以留下或放回野外），每天最多收服 2 只。🧹 整理恐龙：按种类或来历一键选中，送进营地、恐龙箱、别的地图，或者删除（能撤销）。⏸️ 暂停按钮。🌍 多个地图 / 存档，7 种样子，📑 复制存档，🚚 恐龙搬家。",
+        "zh-Hant": "🏕️ 新朋友營地：收服的野生恐龍先住營地，不再擠進公園（可以留下或放回野外），每天最多收服 2 隻。🧹 整理恐龍：按種類或來歷一鍵選中，送進營地、恐龍箱、別的地圖，或者刪除（能撤銷）。⏸️ 暫停按鈕。🌍 多個地圖 / 存檔，7 種樣子，📑 複製存檔，🚚 恐龍搬家。"
+      }
+    },
+    {
       "v": "3.51",
       "file": "drawrassic-park-v3.51.html",
       "date": "2026-11-13",
