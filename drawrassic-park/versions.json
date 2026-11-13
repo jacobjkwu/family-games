@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.17",
+      "file": "drawrassic-park-v3.17.html",
+      "date": "2026-11-12",
+      "schema": 7,
+      "switcher": true,
+      "notes": {
+        "en": "🌐 Online army battles by room code: one player creates a room (5-letter code or link), the other joins from another iPad, computer or Xbox.",
+        "fr": "🌐 Batailles d’armées en ligne avec un code de salle : un joueur crée une salle (code de 5 lettres ou lien), l’autre la rejoint depuis un autre iPad, ordinateur ou Xbox.",
+        "zh-Hans": "🌐 在线军团大战：一个人创建房间（5 位房间码或链接），另一个人用另一台 iPad、电脑或 Xbox 加入。",
+        "zh-Hant": "🌐 線上軍團大戰：一個人建立房間（5 位房間碼或連結），另一個人用另一台 iPad、電腦或 Xbox 加入。"
+      }
+    },
+    {
       "v": "3.16",
       "file": "drawrassic-park-v3.16.html",
       "date": "2026-11-12",

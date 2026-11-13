@@ -1,5 +1,12 @@
 # Drawrassic Park — Changelog
 
+## v3.17 (2026-11-12) — save schema s7 (unchanged)
+- 🌐 Online army battle (Arena → 🌐 Online battle): ➕ Create a room shows a 5-character code (no look-alike letters) and 📋 Copy link (`?room=CODE` opens the game and joins). The friend types the code or opens the link. Each player builds their own army on their own screen and sees the friend's progress; when both are ✅ ready, the battle starts.
+- The room creator (player 1, red) runs the battle and sends the fighters' positions about 15 times a second; player 2 (blue) sends only their power buttons (⚡ 🛡️ 🌟). Both see the same result. Rematch is started by player 1.
+- Connection status always shows at the top. Wrong code → "room doesn't exist"; a third player → "room full"; different game versions → "Your friend is on vX, you're on vY"; a dropped connection reconnects by itself (up to 10 tries); a player leaving is shown to the other.
+- Uses WebRTC through PeerJS 1.5.4 (copy in `vendor/peerjs.min.js`, MIT) and its free public broker (0.peerjs.com): no uptime guarantee, and without a TURN relay some networks (strict NAT, some mobile or school networks) won't connect. Online play doesn't work in the claude.ai artifact copy.
+- When the game is opened with a room link, the start-up backup reminder is skipped (the empty-storage prompt and the 💾 red dot still work). Save format unchanged (s7).
+
 ## v3.16 (2026-11-12) — save schema s7 (unchanged)
 - ⚔️ Army Battle (Arena → ⚔️ Army battle, 2 players): players sit top/bottom in portrait or left/right in landscape; each half of the screen is turned to face its player. Each player taps dinos (24 species) to build an army with 100 points (common 5, rare 8, epic 12, legendary 20; up to 30 dinos), or 🎲 random army, then ✅ Ready. Both players can touch at the same time.
 - In the colosseum the red and blue armies line up and fight. Each player has three powers on their side: ⚡ Charge (faster and +40% damage for 4 s, 10 s cooldown), 🛡️ Defend (half damage for 4 s, 12 s cooldown), 🌟 Super move (every dino uses its special move now, 20 s cooldown).
