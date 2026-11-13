@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.49",
+      "file": "drawrassic-park-v3.49.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎲 15 new mystery events (banana peels, balloon storm, chicken run, golden nuggets, ice statues, pillow fight, dino disco, lake tentacles, gift drop, sleepwalker, ghost party, duck race, rocket ride, bee chase, magic hat) and a 🎲 events panel to start any event yourself. Hero boss bars no longer blink.",
+        "fr": "🎲 15 nouveaux événements mystère (peaux de banane, ballons, poules, pépites d’or, statues de glace, bataille d’oreillers, disco, tentacules, cadeaux, somnambule, fantômes, course de canards, fusée, abeilles, chapeau magique) et un panneau 🎲 pour lancer n’importe quel événement. Les barres des boss héros ne clignotent plus.",
+        "zh-Hans": "🎲 新增 15 个神秘事件（香蕉皮、气球风暴、小鸡逃亡、金便便、冰冻雕像、枕头大战、恐龙迪斯科、湖怪触手、礼物空投、梦游恐龙、幽灵派对、橡皮鸭大赛、火箭发射、蜜蜂追击、魔术帽），还有 🎲 神秘事件面板，可以自己点开任何事件。英雄 Boss 血条不再一闪一闪。",
+        "zh-Hant": "🎲 新增 15 個神秘事件（香蕉皮、氣球風暴、小雞逃亡、金便便、冰凍雕像、枕頭大戰、恐龍迪斯可、湖怪觸手、禮物空投、夢遊恐龍、幽靈派對、橡皮鴨大賽、火箭發射、蜜蜂追擊、魔術帽），還有 🎲 神秘事件面板，可以自己點開任何事件。英雄 Boss 血條不再一閃一閃。"
+      }
+    },
+    {
       "v": "3.48",
       "file": "drawrassic-park-v3.48.html",
       "date": "2026-11-13",
