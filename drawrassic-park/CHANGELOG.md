@@ -1,5 +1,13 @@
 # Drawrassic Park — Changelog
 
+## v3.14 (2026-11-12) — save schema s7 (new)
+- **Schema change s6 → s7:** adds hired rangers `rangers`; decorations can now be facilities, which v3.13 and older don't know (they would drop them), hence the new format. On first start v3.14 copies the s6 save to `save/s7`; s6 is untouched for v3.13. Launcher: Copy progress both ways (s7 → s6 drops rangers and facilities).
+- 🏗️ Facilities tab in the Shop (paid with coins, placed like decorations, half refund when removed): ice-cream cart and burger stand (visitors buy food: +coins), restrooms, bench, lookout tower, dino carousel (animated), dino clinic (heals dinos nearby, knocked-out dinos wake sooner), auto feeder (feeds hungry dinos nearby), lamp post (its light hurts shadow dinos at night), ranger hut (+2 ranger places).
+- Visitors: the park rating (dinos by rarity + facilities) decides how many visitors come by day (up to 40). Each pays a 1-coin ticket, walks to dinos and facilities, says things, takes photos, buys food, and leaves at night or when shadow dinos come.
+- 🧑‍🌾 Rangers (hire for 30 coins; 2 places, +2 per ranger hut, max 10): they feed hungry dinos, break up fights, wake knocked-out dinos and chase shadow dinos with a flashlight at night.
+- The park title shows visitors and rangers (👥, 🧑‍🌾).
+
+
 ## v3.13 (2026-11-12) — save schema s6 (new)
 - **Schema change s5 → s6:** adds materials `mats` {id: count}, the Fusion Book `book` (name, parents, species, date, small picture for the newest 60) and a per-dino fusion count `fz`. On first start v3.13 copies the s5 save to `save/s6` (s5 is left untouched for v3.10–v3.12). Launcher: Copy progress both ways (s6 → s5 drops materials, book and fusion counts).
 - 10 materials: 🦴 fossil bone and 🪶 ancient feather (sparkly finds in the Wild Lands — tap them — and from catching wild dinos), 🍃 magic leaf (plant-eaters grazing bushes), 🔮 shadow shard (defeated shadow dinos, collected by themselves after 12 s), 🐉 dino scale (arena and Boss Altar wins), and one boss material per boss (🌋 lava core, ❄️ ice crystal, ⚡ thunder plume, 👑 shadow crown, ☠️ dark wing bone) from park boss fights and Boss Altar wins.

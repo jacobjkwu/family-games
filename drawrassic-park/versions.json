@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.14",
+      "file": "drawrassic-park-v3.14.html",
+      "date": "2026-11-12",
+      "schema": 7,
+      "switcher": true,
+      "notes": {
+        "en": "Visitors, facilities and rangers: build ice-cream carts, a carousel, a clinic, lamps and more with coins; visitors come, watch your dinos and pay; rangers look after the park.",
+        "fr": "Visiteurs, installations et rangers : construis avec des pièces chariots à glaces, manège, clinique, lampadaires… ; les visiteurs viennent voir tes dinos et paient ; les rangers s’occupent du parc.",
+        "zh-Hans": "游客、设施和护林员：用金币建冰淇淋车、旋转木马、诊所、路灯等；游客来看恐龙还会付钱；护林员帮你照顾公园。",
+        "zh-Hant": "遊客、設施和護林員：用金幣建冰淇淋車、旋轉木馬、診所、路燈等；遊客來看恐龍還會付錢；護林員幫你照顧公園。"
+      }
+    },
+    {
       "v": "3.13",
       "file": "drawrassic-park-v3.13.html",
       "date": "2026-11-12",
