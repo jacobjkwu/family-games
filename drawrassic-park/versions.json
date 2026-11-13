@@ -1,0 +1,148 @@
+{
+  "game": "drawrassic-park",
+  "versions": [
+    {
+      "v": "3.5",
+      "file": "drawrassic-park-v3.5.html",
+      "date": "2026-11-12",
+      "schema": 4,
+      "switcher": true,
+      "notes": {
+        "en": "☁️ Automatic cloud backup on the family games website: sign in with Google once, and the park uploads by itself. Other devices (Xbox, PC) can load it, and you can restore any of the last backups.",
+        "fr": "☁️ Sauvegarde cloud automatique sur le site des jeux de la famille : connecte-toi une fois avec Google et le parc s’envoie tout seul. Les autres appareils (Xbox, PC) peuvent le charger, et tu peux restaurer les dernières sauvegardes.",
+        "zh-Hans": "☁️ 在家庭游戏网站上自动云备份：用 Google 登录一次，公园就会自己上传。Xbox、电脑也能载入同一份进度，还能从最近的云端备份里恢复。",
+        "zh-Hant": "☁️ 在家庭遊戲網站上自動雲端備份：用 Google 登入一次，公園就會自己上傳。Xbox、電腦也能載入同一份進度，還能從最近的雲端備份裡恢復。"
+      }
+    },
+    {
+      "v": "3.4",
+      "file": "drawrassic-park-v3.4.html",
+      "date": "2026-11-12",
+      "schema": 4,
+      "switcher": true,
+      "notes": {
+        "en": "Backups outside the browser: the 💾 button copies a backup code in one tap (paste it into Notes). A red dot and a reminder appear when a backup is due. A new device asks to import your backup before starting fresh.",
+        "fr": "Sauvegardes hors du navigateur : le bouton 💾 copie un code de sauvegarde en un toucher (colle-le dans Notes). Un point rouge et un rappel apparaissent quand il faut sauvegarder. Un nouvel appareil propose d’importer ta sauvegarde avant de recommencer.",
+        "zh-Hans": "浏览器之外的备份：点 💾 一下就复制好备份代码，粘贴到“备忘录”保存。该备份时按钮上会有红点，还会提醒你。新设备会先问你要不要导入备份，再开新公园。",
+        "zh-Hant": "瀏覽器之外的備份：點 💾 一下就複製好備份代碼，貼到「備忘錄」保存。該備份時按鈕上會有紅點，還會提醒你。新裝置會先問你要不要匯入備份，再開新公園。"
+      }
+    },
+    {
+      "v": "3.3",
+      "file": "drawrassic-park-v3.3.html",
+      "date": "2026-11-12",
+      "schema": 4,
+      "switcher": true,
+      "notes": {
+        "en": "Save safety: if the iPad’s storage opens slowly, the game no longer starts a new park over your save; it waits, and if it still can’t read it, it stops saving and asks you to reopen. Daily backups for 7 days.",
+        "fr": "Sécurité des sauvegardes : si le stockage de l’iPad s’ouvre lentement, le jeu ne crée plus un nouveau parc par-dessus ta sauvegarde ; il attend, et s’il ne peut toujours pas la lire, il arrête d’enregistrer et te demande de rouvrir. Copies quotidiennes sur 7 jours.",
+        "zh-Hans": "存档保护：iPad 存储打开得慢时，游戏不会再用新公园盖掉你的存档；会耐心等，实在读不出来就暂停存档，请你重新打开。每天自动备份，保留 7 天。",
+        "zh-Hant": "存檔保護：iPad 儲存打開得慢時，遊戲不會再用新公園蓋掉你的存檔；會耐心等，實在讀不出來就暫停存檔，請你重新打開。每天自動備份，保留 7 天。"
+      }
+    },
+    {
+      "v": "3.2",
+      "file": "drawrassic-park-v3.2.html",
+      "date": "2026-11-12",
+      "schema": 4,
+      "switcher": true,
+      "notes": {
+        "en": "Fix: the arena no longer pops up by itself (park dinos fight again). Pick your own fighters, and the new 👑 King of the Arena brawl with up to 150 dinos.",
+        "fr": "Correctif : l’arène ne s’ouvre plus toute seule (les dinos du parc se battent de nouveau). Choisis tes combattants, et nouvelle mêlée 👑 Roi de l’arène jusqu’à 150 dinos.",
+        "zh-Hans": "修复：斗兽场不再自己弹出来（公园里的恐龙又能正常打架了）。可以自己选对战的恐龙；新增 👑 竞技场之王大乱斗，最多 150 只。",
+        "zh-Hant": "修復：鬥獸場不再自己彈出來（公園裡的恐龍又能正常打架了）。可以自己選對戰的恐龍；新增 👑 競技場之王大亂鬥，最多 150 隻。"
+      }
+    },
+    {
+      "v": "3.1",
+      "file": "drawrassic-park-v3.1.html",
+      "date": "2026-11-13",
+      "schema": 4,
+      "switcher": true,
+      "notes": {
+        "en": "New ⚔️ Arena button: random dinos fight in a colosseum (1v1, 4-way, 3v3, royale of 8) with skills, sparks, shockwaves and K.O. slow-motion.",
+        "fr": "Nouveau bouton ⚔️ Arène : des dinos au hasard s’affrontent au colisée (1c1, mêlée à 4, 3c3, royale à 8) avec attaques spéciales, étincelles et ralenti au K.O.",
+        "zh-Hans": "新增 ⚔️ 斗兽场按钮：随机挑恐龙在斗兽场对战（1对1、4只乱斗、3对3、8只大逃杀），有必杀技、火花、冲击波和 K.O. 慢镜头。",
+        "zh-Hant": "新增 ⚔️ 鬥獸場按鈕：隨機挑恐龍在鬥獸場對戰（1對1、4隻亂鬥、3對3、8隻大逃殺），有必殺技、火花、衝擊波和 K.O. 慢鏡頭。"
+      }
+    },
+    {
+      "v": "3",
+      "file": "drawrassic-park-v3.html",
+      "date": "2026-11-13",
+      "schema": 4,
+      "switcher": true,
+      "notes": {
+        "en": "The park is 4 screens wide: meadow, forest, Great Lagoon and the Wild Lands. Terrain tool: dig craters, make lakes, raise mountains.",
+        "fr": "Le parc fait 4 écrans de large : prairie, forêt, grand lagon et terres sauvages. Outil terrain : cratères, lacs et montagnes.",
+        "zh-Hans": "公园变成 4 个屏幕宽：草原、森林、大湖和野外。地形工具：挖坑、造湖、堆山。",
+        "zh-Hant": "公園變成 4 個螢幕寬：草原、森林、大湖和野外。地形工具：挖坑、造湖、堆山。"
+      }
+    },
+    {
+      "v": "2.3",
+      "file": "drawrassic-park-v2.3.html",
+      "date": "2026-11-13",
+      "schema": 3,
+      "switcher": true,
+      "notes": {
+        "en": "Fix: “storage full” errors. Drawings and saves now use the iPad’s big storage (IndexedDB).",
+        "fr": "Correctif : erreurs « stockage plein ». Dessins et sauvegardes utilisent le grand stockage de l’iPad (IndexedDB).",
+        "zh-Hans": "修复“存储满了”的报错：画作和存档改用 iPad 的大存储（IndexedDB）。",
+        "zh-Hant": "修復「儲存滿了」的報錯：畫作和存檔改用 iPad 的大儲存（IndexedDB）。"
+      }
+    },
+    {
+      "v": "2.2",
+      "file": "drawrassic-park-v2.2.html",
+      "date": "2026-11-12",
+      "schema": 2,
+      "switcher": true,
+      "notes": {
+        "en": "One baby per dino. Safer saves with automatic backup, export/import and version switching.",
+        "fr": "Un seul bébé par dino. Sauvegardes plus sûres : copie de secours, export/import et changement de version.",
+        "zh-Hans": "每只恐龙只能生一只小恐龙。存档更安全：自动备份、导出/导入、切换版本。",
+        "zh-Hant": "每隻恐龍只能生一隻小恐龍。存檔更安全：自動備份、匯出/匯入、切換版本。"
+      }
+    },
+    {
+      "v": "2.1",
+      "file": "drawrassic-park-v2.1.html",
+      "date": "2026-11-12",
+      "schema": 1,
+      "switcher": false,
+      "notes": {
+        "en": "Fix: new dinos stuck when the park hit 20. Dino Box, adjustable park limit, day/night switch.",
+        "fr": "Correctif : nouveaux dinos bloqués à 20. Boîte à dinos, limite réglable, jour/nuit.",
+        "zh-Hans": "修复：公园满 20 只后放不进新恐龙。恐龙收藏箱、可调上限、昼夜切换。",
+        "zh-Hant": "修復：公園滿 20 隻後放不進新恐龍。恐龍收藏箱、可調上限、晝夜切換。"
+      }
+    },
+    {
+      "v": "2",
+      "file": "drawrassic-park-v2.html",
+      "date": "2026-11-12",
+      "schema": 1,
+      "switcher": false,
+      "notes": {
+        "en": "Shadow dinos at night, coins and dino blueprints, funny lines and sound effects.",
+        "fr": "Dinos de l'ombre la nuit, pièces et plans de dinos, répliques drôles et effets sonores.",
+        "zh-Hans": "夜晚暗影恐龙、金币和恐龙图纸、搞笑台词和音效。",
+        "zh-Hant": "夜晚暗影恐龍、金幣和恐龍圖紙、搞笑台詞和音效。"
+      }
+    },
+    {
+      "v": "1",
+      "file": "drawrassic-park-v1.html",
+      "date": "2026-11-12",
+      "schema": 1,
+      "switcher": false,
+      "notes": {
+        "en": "Draw a dino and release it into the park: feeding, hunting, battles and eggs.",
+        "fr": "Dessine un dino et lâche-le dans le parc : nourrir, chasser, combats et œufs.",
+        "zh-Hans": "画一只恐龙放进公园：喂食、捕猎、对战、下蛋。",
+        "zh-Hant": "畫一隻恐龍放進公園：餵食、捕獵、對戰、下蛋。"
+      }
+    }
+  ]
+}

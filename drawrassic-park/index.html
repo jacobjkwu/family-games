@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Drawrassic Park</title>
+<style>
+:root{--ink:#1d3b25;--khaki:#f3e6bf;--paper:#fff8e1;--amber:#f59e0b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:#2c5a34 radial-gradient(circle at 20% 0%,#3d7a45 0,#2c5a34 60%) fixed;color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","PingFang TC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",system-ui,sans-serif;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;overscroll-behavior:none;touch-action:manipulation}
+main{max-width:860px;margin:0 auto;padding:18px 16px 40px}
+button,select,a.btn{font-family:inherit;touch-action:manipulation}
+.panel{background:var(--khaki);border:4px solid var(--ink);border-radius:22px;box-shadow:0 6px 0 rgba(0,0,0,.3)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:3px solid var(--ink);background:var(--paper);border-radius:16px;font-size:18px;font-weight:700;
+  padding:8px 16px;min-height:52px;box-shadow:0 4px 0 var(--ink);color:var(--ink);text-decoration:none;cursor:pointer}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.btn.primary{background:var(--amber);color:#2b1600}
+.btn.danger{background:#f6a38f}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:#fff8e1;margin-bottom:14px}
+header h1{margin:0;font-size:30px;flex:1;min-width:200px}
+header h1 small{display:block;font-size:16px;font-weight:500;opacity:.85}
+.langs{display:flex;gap:6px;flex-wrap:wrap}
+.langs button{min-height:44px;border:3px solid var(--ink);border-radius:12px;background:var(--khaki);font-size:15px;font-weight:700;padding:4px 10px;color:var(--ink)}
+.langs button.on{background:var(--amber)}
+#continue{width:100%;min-height:72px;font-size:24px;margin:0 0 18px}
+.ver{padding:14px 16px;margin-bottom:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.ver .info{flex:1;min-width:220px}
+.ver h2{margin:0;font-size:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.badge{font-size:13px;background:#16a34a;color:#fff;border-radius:999px;padding:2px 10px}
+.meta{font-size:14px;opacity:.75;margin:2px 0}
+.notes{font-size:16px;margin:4px 0}
+.warn{font-size:13px;color:#8a3b12;margin-top:4px}
+.ver .btn{min-width:140px}
+section.copy{padding:16px;margin-top:20px}
+section.copy h3{margin:0 0 6px;font-size:20px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.row label{font-weight:700;font-size:16px}
+select{font-size:17px;min-height:48px;border:3px solid var(--ink);border-radius:12px;background:#fff;padding:4px 10px;color:var(--ink)}
+.note{font-size:14px;opacity:.85}
+.skey{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 0;border-top:2px dashed rgba(29,59,37,.2)}
+.skey .nm{flex:1;min-width:200px;font-size:15px}
+.skey .btn{min-height:44px;font-size:15px;padding:4px 12px}
+#undos{display:flex;gap:8px;flex-wrap:wrap}
+.overlay{position:fixed;inset:0;background:rgba(10,25,12,.6);display:flex;align-items:center;justify-content:center;padding:16px;z-index:10}
+.overlay.hidden,.hidden{display:none!important}
+.dialog{width:min(520px,100%);padding:18px}
+.dialog h3{margin:0 0 10px;font-size:22px}
+.sum{background:var(--paper);border:3px solid var(--ink);border-radius:14px;padding:8px 12px;margin:6px 0 12px;font-size:16px}
+#rescueBtn{width:100%;min-height:60px;font-size:20px;margin:0 0 18px;background:#fde68a}
+#rescue{z-index:12;align-items:flex-start;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+#rescue .dialog{width:min(860px,100%);margin:auto}
+.rc{background:var(--paper);border:3px solid var(--ink);border-radius:16px;padding:10px 12px;margin:8px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.rc .info{flex:1;min-width:220px}.rc b{font-size:17px}.rc .thumbs{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.rc .thumbs img{width:54px;height:44px;object-fit:contain;background:#fff;border-radius:8px;border:2px solid rgba(29,59,37,.3)}
+.rc.cur{box-shadow:0 0 0 4px #16a34a}
+#rDraw{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+#rDraw button{width:104px;padding:4px;border:3px solid var(--ink);border-radius:14px;background:#fff;font:inherit;font-size:13px;color:var(--ink)}
+#rDraw button img{width:100%;height:70px;object-fit:contain}
+#rDraw button.off{opacity:.3}
+#toast{z-index:40!important;position:fixed;left:50%;top:18px;transform:translateX(-50%);background:rgba(29,59,37,.95);color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;opacity:0;transition:opacity .3s;pointer-events:none;z-index:20;max-width:92vw;text-align:center}
+#toast.show{opacity:1}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>🦖 Drawrassic Park<small data-t="subtitle"></small></h1>
+    <div class="langs" id="langs"></div>
+  </header>
+  <a class="btn primary" id="continue" href="#"></a>
+  <button class="btn" id="rescueBtn"></button>
+  <div id="list"></div>
+  <section class="copy panel">
+    <h3 data-t="copyTitle"></h3>
+    <div class="note" data-t="copyHelp"></div>
+    <div class="row"><label data-t="from"></label><select id="from"></select><label data-t="to"></label><select id="to"></select>
+      <button class="btn" id="copyBtn" data-t="copyBtn"></button></div>
+    <div id="undos"></div>
+    <p class="note" data-t="storageNote"></p>
+  </section>
+  <section class="copy panel">
+    <h3 data-t="storTitle"></h3>
+    <div class="note" data-t="storHelp"></div>
+    <div id="storUse" class="sum"></div>
+    <div id="storList"></div>
+  </section>
+</main>
+<div id="dlg" class="overlay hidden" style="z-index:30"><div class="dialog panel">
+  <h3 id="dlgTitle"></h3>
+  <div id="dlgBody"></div>
+  <div class="row" style="justify-content:flex-end"><button class="btn" id="dlgNo"></button><button class="btn danger" id="dlgYes"></button></div>
+</div></div>
+<div id="rescue" class="overlay hidden"><div class="dialog panel">
+  <div class="row" style="margin:0"><h3 id="rTitle" style="flex:1;margin:0"></h3><button class="btn" id="rClose"></button></div>
+  <div id="rBody"></div>
+</div></div>
+<div id="toast"></div>
+<script>
+(()=>{
+'use strict';
+const GAME_ID='drawrassic-park';
+const EMBEDDED={"game": "drawrassic-park", "versions": [{"v": "3.5", "file": "drawrassic-park-v3.5.html", "date": "2026-11-12", "schema": 4, "switcher": true, "notes": {"en": "☁️ Automatic cloud backup on the family games website: sign in with Google once, and the park uploads by itself. Other devices (Xbox, PC) can load it, and you can restore any of the last backups.", "fr": "☁️ Sauvegarde cloud automatique sur le site des jeux de la famille : connecte-toi une fois avec Google et le parc s’envoie tout seul. Les autres appareils (Xbox, PC) peuvent le charger, et tu peux restaurer les dernières sauvegardes.", "zh-Hans": "☁️ 在家庭游戏网站上自动云备份：用 Google 登录一次，公园就会自己上传。Xbox、电脑也能载入同一份进度，还能从最近的云端备份里恢复。", "zh-Hant": "☁️ 在家庭遊戲網站上自動雲端備份：用 Google 登入一次，公園就會自己上傳。Xbox、電腦也能載入同一份進度，還能從最近的雲端備份裡恢復。"}}, {"v": "3.4", "file": "drawrassic-park-v3.4.html", "date": "2026-11-12", "schema": 4, "switcher": true, "notes": {"en": "Backups outside the browser: the 💾 button copies a backup code in one tap (paste it into Notes). A red dot and a reminder appear when a backup is due. A new device asks to import your backup before starting fresh.", "fr": "Sauvegardes hors du navigateur : le bouton 💾 copie un code de sauvegarde en un toucher (colle-le dans Notes). Un point rouge et un rappel apparaissent quand il faut sauvegarder. Un nouvel appareil propose d’importer ta sauvegarde avant de recommencer.", "zh-Hans": "浏览器之外的备份：点 💾 一下就复制好备份代码，粘贴到“备忘录”保存。该备份时按钮上会有红点，还会提醒你。新设备会先问你要不要导入备份，再开新公园。", "zh-Hant": "瀏覽器之外的備份：點 💾 一下就複製好備份代碼，貼到「備忘錄」保存。該備份時按鈕上會有紅點，還會提醒你。新裝置會先問你要不要匯入備份，再開新公園。"}}, {"v": "3.3", "file": "drawrassic-park-v3.3.html", "date": "2026-11-12", "schema": 4, "switcher": true, "notes": {"en": "Save safety: if the iPad’s storage opens slowly, the game no longer starts a new park over your save; it waits, and if it still can’t read it, it stops saving and asks you to reopen. Daily backups for 7 days.", "fr": "Sécurité des sauvegardes : si le stockage de l’iPad s’ouvre lentement, le jeu ne crée plus un nouveau parc par-dessus ta sauvegarde ; il attend, et s’il ne peut toujours pas la lire, il arrête d’enregistrer et te demande de rouvrir. Copies quotidiennes sur 7 jours.", "zh-Hans": "存档保护：iPad 存储打开得慢时，游戏不会再用新公园盖掉你的存档；会耐心等，实在读不出来就暂停存档，请你重新打开。每天自动备份，保留 7 天。", "zh-Hant": "存檔保護：iPad 儲存打開得慢時，遊戲不會再用新公園蓋掉你的存檔；會耐心等，實在讀不出來就暫停存檔，請你重新打開。每天自動備份，保留 7 天。"}}, {"v": "3.2", "file": "drawrassic-park-v3.2.html", "date": "2026-11-12", "schema": 4, "switcher": true, "notes": {"en": "Fix: the arena no longer pops up by itself (park dinos fight again). Pick your own fighters, and the new 👑 King of the Arena brawl with up to 150 dinos.", "fr": "Correctif : l’arène ne s’ouvre plus toute seule (les dinos du parc se battent de nouveau). Choisis tes combattants, et nouvelle mêlée 👑 Roi de l’arène jusqu’à 150 dinos.", "zh-Hans": "修复：斗兽场不再自己弹出来（公园里的恐龙又能正常打架了）。可以自己选对战的恐龙；新增 👑 竞技场之王大乱斗，最多 150 只。", "zh-Hant": "修復：鬥獸場不再自己彈出來（公園裡的恐龍又能正常打架了）。可以自己選對戰的恐龍；新增 👑 競技場之王大亂鬥，最多 150 隻。"}}, {"v": "3.1", "file": "drawrassic-park-v3.1.html", "date": "2026-11-13", "schema": 4, "switcher": true, "notes": {"en": "New ⚔️ Arena button: random dinos fight in a colosseum (1v1, 4-way, 3v3, royale of 8) with skills, sparks, shockwaves and K.O. slow-motion.", "fr": "Nouveau bouton ⚔️ Arène : des dinos au hasard s’affrontent au colisée (1c1, mêlée à 4, 3c3, royale à 8) avec attaques spéciales, étincelles et ralenti au K.O.", "zh-Hans": "新增 ⚔️ 斗兽场按钮：随机挑恐龙在斗兽场对战（1对1、4只乱斗、3对3、8只大逃杀），有必杀技、火花、冲击波和 K.O. 慢镜头。", "zh-Hant": "新增 ⚔️ 鬥獸場按鈕：隨機挑恐龍在鬥獸場對戰（1對1、4隻亂鬥、3對3、8隻大逃殺），有必殺技、火花、衝擊波和 K.O. 慢鏡頭。"}}, {"v": "3", "file": "drawrassic-park-v3.html", "date": "2026-11-13", "schema": 4, "switcher": true, "notes": {"en": "The park is 4 screens wide: meadow, forest, Great Lagoon and the Wild Lands. Terrain tool: dig craters, make lakes, raise mountains.", "fr": "Le parc fait 4 écrans de large : prairie, forêt, grand lagon et terres sauvages. Outil terrain : cratères, lacs et montagnes.", "zh-Hans": "公园变成 4 个屏幕宽：草原、森林、大湖和野外。地形工具：挖坑、造湖、堆山。", "zh-Hant": "公園變成 4 個螢幕寬：草原、森林、大湖和野外。地形工具：挖坑、造湖、堆山。"}}, {"v": "2.3", "file": "drawrassic-park-v2.3.html", "date": "2026-11-13", "schema": 3, "switcher": true, "notes": {"en": "Fix: “storage full” errors. Drawings and saves now use the iPad’s big storage (IndexedDB).", "fr": "Correctif : erreurs « stockage plein ». Dessins et sauvegardes utilisent le grand stockage de l’iPad (IndexedDB).", "zh-Hans": "修复“存储满了”的报错：画作和存档改用 iPad 的大存储（IndexedDB）。", "zh-Hant": "修復「儲存滿了」的報錯：畫作和存檔改用 iPad 的大儲存（IndexedDB）。"}}, {"v": "2.2", "file": "drawrassic-park-v2.2.html", "date": "2026-11-12", "schema": 2, "switcher": true, "notes": {"en": "One baby per dino. Safer saves with automatic backup, export/import and version switching.", "fr": "Un seul bébé par dino. Sauvegardes plus sûres : copie de secours, export/import et changement de version.", "zh-Hans": "每只恐龙只能生一只小恐龙。存档更安全：自动备份、导出/导入、切换版本。", "zh-Hant": "每隻恐龍只能生一隻小恐龍。存檔更安全：自動備份、匯出/匯入、切換版本。"}}, {"v": "2.1", "file": "drawrassic-park-v2.1.html", "date": "2026-11-12", "schema": 1, "switcher": false, "notes": {"en": "Fix: new dinos stuck when the park hit 20. Dino Box, adjustable park limit, day/night switch.", "fr": "Correctif : nouveaux dinos bloqués à 20. Boîte à dinos, limite réglable, jour/nuit.", "zh-Hans": "修复：公园满 20 只后放不进新恐龙。恐龙收藏箱、可调上限、昼夜切换。", "zh-Hant": "修復：公園滿 20 隻後放不進新恐龍。恐龍收藏箱、可調上限、晝夜切換。"}}, {"v": "2", "file": "drawrassic-park-v2.html", "date": "2026-11-12", "schema": 1, "switcher": false, "notes": {"en": "Shadow dinos at night, coins and dino blueprints, funny lines and sound effects.", "fr": "Dinos de l'ombre la nuit, pièces et plans de dinos, répliques drôles et effets sonores.", "zh-Hans": "夜晚暗影恐龙、金币和恐龙图纸、搞笑台词和音效。", "zh-Hant": "夜晚暗影恐龍、金幣和恐龍圖紙、搞笑台詞和音效。"}}, {"v": "1", "file": "drawrassic-park-v1.html", "date": "2026-11-12", "schema": 1, "switcher": false, "notes": {"en": "Draw a dino and release it into the park: feeding, hunting, battles and eggs.", "fr": "Dessine un dino et lâche-le dans le parc : nourrir, chasser, combats et œufs.", "zh-Hans": "画一只恐龙放进公园：喂食、捕猎、对战、下蛋。", "zh-Hant": "畫一隻恐龍放進公園：餵食、捕獵、對戰、下蛋。"}}]};
+const K={settings:GAME_ID+'/settings', launcher:GAME_ID+'/launcher'};
+const SAVE_KEY={1:'drawrassic_park_v1',2:GAME_ID+'/save/s2'}, BOX_KEY={1:'drawrassic_box_v1',2:GAME_ID+'/box/s1'};
+const IDB_SCHEMAS={3:{save:'save/s3',box:'box/s2'},4:{save:'save/s4',box:'box/s2'}}; // v2.3+ keep saves in IndexedDB (database "drawrassic-park")
+const IDB={ db:null, ok:false,
+  open(){ return new Promise(res=>{ try{ const r=indexedDB.open(GAME_ID,1); r.onupgradeneeded=()=>{ try{ r.result.createObjectStore('kv'); }catch(e){} }; r.onsuccess=()=>{ this.db=r.result; this.ok=true; res(true); }; r.onerror=()=>res(false); r.onblocked=()=>res(false); }catch(e){ res(false); } }); },
+  get(k){ return new Promise(res=>{ if(!this.ok) return res(undefined); try{ const q=this.db.transaction('kv').objectStore('kv').get(k); q.onsuccess=()=>res(q.result); q.onerror=()=>res(undefined); }catch(e){ res(undefined); } }); },
+  putMany(ents){ return new Promise(res=>{ if(!this.ok) return res(false); try{ const tx=this.db.transaction('kv','readwrite'), so=tx.objectStore('kv'); for(const [k,v] of ents) so.put(v,k); tx.oncomplete=()=>res(true); tx.onerror=tx.onabort=()=>res(false); }catch(e){ res(false); } }); },
+  put(k,v){ return this.putMany([[k,v]]); },
+  del(k){ return new Promise(res=>{ if(!this.ok) return res(false); try{ const tx=this.db.transaction('kv','readwrite'); tx.objectStore('kv').delete(k); tx.oncomplete=()=>res(true); tx.onerror=tx.onabort=()=>res(false); }catch(e){ res(false); } }); },
+  keys(){ return new Promise(res=>{ if(!this.ok) return res([]); try{ const q=this.db.transaction('kv').objectStore('kv').getAllKeys(); q.onsuccess=()=>res((q.result||[]).map(String)); q.onerror=()=>res([]); }catch(e){ res([]); } }); } };
+function hashStr(t){ let a=0x811c9dc5, b=0x9e3779b9^t.length; for(let i=0;i<t.length;i++){ const c=t.charCodeAt(i); a=Math.imul(a^c,16777619); b=Math.imul(b^c,2246822507); } return (a>>>0).toString(36)+(b>>>0).toString(36)+t.length.toString(36); }
+async function toRefs(list){ const items=(list||[]).map(x=>Object.assign({},x)), ents=[]; for(const x of items){ if(typeof x.src!=='string') continue; const h=hashStr(x.src); ents.push(['img/'+h,x.src]); x.img=h; delete x.src; }
+  if(ents.length&&!(await IDB.putMany(ents))) throw new Error('img'); return items; }
+async function fromRefs(list){ const out=[]; for(const x of (Array.isArray(list)?list:[])){ if(!x) continue; if(typeof x.src==='string'){ out.push(x); continue; } const src=x.img?await IDB.get('img/'+x.img):null; if(typeof src==='string') out.push(Object.assign({},x,{src})); } return out; }
+const isIdb=n=>!!IDB_SCHEMAS[n];
+async function readData(n){ if(isIdb(n)){ const v=await IDB.get(IDB_SCHEMAS[n].save); if(!v||!Array.isArray(v.dinos)) return null; return Object.assign({},v,{dinos:await fromRefs(v.dinos)}); } const d=st.json(SAVE_KEY[n]); return d&&Array.isArray(d.dinos)?d:null; }
+async function readBox(n){ if(isIdb(n)){ const v=await IDB.get(IDB_SCHEMAS[n].box); return Array.isArray(v)?await fromRefs(v):null; } const b=st.json(BOX_KEY[n]); return Array.isArray(b)?b:null; }
+async function rawGet(n,what){ if(isIdb(n)) return await IDB.get(IDB_SCHEMAS[n][what]); return st.get(what==='save'?SAVE_KEY[n]:BOX_KEY[n]); }
+async function rawSet(n,what,v){ if(isIdb(n)) return await IDB.put(IDB_SCHEMAS[n][what],v); return st.set(what==='save'?SAVE_KEY[n]:BOX_KEY[n],v); }
+async function bakGet(n,what){ return isIdb(n)?await IDB.get(IDB_SCHEMAS[n][what]+'/bak-copy'):st.get(what==='save'?bakKey(n):bakBoxKey(n)); }
+async function bakSet(n,what,v){ return isIdb(n)?await IDB.put(IDB_SCHEMAS[n][what]+'/bak-copy',v):st.set(what==='save'?bakKey(n):bakBoxKey(n),v); }
+async function bakDel(n,what){ if(isIdb(n)) await IDB.del(IDB_SCHEMAS[n][what]+'/bak-copy'); else st.del(what==='save'?bakKey(n):bakBoxKey(n)); }
+async function writeData(n,data){ if(isIdb(n)) return await IDB.put(IDB_SCHEMAS[n].save,Object.assign({},data,{dinos:await toRefs(data.dinos)})); return st.set(SAVE_KEY[n],JSON.stringify(data)); }
+async function writeBox(n,box){ if(isIdb(n)) return await IDB.put(IDB_SCHEMAS[n].box,await toRefs(box)); return st.set(BOX_KEY[n],JSON.stringify(box)); }
+const bakKey=n=>`${GAME_ID}/save/s${n}/bak-copy`, bakBoxKey=n=>`${GAME_ID}/save/s${n}/bak-copy-box`;
+const UP={ // same migrations as the game
+  1:d=>{ const o=JSON.parse(JSON.stringify(d)); o.schema=2; const ds=Array.isArray(o.dinos)?o.dinos:[], es=Array.isArray(o.eggs)?o.eggs:[];
+    for(const x of ds){ x.kids=Math.max(x.kids|0, ds.filter(c=>Array.isArray(c.parents)&&c.parents.includes(x.name)).length+es.filter(e=>Array.isArray(e.parents)&&e.parents.includes(x.id)).length); } return o; },
+  2:d=>Object.assign(JSON.parse(JSON.stringify(d)),{schema:3}),
+  3:d=>{ const o=JSON.parse(JSON.stringify(d)); o.schema=4; const m=nx=>0.17+Math.min(1,Math.max(0,+nx||0))*0.5; for(const k of ['dinos','decor','eggs']) for(const x of (Array.isArray(o[k])?o[k]:[])) if(x) x.nx=m(x.nx); o.terrain=null; o.giftMosa=true; return o; } };
+const DOWN={ // s2 -> s1: s1 has no "kids" field. s3 -> s2: same fields, back to localStorage
+  2:d=>{ const o=JSON.parse(JSON.stringify(d)); delete o.schema; for(const x of (o.dinos||[])) delete x.kids; return o; },
+  3:d=>Object.assign(JSON.parse(JSON.stringify(d)),{schema:2}),
+  // s4 -> s3: the old park is one screen wide, so positions squeeze back from the big map; lakes and mountains are dropped
+  4:d=>{ const o=JSON.parse(JSON.stringify(d)); o.schema=3; const m=nx=>Math.min(1,Math.max(0,((+nx||0)-0.17)/0.5)); for(const k of ['dinos','decor','eggs']) for(const x of (Array.isArray(o[k])?o[k]:[])) if(x) x.nx=m(x.nx); delete o.terrain; delete o.giftMosa; return o; } };
+const S={
+ en:{storTitle:'Storage',storHelp:'Safari gives each website only about 5 MB for small saves, no matter how much space the iPad has. v2.3 and later keep drawings in a bigger store (IndexedDB). If an older version says storage is full, you can delete old copies here.',storUse:'Small storage used: {used} of about 5 MB',storIdb:'big storage: {used}',lblSave:'Save of v{list}',lblBak:'Automatic backup copy',lblBroken:'Copy of a damaged save',lblCopy:'Backup from “Copy progress”',lblBox:'Dino Box (older versions)',del:'Delete',delTitle:'Delete this from storage?',delNote:'This can’t be undone. Versions that use it will start fresh or lose this copy.',deleted:'Deleted.',full:'⚠️ Storage full: nothing was changed.',subtitle:'Pick a version to play',cont:'▶ Continue v{v}',play:'▶ Play',latest:'Latest',save:'Save format s{n}',shares:'Shares its save with v{list}',
+   noSwitch:'No in-game “switch version” button: come back with the browser’s Back button or reopen this link.',
+   copyTitle:'Copy progress between versions',copyHelp:'Use this when you played further in another version. The save you replace is backed up first, and you can undo it.',
+   from:'From',to:'To',copyBtn:'Copy progress',undo:'↩️ Undo last copy into v{list}',same:'These versions already share the same save.',nosave:'v{v} has no save yet.',
+   cannot:'Can’t copy into this older save format.',confirmTitle:'Replace the progress in v{to}?',willCopy:'Copy from v{from}:',willReplace:'This replaces in v{to}:',empty:'(nothing saved yet)',
+   backupNote:'The replaced save is backed up. You can undo this on this page.',yes:'Replace',cancel:'Cancel',done:'Copied! v{to} now has this progress.',undone:'Backup restored.',
+   undoTitle:'Undo the last copy into v{list}?',undoBody:'This puts back the save that was there before the copy.',restore:'Restore',
+   summary:'{d} dinos · {a} amber · {c} coins · {b} in the Dino Box',storageNote:'All versions live at this one link and share its storage. Add it to your Home Screen so Safari keeps your saves.'},
+ fr:{storTitle:'Stockage',storHelp:'Safari ne donne qu’environ 5 Mo par site pour les petites sauvegardes, quel que soit l’espace libre de l’iPad. La v2.3 et suivantes rangent les dessins dans un stockage plus grand (IndexedDB). Si une ancienne version dit que le stockage est plein, tu peux supprimer ici les vieilles copies.',storUse:'Petit stockage utilisé : {used} sur environ 5 Mo',storIdb:'grand stockage : {used}',lblSave:'Sauvegarde de v{list}',lblBak:'Copie de secours automatique',lblBroken:'Copie d’une sauvegarde abîmée',lblCopy:'Copie de secours de « Copier la progression »',lblBox:'Boîte à dinos (anciennes versions)',del:'Supprimer',delTitle:'Supprimer ceci du stockage ?',delNote:'Impossible d’annuler. Les versions qui l’utilisent repartiront de zéro ou perdront cette copie.',deleted:'Supprimé.',full:'⚠️ Stockage plein : rien n’a été changé.',subtitle:'Choisis une version',cont:'▶ Continuer v{v}',play:'▶ Jouer',latest:'Dernière',save:'Sauvegarde format s{n}',shares:'Partage sa sauvegarde avec v{list}',
+   noSwitch:'Pas de bouton « changer de version » dans le jeu : reviens avec le bouton Retour du navigateur ou rouvre ce lien.',
+   copyTitle:'Copier la progression entre versions',copyHelp:'Utile si tu as joué plus loin dans une autre version. La sauvegarde remplacée est d’abord copiée, et tu peux annuler.',
+   from:'De',to:'Vers',copyBtn:'Copier la progression',undo:'↩️ Annuler la dernière copie vers v{list}',same:'Ces versions partagent déjà la même sauvegarde.',nosave:'v{v} n’a pas encore de sauvegarde.',
+   cannot:'Impossible de copier vers ce format plus ancien.',confirmTitle:'Remplacer la progression de v{to} ?',willCopy:'Copier depuis v{from} :',willReplace:'Ceci remplace dans v{to} :',empty:'(rien de sauvegardé)',
+   backupNote:'La sauvegarde remplacée est gardée en secours. Tu peux annuler sur cette page.',yes:'Remplacer',cancel:'Annuler',done:'Copié ! v{to} a maintenant cette progression.',undone:'Copie de secours restaurée.',
+   undoTitle:'Annuler la dernière copie vers v{list} ?',undoBody:'Ceci remet la sauvegarde d’avant la copie.',restore:'Restaurer',
+   summary:'{d} dinos · {a} ambre · {c} pièces · {b} dans la boîte',storageNote:'Toutes les versions sont à ce même lien et partagent son stockage. Ajoute-le à l’écran d’accueil pour que Safari garde tes sauvegardes.'},
+ 'zh-Hans':{storTitle:'存储空间',storHelp:'不管 iPad 还剩多少空间，Safari 给每个网站的小存档空间只有大约 5 MB。v2.3 及以后的版本把画作放进更大的存储（IndexedDB）。如果旧版本提示存储满了，可以在这里删除旧的副本。',storUse:'小存档空间已用 {used}（共约 5 MB）',storIdb:'大存储已用 {used}',lblSave:'v{list} 的存档',lblBak:'自动备份副本',lblBroken:'损坏存档的副本',lblCopy:'“复制进度”留下的备份',lblBox:'恐龙收藏箱（旧版本）',del:'删除',delTitle:'要从存储里删除这个吗？',delNote:'删除后无法恢复。用到它的版本会重新开始，或少一份副本。',deleted:'已删除。',full:'⚠️ 存储满了：什么都没有改动。',subtitle:'选择要玩的版本',cont:'▶ 继续玩 v{v}',play:'▶ 开始玩',latest:'最新',save:'存档格式 s{n}',shares:'和 v{list} 共用存档',
+   noSwitch:'这个版本里没有“切换版本”按钮：用浏览器的返回键回来，或重新打开这个链接。',
+   copyTitle:'在版本之间复制进度',copyHelp:'如果你在另一个版本里玩得更远，可以把进度复制过来。被替换的存档会先备份，还能撤销。',
+   from:'从',to:'到',copyBtn:'复制进度',undo:'↩️ 撤销上次复制到 v{list}',same:'这两个版本本来就共用同一个存档。',nosave:'v{v} 还没有存档。',
+   cannot:'不能复制到这个更旧的存档格式。',confirmTitle:'要替换 v{to} 的进度吗？',willCopy:'从 v{from} 复制：',willReplace:'会替换掉 v{to} 里的：',empty:'（还没有存档）',
+   backupNote:'被替换的存档会保留备份，可以在这个页面撤销。',yes:'替换',cancel:'取消',done:'复制好了！v{to} 现在是这份进度。',undone:'已恢复备份。',
+   undoTitle:'撤销上次复制到 v{list} 吗？',undoBody:'会把复制前的存档放回去。',restore:'恢复',
+   summary:'{d} 只恐龙 · {a} 琥珀 · {c} 金币 · 收藏箱 {b} 只',storageNote:'所有版本都在这一个链接里，共用同一份存储。把它添加到主屏幕，Safari 才会一直保留你的存档。'},
+ 'zh-Hant':{storTitle:'儲存空間',storHelp:'不管 iPad 還剩多少空間，Safari 給每個網站的小存檔空間只有大約 5 MB。v2.3 及以後的版本把畫作放進更大的儲存（IndexedDB）。如果舊版本提示儲存滿了，可以在這裡刪除舊的副本。',storUse:'小存檔空間已用 {used}（共約 5 MB）',storIdb:'大儲存已用 {used}',lblSave:'v{list} 的存檔',lblBak:'自動備份副本',lblBroken:'損壞存檔的副本',lblCopy:'「複製進度」留下的備份',lblBox:'恐龍收藏箱（舊版本）',del:'刪除',delTitle:'要從儲存裡刪除這個嗎？',delNote:'刪除後無法恢復。用到它的版本會重新開始，或少一份副本。',deleted:'已刪除。',full:'⚠️ 儲存滿了：什麼都沒有改動。',subtitle:'選擇要玩的版本',cont:'▶ 繼續玩 v{v}',play:'▶ 開始玩',latest:'最新',save:'存檔格式 s{n}',shares:'和 v{list} 共用存檔',
+   noSwitch:'這個版本裡沒有「切換版本」按鈕：用瀏覽器的返回鍵回來，或重新打開這個連結。',
+   copyTitle:'在版本之間複製進度',copyHelp:'如果你在另一個版本裡玩得更遠，可以把進度複製過來。被替換的存檔會先備份，還能撤銷。',
+   from:'從',to:'到',copyBtn:'複製進度',undo:'↩️ 撤銷上次複製到 v{list}',same:'這兩個版本本來就共用同一個存檔。',nosave:'v{v} 還沒有存檔。',
+   cannot:'不能複製到這個更舊的存檔格式。',confirmTitle:'要替換 v{to} 的進度嗎？',willCopy:'從 v{from} 複製：',willReplace:'會替換掉 v{to} 裡的：',empty:'（還沒有存檔）',
+   backupNote:'被替換的存檔會保留備份，可以在這個頁面撤銷。',yes:'替換',cancel:'取消',done:'複製好了！v{to} 現在是這份進度。',undone:'已恢復備份。',
+   undoTitle:'撤銷上次複製到 v{list} 嗎？',undoBody:'會把複製前的存檔放回去。',restore:'恢復',
+   summary:'{d} 隻恐龍 · {a} 琥珀 · {c} 金幣 · 收藏箱 {b} 隻',storageNote:'所有版本都在這一個連結裡，共用同一份儲存。把它加入主畫面，Safari 才會一直保留你的存檔。'} };
+const LANGS=[['en','English'],['fr','Français'],['zh-Hans','简体中文'],['zh-Hant','繁體中文']];
+const $=s=>document.querySelector(s);
+const st={ get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); return true; }catch(e){ return false; } },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }, json(k){ const r=this.get(k); if(r==null) return null; try{ return JSON.parse(r); }catch(e){ return undefined; } } };
+function sharedGet(){ const o=st.json(K.settings); return (o&&typeof o==='object')?o:{}; }
+function sharedSet(p){ const o=sharedGet(); st.set(K.settings,JSON.stringify(Object.assign(o,p))); }
+function detectLang(){ const l=(navigator.language||'en'); if(/^zh-(TW|HK|MO)|^zh-Hant/i.test(l)) return 'zh-Hant'; if(/^zh/i.test(l)) return 'zh-Hans'; if(/^fr/i.test(l)) return 'fr'; return 'en'; }
+let lang=sharedGet().lang; if(!S[lang]) lang=detectLang();
+const t=(k,v={})=>(S[lang][k]||S.en[k]).replace(/\{(\w+)\}/g,(m,x)=>v[x]!=null?v[x]:m);
+let VERS=[];
+function toast(m){ const e=$('#toast'); e.textContent=m; e.classList.add('show'); clearTimeout(toast.t); toast.t=setTimeout(()=>e.classList.remove('show'),3000); }
+function dialog(title,body,yes,onYes){ $('#dlgTitle').textContent=title; $('#dlgBody').innerHTML=''; $('#dlgBody').append(...body); $('#dlgYes').textContent=yes; $('#dlgNo').textContent=t('cancel');
+  $('#dlg').classList.remove('hidden'); $('#dlgYes').onclick=()=>{ $('#dlg').classList.add('hidden'); Promise.resolve(onYes()).catch(()=>toast(t('full'))); }; $('#dlgNo').onclick=()=>$('#dlg').classList.add('hidden'); }
+const el=(tag,cls,txt)=>{ const e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; };
+async function summary(n){ let d,b; if(isIdb(n)){ d=await IDB.get(IDB_SCHEMAS[n].save); b=await IDB.get(IDB_SCHEMAS[n].box); } else { d=st.json(SAVE_KEY[n]); b=st.json(BOX_KEY[n]); }
+  if(!d||!Array.isArray(d.dinos)) return null; return t('summary',{d:d.dinos.length,a:d.amber|0,c:d.coins|0,b:Array.isArray(b)?b.length:0}); }
+function lastPlayed(){ const o=st.json(K.launcher); return o&&o.last; }
+function go(v){ const o=st.json(K.launcher)||{}; o.last=v.v; st.set(K.launcher,JSON.stringify(o)); location.href=v.file; }
+function render(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-t]').forEach(e=>e.textContent=t(e.dataset.t)); $('#rescueBtn').textContent=rt('btn');
+  const L=$('#langs'); L.innerHTML=''; for(const [k,name] of LANGS){ const b=el('button',k===lang?'on':'',name); b.onclick=()=>{ lang=k; sharedSet({lang}); render(); }; L.appendChild(b); }
+  const lv=VERS.find(v=>v.v===lastPlayed())||VERS[0]; const c=$('#continue'); c.textContent=t('cont',{v:lv.v}); c.href=lv.file; c.onclick=e=>{ e.preventDefault(); go(lv); };
+  const list=$('#list'); list.innerHTML='';
+  VERS.forEach((v,i)=>{ const card=el('div','ver panel'), info=el('div','info'); const h=el('h2',null,'v'+v.v); if(i===0) h.appendChild(el('span','badge',t('latest')));
+    info.appendChild(h); const same=VERS.filter(o=>o!==v&&o.schema===v.schema).map(o=>o.v);
+    info.appendChild(el('div','meta',v.date+' · '+t('save',{n:v.schema})+(same.length?' · '+t('shares',{list:same.join(', v')}):'')));
+    info.appendChild(el('div','notes',(v.notes&&(v.notes[lang]||v.notes.en))||''));
+    const smEl=el('div','meta',''); info.appendChild(smEl); summary(v.schema).then(sm=>{ if(sm) smEl.textContent='💾 '+sm; });
+    if(!v.switcher) info.appendChild(el('div','warn',t('noSwitch')));
+    const b=el('a','btn primary',t('play')); b.href=v.file; b.onclick=e=>{ e.preventDefault(); go(v); };
+    card.append(info,b); list.appendChild(card); });
+  for(const id of ['from','to']){ const s=$('#'+id), keep=s.value; s.innerHTML=''; for(const v of VERS){ const o=el('option',null,'v'+v.v+' (s'+v.schema+')'); o.value=v.v; s.appendChild(o); } if(keep) s.value=keep; }
+  if(!$('#to').value||$('#to').value===$('#from').value){ $('#from').value=VERS[Math.min(1,VERS.length-1)].v; $('#to').value=VERS[0].v; }
+  const U=$('#undos'); U.innerHTML=''; const schemas=[...new Set(VERS.map(v=>v.schema))];
+  for(const n of schemas){ bakGet(n,'save').then(bk=>{ if(bk==null) return; const names=VERS.filter(v=>v.schema===n).map(v=>v.v).join(', v');
+    const b=el('button','btn',t('undo',{list:names})); b.onclick=()=>dialog(t('undoTitle',{list:names}),[el('p',null,t('undoBody'))],t('restore'),()=>undoCopy(n)); U.appendChild(b); }); }
+  renderStorage();
+}
+function lsKeys(){ const out=[]; try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k&&(k.startsWith(GAME_ID+'/')||k.startsWith('drawrassic_'))){ const v=localStorage.getItem(k)||''; out.push({k,bytes:(k.length+v.length)*2}); } } }catch(e){} return out.sort((a,b)=>b.bytes-a.bytes); }
+const mb=b=>(b/1048576).toFixed(2)+' MB';
+function keyLabel(k){ if(k===SAVE_KEY[1]) return t('lblSave',{list:VERS.filter(v=>v.schema===1).map(v=>v.v).join(', v')}); if(k===SAVE_KEY[2]) return t('lblSave',{list:VERS.filter(v=>v.schema===2).map(v=>v.v).join(', v')});
+  if(/\/bak$/.test(k)) return t('lblBak'); if(/\/broken-/.test(k)) return t('lblBroken'); if(/bak-copy/.test(k)) return t('lblCopy'); if(k===BOX_KEY[1]||k===BOX_KEY[2]) return t('lblBox'); return k; }
+async function renderStorage(){ const keys=lsKeys(), total=keys.reduce((a,b)=>a+b.bytes,0); let txt=t('storUse',{used:mb(total)});
+  try{ if(navigator.storage&&navigator.storage.estimate){ const e=await navigator.storage.estimate(); if(e&&e.usage!=null) txt+=' · '+t('storIdb',{used:mb(e.usage)}); } }catch(_){}
+  $('#storUse').textContent=txt; const L=$('#storList'); L.innerHTML='';
+  for(const it of keys){ if(it.bytes<20000) continue; const row=el('div','skey'); row.appendChild(el('div','nm',keyLabel(it.k)+' — '+mb(it.bytes)));
+    const del=el('button','btn danger',t('del')); del.onclick=()=>dialog(t('delTitle'),[el('p',null,keyLabel(it.k)+' ('+mb(it.bytes)+')'),el('p','note',t('delNote'))],t('del'),()=>{ st.del(it.k); toast(t('deleted')); render(); }); row.appendChild(del); L.appendChild(row); } }
+async function copyProgress(){ const fv=VERS.find(v=>v.v===$('#from').value), tv=VERS.find(v=>v.v===$('#to').value); if(!fv||!tv) return;
+  const fs=fv.schema, ts=tv.schema; if(fs===ts){ toast(t('same')); return; }
+  const src=await readData(fs); if(!src){ toast(t('nosave',{v:fv.v})); return; }
+  let data=src; try{ if(fs<ts){ for(let n=fs;n<ts;n++) data=UP[n](data); } else { for(let n=fs;n>ts;n--){ if(!DOWN[n]){ toast(t('cannot')); return; } data=DOWN[n](data); } } }catch(e){ toast(t('cannot')); return; }
+  const body=[el('div',null,t('willCopy',{from:fv.v})),el('div','sum',(await summary(fs))||''),el('div',null,t('willReplace',{to:tv.v})),el('div','sum',(await summary(ts))||t('empty')),el('p','note',t('backupNote'))];
+  dialog(t('confirmTitle',{to:tv.v}),body,t('yes'),async()=>{
+    const full=()=>toast(t('full'));
+    const cur=await rawGet(ts,'save'), curBox=await rawGet(ts,'box');
+    if(cur!=null&&!(await bakSet(ts,'save',cur))){ full(); return; }
+    if(curBox!=null) await bakSet(ts,'box',curBox);
+    try{ if(!(await writeData(ts,data))){ full(); return; } }catch(e){ full(); return; }
+    const box=await readBox(fs); if(box) try{ await writeBox(ts,box); }catch(e){}
+    toast(t('done',{to:tv.v})); render(); }); }
+async function undoCopy(n){ const b=await bakGet(n,'save'); if(b==null) return; if(!(await rawSet(n,'save',b))){ toast(t('full')); return; } const bb=await bakGet(n,'box'); if(bb!=null) await rawSet(n,'box',bb);
+  await bakDel(n,'save'); await bakDel(n,'box'); toast(t('undone')); render(); }
+
+/* ---------- 🛟 Rescue: list every save still stored on this device, restore one, and put stray drawings into the Dino Box ---------- */
+const RS={
+ en:{btn:'🛟 Recover lost saves',title:'🛟 Recover saves',loading:'Reading everything saved on this device…',noIdb:'Could not open the big storage. Close the game in other tabs, then try again.',retry:'Try again',
+  savesTitle:'Saves found on this device',savesHelp:'Each card is a save still stored here, best first. Restore the one with your dinos. Your current park is backed up first, so it shows up here and can be restored too.',
+  current:'⭐ Current save (v3 and later)',bak:'Automatic backup',broken:'Damaged-save copy',copy:'Copy made by “Copy progress”',rescue:'Backup made by this tool',day:'Daily backup',oldv:'Save of {v}',fallback:'Small-storage save',other:'Other copy',
+  restore:'♻️ Restore this',sum:'{d} dinos · highest Lv {lv} · {a} amber · {c} coins · night {n}',none:'No saves found on this device.',
+  confirmT:'Restore this save?',confirmB:'Your current park will be replaced by this one. The current park is kept as a backup and will be listed here.',yes:'Restore',done:'Restored! Open the latest version to play.',
+  drawTitle:'Your drawings',drawHelp:'Every dino you drew is stored on its own and is never deleted. {n} drawings are not in your park or Dino Box right now. Tap to leave some out, then put them in the Dino Box and release them from the game.',drawNone:'All your drawings are already in the park or the Dino Box.',
+  toBox:'📦 Put {n} into the Dino Box',boxDone:'{n} dinos are in the Dino Box. Open the game, tap 📦 Box and release them.',close:'✕ Close',play:'▶️ Open v{v}',full:'Could not write to storage.',newer:'This save is from a newer game version.'},
+ fr:{btn:'🛟 Récupérer des sauvegardes',title:'🛟 Récupérer des sauvegardes',loading:'Lecture de tout ce qui est enregistré sur cet appareil…',noIdb:'Impossible d’ouvrir le grand stockage. Ferme le jeu dans les autres onglets, puis réessaie.',retry:'Réessayer',
+  savesTitle:'Sauvegardes trouvées sur cet appareil',savesHelp:'Chaque carte est une sauvegarde encore présente ici, la meilleure en premier. Restaure celle qui a tes dinos. Ton parc actuel est d’abord sauvegardé : il apparaîtra ici et pourra lui aussi être restauré.',
+  current:'⭐ Sauvegarde actuelle (v3 et après)',bak:'Copie de secours automatique',broken:'Copie d’une sauvegarde abîmée',copy:'Copie faite par « Copier la progression »',rescue:'Copie faite par cet outil',day:'Copie du jour',oldv:'Sauvegarde de {v}',fallback:'Sauvegarde du petit stockage',other:'Autre copie',
+  restore:'♻️ Restaurer',sum:'{d} dinos · niveau max {lv} · {a} ambre · {c} pièces · nuit {n}',none:'Aucune sauvegarde trouvée sur cet appareil.',
+  confirmT:'Restaurer cette sauvegarde ?',confirmB:'Ton parc actuel sera remplacé par celui-ci. Le parc actuel est gardé en copie et apparaîtra ici.',yes:'Restaurer',done:'Restauré ! Ouvre la dernière version pour jouer.',
+  drawTitle:'Tes dessins',drawHelp:'Chaque dino que tu as dessiné est rangé à part et n’est jamais effacé. {n} dessins ne sont ni dans ton parc ni dans la boîte à dinos. Touche pour en retirer, puis mets-les dans la boîte et relâche-les depuis le jeu.',drawNone:'Tous tes dessins sont déjà dans le parc ou la boîte à dinos.',
+  toBox:'📦 Mettre {n} dans la boîte',boxDone:'{n} dinos sont dans la boîte. Ouvre le jeu, touche 📦 Box et relâche-les.',close:'✕ Fermer',play:'▶️ Ouvrir la v{v}',full:'Impossible d’écrire dans le stockage.',newer:'Cette sauvegarde vient d’une version plus récente.'},
+ 'zh-Hans':{btn:'🛟 找回存档',title:'🛟 找回存档',loading:'正在读取这台设备上保存的所有东西…',noIdb:'打不开大存储。请把其他标签页里的游戏关掉，再试一次。',retry:'再试一次',
+  savesTitle:'这台设备上找到的存档',savesHelp:'每张卡片都是还保存在这里的一份存档，最好的排在最前面。找到有你恐龙的那份，点“恢复”。恢复前会先备份现在的公园，它也会出现在这个列表里，随时能换回来。',
+  current:'⭐ 当前存档（v3 及以后）',bak:'自动备份',broken:'损坏存档的副本',copy:'“复制进度”留下的备份',rescue:'找回工具留下的备份',day:'每日备份',oldv:'{v} 的存档',fallback:'小存储里的存档',other:'其他副本',
+  restore:'♻️ 恢复这份',sum:'{d} 只恐龙 · 最高 {lv} 级 · 琥珀 {a} · 金币 {c} · 第 {n} 夜',none:'这台设备上没有找到存档。',
+  confirmT:'恢复这份存档？',confirmB:'现在的公园会被换成这一份。现在的公园会先备份，之后也会出现在这个列表里。',yes:'恢复',done:'恢复好了！打开最新版本就能接着玩。',
+  drawTitle:'你画的恐龙',drawHelp:'你画的每一只恐龙都单独保存，从来不会被删掉。有 {n} 张画现在不在公园里，也不在恐龙盒子里。点一下可以不选某张，然后把它们放进恐龙盒子，再在游戏里放回公园。',drawNone:'你画的恐龙都已经在公园或恐龙盒子里了。',
+  toBox:'📦 把 {n} 只放进恐龙盒子',boxDone:'{n} 只恐龙已经放进恐龙盒子。打开游戏，点 📦 Box 把它们放出来。',close:'✕ 关闭',play:'▶️ 打开 v{v}',full:'存储写入失败。',newer:'这份存档来自更新的游戏版本。'},
+ 'zh-Hant':{btn:'🛟 找回存檔',title:'🛟 找回存檔',loading:'正在讀取這台裝置上儲存的所有東西…',noIdb:'打不開大儲存。請把其他分頁裡的遊戲關掉，再試一次。',retry:'再試一次',
+  savesTitle:'這台裝置上找到的存檔',savesHelp:'每張卡片都是還保存在這裡的一份存檔，最好的排在最前面。找到有你恐龍的那份，點「恢復」。恢復前會先備份現在的公園，它也會出現在這個列表裡，隨時能換回來。',
+  current:'⭐ 目前存檔（v3 及以後）',bak:'自動備份',broken:'損壞存檔的副本',copy:'「複製進度」留下的備份',rescue:'找回工具留下的備份',day:'每日備份',oldv:'{v} 的存檔',fallback:'小儲存裡的存檔',other:'其他副本',
+  restore:'♻️ 恢復這份',sum:'{d} 隻恐龍 · 最高 {lv} 級 · 琥珀 {a} · 金幣 {c} · 第 {n} 夜',none:'這台裝置上沒有找到存檔。',
+  confirmT:'恢復這份存檔？',confirmB:'現在的公園會被換成這一份。現在的公園會先備份，之後也會出現在這個列表裡。',yes:'恢復',done:'恢復好了！打開最新版本就能接著玩。',
+  drawTitle:'你畫的恐龍',drawHelp:'你畫的每一隻恐龍都單獨保存，從來不會被刪掉。有 {n} 張畫現在不在公園裡，也不在恐龍盒子裡。點一下可以不選某張，然後把它們放進恐龍盒子，再在遊戲裡放回公園。',drawNone:'你畫的恐龍都已經在公園或恐龍盒子裡了。',
+  toBox:'📦 把 {n} 隻放進恐龍盒子',boxDone:'{n} 隻恐龍已經放進恐龍盒子。打開遊戲，點 📦 Box 把牠們放出來。',close:'✕ 關閉',play:'▶️ 打開 v{v}',full:'儲存寫入失敗。',newer:'這份存檔來自更新的遊戲版本。'} };
+const rt=(k,v={})=>((RS[lang]||RS.en)[k]||RS.en[k]).replace(/\{(\w+)\}/g,(m,x)=>v[x]!=null?v[x]:m);
+const okSave=v=>!!v&&typeof v==='object'&&Array.isArray(v.dinos);
+function vlist(n){ const l=VERS.filter(v=>v.schema===n).map(v=>'v'+v.v); return l.length?l.join(', '):'s'+n; }
+function rLabel(where,k,n){ let m;
+  if(where==='idb'&&k==='save/s4') return rt('current');
+  if(/\/bak$/.test(k)) return rt('bak'); if(/\/broken-(\d+)/.test(k)) return rt('broken')+' · '+new Date(+k.match(/broken-(\d+)/)[1]).toLocaleString();
+  if(/bak-copy/.test(k)) return rt('copy'); if((m=k.match(/\/rescue-(\d+)/))) return rt('rescue')+' · '+new Date(+m[1]).toLocaleString();
+  if((m=k.match(/\/day-([\d-]+)/))) return rt('day')+' · '+m[1]; if(where==='ls'&&n===4) return rt('fallback');
+  if(k===('save/s'+n)||k===SAVE_KEY[n]) return rt('oldv',{v:vlist(n)}); return rt('other')+' · '+k; }
+async function srcOf(x){ if(!x) return null; if(typeof x.src==='string') return x.src; if(x.img){ const v=await IDB.get('img/'+x.img); return typeof v==='string'?v:null; } return null; }
+async function rCollect(){ const out=[]; const keys=await IDB.keys();
+  for(const k of keys){ const m=k.match(/^save\/s(\d+)(\/|$)/); if(!m) continue; const v=await IDB.get(k); if(okSave(v)) out.push({where:'idb',key:k,n:+m[1],val:v}); }
+  try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(!k) continue; let n=0, m;
+      if(k===SAVE_KEY[1]||k.startsWith(SAVE_KEY[1]+'/')) n=1; else if((m=k.match(/^drawrassic-park\/save\/s(\d+)(\/|$)/))) n=+m[1]; if(!n||/-box$/.test(k)) continue;
+      let v=null; try{ v=JSON.parse(localStorage.getItem(k)); }catch(e){} if(okSave(v)) out.push({where:'ls',key:k,n,val:v}); } }catch(e){}
+  for(const c of out){ const ds=c.val.dinos.filter(x=>x&&!x.test); c.d=ds.length; c.lv=ds.reduce((a,x)=>Math.max(a,x.level|0),0); c.score=ds.reduce((a,x)=>a+(x.level|0)+1,0)+(c.val.amber|0)/200+(c.val.coins|0)/20; c.ds=ds; }
+  return out.sort((a,b)=>(b.where==='idb'&&b.key==='save/s4')-(a.where==='idb'&&a.key==='save/s4')||b.score-a.score); }
+async function rRestore(c){ const latest=VERS[0]; if(c.n>4){ toast(rt('newer')); return; }
+  let data=JSON.parse(JSON.stringify(c.val)); try{ for(let n=c.n;n<4;n++) data=UP[n](data); }catch(e){ toast(rt('full')); return; } data.schema=4;
+  const ts=Date.now(), cur=await IDB.get('save/s4'), curBox=await IDB.get('box/s2');
+  if(okSave(cur)&&!(await IDB.put('save/s4/rescue-'+ts,cur))){ toast(rt('full')); return; } if(Array.isArray(curBox)) await IDB.put('box/s2/rescue-'+ts,curBox);
+  try{ if(!(await writeData(4,data))){ toast(rt('full')); return; } }catch(e){ toast(rt('full')); return; }
+  const o=st.json(K.launcher)||{}; o.last=latest.v; st.set(K.launcher,JSON.stringify(o)); toast(rt('done')); openRescue(); }
+async function rToBox(hs,meta){ const ts=Date.now(), cur=await IDB.get('box/s2'), box=Array.isArray(cur)?cur.slice():[];
+  if(Array.isArray(cur)&&!(await IDB.put('box/s2/rescue-'+ts,cur))){ toast(rt('full')); return; }
+  hs.forEach((h,i)=>{ const m=meta[h]||{}; box.unshift({id:'r'+ts+'-'+i,name:m.name||('Dino '+(i+1)),tpl:m.tpl||null,diet:m.diet==='plant'?'plant':'meat',move:['walk','fly','swim'].includes(m.move)?m.move:'walk',
+    size:['S','M','L','XL'].includes(m.size)?m.size:'M',pers:['calm','brave','fierce'].includes(m.pers)?m.pers:'brave',level:Math.min(10,Math.max(1,m.level|0||2)),img:h,saved:ts}); });
+  if(!(await IDB.put('box/s2',box))){ toast(rt('full')); return; } toast(rt('boxDone',{n:hs.length})); openRescue(); }
+async function openRescue(){ const R=$('#rescue'), B=$('#rBody'); $('#rTitle').textContent=rt('title'); $('#rClose').textContent=rt('close'); R.classList.remove('hidden'); B.innerHTML=''; B.appendChild(el('p','sum',rt('loading')));
+  if(!IDB.ok) await Promise.race([IDB.open(),new Promise(r=>setTimeout(()=>r(false),15000))]);
+  B.innerHTML='';
+  if(!IDB.ok){ B.appendChild(el('p','sum',rt('noIdb'))); const b=el('button','btn primary',rt('retry')); b.onclick=openRescue; B.appendChild(b); return; }
+  const latest=VERS[0]; const pb=el('a','btn primary',rt('play',{v:latest.v})); pb.href=latest.file; pb.onclick=e=>{ e.preventDefault(); go(latest); }; B.appendChild(pb);
+  B.appendChild(el('h3',null,rt('savesTitle'))); B.appendChild(el('p','note',rt('savesHelp')));
+  const list=await rCollect(); if(!list.length) B.appendChild(el('p','sum',rt('none')));
+  for(const c of list){ const card=el('div','rc'+(c.where==='idb'&&c.key==='save/s4'?' cur':'')), info=el('div','info');
+    info.appendChild(el('b',null,rLabel(c.where,c.key,c.n))); info.appendChild(el('div','meta',rt('sum',{d:c.d,lv:c.lv,a:c.val.amber|0,c:c.val.coins|0,n:c.val.nightNum|0})));
+    info.appendChild(el('div','note',c.ds.slice(0,10).map(x=>x.name).join('、')+(c.ds.length>10?' …':'')));
+    const th=el('div','thumbs'); info.appendChild(th); for(const x of c.ds.slice(0,8)){ srcOf(x).then(s=>{ if(s){ const im=document.createElement('img'); im.src=s; im.alt=''; th.appendChild(im); } }); }
+    card.appendChild(info); if(!(c.where==='idb'&&c.key==='save/s4')){ const b=el('button','btn primary',rt('restore')); b.onclick=()=>dialog(rt('confirmT'),[el('div','sum',rLabel(c.where,c.key,c.n)+' — '+rt('sum',{d:c.d,lv:c.lv,a:c.val.amber|0,c:c.val.coins|0,n:c.val.nightNum|0})),el('p','note',rt('confirmB'))],rt('yes'),()=>rRestore(c)); card.appendChild(b); }
+    B.appendChild(card); }
+  // drawings that are in neither the current park nor the Dino Box
+  const keys=await IDB.keys(), imgs=keys.filter(k=>k.startsWith('img/')).map(k=>k.slice(4)); const used=new Set();
+  const cur=await IDB.get('save/s4'), box=await IDB.get('box/s2');
+  for(const x of [...(okSave(cur)?cur.dinos:[]),...(Array.isArray(box)?box:[])]){ if(!x) continue; if(x.img) used.add(x.img); else if(typeof x.src==='string') used.add(hashStr(x.src)); }
+  const meta={}; for(const c of list) for(const x of c.ds){ const h=x.img||(typeof x.src==='string'?hashStr(x.src):null); if(h&&(!meta[h]||(x.level|0)>(meta[h].level|0))) meta[h]=x; }
+  const stray=imgs.filter(h=>!used.has(h)); B.appendChild(el('h3',null,rt('drawTitle')));
+  if(!stray.length){ B.appendChild(el('p','note',rt('drawNone'))); return; }
+  B.appendChild(el('p','note',rt('drawHelp',{n:stray.length}))); const g=el('div',null); g.id='rDraw'; B.appendChild(g); const sel=new Set(stray);
+  const tb=el('button','btn primary',''); const upd=()=>{ tb.textContent=rt('toBox',{n:sel.size}); tb.disabled=!sel.size; };
+  for(const h of stray){ const b=document.createElement('button'); const im=document.createElement('img'); im.alt=''; IDB.get('img/'+h).then(s=>{ if(typeof s==='string') im.src=s; }); b.appendChild(im);
+    b.appendChild(el('div',null,meta[h]?meta[h].name+' · Lv'+(meta[h].level|0):'?')); b.onclick=()=>{ if(sel.has(h)) sel.delete(h); else sel.add(h); b.classList.toggle('off',!sel.has(h)); upd(); }; g.appendChild(b); }
+  upd(); tb.onclick=()=>rToBox([...sel],meta); B.appendChild(tb); }
+$('#rescueBtn').onclick=openRescue; $('#rClose').onclick=()=>{ $('#rescue').classList.add('hidden'); render(); };
+$('#copyBtn').onclick=copyProgress;
+document.addEventListener('gesturestart',e=>e.preventDefault());
+async function start(list){ await Promise.race([IDB.open(),new Promise(r=>setTimeout(()=>r(false),2500))]); VERS=(list&&Array.isArray(list.versions)?list.versions:[]).filter(v=>v&&v.file&&v.v); if(!VERS.length&&EMBEDDED) VERS=EMBEDDED.versions; render(); if(location.hash==='#rescue') openRescue(); }
+try{ fetch('versions.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(start,()=>start(EMBEDDED)); }catch(e){ start(EMBEDDED); }
+})();
+</script>
+</body>
+</html>
