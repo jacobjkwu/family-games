@@ -2,6 +2,18 @@
   "game": "goat-mayhem",
   "versions": [
     {
+      "v": 6,
+      "file": "goat-mayhem-v6.html",
+      "date": "2026-11-13",
+      "schema": "s2",
+      "notes": {
+        "en": "🌐 Online with a friend: one player creates a room and shares the 5-letter code or link, the other joins from anywhere. The creator's game runs both goats; breaks, explosions and chaos show on both screens. The visiting friend's own save isn't changed.",
+        "fr": "🌐 En ligne avec un ami : un joueur crée une salle et partage le code à 5 lettres ou le lien, l’autre la rejoint de n’importe où. Le jeu du créateur fait tourner les deux chèvres ; casse, explosions et chaos s’affichent sur les deux écrans. La sauvegarde de l’ami invité n’est pas modifiée.",
+        "zh-Hans": "🌐 和朋友联网玩：一个人创建房间，把 5 位房间码或链接发给朋友，朋友在任何地方都能加入。两只山羊都由创建房间的人的游戏来跑，撞坏的东西、爆炸和捣乱分数两边都看得到。来做客的朋友自己的存档不会改动。",
+        "zh-Hant": "🌐 和朋友連線玩：一個人建立房間，把 5 位房間碼或連結傳給朋友，朋友在任何地方都能加入。兩隻山羊都由建立房間的人的遊戲來跑，撞壞的東西、爆炸和搗亂分數兩邊都看得到。來作客的朋友自己的存檔不會改動。"
+      }
+    },
+    {
       "v": 5,
       "file": "goat-mayhem-v5.html",
       "date": "2026-11-13",
