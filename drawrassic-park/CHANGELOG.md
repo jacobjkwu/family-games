@@ -1,5 +1,13 @@
 # Drawrassic Park — Changelog
 
+## v3.25 (2026-11-13) — save schema s7 (unchanged)
+- 💥 New effects layer, built after Crab King Castle's recipe (hot core + coloured burst + smoke + ground ring + flash light + shake): pre-drawn glow, spark, smoke, ring, star, droplet and shard sprites, tinted and cached; additive blending; a pooled list of up to 700 effects (no garbage while playing); dynamic lights that matter most at night; screen flashes; a short hit-stop on big on-screen hits (at most once every 0.9 s); smooth sine-based camera shake.
+- Every old particle now has a sprite look: glowing streak sparks, soft smoke dust, water droplets, flipping confetti, glowing stars and rings, shiny hearts, popping damage numbers with outlines. Big bursts add a glow, a ground ring and a light.
+- Recipes for: hits and critical hits, knockouts (dust, ring, dizzy stars), level-ups (light pillar, rising stars, ring), hatching (shell shards, flash, sparkles), pick-ups, roars (sound-wave rings), shadow flashes, lightning strikes, boss and dark-boss entrances (flash, rings, smoke, freeze), magic.
+- 🎆 Fireworks: new quick-bar action (also in the Mischief bar): rockets with trails burst into coloured star showers with glitter and light.
+- Number panel: 💥 Effects (on/off, shake, flashes, freeze) and a 💥 Effects show button.
+- Measured in desktop headless Chrome: 313 dinos + 100 visitors with an explosion and a critical hit every 0.15 s (≈350 live effects): draw ≈9 ms per frame. Normal play adds well under 1 ms. Not measured on a real iPad. Save format unchanged (s7).
+
 ## v3.24 (2026-11-13) — save schema s7 (unchanged)
 - 🦖 Dino drawings are baked once when they load: a dark outline, light from above and a soft shade underneath (the original drawing is kept for analysis and fusion). Soft contact shadows for everything (one pre-drawn sprite).
 - 🏔️ Far background: two layers of mountains (snow caps, shaded faces, haze toward the horizon), lit volcanoes with ridges and a glowing crater, shaded tree line. Clouds are pre-drawn with light tops and blue undersides, cross-fade to a night version, and float in front of the mountains.

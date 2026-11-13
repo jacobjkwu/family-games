@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.25",
+      "file": "drawrassic-park-v3.25.html",
+      "date": "2026-11-13",
+      "schema": 7,
+      "switcher": true,
+      "notes": {
+        "en": "💥 Effects show: glowing sparks, smoke, shock rings and flashes of light on hits, knockouts, level-ups, hatching, roars, lightning and bosses; tiny freeze on big hits; smooth screen shake; and 🎆 fireworks on the quick bar.",
+        "fr": "💥 Festival d’effets : étincelles lumineuses, fumée, anneaux de choc et éclairs de lumière sur les coups, K.-O., niveaux, éclosions, cris, la foudre et les boss ; petit arrêt sur les gros coups ; tremblement d’écran plus doux ; et 🎆 feu d’artifice dans la barre rapide.",
+        "zh-Hans": "💥 特效大爆炸：打中、打倒、升级、孵蛋、大吼、闪电、Boss 出场都有发光火花、烟雾、冲击波和闪光；重击会定格一下；屏幕震动更顺滑；快捷栏里还能 🎆 放烟花。",
+        "zh-Hant": "💥 特效大爆炸：打中、打倒、升級、孵蛋、大吼、閃電、Boss 出場都有發光火花、煙霧、衝擊波和閃光；重擊會定格一下；螢幕震動更順滑；快捷列裡還能 🎆 放煙火。"
+      }
+    },
+    {
       "v": "3.24",
       "file": "drawrassic-park-v3.24.html",
       "date": "2026-11-13",
