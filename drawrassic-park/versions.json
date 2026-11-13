@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.12",
+      "file": "drawrassic-park-v3.12.html",
+      "date": "2026-11-12",
+      "schema": 5,
+      "switcher": true,
+      "notes": {
+        "en": "Funnier dinos: 30 riddles with punchlines, lines for every dino group and 40 species, lines for what is happening, and little conversations between dinos.",
+        "fr": "Des dinos plus drôles : 30 devinettes avec chute, des répliques pour chaque groupe et 40 espèces, selon ce qui se passe, et de petites conversations entre dinos.",
+        "zh-Hans": "恐龙更搞笑了：30 个脑筋急转弯（先问后答）、每类恐龙和 40 种恐龙的专属台词、看情况说的台词，还有恐龙之间的小对话。",
+        "zh-Hant": "恐龍更搞笑了：30 個腦筋急轉彎（先問後答）、每類恐龍和 40 種恐龍的專屬台詞、看情況說的台詞，還有恐龍之間的小對話。"
+      }
+    },
+    {
       "v": "3.11",
       "file": "drawrassic-park-v3.11.html",
       "date": "2026-11-12",

@@ -1,5 +1,13 @@
 # Drawrassic Park — Changelog
 
+## v3.12 (2026-11-12) — save schema s5 (unchanged)
+- 💬 Talk and tapping a dino: 30% of the time it tells a riddle, then the punchline 2.6 s later (a nearby dino often laughs or groans).
+- New lines for each dino group (meat-eaters, raptors, long-necks, horns, armour, duck-bills, flyers, swimmers) and for 40 species.
+- Lines for what is happening: tired, stunned, slowed, a boss in the park, hurt, legendary or rare species, a dino whose stats were changed.
+- Every 14–26 s two dinos near each other on screen have a short conversation.
+- Lines are in Chinese, like the existing dino lines; they will be translated in the four-language version.
+- Save format unchanged (s5).
+
 ## v3.11 (2026-11-12) — save schema s5 (unchanged)
 - 👹 Boss Altar in the Wild Lands' Boss Arena (a glowing ring and a "tap the altar" sign mark it; also in Settings). Pick one of the 5 bosses (Shadow Rex, Thunderwing, Magma Ankylo, Frost Spino, Mutant Dark Quetzalcoatlus) and up to 6 park dinos (⭐ picks the strongest 6), then fight in the colosseum.
 - The boss's health and attack scale with the team you bring (the Dark Quetzalcoatlus is the hardest). Each boss uses its own 3 moves, built on the arena's move types; stuns on a boss last at most 0.4 s.
