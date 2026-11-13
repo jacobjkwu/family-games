@@ -1,5 +1,13 @@
 # Drawrassic Park — Changelog
 
+## v3.42 (2026-11-13) — save schema s8 (unchanged)
+- 💥 New boss skills (3 per boss, added to the old ones, so each has 6): Rex charge / triple shockwave / shadow claws; Storm charge / chain lightning / feather fan; Magma charge / lava geysers / quake fissures; Frost charge / blizzard vortex / ice spikes; Dark Quetzal charge / homing shadow orbs / shockwave rings. Every skill shows a warning shape on the ground first (lane, circle, X, crack, swirl) so dinos and players can see it coming, and a skill name flashes on screen.
+- 🌋 Full-screen ultimates at 60% and 25% boss health: the screen darkens, cinema bars slide in, a charge bar fills, then a boss-specific finisher hits every dino on screen (Rex quake cracks, Storm lightning, Magma meteors, Frost freeze + slow, Dark Quetzal shadow beams) followed by slow motion. Ultimates never knock a dino below 1 HP.
+- 👆 Break it: tap the boss 10 times during the charge (controller: Ⓐ or Ⓧ) → BREAK!, 6% boss damage and a 3-second daze. The prompt shows Ⓐ when you last used a controller, and sits above the toolbar on TV.
+- 😡 Below 50% the boss is enraged: spark aura and faster skills. Skills never repeat one of the last 3 used.
+- 🛠️ Dev panel group “Boss”: skill damage ×, charge length/time, ultimate charge time, taps to break, ultimate damage %.
+- Save format unchanged (s8).
+
 ## v3.41 (2026-11-13) — save schema s8 (unchanged)
 - 🗺️ The park is 7 screens wide (was 4; number panel 🎨 mapScreens, 4–10). Zones keep their share of the width, and positions have been saved as fractions of the width since v3, so dinos, decorations and toys land in the same zone in every version; lakes and hills you dig keep their old size (their width is now measured against 4 screens in every version). The built-in lagoon and the plaza grow with the map. Save schema unchanged (s8).
 - 🏜️ Wild Lands → badlands: red mesas on the horizon, sand and red-earth patches, cacti (some flowering), dry bushes, old bones, rocks. 🌲 Forest floor: mushroom rings, fallen logs with moss, ferns.

@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.42",
+      "file": "drawrassic-park-v3.42.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "💥 Boss super moves: every boss has 6 skills now, from a raging charge to ring blasts and lightning chains. Below 60% and 25% health it starts a FULL-SCREEN ultimate: tap the boss 10 times (or press Ⓐ) to break it and stun it!",
+        "fr": "💥 Super attaques des boss : chaque boss a maintenant 6 attaques, de la charge furieuse aux ondes de choc et aux chaînes d'éclairs. Sous 60 % et 25 % de vie, il lance une ULTIME plein écran : touche le boss 10 fois (ou appuie sur Ⓐ) pour la briser et l'étourdir !",
+        "zh-Hans": "💥 Boss 超级技能：每只 Boss 现在有 6 种技能，从蛮力冲撞到冲击波、连锁闪电。血量低于 60% 和 25% 时会放全屏大招：快点 Boss 10 下（或按 Ⓐ）就能打断它，还能把它打晕！",
+        "zh-Hant": "💥 Boss 超級技能：每隻 Boss 現在有 6 種技能，從蠻力衝撞到衝擊波、連鎖閃電。血量低於 60% 和 25% 時會放全螢幕大招：快點 Boss 10 下（或按 Ⓐ）就能打斷牠，還能把牠打暈！"
+      }
+    },
+    {
       "v": "3.41",
       "file": "drawrassic-park-v3.41.html",
       "date": "2026-11-13",
