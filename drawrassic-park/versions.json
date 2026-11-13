@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.43",
+      "file": "drawrassic-park-v3.43.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "👹 10 bosses: 5 new ones (Thornhorn, Tidal Titan, Void Raptor, Crystal Stego, Solar Dilo) with their own skills and ultimates, a new skill for each old boss, and a 📖 Boss Codex. Bosses are much weaker now: every boss hit takes only 1 HP. The cartoon v3.39 look is back, plus googly eyes and other silly dress-ups.",
+        "fr": "👹 10 boss : 5 nouveaux (Cornépine, Titan des marées, Raptor du néant, Stégo de cristal, Dilo solaire) avec leurs attaques et ultimes, une nouvelle attaque pour chaque ancien boss et un 📖 Codex des boss. Les boss sont beaucoup plus faibles : chaque coup de boss n’enlève que 1 PV. Le look dessin animé de la v3.39 revient, avec des yeux rigolos et d’autres déguisements.",
+        "zh-Hans": "👹 10 只 Boss：新来 5 只（荆棘角龙、怒涛巨龙、虚空迅猛龙、水晶剑龙、烈日双冠龙），各有自己的技能和大招；老 Boss 每只多学一个新技能；还有 📖 Boss 图鉴。Boss 变弱了：每次打中只扣 1 滴血。恢复 v3.39 的卡通画风，还多了摇摇眼等搞笑装扮。",
+        "zh-Hant": "👹 10 隻 Boss：新來 5 隻（荊棘角龍、怒濤巨龍、虛空迅猛龍、水晶劍龍、烈日雙冠龍），各有自己的技能和大招；老 Boss 每隻多學一個新技能；還有 📖 Boss 圖鑑。Boss 變弱了：每次打中只扣 1 滴血。恢復 v3.39 的卡通畫風，還多了搖搖眼等搞笑裝扮。"
+      }
+    },
+    {
       "v": "3.42",
       "file": "drawrassic-park-v3.42.html",
       "date": "2026-11-13",
