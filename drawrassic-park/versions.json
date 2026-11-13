@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.26",
+      "file": "drawrassic-park-v3.26.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎨 Dino Studio: Easy mode in 3 steps (body → 18 snap-on parts → 10 patterns and 9 stickers), 15 magic brushes, 🎲 random dinos; Pro mode with 4 layers, shapes, shading, colour picker, eyedropper, move/flip/rotate/scale, pinch zoom, undo/redo and rig markers; choose voice, special move and stats; edit any park dino; share dinos as codes.",
+        "fr": "🎨 Studio à dinos : mode Facile en 3 étapes (corps → 18 morceaux à poser → 10 motifs et 9 autocollants), 15 pinceaux magiques, 🎲 dinos au hasard ; mode Pro avec 4 calques, formes, dégradés, nuancier, pipette, déplacer/retourner/tourner/agrandir, zoom à deux doigts, annuler/rétablir et repères d’animation ; choisis la voix, l’attaque spéciale et les stats ; modifie n’importe quel dino du parc ; partage tes dinos par code.",
+        "zh-Hans": "🎨 恐龙工作室：简单模式三步完成（身体 → 18 种部件 → 10 种花纹和 9 种贴纸），15 种魔法笔刷，🎲 随机恐龙；专业模式有 4 个图层、形状、渐变、调色盘、吸色、移动/翻转/旋转/缩放、两指缩放、撤销/重做和骨架点；可以选声音、必杀技和能力值；公园里的恐龙都能重新编辑；还能用代码把恐龙分享给朋友。",
+        "zh-Hant": "🎨 恐龍工作室：簡單模式三步完成（身體 → 18 種部件 → 10 種花紋和 9 種貼紙），15 種魔法筆刷，🎲 隨機恐龍；專業模式有 4 個圖層、形狀、漸層、調色盤、吸色、移動/翻轉/旋轉/縮放、兩指縮放、復原/重做和骨架點；可以選聲音、必殺技和能力值；公園裡的恐龍都能重新編輯；還能用代碼把恐龍分享給朋友。"
+      }
+    },
+    {
       "v": "3.25",
       "file": "drawrassic-park-v3.25.html",
       "date": "2026-11-13",
