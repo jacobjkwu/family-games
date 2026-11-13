@@ -1,5 +1,11 @@
 # Drawrassic Park — Changelog
 
+## v3.41 (2026-11-13) — save schema s8 (unchanged)
+- 🗺️ The park is 7 screens wide (was 4; number panel 🎨 mapScreens, 4–10). Zones keep their share of the width, and positions have been saved as fractions of the width since v3, so dinos, decorations and toys land in the same zone in every version; lakes and hills you dig keep their old size (their width is now measured against 4 screens in every version). The built-in lagoon and the plaza grow with the map. Save schema unchanged (s8).
+- 🏜️ Wild Lands → badlands: red mesas on the horizon, sand and red-earth patches, cacti (some flowering), dry bushes, old bones, rocks. 🌲 Forest floor: mushroom rings, fallen logs with moss, ferns.
+- Ground tiles are built when they first come into view (~20 ms each on a desktop) and the next ones one per frame while idle, at most 1.5× pixel density (number panel: gtDpr), and tiles more than 3 screens from the camera are released, so the wider park uses about the same memory as before and starts faster (background setup 2 ms instead of ~65 ms).
+- Measured in desktop headless Chrome with 314 dinos + 60 visitors: AI 2.6 ms + draw 4.2 ms per frame. Not measured on a real iPad; not tested on a real iPad or Xbox.
+
 ## v3.40 (2026-11-13) — save schema s8 (unchanged)
 - 🎨 Dinos: the white sticker border (and the thin dark line around it) is peeled off from the outside in — only near-white pixels touching the outside, at most a thin band, and only when the drawing isn't mostly white; leftover specks are dropped — and the dark outline is drawn around the dino itself (2.2× thicker). Then a light map is baked from a blurred copy of the shape: a bevel lit from the upper left, a cool shadow on the lower edges, a warm rim light along the top edge, a softer belly and a fine scale texture. Kids' own drawings get the same treatment. The extra bake (~5 ms a drawing on a desktop) runs a little each frame after the park opens (3 ms budget) and swaps the picture in place, so opening a park is not slower.
 - 👥 Visitors and staff are drawn 30% larger (tapping them follows the new size).

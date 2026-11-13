@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.41",
+      "file": "drawrassic-park-v3.41.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🗺️ Bigger park: 7 screens wide instead of 4. Every area keeps its place (your dinos stay where they were), the Wild Lands become 🏜️ badlands with red mesas, cacti, dunes and old bones, and the forest gets mushroom rings, fallen logs and ferns.",
+        "fr": "🗺️ Parc plus grand : 7 écrans de large au lieu de 4. Chaque zone garde sa place (tes dinos restent où ils étaient), les Terres sauvages deviennent des 🏜️ terres arides avec mesas rouges, cactus, dunes et vieux os, et la forêt gagne des ronds de champignons, des troncs tombés et des fougères.",
+        "zh-Hans": "🗺️ 公园变大了：从 4 个屏幕宽变成 7 个屏幕宽。每个区域都在原来的位置（恐龙还在原地），野外变成了 🏜️ 恶地荒原，有红色台地、仙人掌、沙丘和老骨头；森林里多了蘑菇圈、倒下的树干和蕨类。",
+        "zh-Hant": "🗺️ 公園變大了：從 4 個螢幕寬變成 7 個螢幕寬。每個區域都在原來的位置（恐龍還在原地），野外變成了 🏜️ 惡地荒原，有紅色台地、仙人掌、沙丘和老骨頭；森林裡多了蘑菇圈、倒下的樹幹和蕨類。"
+      }
+    },
+    {
       "v": "3.40",
       "file": "drawrassic-park-v3.40.html",
       "date": "2026-11-13",
