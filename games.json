@@ -99,8 +99,8 @@
     {
       "id": "crab-castle",
       "url": "https://jacobjkwu.github.io/family-games/crab-castle/",
-      "latest": "v7",
-      "input": "touch",
+      "latest": "v10",
+      "input": "both",
       "color": "#ff6b4a",
       "name": {
         "zh-Hans": "巨蟹王城堡保卫战",

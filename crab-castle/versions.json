@@ -1,24 +1,83 @@
 {
   "game": "crab-castle",
   "versions": [
-    {"v": 7, "file": "crab-castle-v7.html", "date": "2026-11-13", "schema": "s2",
-     "notes": {
-       "zh-Hans": "地图编辑器：自己画路线、选主题和难度、分享码；每波自动存档，可以继续上次。",
-       "zh-Hant": "地圖編輯器：自己畫路線、選主題和難度、分享碼；每波自動存檔，可以繼續上次。",
-       "en": "Map editor: draw your own route, pick theme and difficulty, share codes. Auto-save after each wave with Continue.",
-       "fr": "Éditeur de cartes : tracez votre chemin, choisissez thème et difficulté, codes de partage. Sauvegarde après chaque vague."}},
-    {"v": 6, "file": "crab-castle-v6.html", "date": "2026-11-13", "schema": "s1",
-     "notes": {
-       "zh-Hans": "所有敌人、守卫换成 3D 模型，有走路、攻击和死亡动画；7 个 Boss 专属模型；压力测试按钮。",
-       "zh-Hant": "所有敵人、守衛換成 3D 模型，有走路、攻擊和死亡動畫；7 個 Boss 專屬模型；壓力測試按鈕。",
-       "en": "All enemies and guards are 3D models with walk, attack and death animations; 7 custom boss models; stress test.",
-       "fr": "Ennemis et gardes en modèles 3D animés (marche, attaque, mort) ; 7 boss modélisés ; test de charge."}},
-    {"v": 4, "file": "crab-castle-v4.html", "date": "2026-11-12", "schema": null,
-     "notes": {
-       "zh-Hans": "2D 版最后一版：16 种陷阱、21 种敌人分 5 级、秘籍改金币。没有存档。",
-       "zh-Hant": "2D 版最後一版：16 種陷阱、21 種敵人分 5 級、秘籍改金幣。沒有存檔。",
-       "en": "Last 2D version: 16 traps, 21 enemies in 5 levels, gold cheat. No saves.",
-       "fr": "Dernière version 2D : 16 pièges, 21 ennemis sur 5 niveaux, triche d'or. Pas de sauvegarde."}}
+    {
+      "v": 10,
+      "file": "crab-castle-v10.html",
+      "date": "2026-11-13",
+      "schema": "s3",
+      "notes": {
+        "zh-Hans": "🌐 用房间码和远方的朋友联机（最多 4 人，只能在游戏大厅 GitHub Pages 上用）；每人看到自己的语言；断线可以重新连接。",
+        "zh-Hant": "🌐 用房間碼和遠方的朋友連線（最多 4 人，只能在遊戲大廳 GitHub Pages 上用）；每人看到自己的語言；斷線可以重新連線。",
+        "en": "🌐 Play online with friends by room code (up to 4; works only on the GitHub Pages Game Hub); everyone sees their own language; reconnect after drops.",
+        "fr": "🌐 Jouer en ligne avec des amis par code de salon (jusqu’à 4 ; seulement sur le Game Hub GitHub Pages) ; chacun dans sa langue ; reconnexion après coupure."
+      }
+    },
+    {
+      "v": 9,
+      "file": "crab-castle-v9.html",
+      "date": "2026-11-13",
+      "schema": "s3",
+      "notes": {
+        "zh-Hans": "本地多人：同一台 iPad 两人各按一半屏幕一起守城（可换边、转屏自动换座位）；最多 4 个手柄按 Ⓐ 加入，每人自己的颜色、准星、枪和击败数。和 v8 共用存档。",
+        "zh-Hant": "本地多人：同一台 iPad 兩人各按一半螢幕一起守城（可換邊、轉螢幕自動換座位）；最多 4 個手把按 Ⓐ 加入，每人自己的顏色、準星、槍和擊敗數。和 v8 共用存檔。",
+        "en": "Local multiplayer: two players on one iPad, each using half the screen (swap sides, seats follow rotation); up to 4 controllers join with Ⓐ, each with their own color, reticle, gun and kill count. Shares saves with v8.",
+        "fr": "Multijoueur local : deux joueurs sur un iPad, chacun sa moitié d’écran (changer de côté, places suivant la rotation) ; jusqu’à 4 manettes rejoignent avec Ⓐ, chacune avec sa couleur, son viseur, son arme et ses victoires. Sauvegarde partagée avec la v8."
+      }
+    },
+    {
+      "v": 8,
+      "file": "crab-castle-v8.html",
+      "date": "2026-11-13",
+      "schema": "s3",
+      "notes": {
+        "zh-Hans": "四种语言；Xbox 手柄全程可玩；开发/作弊面板和参数预设；备份码和找回存档；敌人很多时更省电更快。",
+        "zh-Hant": "四種語言；Xbox 手把全程可玩；開發/秘籍面板和參數預設；備份碼和找回存檔；敵人很多時更省電更快。",
+        "en": "Four languages; fully playable with an Xbox controller; dev/cheat panel with presets; backup codes and save recovery; faster with huge crowds.",
+        "fr": "Quatre langues ; jouable entièrement à la manette Xbox ; panneau dev/triches avec préréglages ; codes de sauvegarde et récupération ; plus rapide avec des foules énormes."
+      }
+    },
+    {
+      "v": 7,
+      "file": "crab-castle-v7.html",
+      "date": "2026-11-13",
+      "schema": "s2",
+      "notes": {
+        "zh-Hans": "地图编辑器：自己画路线、选主题和难度、分享码；每波自动存档，可以继续上次。",
+        "zh-Hant": "地圖編輯器：自己畫路線、選主題和難度、分享碼；每波自動存檔，可以繼續上次。",
+        "en": "Map editor: draw your own route, pick theme and difficulty, share codes. Auto-save after each wave with Continue.",
+        "fr": "Éditeur de cartes : tracez votre chemin, choisissez thème et difficulté, codes de partage. Sauvegarde après chaque vague."
+      }
+    },
+    {
+      "v": 6,
+      "file": "crab-castle-v6.html",
+      "date": "2026-11-13",
+      "schema": "s1",
+      "notes": {
+        "zh-Hans": "所有敌人、守卫换成 3D 模型，有走路、攻击和死亡动画；7 个 Boss 专属模型；压力测试按钮。",
+        "zh-Hant": "所有敵人、守衛換成 3D 模型，有走路、攻擊和死亡動畫；7 個 Boss 專屬模型；壓力測試按鈕。",
+        "en": "All enemies and guards are 3D models with walk, attack and death animations; 7 custom boss models; stress test.",
+        "fr": "Ennemis et gardes en modèles 3D animés (marche, attaque, mort) ; 7 boss modélisés ; test de charge."
+      }
+    },
+    {
+      "v": 4,
+      "file": "crab-castle-v4.html",
+      "date": "2026-11-12",
+      "schema": null,
+      "notes": {
+        "zh-Hans": "2D 版最后一版：16 种陷阱、21 种敌人分 5 级、秘籍改金币。没有存档。",
+        "zh-Hant": "2D 版最後一版：16 種陷阱、21 種敵人分 5 級、秘籍改金幣。沒有存檔。",
+        "en": "Last 2D version: 16 traps, 21 enemies in 5 levels, gold cheat. No saves.",
+        "fr": "Dernière version 2D : 16 pièges, 21 ennemis sur 5 niveaux, triche d'or. Pas de sauvegarde."
+      }
+    }
   ],
-  "missing": [1, 2, 3, 5]
+  "missing": [
+    1,
+    2,
+    3,
+    5
+  ]
 }
