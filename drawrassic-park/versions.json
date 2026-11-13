@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.23",
+      "file": "drawrassic-park-v3.23.html",
+      "date": "2026-11-13",
+      "schema": 7,
+      "switcher": true,
+      "notes": {
+        "en": "🦖 Livelier dinos (head, tail, hops, spins, roars, rolling KO, sleepy belly flop, blinking eyes), a huge library of jokes and funny lines, a quick bar you can customise (✏️ or long-press), and 📊 park data with charts.",
+        "fr": "🦖 Des dinos plus vivants (tête, queue, sauts, pirouettes, cris, K.-O. sur le dos, sieste, clignements d’yeux), une énorme bibliothèque de blagues et de répliques, une barre rapide à ton goût (✏️ ou appui long) et 📊 les données du parc en graphiques.",
+        "zh-Hans": "🦖 恐龙更生动了（摆头、甩尾、蹦跳、转圈、大吼、被打倒会翻肚皮、睡觉会趴下、会眨眼），超大的笑话和台词库，可以自己定制的快捷栏（点 ✏️ 或长按），还有 📊 带图表的公园数据。",
+        "zh-Hant": "🦖 恐龍更生動了（擺頭、甩尾、蹦跳、轉圈、大吼、被打倒會翻肚皮、睡覺會趴下、會眨眼），超大的笑話和台詞庫，可以自己訂製的快捷列（點 ✏️ 或長按），還有 📊 帶圖表的公園數據。"
+      }
+    },
+    {
       "v": "3.22",
       "file": "drawrassic-park-v3.22.html",
       "date": "2026-11-13",

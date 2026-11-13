@@ -1,5 +1,13 @@
 # Drawrassic Park — Changelog
 
+## v3.23 (2026-11-13) — save schema s7 (unchanged)
+- 🎞️ Dino animation: the drawing is split into head / body / tail bands that move separately (head bob, tail swing, breathing), squash on landing, hop when petted, spin on level-up, roar at battle start, lean into lunges and recoil from hits, KO roll onto the back with kicking legs, belly drop and folded legs when asleep, blinking eyes found automatically on the drawing (✕ eyes when KO). Number panel: 🎞️ Dino animation.
+- 💬 Line library: ~350 new kid-friendly lines, jokes, facts, riddles and visitor↔dino exchanges in all four languages, picked by context (weather, time of day, hunger, group, personality, nearby dino) with no repeats; rare golden lines. Visitors no longer talk over each other. Number panel: 💬 Lines & jokes.
+- 🧰 Quick bar: 36 actions (tools, shop, arena, armies, sky, day/night, freeze time, speed, feed all, big roar, party, find/follow a dino, photo, data, settings…). ✏️ or a long press opens the editor: add, remove, reorder, 5 ready-made bars. Pages with ◀ ▶ when they don't fit. Stored in its own key drawrassic-park/toolbar/t1 (+ /bak).
+- 📊 Park data: overview tiles with hungry/hurt alerts, history line chart (8 measures, a point every 20 s, 2 hours kept), dinos by group/rarity/food/movement, sortable dino list (tap to fly to a dino), visitors by type, staff by job and what they're doing, coins by source and per minute, and a diary of park news. History in its own key drawrassic-park/stats/h1 (+ /bak), not in the save.
+- Fixes: shadow dinos at night could stop the drawing loop (new eye code needed a colour they don't have).
+- Save schema unchanged (s7).
+
 ## v3.22 (2026-11-13) — save schema s7 (unchanged)
 - 🎲 Random events, each a data entry (start / update / end / tap / draw). About every 2½ minutes (number panel: 🎲 Random events) one starts with a big banner and a sound; a panel at the top right (bottom right in portrait) shows the goal and time — tap it, or the red arrow at the screen edge, to jump to the action. No event starts during a boss fight, a disaster or in the arena. Nothing about an event is saved: a reload ends it and every dino goes back to normal.
 - 🚨 Jailbreak: a dino escapes into the visitor plaza, visitors run screaming, the camera follows it; tap it 5 times in 40 s to lasso it back (+10 coins), otherwise it walks back by itself.
