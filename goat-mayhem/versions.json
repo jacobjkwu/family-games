@@ -2,6 +2,18 @@
   "game": "goat-mayhem",
   "versions": [
     {
+      "v": 9,
+      "file": "goat-mayhem-v9.html",
+      "date": "2026-11-13",
+      "schema": "s2",
+      "notes": {
+        "en": "♾️ Endless mod (Settings → Endless coins & resources): coins never run out, every goat, gear and power is free and unlocked without bells or tasks, powers recharge almost at once, the jetpack never runs out of fuel. Turn it off any time; your real coins are kept.",
+        "fr": "♾️ Mod infini (Réglages → Pièces et ressources infinies) : les pièces ne s’épuisent jamais, chaque chèvre, équipement et pouvoir est gratuit et débloqué sans cloches ni défis, les pouvoirs se rechargent presque tout de suite, le jetpack ne manque jamais de carburant. Désactivable à tout moment ; tes vraies pièces sont gardées.",
+        "zh-Hans": "♾️ 无限模式（设置 → 无限金币和资源）：金币用不完，所有山羊、装备和能力都免费、直接解锁，不用铃铛也不用做任务；能力几乎马上就能再用，火箭背包的燃料也用不完。随时可以关掉，你原来的金币不会变。",
+        "zh-Hant": "♾️ 無限模式（設定 → 無限金幣和資源）：金幣用不完，所有山羊、裝備和能力都免費、直接解鎖，不用鈴鐺也不用做任務；能力幾乎馬上就能再用，火箭背包的燃料也用不完。隨時可以關掉，你原來的金幣不會變。"
+      }
+    },
+    {
       "v": 8,
       "file": "goat-mayhem-v8.html",
       "date": "2026-11-13",
