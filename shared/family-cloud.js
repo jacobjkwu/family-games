@@ -16,28 +16,28 @@ const GAMES = {
 };
 const STATE_KEY = 'family-cloud/state';
 const STR = {
-  en: { chipOff: '☁️ Turn on cloud backup', chipOn: '☁️ Backed up {t}', chipBusy: '☁️ Backing up…', chipErr: '☁️ Backup problem', title: '☁️ Cloud backup',
+  en: { chipReady: '☁️ Cloud backup on', pairStart: '📺 Use a pairing code (no typing here)', pairT: '📺 Pairing code', pairB: 'On the iPad that is signed in: open the Game Hub → ☁️ → “📺 Pair another device”, and type this code:', pairWait: 'Waiting for the iPad…', pairOk: '📺 Paired with {e}’s cloud saves.', pairOld: 'This code has expired. Start again.', pairOther: '📺 Pair another device', pairEnter: 'Type the 6-letter code shown on the TV:', pairBad: 'No device is waiting with that code. Check the code on the TV.', pairDone: '📺 Device paired. It now uses your cloud saves.', ok: 'OK', pairedAs: 'Paired with {e}’s cloud saves', unpair: 'Unpair this device', cancel: 'Cancel', chipOff: '☁️ Turn on cloud backup', chipOn: '☁️ Backed up {t}', chipBusy: '☁️ Backing up…', chipErr: '☁️ Backup problem', title: '☁️ Cloud backup',
     signedOut: 'Sign in with Google once on this device, and every game backs itself up to the cloud.', signIn: 'Sign in with Google', signOut: 'Sign out',
     as: 'Signed in as {e}', upAll: '⬆️ Back up now', restore: '⬇️ Restore a game…', close: 'Close', pickGame: 'Which game?', pickSnap: 'Which backup?', none: 'No cloud backups yet.',
     newerT: '☁️ Newer progress in the cloud', newerB: '{g}: progress from {d}, {t}.\nLoad it on this device? This device’s progress is kept as a backup first.', load: 'Load it', keep: 'Keep this device’s',
     loadOk: '☁️ {g}: cloud progress loaded.', upOk: '☁️ All games backed up.', err: 'Cloud backup problem: {m}', confirmT: 'Restore this backup?', confirmB: '{g}: backup from {d}, {t}.\nThis device’s progress is kept as a backup first.',
     never: 'never', justNow: 'just now', ago: '{t} ago', min: '{n} min', hr: '{n} h', day: '{n} days', lastUp: '{g}: last backup {t}', drawrassic: 'Drawrassic Park backs itself up inside the game (⚙️ settings).',
     dev: { ipad: 'iPad', iphone: 'iPhone', xbox: 'Xbox', pc: 'PC', mac: 'Mac', android: 'Android', other: 'another device' } },
-  fr: { chipOff: '☁️ Activer la sauvegarde cloud', chipOn: '☁️ Sauvegardé {t}', chipBusy: '☁️ Sauvegarde…', chipErr: '☁️ Problème de sauvegarde', title: '☁️ Sauvegarde cloud',
+  fr: { chipReady: '☁️ Sauvegarde cloud activée', pairStart: '📺 Utiliser un code d’appairage (rien à taper ici)', pairT: '📺 Code d’appairage', pairB: 'Sur l’iPad connecté : ouvre la salle de jeux → ☁️ → « 📺 Appairer un autre appareil », puis tape ce code :', pairWait: 'En attente de l’iPad…', pairOk: '📺 Appairé aux sauvegardes de {e}.', pairOld: 'Ce code a expiré. Recommence.', pairOther: '📺 Appairer un autre appareil', pairEnter: 'Tape le code de 6 lettres affiché sur la télé :', pairBad: 'Aucun appareil n’attend avec ce code. Vérifie le code sur la télé.', pairDone: '📺 Appareil appairé. Il utilise maintenant tes sauvegardes cloud.', ok: 'OK', pairedAs: 'Appairé aux sauvegardes de {e}', unpair: 'Désappairer cet appareil', cancel: 'Annuler', chipOff: '☁️ Activer la sauvegarde cloud', chipOn: '☁️ Sauvegardé {t}', chipBusy: '☁️ Sauvegarde…', chipErr: '☁️ Problème de sauvegarde', title: '☁️ Sauvegarde cloud',
     signedOut: 'Connecte-toi une fois avec Google sur cet appareil, et chaque jeu se sauvegarde tout seul dans le cloud.', signIn: 'Se connecter avec Google', signOut: 'Se déconnecter',
     as: 'Connecté : {e}', upAll: '⬆️ Sauvegarder maintenant', restore: '⬇️ Restaurer un jeu…', close: 'Fermer', pickGame: 'Quel jeu ?', pickSnap: 'Quelle sauvegarde ?', none: 'Pas encore de sauvegarde dans le cloud.',
     newerT: '☁️ Progression plus récente dans le cloud', newerB: '{g} : progression de {d}, {t}.\nLa charger sur cet appareil ? La progression de cet appareil est d’abord gardée en copie.', load: 'La charger', keep: 'Garder celle-ci',
     loadOk: '☁️ {g} : progression du cloud chargée.', upOk: '☁️ Tous les jeux sont sauvegardés.', err: 'Problème de sauvegarde cloud : {m}', confirmT: 'Restaurer cette sauvegarde ?', confirmB: '{g} : sauvegarde de {d}, {t}.\nLa progression de cet appareil est d’abord gardée en copie.',
     never: 'jamais', justNow: 'à l’instant', ago: 'il y a {t}', min: '{n} min', hr: '{n} h', day: '{n} jours', lastUp: '{g} : dernière sauvegarde {t}', drawrassic: 'Drawrassic Park se sauvegarde dans le jeu (⚙️ réglages).',
     dev: { ipad: 'iPad', iphone: 'iPhone', xbox: 'Xbox', pc: 'PC', mac: 'Mac', android: 'Android', other: 'un autre appareil' } },
-  'zh-Hans': { chipOff: '☁️ 开启云备份', chipOn: '☁️ 已备份 · {t}', chipBusy: '☁️ 正在备份…', chipErr: '☁️ 备份出了问题', title: '☁️ 云备份',
+  'zh-Hans': { chipReady: '☁️ 云备份已开启', pairStart: '📺 用配对码（这里不用打字）', pairT: '📺 配对码', pairB: '在已经登录的 iPad 上：打开游戏大厅 → ☁️ → “📺 配对另一台设备”，输入这个码：', pairWait: '正在等 iPad…', pairOk: '📺 已经和 {e} 的云存档配对好了。', pairOld: '这个码过期了，请重新开始。', pairOther: '📺 配对另一台设备', pairEnter: '输入电视上显示的 6 位码：', pairBad: '没有设备在用这个码等待。请核对电视上的码。', pairDone: '📺 配对成功！那台设备现在用你的云存档了。', ok: '确定', pairedAs: '已和 {e} 的云存档配对', unpair: '取消这台设备的配对', cancel: '取消', chipOff: '☁️ 开启云备份', chipOn: '☁️ 已备份 · {t}', chipBusy: '☁️ 正在备份…', chipErr: '☁️ 备份出了问题', title: '☁️ 云备份',
     signedOut: '在这台设备上用 Google 登录一次，所有游戏都会自动备份到云端。', signIn: '用 Google 登录', signOut: '退出登录',
     as: '已登录：{e}', upAll: '⬆️ 立即备份', restore: '⬇️ 恢复某个游戏…', close: '关闭', pickGame: '恢复哪个游戏？', pickSnap: '用哪一份备份？', none: '云端还没有备份。',
     newerT: '☁️ 云端有更新的进度', newerB: '{g}：来自 {d} 的进度，{t}。\n要载入到这台设备吗？这台设备现在的进度会先留一份备份。', load: '载入', keep: '保留这台的',
     loadOk: '☁️ {g}：云端进度已载入。', upOk: '☁️ 所有游戏都备份好了。', err: '云备份出了问题：{m}', confirmT: '恢复这份备份？', confirmB: '{g}：来自 {d} 的备份，{t}。\n这台设备现在的进度会先留一份备份。',
     never: '还没有', justNow: '刚刚', ago: '{t}前', min: '{n} 分钟', hr: '{n} 小时', day: '{n} 天', lastUp: '{g}：上次备份 {t}', drawrassic: 'Drawrassic Park 在游戏里自己备份（⚙️ 设置）。',
     dev: { ipad: 'iPad', iphone: 'iPhone', xbox: 'Xbox', pc: '电脑', mac: 'Mac', android: '安卓设备', other: '另一台设备' } },
-  'zh-Hant': { chipOff: '☁️ 開啟雲端備份', chipOn: '☁️ 已備份 · {t}', chipBusy: '☁️ 正在備份…', chipErr: '☁️ 備份出了問題', title: '☁️ 雲端備份',
+  'zh-Hant': { chipReady: '☁️ 雲端備份已開啟', pairStart: '📺 用配對碼（這裡不用打字）', pairT: '📺 配對碼', pairB: '在已經登入的 iPad 上：打開遊戲大廳 → ☁️ → 「📺 配對另一台裝置」，輸入這個碼：', pairWait: '正在等 iPad…', pairOk: '📺 已經和 {e} 的雲端存檔配對好了。', pairOld: '這個碼過期了，請重新開始。', pairOther: '📺 配對另一台裝置', pairEnter: '輸入電視上顯示的 6 位碼：', pairBad: '沒有裝置在用這個碼等待。請核對電視上的碼。', pairDone: '📺 配對成功！那台裝置現在用你的雲端存檔了。', ok: '確定', pairedAs: '已和 {e} 的雲端存檔配對', unpair: '取消這台裝置的配對', cancel: '取消', chipOff: '☁️ 開啟雲端備份', chipOn: '☁️ 已備份 · {t}', chipBusy: '☁️ 正在備份…', chipErr: '☁️ 備份出了問題', title: '☁️ 雲端備份',
     signedOut: '在這台裝置上用 Google 登入一次，所有遊戲都會自動備份到雲端。', signIn: '用 Google 登入', signOut: '登出',
     as: '已登入：{e}', upAll: '⬆️ 立即備份', restore: '⬇️ 恢復某個遊戲…', close: '關閉', pickGame: '恢復哪個遊戲？', pickSnap: '用哪一份備份？', none: '雲端還沒有備份。',
     newerT: '☁️ 雲端有更新的進度', newerB: '{g}：來自 {d} 的進度，{t}。\n要載入到這台裝置嗎？這台裝置現在的進度會先留一份備份。', load: '載入', keep: '保留這台的',
@@ -74,7 +74,8 @@ async function loadApi() {
   const app = fb.initializeApp(FIREBASE_CONFIG), auth = fb.getAuth(app), db = fb.getFirestore(app);
   try { await fb.getRedirectResult(auth); } catch (e) {}
   return {
-    onUser(cb) { fb.onAuthStateChanged(auth, u => cb(u ? { uid: u.uid, email: u.email || '' } : null)); },
+    onUser(cb) { fb.onAuthStateChanged(auth, u => cb(u ? { uid: u.uid, email: u.email || '', anon: !!u.isAnonymous } : null)); },
+    signInAnon() { return fb.signInAnonymously(auth); },
     signIn() { const p = new fb.GoogleAuthProvider(); p.setCustomParameters({ prompt: 'select_account' });
       return fb.signInWithPopup(auth, p).catch(e => { const c = (e && e.code) || ''; if (/popup-blocked|operation-not-supported|web-storage-unsupported/.test(c)) return fb.signInWithRedirect(auth, p); throw e; }); },
     signOut() { return fb.signOut(auth); },
@@ -83,7 +84,9 @@ async function loadApi() {
     async list(c, n) { const s = await fb.getDocs(fb.query(fb.collection(db, c), fb.orderBy('at', 'desc'), fb.limit(n))); return s.docs.map(x => Object.assign({ id: x.id }, x.data())); },
     del(p) { return fb.deleteDoc(fb.doc(db, p)); } };
 }
-const base = g => 'users/' + C.user.uid + '/ls/' + g;
+const ownerUid = () => C.user ? (C.user.anon ? (state().owner || null) : C.user.uid) : null;
+const active = () => !!ownerUid();   // signed in with Google, or paired
+const base = g => 'users/' + ownerUid() + '/ls/' + g;
 async function upload(g, force) {
   const data = localData(g); if (!Object.keys(data).length || !hasProgress(g, data)) return false;
   const json = JSON.stringify(data), h = hash(json), st = state(); st.hash = st.hash || {};
@@ -97,7 +100,7 @@ async function upload(g, force) {
 }
 async function prune(g) { try { const list = await C.api.list(base(g) + '/snaps', 200); const hs = list.filter(x => x.id.startsWith('h-')), ds = list.filter(x => x.id.startsWith('d-'));
   for (const x of [...hs.slice(CFG.keepHourly), ...ds.slice(CFG.keepDaily)]) await C.api.del(base(g) + '/snaps/' + x.id); } catch (e) {} }
-async function uploadAll(force) { if (!C.user || C.busy) return; C.busy = true; C.err = ''; chip();
+async function uploadAll(force) { if (!active() || C.busy) return; C.busy = true; C.err = ''; chip();
   let any = false; try { for (const g of C.games) any = (await upload(g, force)) || any; } catch (e) { C.err = (e && (e.code || e.message)) || '?'; }
   C.busy = false; chip(); return any; }
 function restoreLocal(g, json) { const data = JSON.parse(json); const cur = localData(g);
@@ -107,7 +110,7 @@ function restoreLocal(g, json) { const data = JSON.parse(json); const cur = loca
   const st = state(); st.hash = st.hash || {}; st.hash[g] = hash(JSON.stringify(localData(g))); setState(st); }
 async function restoreSnap(g, snapId) { const s = await C.api.get(base(g) + '/snaps/' + snapId); if (!s) throw new Error('backup not found'); restoreLocal(g, s.data);
   const st = state(); st.seen = st.seen || {}; st.seen[g] = Math.max(st.seen[g] || 0, s.at); setState(st); toast(T('loadOk', { g: gName(g) })); setTimeout(() => location.reload(), 1200); }
-async function checkNewer() { if (!C.user) return;
+async function checkNewer() { if (!active()) return;
   for (const g of C.games) { try { const m = await C.api.get(base(g)); const st = state(); if (!m || m.dev === device() || !(m.at > ((st.seen || {})[g] || 0))) continue;
       const local = localData(g); if (hash(JSON.stringify(local)) === m.hash) { st.seen = st.seen || {}; st.seen[g] = m.at; setState(st); continue; }
       if (g === 'game-hub' && hasProgress(g, local)) { st.seen = st.seen || {}; st.seen[g] = m.at; setState(st); continue; } // don't nag about hub settings
@@ -117,12 +120,12 @@ async function checkNewer() { if (!C.user) return;
     } catch (e) { C.err = (e && (e.code || e.message)) || '?'; chip(); } } }
 
 /* ---------- UI: chip, dialogs (touch + controller) ---------- */
-const css = `.fc-chip{font:inherit;font-size:16px;font-weight:700;min-height:44px;padding:6px 14px;border-radius:999px;border:3px solid #1d3b25;background:#fff8e1;color:#1d3b25;cursor:pointer}
+const css = `.fc-chip{font:inherit;font-size:clamp(16px,1.35vw,28px);font-weight:700;min-height:44px;padding:6px 14px;border-radius:999px;border:3px solid #1d3b25;background:#fff8e1;color:#1d3b25;cursor:pointer}
 .fc-chip.float{position:fixed;left:max(10px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));z-index:50;box-shadow:0 4px 0 rgba(0,0,0,.3)}
 .fc-overlay{position:fixed;inset:0;background:rgba(10,20,12,.6);display:flex;align-items:center;justify-content:center;z-index:1000;padding:16px;touch-action:pan-y}
-.fc-box{background:#fff8e1;color:#1d3b25;border:4px solid #1d3b25;border-radius:22px;padding:18px 20px;width:min(560px,100%);max-height:90vh;overflow:auto;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","PingFang TC","Microsoft YaHei",system-ui,sans-serif;font-size:18px}
-.fc-box h2{margin:0 0 10px;font-size:24px}.fc-box p{white-space:pre-line;margin:6px 0 12px}.fc-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-.fc-btn{font:inherit;font-size:18px;font-weight:700;min-height:52px;padding:8px 16px;border-radius:16px;border:3px solid #1d3b25;background:#f3e6bf;color:#1d3b25;cursor:pointer;flex:1 1 auto}
+.fc-box{background:#fff8e1;color:#1d3b25;border:4px solid #1d3b25;border-radius:22px;padding:18px 20px;width:min(36em,100%);max-height:90vh;overflow:auto;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","PingFang TC","Microsoft YaHei",system-ui,sans-serif;font-size:clamp(18px,1.55vw,32px)}
+.fc-box h2{margin:0 0 10px;font-size:1.35em}.fc-box p{white-space:pre-line;margin:6px 0 12px}.fc-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.fc-btn{font:inherit;font-size:1em;font-weight:700;min-height:2.6em;padding:8px 16px;border-radius:16px;border:3px solid #1d3b25;background:#f3e6bf;color:#1d3b25;cursor:pointer;flex:1 1 auto}
 .fc-btn.primary{background:#f59e0b}.fc-btn.wide{display:block;width:100%;text-align:left;margin:6px 0;flex:none}.fc-btn.fc-focus{outline:6px solid #f59e0b;outline-offset:3px;box-shadow:0 0 0 10px rgba(245,158,11,.35)}
 .fc-toast{position:fixed;left:50%;top:16px;transform:translateX(-50%);background:rgba(29,59,37,.95);color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;z-index:1001;max-width:92vw;text-align:center;font-family:system-ui,sans-serif}`;
 function addCss() { if (document.getElementById('fc-css')) return; const s = document.createElement('style'); s.id = 'fc-css'; s.textContent = css; document.head.appendChild(s); }
@@ -155,20 +158,52 @@ function pollPads() { let pads = []; try { pads = Array.from((navigator.getGamep
   requestAnimationFrame(pollPads); }
 document.addEventListener('keydown', e => { if (!modal) return; if (e.key === 'Escape') { modal.cancel(); e.preventDefault(); } }, true);
 let chipEl = null;
-function chip() { if (!chipEl) return; chipEl.textContent = !C.api ? '' : !C.user ? T('chipOff') : C.busy ? T('chipBusy') : C.err ? T('chipErr') : T('chipOn', { t: ago(Math.max(0, ...Object.values(state().up || {}))) }); chipEl.hidden = !C.api; }
+function chip() { if (!chipEl) return; chipEl.textContent = !C.api ? '' : !active() ? T('chipOff') : C.busy ? T('chipBusy') : C.err ? T('chipErr') : (Object.keys(state().up || {}).length ? T('chipOn', { t: ago(Math.max(0, ...Object.values(state().up || {}))) }) : T('chipReady')); chipEl.hidden = !C.api; }
 async function menu() {
-  if (!C.user) { const ok = await dialog(T('title'), T('signedOut'), [{ label: T('close'), value: false }, { label: T('signIn'), primary: true, value: true }], false); if (ok) signIn(); return; }
+  if (!active()) { const v = await dialog(T('title'), T('signedOut'), [{ label: T('signIn'), wide: true, value: 'g' }, { label: T('pairStart'), wide: true, value: 'p' }, { label: T('close'), primary: true, value: null }], null);
+    if (v === 'g') signIn(); else if (v === 'p') pairThisDevice(); return; }
   const st = state(); const lines = C.games.filter(g => g !== 'game-hub').map(g => T('lastUp', { g: gName(g), t: ago((st.up || {})[g]) }));
-  const text = T('as', { e: C.user.email || 'Google' }) + '\n' + lines.join('\n') + (C.err ? '\n' + T('err', { m: C.err }) : '') + '\n' + T('drawrassic');
-  const v = await dialog(T('title'), text, [{ label: T('upAll'), wide: true, value: 'up' }, { label: T('restore'), wide: true, value: 'restore' }, { label: T('signOut'), wide: true, value: 'out' }, { label: T('close'), primary: true, value: null }], null);
+  const who = C.user.anon ? T('pairedAs', { e: state().ownerEmail || '?' }) : T('as', { e: C.user.email || 'Google' });
+  const text = who + '\n' + lines.join('\n') + (C.err ? '\n' + T('err', { m: C.err }) : '') + '\n' + T('drawrassic');
+  const v = await dialog(T('title'), text, [{ label: T('upAll'), wide: true, value: 'up' }, { label: T('restore'), wide: true, value: 'restore' }, ...(C.user.anon ? [] : [{ label: T('pairOther'), wide: true, value: 'pair' }]), { label: C.user.anon ? T('unpair') : T('signOut'), wide: true, value: 'out' }, { label: T('close'), primary: true, value: null }], null);
   if (v === 'up') { await uploadAll(true); if (!C.err) toast(T('upOk')); else toast(T('err', { m: C.err })); }
-  else if (v === 'out') { try { await C.api.signOut(); } catch (e) {} }
+  else if (v === 'out') { if (C.user.anon) setState({ owner: null, ownerEmail: null }); try { await C.api.signOut(); } catch (e) {} chip(); }
+  else if (v === 'pair') pairOtherDevice();
   else if (v === 'restore') {
     const g = await dialog(T('pickGame'), '', [...C.games.filter(x => x !== 'game-hub').map(x => ({ label: gName(x), wide: true, value: x })), { label: T('close'), value: null }], null); if (!g) return;
     let list = []; try { list = await C.api.list(base(g) + '/snaps', 80); } catch (e) { toast(T('err', { m: (e && (e.code || e.message)) || '?' })); return; }
     const seen = new Set(), items = []; for (const s of list) { if (seen.has(s.at)) continue; seen.add(s.at); items.push({ label: new Date(s.at).toLocaleString() + ' · ' + devName(s.kind), wide: true, value: s }); }
     const s = await dialog(T('pickSnap'), items.length ? '' : T('none'), [...items, { label: T('close'), value: null }], null); if (!s) return;
     if (await ask(T('confirmT'), T('confirmB', { g: gName(g), d: devName(s.kind), t: new Date(s.at).toLocaleString() }), T('load'), T('close'))) { try { await restoreSnap(g, s.id); } catch (e) { toast(T('err', { m: (e && (e.code || e.message)) || '?' })); } } } }
+
+/* ---------- pairing: a device that can't sign in to Google (Xbox) borrows the family's cloud saves ---------- */
+const CODE_CHARS = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';   // no 0/O, 1/I/L
+const PAIR_TTL = 10 * 60000;
+async function pairThisDevice() {
+  try { if (!C.user || !C.user.anon) await C.api.signInAnon(); } catch (e) { toast(T('err', { m: (e && (e.code || e.message)) || '?' })); return; }
+  for (let i = 0; i < 50 && !(C.user && C.user.anon); i++) await new Promise(r => setTimeout(r, 100));
+  if (!(C.user && C.user.anon)) { toast(T('err', { m: 'anonymous sign-in' })); return; }
+  let code = ''; for (let i = 0; i < 6; i++) code += CODE_CHARS[Math.floor(Math.random() * CODE_CHARS.length)];
+  try { await C.api.set('pairing/' + code, { anon: C.user.uid, at: Date.now(), kind: devKind() }); } catch (e) { toast(T('err', { m: (e && (e.code || e.message)) || '?' })); return; }
+  const big = document.createElement('div'); big.style.cssText = 'font:900 clamp(48px,6vw,120px)/1.1 ui-monospace,Menlo,monospace;letter-spacing:.15em;text-align:center;margin:10px 0;color:#1d3b25'; big.textContent = code;
+  const wait = document.createElement('div'); wait.style.cssText = 'text-align:center;opacity:.8;margin:4px 0 14px'; wait.textContent = T('pairWait'); big.appendChild(document.createElement('br'));
+  const box = document.createElement('div'); box.append(big, wait);
+  let done = false; const t0 = Date.now();
+  const watcher = (async () => { while (!done) { await new Promise(r => setTimeout(r, 2000)); if (done) return;
+      if (Date.now() - t0 > PAIR_TTL) { done = true; modal && modal.cancel(); toast(T('pairOld')); return; }
+      try { const d = await C.api.get('pairing/' + code); if (d && d.owner) { done = true; setState({ owner: d.owner, ownerEmail: d.ownerEmail || '' }); try { await C.api.del('pairing/' + code); } catch (e) {}
+          modal && modal.cancel(); toast(T('pairOk', { e: d.ownerEmail || '' })); chip(); await checkNewer(); await uploadAll(false); return; } } catch (e) {} } })();
+  await dialog(T('pairT'), T('pairB'), [{ label: T('cancel'), primary: true, value: null }], null, box); done = true; await watcher; }
+async function pairOtherDevice() {
+  const inp = document.createElement('input'); inp.type = 'text'; inp.autocapitalize = 'characters'; inp.autocomplete = 'off'; inp.maxLength = 6; inp.inputMode = 'text';
+  inp.style.cssText = 'font:900 max(36px,1.6em) ui-monospace,Menlo,monospace;letter-spacing:.2em;text-transform:uppercase;width:100%;padding:8px 12px;border:3px solid #1d3b25;border-radius:14px;margin:6px 0 12px';
+  setTimeout(() => { try { inp.focus(); } catch (e) {} }, 50);
+  const ok = await dialog(T('pairOther'), T('pairEnter'), [{ label: T('cancel'), value: false }, { label: T('ok'), primary: true, value: true }], false, inp); if (!ok) return;
+  const code = inp.value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+  try { const d = await C.api.get('pairing/' + code); if (!d || !d.anon || Date.now() - (d.at || 0) > PAIR_TTL) { toast(T('pairBad')); return; }
+    await C.api.set('users/' + C.user.uid + '/devices/' + d.anon, { at: Date.now(), kind: d.kind || 'other' });
+    await C.api.set('pairing/' + code, Object.assign({}, d, { owner: C.user.uid, ownerEmail: C.user.email || '' })); toast(T('pairDone'));
+  } catch (e) { toast(T('err', { m: (e && (e.code || e.message)) || '?' })); } }
 async function signIn() { try { await C.api.signIn(); } catch (e) { const c = (e && (e.code || e.message)) || '?'; if (!/popup-closed|cancelled-popup/.test(c)) toast(T('err', { m: c })); } }
 
 /* ---------- start ---------- */
@@ -180,10 +215,10 @@ async function start() {
     const slot = C.chip === 'hub' && document.querySelector('header'); if (slot) slot.appendChild(chipEl); else document.body.appendChild(chipEl); }
   requestAnimationFrame(pollPads);
   try { C.api = await loadApi(); } catch (e) { C.api = null; chip(); return; }
-  C.api.onUser(async u => { C.user = u; chip(); if (u) { await checkNewer(); await uploadAll(false); } });
-  setInterval(() => { if (C.user && !document.hidden) uploadAll(false); else chip(); }, CFG.checkEveryMs);
-  document.addEventListener('visibilitychange', () => { if (!C.user) return; if (document.hidden) uploadAll(false); else checkNewer(); });
-  window.addEventListener('pagehide', () => { if (C.user) uploadAll(false); });
+  C.api.onUser(async u => { C.user = u; if (u && !u.anon && state().owner) setState({ owner: null, ownerEmail: null }); chip(); if (active()) { await checkNewer(); await uploadAll(false); } });
+  setInterval(() => { if (active() && !document.hidden) uploadAll(false); else chip(); }, CFG.checkEveryMs);
+  document.addEventListener('visibilitychange', () => { if (!active()) return; if (document.hidden) uploadAll(false); else checkNewer(); });
+  window.addEventListener('pagehide', () => { if (active()) uploadAll(false); });
   chip(); }
 window.FamilyCloud = { menu, isModalOpen: () => !!modal, uploadAll: () => uploadAll(true) };
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();

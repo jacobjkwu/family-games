@@ -1,5 +1,8 @@
 # Drawrassic Park — Changelog
 
+## v3.8 (2026-11-12) — save schema s4 (unchanged)
+- Xbox pairing: Google sign-in fails on Xbox Edge (the redirect result is lost to cross-site storage blocking). A device paired in the Game Hub (anonymous Firebase sign-in plus a 6-letter code typed on the signed-in iPad) now uses the owner's cloud saves: the owner uid comes from localStorage `family-cloud/state.owner`. Settings shows a link to the Game Hub for pairing.
+
 ## v3.7 (2026-11-12) — save schema s4 (unchanged)
 - Self-healing loader: dinos, eggs and Dino Box items with an id already seen are dropped on load (a v3.5 double import saved every dino twice with the same id; a backup taken afterwards carried the copies too). A toast says how many were removed, and the cleaned park is saved.
 

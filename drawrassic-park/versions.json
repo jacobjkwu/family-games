@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.8",
+      "file": "drawrassic-park-v3.8.html",
+      "date": "2026-11-12",
+      "schema": 4,
+      "switcher": true,
+      "notes": {
+        "en": "Xbox: after pairing in the Game Hub with a 6-letter code, the game uses the family's cloud saves without a Google sign-in on the Xbox.",
+        "fr": "Xbox : après l’appairage dans la salle de jeux avec un code de 6 lettres, le jeu utilise les sauvegardes cloud de la famille sans connexion Google sur la Xbox.",
+        "zh-Hans": "Xbox：在游戏大厅用 6 位配对码配对后，不用在 Xbox 上登录 Google，就能用家里的云存档。",
+        "zh-Hant": "Xbox：在遊戲大廳用 6 位配對碼配對後，不用在 Xbox 上登入 Google，就能用家裡的雲端存檔。"
+      }
+    },
+    {
       "v": "3.7",
       "file": "drawrassic-park-v3.7.html",
       "date": "2026-11-12",
