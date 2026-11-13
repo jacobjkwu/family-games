@@ -2,6 +2,18 @@
   "game": "crab-castle",
   "versions": [
     {
+      "v": 11,
+      "file": "crab-castle-v11.html",
+      "date": "2026-11-13",
+      "schema": "s4",
+      "notes": {
+        "zh-Hans": "🤪 超多搞笑新东西：15 种新敌人（网瘾少年、气球熊孩子、砍价大妈、鸽子精、潜水员…）、5 个新 Boss（国宝熊猫、蚊子王、班主任、断网大魔王、闹钟大魔王）、9 种新兵种（奶茶店员、功夫大师、忍者、吸尘器阿姨…）、8 个新道具（香蕉皮雨、神秘金蛋、龙卷风…）、4 个新成就。新存档 s4（v10 的存档不动）。",
+        "zh-Hant": "🤪 超多搞笑新東西：15 種新敵人（網癮少年、氣球熊孩子、砍價大媽、鴿子精、潛水員…）、5 個新 Boss（國寶熊貓、蚊子王、班主任、斷網大魔王、鬧鐘大魔王）、9 種新兵種（奶茶店員、功夫大師、忍者、吸塵器阿姨…）、8 個新道具（香蕉皮雨、神祕金蛋、龍捲風…）、4 個新成就。新存檔 s4（v10 的存檔不動）。",
+        "en": "🤪 Tons of silly new stuff: 15 new enemies (Gamer Kid, Balloon Brat, Bargain Granny, Flaky Pigeon, Diver…), 5 new bosses (Panda, Mosquito King, Head Teacher, No-Wi-Fi Demon, Alarm Clock Demon), 9 new troops (Boba Barista, Kung Fu Master, Ninja, Vacuum Auntie…), 8 new items (Banana Peel Rain, Mystery Golden Egg, Tornado…), 4 new achievements. New save s4 (v10’s save untouched).",
+        "fr": "🤪 Plein de nouveautés rigolotes : 15 nouveaux ennemis (Accro aux Jeux, Garnement au Ballon, Mamie Marchandage, Pigeon Lâcheur, Plongeur…), 5 nouveaux boss (Panda, Roi Moustique, Maîtresse, Démon Sans-Wi-Fi, Démon Réveil), 9 nouvelles troupes (Barista Boba, Maître de Kung-Fu, Ninja, Tata Aspirateur…), 8 nouveaux objets (Pluie de Peaux de Banane, Œuf d’Or Mystère, Tornade…), 4 nouveaux succès. Nouvelle sauvegarde s4 (celle de v10 intacte)."
+      }
+    },
+    {
       "v": 10,
       "file": "crab-castle-v10.html",
       "date": "2026-11-13",

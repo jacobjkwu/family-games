@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
 <title>巨蟹王城堡保卫战 · 版本</title>
 <style>
 html{font-size:16px}
@@ -127,7 +129,7 @@ const STR = {
 };
 const LANG_NAMES = [['en', 'English'], ['fr', 'Français'], ['zh-Hans', '简体中文'], ['zh-Hant', '繁體中文']];
 // 内置版本表（versions.json 读不到时用）
-const FALLBACK = {game:GAME, versions:[{v:10, file:'crab-castle-v10.html', date:'2026-11-13', schema:'s3', notes:{}}, {v:9, file:'crab-castle-v9.html', date:'2026-11-13', schema:'s3', notes:{}}, {v:8, file:'crab-castle-v8.html', date:'2026-11-13', schema:'s3', notes:{}}, {v:7, file:'crab-castle-v7.html', date:'2026-11-13', schema:'s2', notes:{}}, {v:6, file:'crab-castle-v6.html', date:'2026-11-13', schema:'s1', notes:{}}, {v:4, file:'crab-castle-v4.html', date:'2026-11-12', schema:null, notes:{}}], missing:[1, 2, 3, 5]};
+const FALLBACK = {game:GAME, versions:[{v:11, file:'crab-castle-v11.html', date:'2026-11-13', schema:'s4', notes:{}}, {v:10, file:'crab-castle-v10.html', date:'2026-11-13', schema:'s3', notes:{}}, {v:9, file:'crab-castle-v9.html', date:'2026-11-13', schema:'s3', notes:{}}, {v:8, file:'crab-castle-v8.html', date:'2026-11-13', schema:'s3', notes:{}}, {v:7, file:'crab-castle-v7.html', date:'2026-11-13', schema:'s2', notes:{}}, {v:6, file:'crab-castle-v6.html', date:'2026-11-13', schema:'s1', notes:{}}, {v:4, file:'crab-castle-v4.html', date:'2026-11-12', schema:null, notes:{}}], missing:[1, 2, 3, 5]};
 
 // ---------- 存储（全部 try/catch） ----------
 const get = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
@@ -151,18 +153,27 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '
 // ---------- 存档结构与迁移（和游戏代码里的完全一致） ----------
 // s1（v6）：crab-castle/save/s1 = {ach, map:序号}
 // s2（v7）：crab-castle/save/s2 = {ach, mapId, maps, run}
-// s3（v8）：crab-castle/save/s3 = {game, schema:3, wid, born, savedAt, ver, ach, mapId, maps, run}
+// s3（v8–v10）：crab-castle/save/s3 = {game, schema:3, wid, born, savedAt, ver, ach, mapId, maps, run}
+// s4（v11）：crab-castle/save/s4 = 和 s3 一样的形状，多了新兵种 / 敌人 / 成就
+const V11_GUARDS = ['boba', 'kungfu', 'piggy', 'ninja', 'dj', 'photog', 'magnet', 'firework', 'vacuum'];
+const V11_ACH = ['slip', 'egg', 'vacuum', 'zoo'];
+const V11_ENEMY = ['gamer', 'balloon', 'sleepy', 'shopper', 'snail', 'tourist', 'chef', 'magician', 'pigeon', 'diver', 'richkid', 'pumpkin', 'astro', 'mascot', 'student'];
 const BUILTIN = ['beach', 'lava', 'ice'];
 const SCHEMA_KEY = s => `${GAME}/save/${s}`;
-const ORDER = ['s1', 's2', 's3'];
+const ORDER = ['s1', 's2', 's3', 's4'];
 const newWid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 const UP = {
   s1_s2: d => ({ach:d && d.ach || {}, mapId:BUILTIN[Math.max(0, Math.min(2, Number(d && d.map) || 0))], maps:[], run:null}),
   s2_s3: d => ({game:GAME, schema:3, wid:null, born:Date.now(), savedAt:0, ver:7, ach:d && d.ach || {}, mapId:d && d.mapId, maps:d && d.maps || [], run:d && d.run || null}),
+  s3_s4: d => ({...(d || {}), game:GAME, schema:4, wid:null}),
 };
 const DOWN = {
   s2_s1: d => ({ach:d && d.ach || {}, map:Math.max(0, BUILTIN.indexOf(d && d.mapId))}),
   s3_s2: d => ({ach:d && d.ach || {}, mapId:d && d.mapId || 'beach', maps:Array.isArray(d && d.maps) ? d.maps : [], run:d && d.run || null}),
+  // 降级到 v8–v10：去掉 v11 才有的守卫、成就和图鉴
+  s4_s3: d => { const o = {...(d || {}), schema:3}; o.ach = Object.fromEntries(Object.entries(o.ach || {}).filter(([k]) => !V11_ACH.includes(k)));
+    if (o.run) { o.run = {...o.run, guards:(o.run.guards || []).filter(g => !V11_GUARDS.includes(g[0])), seen:Object.fromEntries(Object.entries(o.run.seen || {}).filter(([k]) => !V11_ENEMY.includes(k)))}; }
+    return o; },
 };
 function convert(data, from, to) {
   let i = ORDER.indexOf(from), j = ORDER.indexOf(to), d = data;
@@ -173,12 +184,12 @@ function convert(data, from, to) {
 }
 // 写入：s3 必须带新的 wid，这样已经打开的 v8 页面会发现存档被改了，不会盖掉它
 function writeSchema(s, data) {
-  const out = s === 's3' ? {...data, game:GAME, schema:3, wid:newWid(), savedAt:Date.now()} : data;
+  const out = s === 's3' || s === 's4' ? {...data, game:GAME, schema:+s.slice(1), wid:newWid(), savedAt:Date.now()} : data;
   return set(SCHEMA_KEY(s), JSON.stringify(out));
 }
 function backupCurrent(s) { const raw = get(SCHEMA_KEY(s)); if (raw != null) set(`${SCHEMA_KEY(s)}/copy-backup-${Date.now()}`, raw); }
 function readSave(s) {
-  const ok = d => d && typeof d === 'object' && (s !== 's3' || (d.game === GAME && d.schema === 3)) ? d : null;
+  const ok = d => d && typeof d === 'object' && (s !== 's3' && s !== 's4' || (d.game === GAME && d.schema === +s.slice(1))) ? d : null;
   return ok(parse(get(SCHEMA_KEY(s)))) || ok(parse(get(SCHEMA_KEY(s) + '/bak')));
 }
 function describe(d, s) {
@@ -249,9 +260,9 @@ function copyText(text, ok) {
 }
 // 和游戏里一样的备份码：CRABCASTLE- + base64(JSON)
 function backupCode() {
-  for (const s of ['s3', 's2', 's1']) { const d = readSave(s); if (d) {
-    const save = s === 's3' ? d : convert(d, s, 's3');
-    const o = {game:GAME, kind:'backup', schema:3, version:vOf('s3') || 8, date:new Date().toISOString(), save, settings:settings()};
+  for (const s of ['s4', 's3', 's2', 's1']) { const d = readSave(s); if (d) {
+    const save = s === 's4' ? d : convert(d, s, 's4');
+    const o = {game:GAME, kind:'backup', schema:4, version:vOf('s4') || 11, date:new Date().toISOString(), save, settings:settings()};
     return 'CRABCASTLE-' + btoa(unescape(encodeURIComponent(JSON.stringify(o)))); } }
   return null;
 }
