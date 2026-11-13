@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.38",
+      "file": "drawrassic-park-v3.38.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "💬 Line Factory: every dino and visitor now has a personality (24 voices: drama star, foodie, brainiac, shy one, chosen one, streamer, old-timer, philosopher, joke king…) and lines are built fresh from templates, word lists and kid-safe internet memes — about 34 million different lines per language, rarely repeating.",
+        "fr": "💬 Usine à répliques : chaque dino et visiteur a une personnalité (24 voix : star du drame, gourmand, intello, timide, l’élu, streameur, vieux sage, philosophe, roi des blagues…) et les répliques sont fabriquées à partir de modèles, de listes de mots et de mèmes adaptés aux enfants — environ 34 millions de répliques par langue.",
+        "zh-Hans": "💬 台词工厂：每只恐龙和每个游客都有自己的性格（24 种：戏精、吃货、学霸、社恐、中二、主播、老干部、哲学家、冷笑话王……），台词由模板、词库和适合小朋友的网络热梗现场拼出来——每种语言大约 3400 万种不同的台词，很少重复。",
+        "zh-Hant": "💬 台詞工廠：每隻恐龍和每個遊客都有自己的性格（24 種：戲精、吃貨、學霸、社恐、中二、主播、老幹部、哲學家、冷笑話王……），台詞由模板、詞庫和適合小朋友的網路熱梗現場拼出來——每種語言大約 3400 萬種不同的台詞，很少重複。"
+      }
+    },
+    {
       "v": "3.37",
       "file": "drawrassic-park-v3.37.html",
       "date": "2026-11-13",
