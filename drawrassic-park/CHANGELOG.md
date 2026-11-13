@@ -1,5 +1,14 @@
 # Drawrassic Park — Changelog
 
+## v3.36 (2026-11-13) — save schema s8 (unchanged)
+- 🎆 Drawn fireworks (quick bar): draw with bright colours (🎲 heart, star, smiley, spiral, rings, emoji), ×1 or ×3. A rocket climbs and bursts into your drawing in glowing sparks (~400 points sampled from the drawing); the sky dims for a moment so it shows in daytime; visitors cheer.
+- 🪂 Parachute (quick bar, or ⋯ → 🪂 on a dino card): colour a canopy (🎲 rainbow, panels, dots, stripes). A hot-air balloon picks up to 3 tame walking S/M/L dinos, rises, drifts with the remote's wind, and they jump one by one: free fall with a spin, the parachute opens (tap a falling dino to open it early), they sway down with the wind; landing in a lake makes a splash.
+- 🖌️ Ground painting (quick bar 涂鸦): drag on the ground in 8 colours, 3 sizes, 🧽 wipe all. Dinos and visitors who walk through paint leave coloured footprints (3-toe prints / shoe prints) for 90 s; paint fades after 3 min. Not saved.
+- 🎏 Wind toys in the 🛝 playground shop: pinwheel 5, windmill 20, weather vane 8, windsock 6, wind chimes 6 🪙. They spin, turn and fill with the cloud remote's wind (stronger in storms and squeeze bursts); tap one for a gust; chimes play soft notes.
+- 🏅 Records: the title shows the park's day or night number (☀️ 第 3 天 / 🌙 第 2 夜, from the save's night counter). Tap it (or ☰ → 🏅) for the new Records tab in Park data: total play time, today's play time, times played, and counters for wild dinos caught, bosses beaten, shadow dinos chased off, battles won, eggs hatched, new dinos, snacks thrown, coins earned, most dinos at once, fireworks and parachute jumps, with medals at 1/5/10/25/50/100… (🏅 toast when you earn one). Counters start in v3.36.
+- Data: records live in drawrassic-park/stats/r1 (+/bak, broken data kept under /broken-…); backup codes now include them and importing keeps the higher number of each. Toys moved to drawrassic-park/toys/t2 (copied from t1 on first run) so v3.34–v3.35 can't drop the new wind toys; t1 is left as it was. Save schema unchanged (s8).
+- Quick bar labels: 涂鸦/塗鴉 and French « Saut » so they don't wrap.
+
 ## v3.35 (2026-11-13) — save schema s8 (unchanged)
 - 🏄 Surfing (quick bar, or ⋯ → 🏄 on the dino card): draw a surfboard (🎲 stripes, flames, rainbow, dots, shark). A walking dino (not XL) goes to the biggest lake and rides back and forth on rolling waves (wave crests drawn on the lake), with spray behind the board. Tap the surfer for a trick: +10 × combo points, a spin and a jump, visitors cheer; each trick risks a wipeout (12% + 7% per combo): a big splash, “blub blub”, and the dino paddles to shore. After 45 s (or a wipeout) the points become coins (1 per 20). Up to 3 surfers.
 - 🛷 Sledding (quick bar): draw a sled (🎲 colours), then tap the ground to heap up a snow hill for 2 minutes. Dinos (S–L) and kid visitors climb up the back, sled down the front with snow spray, plough into the snow at the bottom (sometimes a tumble) and go again.

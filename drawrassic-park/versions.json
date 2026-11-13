@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.36",
+      "file": "drawrassic-park-v3.36.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎆 Draw a firework and it bursts into your drawing in the sky; 🪂 a hot-air balloon takes up to 3 dinos for a parachute jump; 🖌️ paint the ground and dinos leave coloured footprints; 🎏 wind toys (windmill, pinwheel, weather vane, windsock, chimes); 🏅 Records: day/night number, play time and medals.",
+        "fr": "🎆 Dessine un feu d’artifice : il explose en forme de ton dessin ; 🪂 une montgolfière emmène 3 dinos sauter en parachute ; 🖌️ peins le sol, les dinos laissent des traces de couleur ; 🎏 jouets à vent (moulin, moulinet, girouette, manche à air, carillon) ; 🏅 Records : jour/nuit, temps de jeu et médailles.",
+        "zh-Hans": "🎆 画烟花，在天上炸出你画的形状；🪂 热气球带最多 3 只恐龙跳伞；🖌️ 地上涂鸦，恐龙踩过会留下彩色脚印；🎏 风车、风向标、风向袋和风铃；🏅 记录：第几天第几夜、游玩时间和奖牌。",
+        "zh-Hant": "🎆 畫煙火，在天上炸出你畫的形狀；🪂 熱氣球帶最多 3 隻恐龍跳傘；🖌️ 地上塗鴉，恐龍踩過會留下彩色腳印；🎏 風車、風向標、風向袋和風鈴；🏅 紀錄：第幾天第幾夜、遊玩時間和獎牌。"
+      }
+    },
+    {
       "v": "3.35",
       "file": "drawrassic-park-v3.35.html",
       "date": "2026-11-13",
