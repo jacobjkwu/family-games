@@ -1,7 +1,7 @@
 {
   "hub": "game-hub",
   "format": 2,
-  "notes": "Game list for the Game Hub. category: \"family\" (our own games) or \"community\" (open-source AI-made games vendored under community/<id>/, played through community/play.html in a sandbox). input: \"controller\" = 手柄+电视, \"touch\" = 触屏优先. url: the game launcher (absolute, or relative to the hub). Community entries also have entry (start page under community/) and credit {author, made, license, repo}. icon = hand-drawn inline SVG (viewBox 0 0 100 100, single quotes inside). Community entries are either copied (entry: start page under community/), embedded (external: the official https site, shown inside community/play.html) or links (link: true, url opens the site directly). input: touch | both (touch or controller) | controller | keyboard.",
+  "notes": "Game list for the Game Hub. category: \"family\" (our own games) or \"community\" (open-source AI-made games vendored under community/<id>/, played through community/play.html in a sandbox). input: \"controller\" = 手柄+电视, \"touch\" = 触屏优先. url: the game launcher (absolute, or relative to the hub). Community entries also have entry (start page under community/) and credit {author, made, license, repo}. icon = hand-drawn inline SVG (viewBox 0 0 100 100, single quotes inside). Community entries are either copied (entry: start page under community/), embedded (external: the official https site, shown inside community/play.html) or links (link: true, url opens the site directly). input: touch | both (touch or controller) | controller | keyboard. genre: board | puzzle | racing | adventure | build | arcade | cozy (hub filter chips).",
   "games": [
     {
       "id": "goat-mayhem",
@@ -113,7 +113,8 @@
         "license": "MIT",
         "repo": "https://github.com/zeveck/bloom-hop"
       },
-      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8fd8e8'/><ellipse cx='50' cy='66' rx='34' ry='16' fill='#3f9a4e' stroke='#1f5e2a' stroke-width='3'/><path d='M50 66 L80 58' stroke='#8fd3ff' stroke-width='5'/><circle cx='50' cy='50' r='19' fill='#7cc84a' stroke='#2e6b1c' stroke-width='3'/><circle cx='40' cy='35' r='8' fill='#7cc84a' stroke='#2e6b1c' stroke-width='3'/><circle cx='60' cy='35' r='8' fill='#7cc84a' stroke='#2e6b1c' stroke-width='3'/><circle cx='40' cy='35' r='3.5' fill='#1b1b1b'/><circle cx='60' cy='35' r='3.5' fill='#1b1b1b'/><path d='M41 55 Q50 62 59 55' stroke='#2e6b1c' stroke-width='3' fill='none' stroke-linecap='round'/><circle cx='22' cy='26' r='7' fill='#ff8fb1'/><circle cx='22' cy='26' r='3' fill='#ffe08a'/></svg>"
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8fd8e8'/><ellipse cx='50' cy='66' rx='34' ry='16' fill='#3f9a4e' stroke='#1f5e2a' stroke-width='3'/><path d='M50 66 L80 58' stroke='#8fd3ff' stroke-width='5'/><circle cx='50' cy='50' r='19' fill='#7cc84a' stroke='#2e6b1c' stroke-width='3'/><circle cx='40' cy='35' r='8' fill='#7cc84a' stroke='#2e6b1c' stroke-width='3'/><circle cx='60' cy='35' r='8' fill='#7cc84a' stroke='#2e6b1c' stroke-width='3'/><circle cx='40' cy='35' r='3.5' fill='#1b1b1b'/><circle cx='60' cy='35' r='3.5' fill='#1b1b1b'/><path d='M41 55 Q50 62 59 55' stroke='#2e6b1c' stroke-width='3' fill='none' stroke-linecap='round'/><circle cx='22' cy='26' r='7' fill='#ff8fb1'/><circle cx='22' cy='26' r='3' fill='#ffe08a'/></svg>",
+      "genre": "puzzle"
     },
     {
       "id": "puffling-flight",
@@ -141,7 +142,8 @@
         "license": "MIT",
         "repo": "https://github.com/connect-world-1985-ai/2026-10-26-puffling-flight-plan-claude-build-grok"
       },
-      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffd2b8'/><rect x='8' y='70' width='84' height='22' fill='#3d6fb6'/><path d='M14 70 L20 40 L30 42 L34 70 Z M70 70 L74 30 L84 34 L88 70 Z' fill='#7a6a8a'/><ellipse cx='50' cy='48' rx='16' ry='13' fill='#222'/><ellipse cx='52' cy='52' rx='9' ry='8' fill='#fff'/><circle cx='56' cy='42' r='6' fill='#fff'/><circle cx='57' cy='42' r='2.5' fill='#111'/><path d='M62 44 L74 47 L62 51 Z' fill='#ff7a3d' stroke='#c2410c' stroke-width='1.5' stroke-linejoin='round'/><path d='M38 46 Q30 36 36 30 Q42 40 46 44 Z' fill='#333'/></svg>"
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffd2b8'/><rect x='8' y='70' width='84' height='22' fill='#3d6fb6'/><path d='M14 70 L20 40 L30 42 L34 70 Z M70 70 L74 30 L84 34 L88 70 Z' fill='#7a6a8a'/><ellipse cx='50' cy='48' rx='16' ry='13' fill='#222'/><ellipse cx='52' cy='52' rx='9' ry='8' fill='#fff'/><circle cx='56' cy='42' r='6' fill='#fff'/><circle cx='57' cy='42' r='2.5' fill='#111'/><path d='M62 44 L74 47 L62 51 Z' fill='#ff7a3d' stroke='#c2410c' stroke-width='1.5' stroke-linejoin='round'/><path d='M38 46 Q30 36 36 30 Q42 40 46 44 Z' fill='#333'/></svg>",
+      "genre": "arcade"
     },
     {
       "id": "pixel-princess",
@@ -169,7 +171,8 @@
         "license": "MIT",
         "repo": "https://github.com/VTvito/pixel-princess-platformer"
       },
-      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3a2a6a'/><rect x='22' y='60' width='56' height='14' fill='#7b4a2a'/><rect x='22' y='60' width='56' height='5' fill='#5cc85f'/><path d='M30 50 L30 30 L40 40 L50 24 L60 40 L70 30 L70 50 Z' fill='#ffd23f' stroke='#8d6e00' stroke-width='3' stroke-linejoin='round'/><rect x='46' y='36' width='8' height='8' fill='#ff5c8a'/><rect x='33' y='42' width='6' height='6' fill='#4da3ff'/><rect x='61' y='42' width='6' height='6' fill='#4da3ff'/><rect x='14' y='18' width='5' height='5' fill='#fff'/><rect x='82' y='22' width='4' height='4' fill='#fff'/></svg>"
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3a2a6a'/><rect x='22' y='60' width='56' height='14' fill='#7b4a2a'/><rect x='22' y='60' width='56' height='5' fill='#5cc85f'/><path d='M30 50 L30 30 L40 40 L50 24 L60 40 L70 30 L70 50 Z' fill='#ffd23f' stroke='#8d6e00' stroke-width='3' stroke-linejoin='round'/><rect x='46' y='36' width='8' height='8' fill='#ff5c8a'/><rect x='33' y='42' width='6' height='6' fill='#4da3ff'/><rect x='61' y='42' width='6' height='6' fill='#4da3ff'/><rect x='14' y='18' width='5' height='5' fill='#fff'/><rect x='82' y='22' width='4' height='4' fill='#fff'/></svg>",
+      "genre": "arcade"
     },
     {
       "id": "casa-de-gemas",
@@ -197,7 +200,8 @@
         "license": "MIT",
         "repo": "https://github.com/deepujain/casadegema"
       },
-      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffe6ef'/><rect x='26' y='40' width='48' height='44' fill='#fbf6ec' stroke='#8a6d4b' stroke-width='3'/><path d='M20 42 L50 20 L80 42 Z' fill='#d9653b' stroke='#8a3b1c' stroke-width='3' stroke-linejoin='round'/><path d='M44 84 L44 66 Q50 58 56 66 L56 84 Z' fill='#8a5a2b'/><rect x='32' y='50' width='9' height='10' fill='#6fb6e8' stroke='#2f5f8a' stroke-width='2'/><rect x='60' y='50' width='9' height='10' fill='#6fb6e8' stroke='#2f5f8a' stroke-width='2'/><path d='M74 70 L80 64 L86 70 L80 78 Z' fill='#4dd0e1' stroke='#006064' stroke-width='2' stroke-linejoin='round'/><circle cx='22' cy='74' r='6' fill='#e8458f'/><circle cx='18' cy='68' r='4' fill='#ff8fc0'/></svg>"
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffe6ef'/><rect x='26' y='40' width='48' height='44' fill='#fbf6ec' stroke='#8a6d4b' stroke-width='3'/><path d='M20 42 L50 20 L80 42 Z' fill='#d9653b' stroke='#8a3b1c' stroke-width='3' stroke-linejoin='round'/><path d='M44 84 L44 66 Q50 58 56 66 L56 84 Z' fill='#8a5a2b'/><rect x='32' y='50' width='9' height='10' fill='#6fb6e8' stroke='#2f5f8a' stroke-width='2'/><rect x='60' y='50' width='9' height='10' fill='#6fb6e8' stroke='#2f5f8a' stroke-width='2'/><path d='M74 70 L80 64 L86 70 L80 78 Z' fill='#4dd0e1' stroke='#006064' stroke-width='2' stroke-linejoin='round'/><circle cx='22' cy='74' r='6' fill='#e8458f'/><circle cx='18' cy='68' r='4' fill='#ff8fc0'/></svg>",
+      "genre": "cozy"
     },
     {
       "id": "magic-puzzle",
@@ -225,7 +229,8 @@
         "license": "MIT",
         "repo": "https://github.com/maherkhan-builds/maher-magic-puzzle"
       },
-      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#dce6ff'/><g stroke='#1d3b8a' stroke-width='3'><rect x='20' y='20' width='19' height='19' rx='3' fill='#ffd23f'/><rect x='41' y='20' width='19' height='19' rx='3' fill='#ff8a65'/><rect x='62' y='20' width='19' height='19' rx='3' fill='#4da3ff'/><rect x='20' y='41' width='19' height='19' rx='3' fill='#4da3ff'/><rect x='41' y='41' width='19' height='19' rx='3' fill='#ffd23f'/><rect x='20' y='62' width='19' height='19' rx='3' fill='#ff8a65'/><rect x='41' y='62' width='19' height='19' rx='3' fill='#4da3ff'/><rect x='62' y='62' width='19' height='19' rx='3' fill='#ffd23f'/></g><path d='M71.5 44 L74 50 L80 50.5 L75.5 54.5 L77 60 L71.5 57 L66 60 L67.5 54.5 L63 50.5 L69 50 Z' fill='#fff'/></svg>"
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#dce6ff'/><g stroke='#1d3b8a' stroke-width='3'><rect x='20' y='20' width='19' height='19' rx='3' fill='#ffd23f'/><rect x='41' y='20' width='19' height='19' rx='3' fill='#ff8a65'/><rect x='62' y='20' width='19' height='19' rx='3' fill='#4da3ff'/><rect x='20' y='41' width='19' height='19' rx='3' fill='#4da3ff'/><rect x='41' y='41' width='19' height='19' rx='3' fill='#ffd23f'/><rect x='20' y='62' width='19' height='19' rx='3' fill='#ff8a65'/><rect x='41' y='62' width='19' height='19' rx='3' fill='#4da3ff'/><rect x='62' y='62' width='19' height='19' rx='3' fill='#ffd23f'/></g><path d='M71.5 44 L74 50 L80 50.5 L75.5 54.5 L77 60 L71.5 57 L66 60 L67.5 54.5 L63 50.5 L69 50 Z' fill='#fff'/></svg>",
+      "genre": "puzzle"
     },
     {
       "id": "sudoku",
@@ -253,7 +258,8 @@
         "license": "MIT",
         "repo": "https://github.com/miscusi-crew/aiindex-sudoku"
       },
-      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f3e3d3'/><rect x='20' y='20' width='60' height='60' fill='#fff' stroke='#333' stroke-width='3'/><path d='M40 20 V80 M60 20 V80 M20 40 H80 M20 60 H80' stroke='#333' stroke-width='2'/><g font-family='Arial,sans-serif' font-weight='700' font-size='15' text-anchor='middle' fill='#8a2a3a'><text x='30' y='35'>5</text><text x='70' y='35'>3</text><text x='50' y='55'>7</text><text x='30' y='75'>1</text><text x='70' y='75'>9</text></g></svg>"
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f3e3d3'/><rect x='20' y='20' width='60' height='60' fill='#fff' stroke='#333' stroke-width='3'/><path d='M40 20 V80 M60 20 V80 M20 40 H80 M20 60 H80' stroke='#333' stroke-width='2'/><g font-family='Arial,sans-serif' font-weight='700' font-size='15' text-anchor='middle' fill='#8a2a3a'><text x='30' y='35'>5</text><text x='70' y='35'>3</text><text x='50' y='55'>7</text><text x='30' y='75'>1</text><text x='70' y='75'>9</text></g></svg>",
+      "genre": "puzzle"
     },
     {
       "id": "kapadokya-balonu",
@@ -281,7 +287,8 @@
         "license": "MIT",
         "repo": "https://github.com/Furkiozknn/kapadokya-balonu"
       },
-      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffe3b0'/><path d='M10 90 L22 62 L30 90 Z M64 90 L76 58 L88 90 Z' fill='#d9a066' stroke='#8a5a2b' stroke-width='2'/><path d='M50 14 C30 14 24 34 32 48 L44 62 L56 62 L68 48 C76 34 70 14 50 14 Z' fill='#e8590c' stroke='#7f2a05' stroke-width='3'/><path d='M50 14 C42 22 42 50 46 62 M50 14 C58 22 58 50 54 62' stroke='#ffd23f' stroke-width='3' fill='none'/><rect x='44' y='68' width='12' height='9' rx='2' fill='#8a5a2b'/><path d='M45 62 L45 68 M55 62 L55 68' stroke='#5a3a1a' stroke-width='2'/></svg>"
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffe3b0'/><path d='M10 90 L22 62 L30 90 Z M64 90 L76 58 L88 90 Z' fill='#d9a066' stroke='#8a5a2b' stroke-width='2'/><path d='M50 14 C30 14 24 34 32 48 L44 62 L56 62 L68 48 C76 34 70 14 50 14 Z' fill='#e8590c' stroke='#7f2a05' stroke-width='3'/><path d='M50 14 C42 22 42 50 46 62 M50 14 C58 22 58 50 54 62' stroke='#ffd23f' stroke-width='3' fill='none'/><rect x='44' y='68' width='12' height='9' rx='2' fill='#8a5a2b'/><path d='M45 62 L45 68 M55 62 L55 68' stroke='#5a3a1a' stroke-width='2'/></svg>",
+      "genre": "puzzle"
     },
     {
       "id": "karagoz",
@@ -309,7 +316,8 @@
         "license": "MIT",
         "repo": "https://github.com/Furkiozknn/karagoz"
       },
-      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3b1408'/><rect x='18' y='20' width='64' height='54' rx='4' fill='#fff3d6' stroke='#8a3b1c' stroke-width='4'/><path d='M18 20 Q50 34 82 20' fill='#b91c1c'/><circle cx='40' cy='44' r='7' fill='#2b1a10'/><path d='M34 52 L46 52 L48 70 L32 70 Z' fill='#2b1a10'/><circle cx='62' cy='46' r='6' fill='#2b1a10'/><path d='M57 53 L67 53 L70 70 L54 70 Z' fill='#2b1a10'/><path d='M46 58 L56 60' stroke='#2b1a10' stroke-width='3'/><path d='M50 88 L50 80 M44 88 L56 88' stroke='#ffb300' stroke-width='3'/><circle cx='50' cy='79' r='3' fill='#ffd23f'/></svg>"
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3b1408'/><rect x='18' y='20' width='64' height='54' rx='4' fill='#fff3d6' stroke='#8a3b1c' stroke-width='4'/><path d='M18 20 Q50 34 82 20' fill='#b91c1c'/><circle cx='40' cy='44' r='7' fill='#2b1a10'/><path d='M34 52 L46 52 L48 70 L32 70 Z' fill='#2b1a10'/><circle cx='62' cy='46' r='6' fill='#2b1a10'/><path d='M57 53 L67 53 L70 70 L54 70 Z' fill='#2b1a10'/><path d='M46 58 L56 60' stroke='#2b1a10' stroke-width='3'/><path d='M50 88 L50 80 M44 88 L56 88' stroke='#ffb300' stroke-width='3'/><circle cx='50' cy='79' r='3' fill='#ffd23f'/></svg>",
+      "genre": "puzzle"
     },
     {
       "id": "kindle",
@@ -337,7 +345,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ff9b4a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏮</text></svg>",
       "url": "community/play.html?g=kindle",
-      "entry": "kindle/index.html"
+      "entry": "kindle/index.html",
+      "genre": "adventure"
     },
     {
       "id": "hoard-hopper",
@@ -365,7 +374,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#c0392b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐉</text></svg>",
       "url": "community/play.html?g=hoard-hopper",
-      "entry": "hoard-hopper/index.html"
+      "entry": "hoard-hopper/index.html",
+      "genre": "arcade"
     },
     {
       "id": "cozy-bakery",
@@ -391,7 +401,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f6b26b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🥐</text></svg>",
       "url": "community/play.html?g=cozy-bakery",
-      "external": "https://cozybakery.vercel.app/"
+      "external": "https://cozybakery.vercel.app/",
+      "genre": "arcade"
     },
     {
       "id": "cozy-lisbon",
@@ -417,7 +428,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffd23f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>✈️</text></svg>",
       "url": "community/play.html?g=cozy-lisbon",
-      "external": "https://cozylisbon.vercel.app/"
+      "external": "https://cozylisbon.vercel.app/",
+      "genre": "racing"
     },
     {
       "id": "yardclash",
@@ -443,7 +455,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3fae5a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏈</text></svg>",
       "url": "community/play.html?g=yardclash",
-      "external": "https://yardclash.vercel.app/"
+      "external": "https://yardclash.vercel.app/",
+      "genre": "arcade"
     },
     {
       "id": "giant-leap",
@@ -469,7 +482,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#2c3e7a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌕</text></svg>",
       "url": "community/play.html?g=giant-leap",
-      "external": "https://giant-leap.vercel.app/"
+      "external": "https://giant-leap.vercel.app/",
+      "genre": "adventure"
     },
     {
       "id": "tilt-labyrinth",
@@ -495,7 +509,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#a9744f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🟤</text></svg>",
       "url": "community/play.html?g=tilt-labyrinth",
-      "external": "https://blog.silencestar.com/posts/tilt-labyrinth/play/"
+      "external": "https://blog.silencestar.com/posts/tilt-labyrinth/play/",
+      "genre": "puzzle"
     },
     {
       "id": "tree-appreciator",
@@ -521,7 +536,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#7cb342'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌳</text></svg>",
       "url": "community/play.html?g=tree-appreciator",
-      "external": "https://tools.simonwillison.net/tree-appreciator"
+      "external": "https://tools.simonwillison.net/tree-appreciator",
+      "genre": "cozy"
     },
     {
       "id": "yarn-planet",
@@ -549,7 +565,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#e8505b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🧶</text></svg>",
       "url": "community/play.html?g=yarn-planet",
-      "external": "https://yarn.ynot.games/"
+      "external": "https://yarn.ynot.games/",
+      "genre": "adventure"
     },
     {
       "id": "little-flock",
@@ -577,7 +594,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#9ccc65'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐑</text></svg>",
       "url": "community/play.html?g=little-flock",
-      "external": "https://sharpherd.song.work/"
+      "external": "https://sharpherd.song.work/",
+      "genre": "build"
     },
     {
       "id": "driftwing",
@@ -603,7 +621,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#5aa9e6'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🪽</text></svg>",
       "url": "community/play.html?g=driftwing",
-      "external": "https://kylebuildsai.github.io/driftwing/"
+      "external": "https://kylebuildsai.github.io/driftwing/",
+      "genre": "racing"
     },
     {
       "id": "fall-line",
@@ -629,7 +648,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8ecae6'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏂</text></svg>",
       "url": "community/play.html?g=fall-line",
-      "external": "https://nipale-ai.github.io/opus-5-5-overnight-builds/fall-line/"
+      "external": "https://nipale-ai.github.io/opus-5-5-overnight-builds/fall-line/",
+      "genre": "racing"
     },
     {
       "id": "palmera-bay",
@@ -655,7 +675,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f28c38'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🚗</text></svg>",
       "url": "community/play.html?g=palmera-bay",
-      "external": "https://cahlik.net/palmera-bay/"
+      "external": "https://cahlik.net/palmera-bay/",
+      "genre": "racing"
     },
     {
       "id": "three-cats",
@@ -681,7 +702,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#b388ff'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐈</text></svg>",
       "url": "community/play.html?g=three-cats",
-      "external": "https://lambsubstitute.github.io/three-cats/"
+      "external": "https://lambsubstitute.github.io/three-cats/",
+      "genre": "puzzle"
     },
     {
       "id": "fishslop",
@@ -707,7 +729,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#1f8a9e'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐠</text></svg>",
       "url": "community/play.html?g=fishslop",
-      "external": "https://vasu-devs.github.io/FishSlop_Opus5.5/"
+      "external": "https://vasu-devs.github.io/FishSlop_Opus5.5/",
+      "genre": "cozy"
     },
     {
       "id": "solitaire",
@@ -733,7 +756,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#2e7d32'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🃏</text></svg>",
       "url": "community/play.html?g=solitaire",
-      "external": "https://solitaire.mangoidiots.com/"
+      "external": "https://solitaire.mangoidiots.com/",
+      "genre": "board"
     },
     {
       "id": "bubble-wrap",
@@ -759,7 +783,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#9ad0f5'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🫧</text></svg>",
       "url": "community/play.html?g=bubble-wrap",
-      "external": "https://bubble-wrap-simulator.vercel.app/"
+      "external": "https://bubble-wrap-simulator.vercel.app/",
+      "genre": "cozy"
     },
     {
       "id": "rift-chess",
@@ -787,7 +812,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#6d4c41'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>♟️</text></svg>",
       "url": "community/play.html?g=rift-chess",
-      "external": "https://haileystorm.github.io/rift-chess/"
+      "external": "https://haileystorm.github.io/rift-chess/",
+      "genre": "board"
     },
     {
       "id": "thunder-valley",
@@ -813,7 +839,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#e0a030'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🦖</text></svg>",
       "url": "community/play.html?g=thunder-valley",
-      "external": "https://loktar00.github.io/llm-test-pages/fable52-dino-chase/"
+      "external": "https://loktar00.github.io/llm-test-pages/fable52-dino-chase/",
+      "genre": "arcade"
     },
     {
       "id": "lanternfall",
@@ -839,7 +866,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffb300'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏮</text></svg>",
       "url": "community/play.html?g=lanternfall",
-      "external": "https://loktar00.github.io/lanternfall/"
+      "external": "https://loktar00.github.io/lanternfall/",
+      "genre": "arcade"
     },
     {
       "id": "opus-100",
@@ -865,7 +893,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#455a64'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🧪</text></svg>",
       "url": "community/play.html?g=opus-100",
-      "external": "https://swan4er.github.io/opus-100-projects/"
+      "external": "https://swan4er.github.io/opus-100-projects/",
+      "genre": "cozy"
     },
     {
       "id": "cayley",
@@ -893,7 +922,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#4a6fa5'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🛩️</text></svg>",
       "url": "community/play.html?g=cayley",
-      "external": "https://lauramionel.github.io/cayley-flight-simulator/"
+      "external": "https://lauramionel.github.io/cayley-flight-simulator/",
+      "genre": "racing"
     },
     {
       "id": "starry-nightrider",
@@ -919,7 +949,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#1e3a8a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌌</text></svg>",
       "url": "community/play.html?g=starry-nightrider",
-      "external": "https://starrynightrider.com/"
+      "external": "https://starrynightrider.com/",
+      "genre": "adventure"
     },
     {
       "id": "what-the-water-keeps",
@@ -945,7 +976,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#264653'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>⛵</text></svg>",
       "url": "community/play.html?g=what-the-water-keeps",
-      "external": "https://what-the-water-keeps.vercel.app/"
+      "external": "https://what-the-water-keeps.vercel.app/",
+      "genre": "adventure"
     },
     {
       "id": "waking-river",
@@ -971,7 +1003,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#43aa8b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🍃</text></svg>",
       "url": "community/play.html?g=waking-river",
-      "external": "https://rivergame-kappa.vercel.app/"
+      "external": "https://rivergame-kappa.vercel.app/",
+      "genre": "adventure"
     },
     {
       "id": "turbo-tails",
@@ -997,7 +1030,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f4a261'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🦊</text></svg>",
       "url": "community/play.html?g=turbo-tails",
-      "external": "https://turbo-tails.vercel.app/"
+      "external": "https://turbo-tails.vercel.app/",
+      "genre": "racing"
     },
     {
       "id": "capybara-delivery",
@@ -1023,7 +1057,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#c68b59'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🛵</text></svg>",
       "url": "community/play.html?g=capybara-delivery",
-      "external": "https://capybara-vibejam26.leocoout.dev/"
+      "external": "https://capybara-vibejam26.leocoout.dev/",
+      "genre": "racing"
     },
     {
       "id": "bwca-canoe",
@@ -1049,7 +1084,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#2a9d8f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🛶</text></svg>",
       "url": "community/play.html?g=bwca-canoe",
-      "external": "https://gkrumbach07.github.io/bwca-canoe/"
+      "external": "https://gkrumbach07.github.io/bwca-canoe/",
+      "genre": "adventure"
     },
     {
       "id": "oil-paint",
@@ -1075,7 +1111,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#c97b4a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🎨</text></svg>",
       "url": "https://patch.gg/blendi/oil-paint",
-      "link": true
+      "link": true,
+      "genre": "adventure"
     },
     {
       "id": "patchwork-quilt",
@@ -1101,7 +1138,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#d4a5a5'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🧵</text></svg>",
       "url": "https://patch.gg/blendi/patchwork-quilt",
-      "link": true
+      "link": true,
+      "genre": "adventure"
     },
     {
       "id": "banana-mine-rush",
@@ -1127,7 +1165,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f9d71c'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🍌</text></svg>",
       "url": "https://remix.gg/g/banana-mine-rush",
-      "link": true
+      "link": true,
+      "genre": "racing"
     },
     {
       "id": "hoppy-meadow",
@@ -1153,7 +1192,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8bc34a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐰</text></svg>",
       "url": "https://remix.gg/g/hoppy-meadow",
-      "link": true
+      "link": true,
+      "genre": "arcade"
     },
     {
       "id": "brix-84",
@@ -1179,7 +1219,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ff4081'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🧱</text></svg>",
       "url": "https://remix.gg/g/brix-84",
-      "link": true
+      "link": true,
+      "genre": "arcade"
     },
     {
       "id": "stray-cat",
@@ -1205,7 +1246,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#795548'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐱</text></svg>",
       "url": "https://claude.ai/artifact/4nPXUKJjQWNsZEHVNmXXCt",
-      "link": true
+      "link": true,
+      "genre": "adventure"
     },
     {
       "id": "midnight-pass",
@@ -1231,7 +1273,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#37474f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌙</text></svg>",
       "url": "https://claude.ai/artifact/UD9pGEN4QFA8F5EadRw8eL",
-      "link": true
+      "link": true,
+      "genre": "racing"
     },
     {
       "id": "roost",
@@ -1257,7 +1300,8 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8d6e63'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏍️</text></svg>",
       "url": "https://claude.ai/artifact/DLnFodkTwvawCNwurDmSZK?sk=5N6PtC07f1niB7h3I6clZQ",
-      "link": true
+      "link": true,
+      "genre": "racing"
     },
     {
       "id": "kart-adventure",
@@ -1283,7 +1327,1072 @@
       },
       "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#00897b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🗺️</text></svg>",
       "url": "https://claude.ai/artifact/FpdQ81sJs1KiV1a6JCY4jj",
-      "link": true
+      "link": true,
+      "genre": "racing"
+    },
+    {
+      "id": "board-arcade",
+      "category": "community",
+      "input": "touch",
+      "genre": "board",
+      "latest": "",
+      "color": "#5d4037",
+      "name": {
+        "zh-Hans": "68 款棋类游戏厅",
+        "zh-Hant": "68 款棋類遊戲廳",
+        "en": "Board game arcade (68 games)",
+        "fr": "Salle de jeux de plateau (68 jeux)"
+      },
+      "blurb": {
+        "zh-Hans": "五子棋、黑白棋、四子棋、跳棋、播棋、井字棋……68 种经典棋类，可以两人轮流，也可以和电脑下。英文界面。",
+        "zh-Hant": "五子棋、黑白棋、四子棋、跳棋、播棋、井字棋……68 種經典棋類，可以兩人輪流，也可以和電腦下。英文介面。",
+        "en": "Gomoku, Reversi, Connect Four, draughts, mancala, tic-tac-toe… 68 classic board games, pass-and-play or vs the computer.",
+        "fr": "Gomoku, Othello, Puissance 4, dames, mancala… 68 jeux classiques, à deux ou contre l’ordinateur."
+      },
+      "credit": {
+        "author": "patricker",
+        "made": "Claude Fable 5",
+        "repo": "https://github.com/patricker/treant"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#5d4037'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>♟️</text></svg>",
+      "url": "community/play.html?g=board-arcade",
+      "external": "https://mcts.dev/arcade/"
+    },
+    {
+      "id": "chess-3d",
+      "category": "community",
+      "input": "touch",
+      "genre": "board",
+      "latest": "",
+      "color": "#8d6e63",
+      "name": {
+        "zh-Hans": "3D 国际象棋",
+        "zh-Hant": "3D 西洋棋",
+        "en": "Chess 3D",
+        "fr": "Échecs 3D"
+      },
+      "blurb": {
+        "zh-Hans": "可以切换 3D 和 2D 的国际象棋，三档电脑难度，可以悔棋。",
+        "zh-Hant": "可以切換 3D 和 2D 的西洋棋，三檔電腦難度，可以悔棋。",
+        "en": "Chess in 3D or 2D with three computer levels and undo.",
+        "fr": "Échecs en 3D ou 2D, trois niveaux d’ordinateur et retour en arrière."
+      },
+      "credit": {
+        "author": "yortch",
+        "made": "GPT-6 Astra",
+        "repo": "https://github.com/yortch/chess3dastra"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8d6e63'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>♞</text></svg>",
+      "url": "community/play.html?g=chess-3d",
+      "external": "https://yortch.github.io/chess3dastra/"
+    },
+    {
+      "id": "claude-chess",
+      "category": "community",
+      "input": "touch",
+      "genre": "board",
+      "latest": "",
+      "color": "#455a64",
+      "name": {
+        "zh-Hans": "国际象棋大师",
+        "zh-Hant": "西洋棋大師",
+        "en": "Claude Chess",
+        "fr": "Claude Chess"
+      },
+      "blurb": {
+        "zh-Hans": "和 Stockfish 下国际象棋，八档强度，有棋钟、局势条和赛后复盘。",
+        "zh-Hant": "和 Stockfish 下西洋棋，八檔強度，有棋鐘、局勢條和賽後覆盤。",
+        "en": "Play chess against Stockfish at eight strengths, with clocks, an eval bar and post-game review.",
+        "fr": "Échecs contre Stockfish (huit niveaux), pendules et analyse d’après-partie."
+      },
+      "credit": {
+        "author": "mglass222",
+        "made": "Claude Fable 5",
+        "repo": "https://github.com/mglass222/claude-chess-web"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#455a64'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>♔</text></svg>",
+      "url": "community/play.html?g=claude-chess",
+      "external": "https://mglass222.github.io/claude-chess-web/"
+    },
+    {
+      "id": "airgap-games",
+      "category": "community",
+      "input": "touch",
+      "genre": "board",
+      "latest": "",
+      "color": "#00796b",
+      "name": {
+        "zh-Hans": "声音传棋（两台设备）",
+        "zh-Hant": "聲音傳棋（兩台裝置）",
+        "en": "Airgap: games over sound",
+        "fr": "Airgap : jeux par le son"
+      },
+      "blurb": {
+        "zh-Hans": "两台设备面对面下棋：跳棋、国际象棋、海战棋等，每一步靠声音或二维码传给对方，不用联网。",
+        "zh-Hant": "兩台裝置面對面下棋：跳棋、西洋棋、海戰棋等，每一步靠聲音或 QR 碼傳給對方，不用連網。",
+        "en": "Two devices face to face: checkers, chess, a battleship game and more; moves travel by sound or QR code, no network.",
+        "fr": "Deux appareils face à face : dames, échecs, bataille navale… les coups passent par le son ou un QR code."
+      },
+      "credit": {
+        "author": "JakeAve",
+        "made": "Claude Fable 5.1, Claude Opus 5",
+        "repo": "https://github.com/JakeAve/airgap"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#00796b'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>📶</text></svg>",
+      "url": "community/play.html?g=airgap-games",
+      "external": "https://jakeave.github.io/airgap/"
+    },
+    {
+      "id": "gabriels-studio",
+      "category": "community",
+      "input": "touch",
+      "genre": "cozy",
+      "latest": "",
+      "color": "#ff8a65",
+      "name": {
+        "zh-Hans": "加布里埃尔的动画工作室",
+        "zh-Hant": "加布里埃爾的動畫工作室",
+        "en": "Gabriel’s Animation Studio",
+        "fr": "L’atelier d’animation de Gabriel"
+      },
+      "blurb": {
+        "zh-Hans": "先画一个小人当主角，给它换装、变身，再带它去玩二十多个小游戏：跑酷、接星星、射门、卡丁车、太空冒险……专门为 iPad 做的。",
+        "zh-Hant": "先畫一個小人當主角，給它換裝、變身，再帶它去玩二十多個小遊戲：跑酷、接星星、射門、卡丁車、太空冒險……專門為 iPad 做的。",
+        "en": "Draw your own little hero, dress it up, then take it through 20+ mini-games: running, star catching, goal kicks, karts, space trips. Made for iPad.",
+        "fr": "Dessine ton héros, habille-le, puis emmène-le dans plus de 20 mini-jeux : course, étoiles, foot, kart, espace. Fait pour l’iPad."
+      },
+      "credit": {
+        "author": "gberry747-lab",
+        "made": "Claude Fable 5.1",
+        "repo": "https://github.com/gberry747-lab/gabriels-animation-studio"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ff8a65'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>✏️</text></svg>",
+      "url": "community/play.html?g=gabriels-studio",
+      "external": "https://gberry747-lab.github.io/gabriels-animation-studio/"
+    },
+    {
+      "id": "silent-meridian",
+      "category": "community",
+      "input": "touch",
+      "genre": "puzzle",
+      "latest": "",
+      "color": "#3949ab",
+      "name": {
+        "zh-Hans": "寂静子午线",
+        "zh-Hant": "寂靜子午線",
+        "en": "Silent Meridian",
+        "fr": "Silent Meridian"
+      },
+      "blurb": {
+        "zh-Hans": "在两个时间之间切换的解谜冒险：四章、十三个谜题、两种结局，自动存档，支持触屏。",
+        "zh-Hant": "在兩個時間之間切換的解謎冒險：四章、十三個謎題、兩種結局，自動存檔，支援觸控。",
+        "en": "A puzzle adventure across two time states: four chapters, thirteen puzzles, two endings. Touch works.",
+        "fr": "Aventure-énigmes entre deux époques : quatre chapitres, treize énigmes, deux fins. Tactile."
+      },
+      "credit": {
+        "author": "stackloomdev",
+        "made": "GPT-6 Astra",
+        "repo": "https://github.com/stackloomdev/silent-meridian"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3949ab'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🕰️</text></svg>",
+      "url": "community/play.html?g=silent-meridian",
+      "external": "https://silent-meridian.stackloom.org/"
+    },
+    {
+      "id": "citymaker-2048",
+      "category": "community",
+      "input": "touch",
+      "genre": "puzzle",
+      "latest": "",
+      "color": "#26a69a",
+      "name": {
+        "zh-Hans": "城市 2048",
+        "zh-Hant": "城市 2048",
+        "en": "CityMaker 2048",
+        "fr": "CityMaker 2048"
+      },
+      "blurb": {
+        "zh-Hans": "合成 2048，每合一次就盖出更高的 3D 地标建筑，十二座城市可以解锁。",
+        "zh-Hant": "合成 2048，每合一次就蓋出更高的 3D 地標建築，十二座城市可以解鎖。",
+        "en": "2048 where every merge builds a taller 3D landmark, across twelve cities.",
+        "fr": "Un 2048 où chaque fusion construit un monument 3D plus haut, dans douze villes."
+      },
+      "credit": {
+        "author": "derek-wangpch",
+        "made": "GPT-6 Astra",
+        "repo": "https://github.com/derek-wangpch/OpenCityMaker"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#26a69a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏙️</text></svg>",
+      "url": "community/play.html?g=citymaker-2048",
+      "external": "https://citymaker.0to1app.com/"
+    },
+    {
+      "id": "aperture-flight",
+      "category": "community",
+      "input": "touch",
+      "genre": "racing",
+      "latest": "",
+      "color": "#7e57c2",
+      "name": {
+        "zh-Hans": "穿越雕塑飞行",
+        "zh-Hant": "穿越雕塑飛行",
+        "en": "APERTURE",
+        "fr": "APERTURE"
+      },
+      "blurb": {
+        "zh-Hans": "180 秒里驾驶小飞行器，从真实雕塑的孔洞里穿过去。",
+        "zh-Hant": "180 秒裡駕駛小飛行器，從真實雕塑的孔洞裡穿過去。",
+        "en": "180 seconds to fly through the openings of real sculptures.",
+        "fr": "180 secondes pour voler à travers les ouvertures de vraies sculptures."
+      },
+      "credit": {
+        "author": "565353780",
+        "made": "GPT-6",
+        "repo": "https://github.com/565353780/fly-around-sculpture"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#7e57c2'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🗿</text></svg>",
+      "url": "community/play.html?g=aperture-flight",
+      "external": "https://565353780.github.io/fly-around-sculpture/"
+    },
+    {
+      "id": "skysprout",
+      "category": "community",
+      "input": "touch",
+      "genre": "arcade",
+      "latest": "",
+      "color": "#66bb6a",
+      "name": {
+        "zh-Hans": "天空小芽",
+        "zh-Hant": "天空小芽",
+        "en": "SkySprout",
+        "fr": "SkySprout"
+      },
+      "blurb": {
+        "zh-Hans": "原创跳跃平台游戏：三个世界、九个关卡，触屏可玩。",
+        "zh-Hant": "原創跳躍平台遊戲：三個世界、九個關卡，觸控可玩。",
+        "en": "An original platformer with three worlds and nine levels; touch works.",
+        "fr": "Un jeu de plateforme original : trois mondes, neuf niveaux. Tactile."
+      },
+      "credit": {
+        "author": "DUBSOpenHub",
+        "made": "GPT-6 Astra",
+        "repo": "https://github.com/DUBSOpenHub/skysprout"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#66bb6a'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌱</text></svg>",
+      "url": "community/play.html?g=skysprout",
+      "external": "https://dubsopenhub.github.io/skysprout/"
+    },
+    {
+      "id": "microstride",
+      "category": "community",
+      "input": "touch",
+      "genre": "adventure",
+      "latest": "",
+      "color": "#ef6c00",
+      "name": {
+        "zh-Hans": "鞋子上的小人",
+        "zh-Hant": "鞋子上的小人",
+        "en": "MICROSTRIDE",
+        "fr": "MICROSTRIDE"
+      },
+      "blurb": {
+        "zh-Hans": "变成小小人，在一只巨大的鞋子上跑跳冲刺。",
+        "zh-Hant": "變成小小人，在一隻巨大的鞋子上跑跳衝刺。",
+        "en": "Shrink down and run, jump and sprint across a giant shoe.",
+        "fr": "Deviens minuscule et cours sur une chaussure géante."
+      },
+      "credit": {
+        "author": "565353780",
+        "made": "GPT-6",
+        "repo": "https://github.com/565353780/run-on-shoes"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ef6c00'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>👟</text></svg>",
+      "url": "community/play.html?g=microstride",
+      "external": "https://565353780.github.io/run-on-shoes/"
+    },
+    {
+      "id": "2048-siege",
+      "category": "community",
+      "input": "touch",
+      "genre": "puzzle",
+      "latest": "",
+      "color": "#f9a825",
+      "name": {
+        "zh-Hans": "2048 守城",
+        "zh-Hant": "2048 守城",
+        "en": "2048 Siege",
+        "fr": "2048 Siege"
+      },
+      "blurb": {
+        "zh-Hans": "2048 合成加塔防：合出更强的数字守住通道，为手机触屏设计。",
+        "zh-Hant": "2048 合成加塔防：合出更強的數字守住通道，為手機觸控設計。",
+        "en": "2048 merging meets lane tower defense, made for phones.",
+        "fr": "Fusion 2048 et défense de couloirs, pensé pour le tactile."
+      },
+      "credit": {
+        "author": "jun0e",
+        "made": "Claude Opus 5.5",
+        "repo": "https://github.com/jun0e/2048-siege"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#f9a825'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏰</text></svg>",
+      "url": "community/play.html?g=2048-siege",
+      "external": "https://jun0e.github.io/2048-siege/"
+    },
+    {
+      "id": "seaside-scoop",
+      "category": "community",
+      "input": "touch",
+      "genre": "arcade",
+      "latest": "",
+      "color": "#4fc3f7",
+      "name": {
+        "zh-Hans": "15 个触屏小游戏",
+        "zh-Hant": "15 個觸控小遊戲",
+        "en": "15 touch mini-games",
+        "fr": "15 mini-jeux tactiles"
+      },
+      "blurb": {
+        "zh-Hans": "Claude 做的 15 个触屏优先小游戏合集，比如海边冰淇淋店。",
+        "zh-Hant": "Claude 做的 15 個觸控優先小遊戲合集，比如海邊冰淇淋店。",
+        "en": "Fifteen touch-first mini-games by Claude, like a seaside ice-cream stand.",
+        "fr": "Quinze mini-jeux pensés pour le tactile, comme un glacier en bord de mer."
+      },
+      "credit": {
+        "author": "pawanp3",
+        "made": "Claude Fable 5",
+        "repo": "https://github.com/pawanp3/renderwolf-fable5-chart-toppers"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#4fc3f7'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🍦</text></svg>",
+      "url": "community/play.html?g=seaside-scoop",
+      "external": "https://pawanp3.github.io/renderwolf-fable5-chart-toppers/"
+    },
+    {
+      "id": "gridwatch-match",
+      "category": "community",
+      "input": "touch",
+      "genre": "puzzle",
+      "latest": "",
+      "color": "#00bcd4",
+      "name": {
+        "zh-Hans": "赛博三消",
+        "zh-Hant": "賽博三消",
+        "en": "GridWatch Match",
+        "fr": "GridWatch Match"
+      },
+      "blurb": {
+        "zh-Hans": "赛博朋克风格的三消：交换方块连成三个就消除。",
+        "zh-Hant": "賽博朋克風格的三消：交換方塊連成三個就消除。",
+        "en": "A cyberpunk match-3: swap tiles to line up three.",
+        "fr": "Un match-3 cyberpunk : échange les pièces pour en aligner trois."
+      },
+      "credit": {
+        "author": "remeadows",
+        "made": "Claude Fable 5",
+        "repo": "https://github.com/remeadows/GridWatchMatchWeb"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#00bcd4'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>💠</text></svg>",
+      "url": "community/play.html?g=gridwatch-match",
+      "external": "https://gridwatchmatchweb.warsignallabs.net/"
+    },
+    {
+      "id": "gridwatch-breach",
+      "category": "community",
+      "input": "touch",
+      "genre": "puzzle",
+      "latest": "",
+      "color": "#0097a7",
+      "name": {
+        "zh-Hans": "信号防线",
+        "zh-Hant": "訊號防線",
+        "en": "GridWatch: Signal Breach",
+        "fr": "GridWatch: Signal Breach"
+      },
+      "blurb": {
+        "zh-Hans": "布置中继、防火墙，把信号引到终点，挡住一波波入侵，有点像塔防。",
+        "zh-Hant": "布置中繼、防火牆，把訊號引到終點，擋住一波波入侵，有點像塔防。",
+        "en": "Place relays and firewalls to route signals and hold off waves, a bit like tower defense.",
+        "fr": "Place relais et pare-feu pour guider le signal et repousser les vagues."
+      },
+      "credit": {
+        "author": "remeadows",
+        "made": "Claude Fable 5.1",
+        "repo": "https://github.com/remeadows/gridwatch-signal-breach"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#0097a7'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>📡</text></svg>",
+      "url": "community/play.html?g=gridwatch-breach",
+      "external": "https://gridwatch-signalbreach.warsignallabs.net/"
+    },
+    {
+      "id": "skylark-run",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "racing",
+      "latest": "",
+      "color": "#29b6f6",
+      "name": {
+        "zh-Hans": "云雀飞行",
+        "zh-Hant": "雲雀飛行",
+        "en": "Skylark Run",
+        "fr": "Skylark Run"
+      },
+      "blurb": {
+        "zh-Hans": "开敞篷小飞机穿圈飞过乡村，还能开直升机在夜晚城市里悬停降落。",
+        "zh-Hant": "開敞篷小飛機穿圈飛過鄉村，還能開直升機在夜晚城市裡懸停降落。",
+        "en": "Fly an open-cockpit plane through rings over the countryside, or hover a helicopter over a night city.",
+        "fr": "Pilote un petit avion à travers des anneaux, ou un hélicoptère au-dessus d’une ville la nuit."
+      },
+      "credit": {
+        "author": "jackpepper-vibe",
+        "made": "Claude Opus 5",
+        "repo": "https://github.com/jackpepper-vibe/SkylarkRun"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#29b6f6'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🛩️</text></svg>",
+      "url": "community/play.html?g=skylark-run",
+      "external": "https://skylark-run.vercel.app/"
+    },
+    {
+      "id": "long-silence",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "adventure",
+      "latest": "",
+      "color": "#1a237e",
+      "name": {
+        "zh-Hans": "漫长的寂静",
+        "zh-Hant": "漫長的寂靜",
+        "en": "The Long Silence",
+        "fr": "Le long silence"
+      },
+      "blurb": {
+        "zh-Hans": "太空探索：驾驶飞船扫描星系、在行星上降落，每次生成的宇宙都不一样。",
+        "zh-Hant": "太空探索：駕駛飛船掃描星系、在行星上降落，每次生成的宇宙都不一樣。",
+        "en": "Space exploration: scan star systems and land on planets in a seeded universe.",
+        "fr": "Exploration spatiale : scanne des systèmes et pose-toi sur des planètes."
+      },
+      "credit": {
+        "author": "achimala",
+        "made": "Claude Opus 5, Claude Fable 5.1",
+        "repo": "https://github.com/achimala/TheLongSilence"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#1a237e'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🪐</text></svg>",
+      "url": "community/play.html?g=long-silence",
+      "external": "https://longsilence.anshu.dev/"
+    },
+    {
+      "id": "azura",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "adventure",
+      "latest": "",
+      "color": "#ff7043",
+      "name": {
+        "zh-Hans": "陶瓦屋顶之岛",
+        "zh-Hant": "陶瓦屋頂之島",
+        "en": "AZURA",
+        "fr": "AZURA"
+      },
+      "blurb": {
+        "zh-Hans": "一个文件的 3D 小岛探索：在红瓦屋顶的岛上散步、做任务。",
+        "zh-Hant": "一個檔案的 3D 小島探索：在紅瓦屋頂的島上散步、做任務。",
+        "en": "A one-file 3D island to explore, with quests among clay-roofed houses.",
+        "fr": "Une île 3D en un seul fichier, avec des quêtes parmi les toits d’argile."
+      },
+      "credit": {
+        "author": "Orgxsm",
+        "made": "GPT-6 Astra, Claude Code",
+        "repo": "https://github.com/Orgxsm/azura"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ff7043'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏝️</text></svg>",
+      "url": "community/play.html?g=azura",
+      "external": "https://orgxsm.github.io/azura/"
+    },
+    {
+      "id": "haggis-hub",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "arcade",
+      "latest": "",
+      "color": "#558b2f",
+      "name": {
+        "zh-Hans": "苏格兰高地运动会",
+        "zh-Hant": "蘇格蘭高地運動會",
+        "en": "ha·ggis Hub",
+        "fr": "ha·ggis Hub"
+      },
+      "blurb": {
+        "zh-Hans": "苏格兰高地运动会主题的小游戏大厅，走进不同的门玩不同的项目。",
+        "zh-Hant": "蘇格蘭高地運動會主題的小遊戲大廳，走進不同的門玩不同的項目。",
+        "en": "A Highland-games arcade lobby: walk through doors into different events.",
+        "fr": "Un hall d’arcade sur les jeux des Highlands : chaque porte, une épreuve."
+      },
+      "credit": {
+        "author": "Giftedx",
+        "made": "Claude Fable 5",
+        "repo": "https://github.com/Giftedx/ha-ggis-hub"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#558b2f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏴</text></svg>",
+      "url": "community/play.html?g=haggis-hub",
+      "external": "https://ha.ggis.xyz/"
+    },
+    {
+      "id": "neon-snake",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "arcade",
+      "latest": "",
+      "color": "#d500f9",
+      "name": {
+        "zh-Hans": "霓虹贪吃蛇",
+        "zh-Hant": "霓虹貪吃蛇",
+        "en": "Neon Snake",
+        "fr": "Neon Snake"
+      },
+      "blurb": {
+        "zh-Hans": "霓虹风格的贪吃蛇，有节奏音乐。",
+        "zh-Hant": "霓虹風格的貪吃蛇，有節奏音樂。",
+        "en": "Snake in neon, with music.",
+        "fr": "Le serpent, version néon et musicale."
+      },
+      "credit": {
+        "author": "kinncj",
+        "made": "Claude Fable 5.1",
+        "repo": "https://github.com/kinncj/neon-snake"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#d500f9'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🐍</text></svg>",
+      "url": "community/play.html?g=neon-snake",
+      "external": "https://kinncj.github.io/neon-snake/claude-code-fable/"
+    },
+    {
+      "id": "retro-games",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "arcade",
+      "latest": "",
+      "color": "#ff5252",
+      "name": {
+        "zh-Hans": "复古小游戏机",
+        "zh-Hant": "復古小遊戲機",
+        "en": "Twisted Retro Fit",
+        "fr": "Twisted Retro Fit"
+      },
+      "blurb": {
+        "zh-Hans": "一整个原创复古小游戏街机厅。",
+        "zh-Hant": "一整個原創復古小遊戲街機廳。",
+        "en": "A whole arcade of original retro mini-games.",
+        "fr": "Toute une salle d’arcade de mini-jeux rétro originaux."
+      },
+      "credit": {
+        "author": "barneyfin",
+        "made": "Claude Opus 5.5",
+        "repo": "https://github.com/barneyfin/twisted-retro-fit"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ff5252'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🕹️</text></svg>",
+      "url": "community/play.html?g=retro-games",
+      "external": "https://barneyfin.github.io/twisted-retro-fit/"
+    },
+    {
+      "id": "outpace",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "arcade",
+      "latest": "",
+      "color": "#d97757",
+      "name": {
+        "zh-Hans": "打字快跑",
+        "zh-Hant": "打字快跑",
+        "en": "Outpace",
+        "fr": "Outpace"
+      },
+      "blurb": {
+        "zh-Hans": "打字就能跑：打对单词往前冲、按空格跳，甩开后面追来的浪潮。练打字很合适。",
+        "zh-Hant": "打字就能跑：打對單字往前衝、按空白鍵跳，甩開後面追來的浪潮。練打字很合適。",
+        "en": "Type to run and space to jump to outrun the wave. Good typing practice.",
+        "fr": "Tape pour courir, espace pour sauter, et distance la vague. Bon pour apprendre à taper."
+      },
+      "credit": {
+        "author": "ethanplusai",
+        "made": "Claude Opus 5.5, Claude Sonnet 5.5",
+        "repo": "https://github.com/ethanplusai/outpace"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#d97757'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>⌨️</text></svg>",
+      "url": "community/play.html?g=outpace",
+      "external": "https://outpace.ethanplus.ai/"
+    },
+    {
+      "id": "sunset-rush",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "racing",
+      "latest": "",
+      "color": "#ff8f00",
+      "name": {
+        "zh-Hans": "夕阳飞驰",
+        "zh-Hant": "夕陽飛馳",
+        "en": "Sunset Rush",
+        "fr": "Sunset Rush"
+      },
+      "blurb": {
+        "zh-Hans": "夕阳公路赛车：在车流里穿梭，赶在倒计时前过检查点。",
+        "zh-Hant": "夕陽公路賽車：在車流裡穿梭，趕在倒數前過檢查點。",
+        "en": "Sunset road racing: weave through traffic and reach checkpoints before time runs out.",
+        "fr": "Course au coucher du soleil : slalome dans la circulation avant la fin du chrono."
+      },
+      "credit": {
+        "author": "DaikiKobayashi",
+        "made": "Claude Sonnet 5.5",
+        "repo": "https://github.com/DaikiKobayashi/sonnet-5-5-web-game-samples"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ff8f00'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌅</text></svg>",
+      "url": "community/play.html?g=sunset-rush",
+      "external": "https://daikikobayashi.github.io/sonnet-5-5-web-game-samples/games/sunset-rush/max/"
+    },
+    {
+      "id": "dynamite-mole",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "arcade",
+      "latest": "",
+      "color": "#8d6e63",
+      "name": {
+        "zh-Hans": "炸弹鼹鼠",
+        "zh-Hant": "炸彈鼴鼠",
+        "en": "Dynamite Mole",
+        "fr": "Taupe dynamite"
+      },
+      "blurb": {
+        "zh-Hans": "小鼹鼠放炸弹炸开地道、躲开怪物、找到出口，五个关卡。",
+        "zh-Hant": "小鼴鼠放炸彈炸開地道、躲開怪物、找到出口，五個關卡。",
+        "en": "A mole sets bombs to blast tunnels, dodge critters and find the exit, over five stages.",
+        "fr": "Une taupe pose des bombes pour creuser, éviter les bestioles et trouver la sortie."
+      },
+      "credit": {
+        "author": "DaikiKobayashi",
+        "made": "Claude Sonnet 5.5",
+        "repo": "https://github.com/DaikiKobayashi/sonnet-5-5-web-game-samples"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#8d6e63'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>💣</text></svg>",
+      "url": "community/play.html?g=dynamite-mole",
+      "external": "https://daikikobayashi.github.io/sonnet-5-5-web-game-samples/games/dynamite-mole/max/"
+    },
+    {
+      "id": "mouse2-games",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "arcade",
+      "latest": "",
+      "color": "#ab47bc",
+      "name": {
+        "zh-Hans": "五合一小游戏",
+        "zh-Hant": "五合一小遊戲",
+        "en": "Five mini-games",
+        "fr": "Cinq mini-jeux"
+      },
+      "blurb": {
+        "zh-Hans": "一个菜单五个小游戏：赛车、钓鱼、大口吃、魔法符号、小冒险。",
+        "zh-Hant": "一個選單五個小遊戲：賽車、釣魚、大口吃、魔法符號、小冒險。",
+        "en": "Five mini-games in one menu: racing, fishing, big bite, sigils and a little quest.",
+        "fr": "Cinq mini-jeux : course, pêche, grosse bouchée, symboles et petite quête."
+      },
+      "credit": {
+        "author": "hokita",
+        "made": "Claude Fable 5",
+        "repo": "https://github.com/hokita/mouse2"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ab47bc'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🎮</text></svg>",
+      "url": "community/play.html?g=mouse2-games",
+      "external": "https://mouse2-0357d0.web.app/"
+    },
+    {
+      "id": "fable-3d-games",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "arcade",
+      "latest": "",
+      "color": "#3d5afe",
+      "name": {
+        "zh-Hans": "Fable 3D 小游戏合集",
+        "zh-Hant": "Fable 3D 小遊戲合集",
+        "en": "Fable 3D games",
+        "fr": "Jeux 3D Fable"
+      },
+      "blurb": {
+        "zh-Hans": "七个 3D 小游戏：小行星跑酷、吊车叠箱子、悬浮船绕门、保护发光鱼群等。",
+        "zh-Hant": "七個 3D 小遊戲：小行星跑酷、吊車疊箱子、懸浮船繞門、保護發光魚群等。",
+        "en": "Seven 3D mini-games: an asteroid runner, crane stacking, hover-boat slalom, guarding glowing fish and more.",
+        "fr": "Sept mini-jeux 3D : course d’astéroïdes, grue, slalom en hydroglisseur, bancs de poissons…"
+      },
+      "credit": {
+        "author": "shironagasu-ai",
+        "made": "Claude Fable 5",
+        "repo": "https://github.com/shironagasu-ai/claude-fable5-3D-games"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#3d5afe'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🚀</text></svg>",
+      "url": "community/play.html?g=fable-3d-games",
+      "external": "https://shironagasu-ai.github.io/claude-fable5-3D-games/"
+    },
+    {
+      "id": "web-grand-prix",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "racing",
+      "latest": "",
+      "color": "#e53935",
+      "name": {
+        "zh-Hans": "网页 F1 大奖赛",
+        "zh-Hant": "網頁 F1 大獎賽",
+        "en": "Web Grand Prix",
+        "fr": "Web Grand Prix"
+      },
+      "blurb": {
+        "zh-Hans": "F1 风格赛车：电脑对手、天气、换胎进站、6–8 公里赛道。",
+        "zh-Hant": "F1 風格賽車：電腦對手、天氣、換胎進站、6–8 公里賽道。",
+        "en": "F1-style racing with AI rivals, weather, tyres, pit stops and 6–8 km circuits.",
+        "fr": "Course façon F1 : rivaux IA, météo, pneus, arrêts au stand."
+      },
+      "credit": {
+        "author": "GatoArtStudio",
+        "made": "Claude Opus 5.5",
+        "repo": "https://github.com/GatoArtStudio/f1-opus-5.5"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#e53935'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏎️</text></svg>",
+      "url": "community/play.html?g=web-grand-prix",
+      "external": "https://f1-demo.gatoartstudio.com/"
+    },
+    {
+      "id": "slide-rush",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "racing",
+      "latest": "",
+      "color": "#03a9f4",
+      "name": {
+        "zh-Hans": "滑水道大赛",
+        "zh-Hant": "滑水道大賽",
+        "en": "Slide Rush",
+        "fr": "Slide Rush"
+      },
+      "blurb": {
+        "zh-Hans": "3D 滑水道比赛：和十二个对手一起冲下去，转弯、跳跃、找捷径。",
+        "zh-Hant": "3D 滑水道比賽：和十二個對手一起衝下去，轉彎、跳躍、找捷徑。",
+        "en": "A 3D waterslide race against twelve rivals: steer, jump and find the shortcut.",
+        "fr": "Course de toboggan aquatique 3D contre douze rivaux."
+      },
+      "credit": {
+        "author": "KJLKurt",
+        "made": "Claude Opus 5.5",
+        "repo": "https://github.com/KJLKurt/waterslide-game-opus-5.5"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#03a9f4'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🌊</text></svg>",
+      "url": "community/play.html?g=slide-rush",
+      "external": "https://kjlkurt.github.io/waterslide-game-opus-5.5/"
+    },
+    {
+      "id": "putt-quest",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "arcade",
+      "latest": "",
+      "color": "#43a047",
+      "name": {
+        "zh-Hans": "冒险迷你高尔夫",
+        "zh-Hant": "冒險迷你高爾夫",
+        "en": "Putt Quest",
+        "fr": "Putt Quest"
+      },
+      "blurb": {
+        "zh-Hans": "九个主题洞的 3D 迷你高尔夫：瞄准、蓄力、推杆。",
+        "zh-Hant": "九個主題洞的 3D 迷你高爾夫：瞄準、蓄力、推桿。",
+        "en": "3D mini golf over nine themed holes: aim, charge, putt.",
+        "fr": "Mini-golf 3D sur neuf trous à thème : vise, dose, frappe."
+      },
+      "credit": {
+        "author": "leonvanzyl",
+        "made": "Claude Opus 5.5",
+        "repo": "https://github.com/leonvanzyl/3d-golf-sonnet"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#43a047'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>⛳</text></svg>",
+      "url": "community/play.html?g=putt-quest",
+      "external": "https://3d-golf-sonnet.vercel.app/"
+    },
+    {
+      "id": "breakneck-baseball",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "arcade",
+      "latest": "",
+      "color": "#1565c0",
+      "name": {
+        "zh-Hans": "极速棒球",
+        "zh-Hant": "極速棒球",
+        "en": "Breakneck Baseball",
+        "fr": "Breakneck Baseball"
+      },
+      "blurb": {
+        "zh-Hans": "3D 棒球：五种投球、盗垒、真实的球路物理，可以一人对电脑或两人对战。",
+        "zh-Hant": "3D 棒球：五種投球、盜壘、真實的球路物理，可以一人對電腦或兩人對戰。",
+        "en": "3D baseball with five pitches, steals and real ball physics; 1 player vs CPU or 2 players.",
+        "fr": "Baseball 3D : cinq lancers, vols de base, vraie physique ; 1 contre l’ordi ou 2 joueurs."
+      },
+      "credit": {
+        "author": "hynding",
+        "made": "Claude Fable 5",
+        "repo": "https://github.com/hynding/breakneck-baseball"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#1565c0'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>⚾</text></svg>",
+      "url": "community/play.html?g=breakneck-baseball",
+      "external": "https://hynding.github.io/breakneck-baseball/"
+    },
+    {
+      "id": "recess-sports",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "arcade",
+      "latest": "",
+      "color": "#fb8c00",
+      "name": {
+        "zh-Hans": "课间棒球",
+        "zh-Hant": "課間棒球",
+        "en": "Recess Sports",
+        "fr": "Recess Sports"
+      },
+      "blurb": {
+        "zh-Hans": "从三十个邻居小孩里挑九个组队，再打一场投球挥棒的小棒球赛。",
+        "zh-Hant": "從三十個鄰居小孩裡挑九個組隊，再打一場投球揮棒的小棒球賽。",
+        "en": "Draft nine of thirty neighborhood kids, then play a short pitch-and-swing baseball game.",
+        "fr": "Choisis neuf enfants du quartier sur trente, puis joue un petit match de baseball."
+      },
+      "credit": {
+        "author": "srgirsky",
+        "made": "Claude Fable 5",
+        "repo": "https://github.com/srgirsky/recess-sports"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#fb8c00'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🧢</text></svg>",
+      "url": "community/play.html?g=recess-sports",
+      "external": "https://srgirsky.github.io/recess-sports/"
+    },
+    {
+      "id": "brothers",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "puzzle",
+      "latest": "",
+      "color": "#6d4c41",
+      "name": {
+        "zh-Hans": "绑在一起的兄弟",
+        "zh-Hant": "綁在一起的兄弟",
+        "en": "Brothers",
+        "fr": "Frères"
+      },
+      "blurb": {
+        "zh-Hans": "物理解谜：两个用绳子连着的兄弟，互相甩过去到达终点。",
+        "zh-Hant": "物理解謎：兩個用繩子連著的兄弟，互相甩過去到達終點。",
+        "en": "A physics puzzle: two tethered brothers fling each other across arenas to the goal.",
+        "fr": "Puzzle physique : deux frères attachés se lancent l’un l’autre jusqu’au but."
+      },
+      "credit": {
+        "author": "david-a-wheeler",
+        "made": "Claude Fable 5, Claude Opus 4.8",
+        "repo": "https://github.com/david-a-wheeler/brothers"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#6d4c41'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🤝</text></svg>",
+      "url": "community/play.html?g=brothers",
+      "external": "https://brothers.dwheeler.com/"
+    },
+    {
+      "id": "buildyourtown",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "build",
+      "latest": "",
+      "color": "#7cb342",
+      "name": {
+        "zh-Hans": "建造你的小镇",
+        "zh-Hant": "建造你的小鎮",
+        "en": "BuildYourTown",
+        "fr": "BuildYourTown"
+      },
+      "blurb": {
+        "zh-Hans": "斜视角城市建造：修路铺铁轨、划分区、通水通电，看人口慢慢长大，三种难度。",
+        "zh-Hant": "斜視角城市建造：修路鋪鐵軌、劃分區、通水通電，看人口慢慢長大，三種難度。",
+        "en": "An isometric city builder: roads, rails, zoning, power and water, growing population, three difficulties.",
+        "fr": "Construis ta ville : routes, rails, zones, eau et électricité, trois difficultés."
+      },
+      "credit": {
+        "author": "Rapsody09",
+        "made": "Claude Fable 5.1",
+        "repo": "https://github.com/Rapsody09/buildyourtown"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#7cb342'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏘️</text></svg>",
+      "url": "community/play.html?g=buildyourtown",
+      "external": "https://buildyourtown.com/"
+    },
+    {
+      "id": "lastlight",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "build",
+      "latest": "",
+      "color": "#ffb74d",
+      "name": {
+        "zh-Hans": "最后的火光",
+        "zh-Hant": "最後的火光",
+        "en": "Lastlight",
+        "fr": "Lastlight"
+      },
+      "blurb": {
+        "zh-Hans": "六边形地图上的小聚落：分配工人采食物和煤，守住越来越小的温暖圈，熬过一个个夜晚。",
+        "zh-Hant": "六邊形地圖上的小聚落：分配工人採食物和煤，守住越來越小的溫暖圈，熬過一個個夜晚。",
+        "en": "A hex-map settlement: assign workers to food and coal, keep the shrinking warmth ring alive through the nights.",
+        "fr": "Un village sur carte hexagonale : nourriture, charbon et chaleur pour tenir les nuits."
+      },
+      "credit": {
+        "author": "ben-gy",
+        "made": "Claude Opus 4.8",
+        "repo": "https://github.com/ben-gy/lastlight"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#ffb74d'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🔥</text></svg>",
+      "url": "community/play.html?g=lastlight",
+      "external": "https://lastlight.benrichardson.dev/"
+    },
+    {
+      "id": "free-game-village",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "build",
+      "latest": "",
+      "color": "#a1887f",
+      "name": {
+        "zh-Hans": "葡萄谷村庄",
+        "zh-Hant": "葡萄谷村莊",
+        "en": "The Free Game",
+        "fr": "The Free Game"
+      },
+      "blurb": {
+        "zh-Hans": "中世纪村庄建造：修路、村民自己干活、建生产链。",
+        "zh-Hant": "中世紀村莊建造：修路、村民自己幹活、建生產鏈。",
+        "en": "A medieval village builder: roads, busy villagers and production chains.",
+        "fr": "Construis un village médiéval : routes, villageois au travail, chaînes de production."
+      },
+      "credit": {
+        "author": "LucasMarquesShiva",
+        "made": "GPT-6 Astra",
+        "repo": "https://github.com/LucasMarquesShiva/the-free-game"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#a1887f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🍇</text></svg>",
+      "url": "community/play.html?g=free-game-village",
+      "external": "https://vale-dos-vinhedos.lucas579686.chatgpt.site/"
+    },
+    {
+      "id": "hellas",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "build",
+      "latest": "",
+      "color": "#1e88e5",
+      "name": {
+        "zh-Hans": "希腊文明",
+        "zh-Hant": "希臘文明",
+        "en": "HELLAS",
+        "fr": "HELLAS"
+      },
+      "blurb": {
+        "zh-Hans": "回合制策略：带领古希腊城邦建城、发展科技。",
+        "zh-Hant": "回合制策略：帶領古希臘城邦建城、發展科技。",
+        "en": "Turn-based strategy: grow an ancient Greek civilization.",
+        "fr": "Stratégie au tour par tour : fais grandir une civilisation grecque."
+      },
+      "credit": {
+        "author": "MXMX0811",
+        "made": "GPT-6 Astra",
+        "repo": "https://github.com/MXMX0811/gpt-6-astra-game"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#1e88e5'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🏛️</text></svg>",
+      "url": "community/play.html?g=hellas",
+      "external": "https://astra-civilization-v-hellas.pages.dev/"
+    },
+    {
+      "id": "city-crisis",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "build",
+      "latest": "",
+      "color": "#c62828",
+      "name": {
+        "zh-Hans": "城市七分钟危机",
+        "zh-Hant": "城市七分鐘危機",
+        "en": "7 Minutes: City Crisis",
+        "fr": "7 minutes : crise en ville"
+      },
+      "blurb": {
+        "zh-Hans": "420 秒的实时策略：城市的八个系统同时出问题，资源有限，看你怎么调度。",
+        "zh-Hant": "420 秒的即時策略：城市的八個系統同時出問題，資源有限，看你怎麼調度。",
+        "en": "Real-time strategy over 420 seconds: eight city systems in trouble and limited resources.",
+        "fr": "Stratégie en temps réel sur 420 secondes : huit systèmes urbains en crise."
+      },
+      "credit": {
+        "author": "hlforever11",
+        "made": "GPT-6",
+        "repo": "https://github.com/hlforever11/gpt6-city-crisis"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#c62828'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🚨</text></svg>",
+      "url": "community/play.html?g=city-crisis",
+      "external": "https://hlforever11.github.io/gpt6-city-crisis/"
+    },
+    {
+      "id": "finao",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "build",
+      "latest": "",
+      "color": "#37474f",
+      "name": {
+        "zh-Hans": "失败不是选项",
+        "zh-Hant": "失敗不是選項",
+        "en": "Failure is Not an Option",
+        "fr": "L’échec n’est pas une option"
+      },
+      "blurb": {
+        "zh-Hans": "叙事策略游戏：在任务控制中心做决定，把任务救回来。",
+        "zh-Hant": "敘事策略遊戲：在任務控制中心做決定，把任務救回來。",
+        "en": "A narrative strategy game: make the calls in mission control to save the mission.",
+        "fr": "Stratégie narrative : prends les décisions au centre de contrôle."
+      },
+      "credit": {
+        "author": "dan-lee-odinson",
+        "made": "GPT-6 Astra, Claude Code",
+        "repo": "https://github.com/dan-lee-odinson/failure-is-not-an-option"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#37474f'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🛰️</text></svg>",
+      "url": "community/play.html?g=finao",
+      "external": "https://finaogame.com/demo/"
+    },
+    {
+      "id": "sql-boss",
+      "category": "community",
+      "input": "keyboard",
+      "genre": "puzzle",
+      "latest": "",
+      "color": "#5c6bc0",
+      "name": {
+        "zh-Hans": "SQL 打怪",
+        "zh-Hant": "SQL 打怪",
+        "en": "SQL Boss Battle",
+        "fr": "SQL Boss Battle"
+      },
+      "blurb": {
+        "zh-Hans": "用真正的 SQL 查询打败八个 Boss，72 道题。适合大孩子和大人学数据库。",
+        "zh-Hant": "用真正的 SQL 查詢打敗八個 Boss，72 道題。適合大孩子和大人學資料庫。",
+        "en": "Beat eight bosses with real SQL queries across 72 puzzles. For older kids and grown-ups.",
+        "fr": "Bats huit boss avec de vraies requêtes SQL, 72 énigmes. Pour les grands."
+      },
+      "credit": {
+        "author": "raishaldhawan23",
+        "made": "Claude Fable 5.1",
+        "repo": "https://github.com/raishaldhawan23/SQL-Boss-Battle-Game-"
+      },
+      "icon": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='#5c6bc0'/><circle cx='50' cy='50' r='40' fill='none' stroke='#ffffff55' stroke-width='3'/><text x='50' y='53' font-size='50' text-anchor='middle' dominant-baseline='middle' font-family='Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif'>🗄️</text></svg>",
+      "url": "community/play.html?g=sql-boss",
+      "external": "https://raishaldhawan23.github.io/SQL-Boss-Battle-Game-/"
     }
   ]
 }

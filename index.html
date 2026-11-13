@@ -81,6 +81,13 @@ body.show-focus .nav.focused {
 .tag.both { background: #1d3b5c; color: #bfe0ff; }
 .tag.keyboard { background: #3a2f4f; color: #e2d4ff; }
 .sub { margin: 0.3em 0 0; font-size: 1em; font-weight: 700; color: var(--dim); }
+#filters { display: flex; flex-direction: column; gap: 0.45em; }
+#filters[hidden], #none[hidden] { display: none; }
+#q { font: inherit; font-size: max(16px, 1em); color: var(--ink); background: var(--panel); border: 2px solid var(--panel2); border-radius: 0.6em;
+  min-height: 44px; padding: 0.3em 0.7em; width: min(100%, 24em); -webkit-user-select: text; user-select: text; }
+#q::placeholder { color: var(--dim); }
+.chip { font-size: 1em; }
+#none { color: var(--dim); padding: 1em 0; }
 .credit { color: var(--dim); overflow-wrap: anywhere; }
 
 /* ===== Messages & hints ===== */
@@ -108,7 +115,14 @@ footer { margin-top: auto; color: var(--dim); display: flex; flex-wrap: wrap; ga
 
   <div id="msg" hidden><span id="msgText"></span><button class="btn nav" id="retry" type="button"></button></div>
 
+  <div id="filters" hidden>
+    <input id="q" data-key="q" class="nav" type="search" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search">
+    <div class="row" id="fInput"></div>
+    <div class="row" id="fGenre"></div>
+  </div>
+
   <main id="games"></main>
+  <div id="none" hidden></div>
 
   <footer id="hint"></footer>
 </div>
@@ -134,8 +148,9 @@ const CFG = {
 const LANGS = [['en', 'English'], ['fr', 'Français'], ['zh-Hans', '简体中文'], ['zh-Hant', '繁體中文']];
 const STR = {
   'zh-Hans': {
+    search: '🔍 搜索游戏名、作者…', all: '全部', fTouch: '👆 触屏', fPad: '🎮 手柄', fKeyboard: '⌨️ 键盘', allGenres: '全部类型', none: '没有符合条件的游戏。', genres: { board: '♟️ 棋牌', puzzle: '🧩 解谜', racing: '🏁 赛车与飞行', adventure: '🧭 冒险探索', build: '🏗️ 经营建造', arcade: '🕹️ 动作街机', cozy: '🌿 休闲放松' },
     both: '👆🎮 触屏或手柄', keyboard: '⌨️ 需要键盘鼠标（电脑）', subTouch: '👆 iPad 触屏能玩', subPad: '🎮 手柄 + 电视', subKeyboard: '⌨️ 要用键盘鼠标（在电脑上玩）', ext: '🔗 外部网站',
-    secFamily: '🏠 自己开发的游戏', secCommunity: '🌐 社区游戏', secCommunityNote: '别人用 AI 做的开源游戏', by: a => `作者 ${a}`, made: m => `用 ${m} 制作`,
+    secFamily: '🏠 自己开发的游戏', secCommunity: '🌐 社区游戏', secCommunityNote: '别人用 AI 做的游戏', by: a => `作者 ${a}`, made: m => `用 ${m} 制作`,
     title: '🎮 游戏大厅', cont: n => `继续玩：${n}`, latest: '最新版本',
     touch: '👆 触屏优先（用 iPad 投屏）', controller: '🎮 手柄+电视',
     fs: '全屏', exitfs: '退出全屏', fsFail: '✗ 全屏',
@@ -145,8 +160,9 @@ const STR = {
     hintTouch: '点一张卡片就能打开游戏。', hintWake: '用手柄：先按一次 A 叫醒这个页面。',
   },
   'zh-Hant': {
+    search: '🔍 搜尋遊戲名、作者…', all: '全部', fTouch: '👆 觸控', fPad: '🎮 手把', fKeyboard: '⌨️ 鍵盤', allGenres: '全部類型', none: '沒有符合條件的遊戲。', genres: { board: '♟️ 棋牌', puzzle: '🧩 解謎', racing: '🏁 賽車與飛行', adventure: '🧭 冒險探索', build: '🏗️ 經營建造', arcade: '🕹️ 動作街機', cozy: '🌿 休閒放鬆' },
     both: '👆🎮 觸控或手把', keyboard: '⌨️ 需要鍵盤滑鼠（電腦）', subTouch: '👆 iPad 觸控能玩', subPad: '🎮 手把 + 電視', subKeyboard: '⌨️ 要用鍵盤滑鼠（在電腦上玩）', ext: '🔗 外部網站',
-    secFamily: '🏠 自己開發的遊戲', secCommunity: '🌐 社群遊戲', secCommunityNote: '別人用 AI 做的開源遊戲', by: a => `作者 ${a}`, made: m => `用 ${m} 製作`,
+    secFamily: '🏠 自己開發的遊戲', secCommunity: '🌐 社群遊戲', secCommunityNote: '別人用 AI 做的遊戲', by: a => `作者 ${a}`, made: m => `用 ${m} 製作`,
     title: '🎮 遊戲大廳', cont: n => `繼續玩：${n}`, latest: '最新版本',
     touch: '👆 觸控優先（用 iPad 投影）', controller: '🎮 手把+電視',
     fs: '全螢幕', exitfs: '離開全螢幕', fsFail: '✗ 全螢幕',
@@ -156,8 +172,9 @@ const STR = {
     hintTouch: '點一張卡片就能打開遊戲。', hintWake: '用手把：先按一次 A 叫醒這個頁面。',
   },
   en: {
+    search: '🔍 Search games, authors…', all: 'All', fTouch: '👆 Touch', fPad: '🎮 Controller', fKeyboard: '⌨️ Keyboard', allGenres: 'All kinds', none: 'No games match.', genres: { board: '♟️ Board & cards', puzzle: '🧩 Puzzle', racing: '🏁 Racing & flying', adventure: '🧭 Adventure', build: '🏗️ Build & manage', arcade: '🕹️ Action & arcade', cozy: '🌿 Relaxing' },
     both: '👆🎮 Touch or controller', keyboard: '⌨️ Keyboard & mouse (computer)', subTouch: '👆 Plays on the iPad by touch', subPad: '🎮 Controller + TV', subKeyboard: '⌨️ Needs a keyboard & mouse (play on a computer)', ext: '🔗 external site',
-    secFamily: '🏠 Our own games', secCommunity: '🌐 Community games', secCommunityNote: 'Open-source games other people made with AI', by: a => `by ${a}`, made: m => `made with ${m}`,
+    secFamily: '🏠 Our own games', secCommunity: '🌐 Community games', secCommunityNote: 'Games other people made with AI', by: a => `by ${a}`, made: m => `made with ${m}`,
     title: '🎮 Game Hub', cont: n => `Continue: ${n}`, latest: 'Latest',
     touch: '👆 Touch-first (mirror the iPad)', controller: '🎮 Controller + TV',
     fs: 'Fullscreen', exitfs: 'Exit fullscreen', fsFail: '✗ Fullscreen',
@@ -167,8 +184,9 @@ const STR = {
     hintTouch: 'Tap a card to open a game.', hintWake: 'Controller: press A once to wake this page.',
   },
   fr: {
+    search: '🔍 Chercher un jeu, un auteur…', all: 'Tous', fTouch: '👆 Tactile', fPad: '🎮 Manette', fKeyboard: '⌨️ Clavier', allGenres: 'Tous les genres', none: 'Aucun jeu ne correspond.', genres: { board: '♟️ Plateau et cartes', puzzle: '🧩 Réflexion', racing: '🏁 Course et vol', adventure: '🧭 Aventure', build: '🏗️ Gestion', arcade: '🕹️ Action', cozy: '🌿 Détente' },
     both: '👆🎮 Tactile ou manette', keyboard: '⌨️ Clavier et souris (ordinateur)', subTouch: '👆 Se joue au doigt sur l’iPad', subPad: '🎮 Manette + TV', subKeyboard: '⌨️ Clavier et souris (sur un ordinateur)', ext: '🔗 site externe',
-    secFamily: '🏠 Nos propres jeux', secCommunity: '🌐 Jeux de la communauté', secCommunityNote: 'Jeux open source faits avec l’IA par d’autres', by: a => `par ${a}`, made: m => `fait avec ${m}`,
+    secFamily: '🏠 Nos propres jeux', secCommunity: '🌐 Jeux de la communauté', secCommunityNote: 'Jeux faits avec l’IA par d’autres', by: a => `par ${a}`, made: m => `fait avec ${m}`,
     title: '🎮 Salle de jeux', cont: n => `Continuer : ${n}`, latest: 'Dernière version',
     touch: '👆 Tactile : recopier l’iPad', controller: '🎮 Manette + TV',
     fs: 'Plein écran', exitfs: 'Quitter le plein écran', fsFail: '✗ Plein écran',
@@ -203,7 +221,8 @@ const loc = o => {
 };
 
 /* ===================== State ===================== */
-const S = { games: null, status: 'loading', mode: 'none', padSeen: false };
+const S = { games: null, status: 'loading', mode: 'none', padSeen: false, q: '', fInput: 'all', fGenre: 'all' };
+const GENRES = ['board', 'puzzle', 'racing', 'adventure', 'build', 'arcade', 'cozy'];
 const $ = id => document.getElementById(id);
 
 /* ===================== Load games.json ===================== */
@@ -219,6 +238,7 @@ function cleanGame(g) {
     credit: { author: String(c.author || ''), made: String(c.made || '') },
     input: ['controller', 'both', 'keyboard'].includes(g.input) ? g.input : 'touch',
     ext: typeof g.external === 'string' || g.link === true,
+    genre: typeof g.genre === 'string' ? g.genre : '',
     color: typeof g.color === 'string' ? g.color : '#888',
     name: g.name || { en: g.id }, blurb: g.blurb || {}, icon: typeof g.icon === 'string' ? g.icon : '',
   };
@@ -283,13 +303,64 @@ function render() {
     cont.querySelector('.tx').textContent = tr('cont', loc(lg.name));
   } else cont.hidden = true;
 
-  // cards
+  renderFilters();
+  renderCards();
+  renderHint();
+  renderPads();
+
+  if (keep) {
+    const el = document.querySelector(`[data-key="${keep}"]`) || $(keep);
+    if (el && el.offsetParent !== null) setFocus(el, false);
+  }
+}
+
+/* ===================== Search & filters ===================== */
+function chipRow(box, items, cur, onPick) {
+  box.textContent = '';
+  for (const [val, label] of items) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'btn nav chip'; b.textContent = label; b.dataset.key = box.id + '-' + val;
+    b.setAttribute('aria-pressed', String(val === cur));
+    b.addEventListener('click', () => onPick(val));
+    box.appendChild(b);
+  }
+}
+function renderFilters() {
+  const many = (S.games || []).length > 12;
+  $('filters').hidden = !many || S.status !== 'ok';
+  if ($('filters').hidden) return;
+  $('q').placeholder = tr('search');
+  $('q').setAttribute('aria-label', tr('search'));
+  if ($('q').value !== S.q) $('q').value = S.q;
+  chipRow($('fInput'), [['all', tr('all')], ['touch', tr('fTouch')], ['controller', tr('fPad')], ['keyboard', tr('fKeyboard')]], S.fInput, v => { S.fInput = v; refilter('fInput-' + v); });
+  const used = new Set((S.games || []).map(g => g.genre));
+  chipRow($('fGenre'), [['all', tr('allGenres')], ...GENRES.filter(x => used.has(x)).map(x => [x, tr('genres')[x]])], S.fGenre, v => { S.fGenre = v; refilter('fGenre-' + v); });
+}
+function refilter(keepKey) {
+  renderFilters(); renderCards();
+  const el = keepKey && document.querySelector(`[data-key="${keepKey}"]`);
+  if (el) setFocus(el, false);
+}
+const norm = t => String(t || '').toLowerCase();
+function matches(g) {
+  if (S.fInput === 'touch' && !(g.input === 'touch' || g.input === 'both')) return false;
+  if (S.fInput === 'controller' && !(g.input === 'controller' || g.input === 'both')) return false;
+  if (S.fInput === 'keyboard' && g.input !== 'keyboard') return false;
+  if (S.fGenre !== 'all' && g.genre !== S.fGenre) return false;
+  const q = norm(S.q).trim();
+  if (!q) return true;
+  const hay = norm([...Object.values(g.name || {}), loc(g.blurb), g.credit.author, g.credit.made, g.id].join(' '));
+  return q.split(/\s+/).every(w => hay.includes(w));
+}
+$('q').addEventListener('input', () => { S.q = $('q').value; renderCards(); });
+
+function renderCards() {
   const box = $('games');
   box.textContent = '';
   const groups = [['family', tr('secFamily'), ''], ['community', tr('secCommunity'), tr('secCommunityNote')]];
   const many = (S.games || []).some(g => g.category === 'community');
   for (const [cat, title, note] of groups) {
-    const list = (S.games || []).filter(g => g.category === cat);
+    const list = (S.games || []).filter(g => g.category === cat && matches(g));
     if (!list.length) continue;
     if (many) {
       const h = document.createElement('h2'); h.className = 'sec'; h.textContent = title;
@@ -307,13 +378,9 @@ function render() {
       for (const g of items) grid.appendChild(card(g));
     }
   }
-  renderHint();
-  renderPads();
-
-  if (keep) {
-    const el = document.querySelector(`[data-key="${keep}"]`) || $(keep);
-    if (el && el.offsetParent !== null) setFocus(el, false);
-  }
+  const shown = box.querySelectorAll('.card').length;
+  $('none').hidden = !(S.status === 'ok' && S.games.length && !shown);
+  $('none').textContent = tr('none');
 }
 
 function card(g) {
@@ -397,7 +464,9 @@ function setFocus(el, scroll = true) {
   if (!el) return;
   if (focusEl && focusEl !== el) focusEl.classList.remove('focused');
   focusEl = el; el.classList.add('focused');
-  try { el.focus({ preventScroll: true }); } catch (e) {}
+  // the search box only takes real focus when it is activated (A / Enter / tap), so moving over it never pops up a keyboard
+  if (el.tagName !== 'INPUT') { try { el.focus({ preventScroll: true }); } catch (e) {} }
+  else if (document.activeElement && document.activeElement !== el && document.activeElement.tagName === 'INPUT') document.activeElement.blur();
   if (scroll) try { el.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' }); } catch (e) { el.scrollIntoView(false); }
 }
 function move(dir) {
@@ -449,7 +518,7 @@ function act(a) {
       setMode(a.src);
       if (!focusEl || !document.body.contains(focusEl)) { setFocus(defaultFocus()); break; }
       rumble(a.player, 0.5, 90);
-      focusEl.click();
+      if (focusEl.tagName === 'INPUT') { try { focusEl.focus({ preventScroll: true }); } catch (e) {} } else focusEl.click();
       break;
     case 'back':
       setMode(a.src);
@@ -468,6 +537,11 @@ document.addEventListener('contextmenu', e => e.preventDefault());
 /* ===================== Keyboard (optional extra) ===================== */
 const KEYDIR = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' };
 window.addEventListener('keydown', e => {
+  if (e.target && e.target.id === 'q') {
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { e.preventDefault(); act({ type: 'move', dir: KEYDIR[e.key], player: 'kbd', src: 'key' }); }
+    else if (e.key === 'Enter' || e.key === 'Escape') { e.preventDefault(); e.target.blur(); setMode('key'); setFocus(e.target, false); }
+    return;
+  }
   if (KEYDIR[e.key]) { e.preventDefault(); act({ type: 'move', dir: KEYDIR[e.key], player: 'kbd', src: 'key' }); }
   else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act({ type: 'activate', player: 'kbd', src: 'key' }); }
   else if (e.key === 'Escape' || e.key === 'Backspace' || e.key === 'GamepadB') { e.preventDefault(); act({ type: 'back', player: 'kbd', src: 'key' }); }
