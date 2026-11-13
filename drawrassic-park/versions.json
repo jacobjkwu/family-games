@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.20",
+      "file": "drawrassic-park-v3.20.html",
+      "date": "2026-11-13",
+      "schema": 7,
+      "switcher": true,
+      "notes": {
+        "en": "👥 Lively visitors: 16 kinds of people (kids, grandparents, photographers, joggers, scientists, artists, astronauts…) with real walking, waving and photo poses. They walk around ponds and step away from fights. Hired staff now have jobs: ranger, vet, keeper, guard, cleaner.",
+        "fr": "👥 Visiteurs vivants : 16 sortes de gens (enfants, grands-parents, photographes, joggeurs, scientifiques, artistes, astronautes…) qui marchent, saluent et prennent des photos. Ils contournent les mares et s’éloignent des bagarres. Le personnel a un métier : ranger, vétérinaire, soigneur, gardien, agent d’entretien.",
+        "zh-Hans": "👥 游客活起来了：16 种人（小朋友、爷爷奶奶、摄影师、跑步的人、科学家、画家、宇航员……），会走路、挥手、拍照。他们会绕开水池，看到恐龙打架会躲开。雇来的员工有了职业：护林员、兽医、饲养员、保安、清洁工。",
+        "zh-Hant": "👥 遊客活起來了：16 種人（小朋友、爺爺奶奶、攝影師、跑步的人、科學家、畫家、太空人……），會走路、揮手、拍照。他們會繞開水池，看到恐龍打架會躲開。雇來的員工有了職業：護林員、獸醫、飼養員、保全、清潔工。"
+      }
+    },
+    {
       "v": "3.19",
       "file": "drawrassic-park-v3.19.html",
       "date": "2026-11-13",
