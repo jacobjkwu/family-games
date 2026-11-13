@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.9",
+      "file": "drawrassic-park-v3.9.html",
+      "date": "2026-11-12",
+      "schema": 4,
+      "switcher": true,
+      "notes": {
+        "en": "Night bosses (4 bosses, 3 skills each) can attack on nights 1–10. Catch wild dinos in the Wild Lands with a net timing game.",
+        "fr": "Des boss de nuit (4 boss, 3 attaques chacun) peuvent attaquer les nuits 1 à 10. Capture des dinos sauvages dans les terres sauvages avec un jeu de filet.",
+        "zh-Hans": "夜晚 Boss：第 1–10 夜可能来袭，4 个 Boss 各有 3 个技能。野外可以用抛网小游戏抓野生恐龙。",
+        "zh-Hant": "夜晚 Boss：第 1–10 夜可能來襲，4 個 Boss 各有 3 個技能。野外可以用拋網小遊戲抓野生恐龍。"
+      }
+    },
+    {
       "v": "3.8",
       "file": "drawrassic-park-v3.8.html",
       "date": "2026-11-12",

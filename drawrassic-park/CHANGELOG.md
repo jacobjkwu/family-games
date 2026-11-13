@@ -1,5 +1,10 @@
 # Drawrassic Park — Changelog
 
+## v3.9 (2026-11-12) — save schema s4 (unchanged)
+- Night bosses: each night from 1 to 10 has a 30–75% chance (40% after night 10) that a boss comes 8–16 s after dark. Shadow Rex (Quake Roar, Tail Sweep, Shadow Call), Thunderwing (Lightning, Dive Bomb, Thunderstorm), Magma Ankylo (Lava Pools, Iron Shell, Meteor Slam), Frost Spino (Frost Breath, Icicle Rain, Winter Howl). Area attacks show a warning circle first. Boss HP bar at the bottom of the screen; stuns on bosses last at most 0.35 s. Defeating one gives coins, amber and XP to dinos nearby; at sunrise it runs away. Settings: 👹 Summon a boss now.
+- Wild Lands: up to 6 wild dinos roam past the wall. Tap one, then 🎯 Catch: throw the net when the ring matches the dashed circle (3 nets; higher-level dinos are harder). A caught dino walks into the park, or goes to the Dino Box if the park is full. Wild dinos are never saved; dragging one over the wall sends it back. Settings: 🌿 More wild dinos.
+- New text for these features in all four languages.
+
 ## v3.8 (2026-11-12) — save schema s4 (unchanged)
 - Xbox pairing: Google sign-in fails on Xbox Edge (the redirect result is lost to cross-site storage blocking). A device paired in the Game Hub (anonymous Firebase sign-in plus a 6-letter code typed on the signed-in iPad) now uses the owner's cloud saves: the owner uid comes from localStorage `family-cloud/state.owner`. Settings shows a link to the Game Hub for pairing.
 
