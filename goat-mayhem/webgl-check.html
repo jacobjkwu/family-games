@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>3D check · Goat Mayhem</title>
+<style>
+html,body{margin:0;height:100%;background:#2a5d9a;color:#fff;font-family:-apple-system,system-ui,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-text-size-adjust:100%;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overscroll-behavior:none;touch-action:manipulation}
+main{box-sizing:border-box;max-width:1200px;margin:0 auto;padding:5vh 5vw}
+h1{font-size:clamp(28px,3.6vw,52px);margin:0 0 .3em}
+#big{font-size:clamp(30px,4.2vw,60px);font-weight:900;margin:.3em 0;padding:.4em .6em;border-radius:20px;background:rgba(0,0,0,.25)}
+#big.ok{background:#2f8f46}#big.bad{background:#b33a3a}
+.row{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+canvas{width:220px;height:220px;border-radius:18px;background:#123}
+table{border-collapse:collapse;font-size:clamp(17px,1.8vw,28px);margin-top:12px}
+td{padding:6px 14px;border-bottom:1px solid rgba(255,255,255,.2);vertical-align:top}
+td:first-child{opacity:.85}
+.btns{display:flex;gap:16px;flex-wrap:wrap;margin:22px 0}
+button{min-height:64px;min-width:150px;padding:10px 24px;font-size:clamp(18px,2.2vw,32px);font-weight:800;border-radius:16px;border:4px solid transparent;background:#fff;color:#1d3d66;cursor:pointer}
+button.pri{background:#ffcf3a}button:focus{outline:none;border-color:#46c860;box-shadow:0 0 0 6px rgba(70,200,96,.6)}
+#langs button{min-width:0;font-size:clamp(16px,1.8vw,26px);min-height:52px}
+pre{white-space:pre-wrap;word-break:break-word;font-size:15px;opacity:.85}
+</style>
+</head>
+<body>
+<main>
+  <div class="btns" id="langs"></div>
+  <h1 id="title"></h1>
+  <div id="big"></div>
+  <div class="row"><canvas id="cube" width="440" height="440"></canvas><div id="cubeTxt" style="font-size:clamp(17px,2vw,30px);max-width:640px"></div></div>
+  <table id="tbl"></table>
+  <div class="btns"><button class="pri" id="again"></button><button id="play"></button><button id="back"></button></div>
+  <pre id="raw"></pre>
+</main>
+<script>
+// Stand-alone page: it never touches game saves. It only asks the browser which kinds of 3D it will give.
+const STR = {
+  en: { title: '3D check', ok: '✅ 3D works here', partial: '⚠️ Only basic 3D works', bad: '❌ 3D does not work here', cubeOk: 'If you see a spinning coloured cube, 3D drawing really works.', cubeBad: 'No cube: this browser would not draw 3D.', again: 'Check again', play: 'Play Goat Mayhem', back: 'Back', yes: 'yes', no: 'no', gpu: 'Graphics chip', maxTex: 'Biggest texture', w2: 'WebGL 2 (best)', w1: 'WebGL 1 (basic)', w2plain: 'WebGL 2, plain settings', xbox: 'Xbox', webgpu: 'WebGPU', tipBad: 'Close the browser completely and open it again, then check again. On Xbox: Xbox button → highlight Edge → Menu ☰ → Quit. If it still says no, restart the Xbox.' },
+  fr: { title: 'Test 3D', ok: '✅ La 3D marche ici', partial: '⚠️ Seule la 3D de base marche', bad: '❌ La 3D ne marche pas ici', cubeOk: 'Si tu vois un cube coloré qui tourne, la 3D marche vraiment.', cubeBad: 'Pas de cube : ce navigateur refuse de dessiner en 3D.', again: 'Refaire le test', play: 'Jouer à Goat Mayhem', back: 'Retour', yes: 'oui', no: 'non', gpu: 'Puce graphique', maxTex: 'Plus grande texture', w2: 'WebGL 2 (le mieux)', w1: 'WebGL 1 (de base)', w2plain: 'WebGL 2, réglages simples', xbox: 'Xbox', webgpu: 'WebGPU', tipBad: 'Ferme complètement le navigateur, rouvre-le et refais le test. Sur Xbox : bouton Xbox → sélectionne Edge → Menu ☰ → Quitter. Si c’est toujours non, redémarre la Xbox.' },
+  'zh-Hans': { title: '3D 检测', ok: '✅ 这里能用 3D', partial: '⚠️ 只能用基础 3D', bad: '❌ 这里不能用 3D', cubeOk: '如果看到一个会转的彩色方块，就说明 3D 真的能画出来。', cubeBad: '没有方块：这个浏览器不肯画 3D。', again: '再检测一次', play: '去玩疯狂山羊', back: '返回', yes: '能', no: '不能', gpu: '显卡', maxTex: '最大贴图', w2: 'WebGL 2（最好）', w1: 'WebGL 1（基础）', w2plain: 'WebGL 2，简单设置', xbox: 'Xbox', webgpu: 'WebGPU', tipBad: '把浏览器完全关掉再打开，然后再检测一次。Xbox 上：按 Xbox 键 → 选中 Edge → 按菜单键 ☰ → 退出。还是不能的话，重启 Xbox。' },
+  'zh-Hant': { title: '3D 檢測', ok: '✅ 這裡能用 3D', partial: '⚠️ 只能用基礎 3D', bad: '❌ 這裡不能用 3D', cubeOk: '如果看到一個會轉的彩色方塊，就說明 3D 真的能畫出來。', cubeBad: '沒有方塊：這個瀏覽器不肯畫 3D。', again: '再檢測一次', play: '去玩瘋狂山羊', back: '返回', yes: '能', no: '不能', gpu: '顯示卡', maxTex: '最大貼圖', w2: 'WebGL 2（最好）', w1: 'WebGL 1（基礎）', w2plain: 'WebGL 2，簡單設定', xbox: 'Xbox', webgpu: 'WebGPU', tipBad: '把瀏覽器完全關掉再打開，然後再檢測一次。Xbox 上：按 Xbox 鍵 → 選中 Edge → 按選單鍵 ☰ → 結束。還是不行的話，重新啟動 Xbox。' }
+};
+const NAMES = [['en', 'English'], ['fr', 'Français'], ['zh-Hans', '简体中文'], ['zh-Hant', '繁體中文']];
+const LANG_KEY = 'goat-mayhem/settings';
+function detect() { const n = navigator.language || 'en'; if (/^zh-(TW|HK|MO)/i.test(n) || /hant/i.test(n)) return 'zh-Hant'; if (/^zh/i.test(n)) return 'zh-Hans'; if (/^fr/i.test(n)) return 'fr'; return 'en'; }
+let LANG = detect();
+try { const s = JSON.parse(localStorage.getItem(LANG_KEY) || 'null'); if (s && STR[s.lang]) LANG = s.lang; } catch (e) {} // read only: the game owns this key
+const T = k => (STR[LANG] && STR[LANG][k]) || STR.en[k];
+try { if ('gamepadInputEmulation' in navigator) navigator.gamepadInputEmulation = 'mouse'; } catch (e) {} // Xbox Edge: controller moves the cursor here
+
+function probe(type, attr) {
+  const c = document.createElement('canvas'); let why = '';
+  c.addEventListener('webglcontextcreationerror', e => { why = e.statusMessage || why; });
+  let gl = null; try { gl = c.getContext(type, attr); } catch (e) { why = String(e.message || e); }
+  const r = { ok: !!gl, why };
+  if (gl) {
+    try { const d = gl.getExtension('WEBGL_debug_renderer_info'); r.gpu = d ? gl.getParameter(d.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER); } catch (e) {}
+    try { r.maxTex = gl.getParameter(gl.MAX_TEXTURE_SIZE); } catch (e) {}
+    try { const x = gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext(); } catch (e) {}
+  }
+  return r;
+}
+let R = null, raf = 0;
+function run() {
+  R = { w2: probe('webgl2', { antialias: true, powerPreference: 'high-performance' }), w2plain: probe('webgl2', { antialias: false }), w1: probe('webgl', { antialias: false }) };
+  if (!R.w1.ok) R.w1 = probe('experimental-webgl', {});
+  R.webgpu = !!navigator.gpu; R.xbox = /Xbox/i.test(navigator.userAgent || '');
+  R.cube = drawCube(); render();
+}
+function drawCube() {
+  cancelAnimationFrame(raf);
+  const old = document.getElementById('cube'), c = old.cloneNode(false); old.replaceWith(c);
+  const gl = c.getContext('webgl2') || c.getContext('webgl') || c.getContext('experimental-webgl');
+  if (!gl) return false;
+  const vs = 'attribute vec3 p; attribute vec3 col; uniform float t; varying vec3 v; void main(){ float a=t, b=t*0.7; mat3 ry=mat3(cos(a),0.,-sin(a), 0.,1.,0., sin(a),0.,cos(a)); mat3 rx=mat3(1.,0.,0., 0.,cos(b),sin(b), 0.,-sin(b),cos(b)); vec3 q=rx*ry*p; v=col; gl_Position=vec4(q.xy*0.55, q.z*0.3+0.5, 1.0); }';
+  const fs = 'precision mediump float; varying vec3 v; void main(){ gl_FragColor=vec4(v,1.0); }';
+  const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return o; };
+  const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr);
+  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return false;
+  const F = [[[1,0,0],[1,0.3,0.3]], [[-1,0,0],[0.3,1,0.3]], [[0,1,0],[0.3,0.5,1]], [[0,-1,0],[1,0.85,0.2]], [[0,0,1],[1,0.4,0.9]], [[0,0,-1],[0.3,1,1]]];
+  const data = [];
+  for (const [n, col] of F) { const ax = n.findIndex(x => x !== 0), s = n[ax], u = (ax + 1) % 3, w = (ax + 2) % 3;
+    const corner = (a, b) => { const p = [0, 0, 0]; p[ax] = s; p[u] = a; p[w] = b; return p; };
+    for (const [a, b] of [[-1,-1],[1,-1],[1,1],[-1,-1],[1,1],[-1,1]]) data.push(...corner(a, b), ...col); }
+  const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
+  const lp = gl.getAttribLocation(pr, 'p'), lc = gl.getAttribLocation(pr, 'col'), lt = gl.getUniformLocation(pr, 't');
+  gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp, 3, gl.FLOAT, false, 24, 0); gl.enableVertexAttribArray(lc); gl.vertexAttribPointer(lc, 3, gl.FLOAT, false, 24, 12);
+  gl.useProgram(pr); gl.enable(gl.DEPTH_TEST);
+  const t0 = performance.now(); let drew = false;
+  const loop = () => { gl.viewport(0, 0, c.width, c.height); gl.clearColor(0.07, 0.13, 0.2, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.uniform1f(lt, (performance.now() - t0) / 1000); gl.drawArrays(gl.TRIANGLES, 0, 36); drew = gl.getError() === gl.NO_ERROR || drew; raf = requestAnimationFrame(loop); };
+  loop(); return true;
+}
+function render() {
+  document.documentElement.lang = LANG; document.title = T('title') + ' · Goat Mayhem';
+  document.getElementById('langs').innerHTML = NAMES.map(([k, n]) => '<button data-l="' + k + '"' + (k === LANG ? ' style="background:#ffcf3a"' : '') + '>' + n + '</button>').join('');
+  document.querySelectorAll('#langs button').forEach(b => b.onclick = () => { LANG = b.dataset.l; render(); });
+  document.getElementById('title').textContent = T('title');
+  document.getElementById('again').textContent = T('again'); document.getElementById('play').textContent = T('play'); document.getElementById('back').textContent = T('back');
+  if (!R) return;
+  const big = document.getElementById('big'), any2 = R.w2.ok || R.w2plain.ok, any = any2 || R.w1.ok;
+  big.className = any2 ? 'ok' : any ? '' : 'bad'; big.textContent = any2 ? T('ok') : any ? T('partial') : T('bad');
+  document.getElementById('cubeTxt').textContent = R.cube ? T('cubeOk') : T('cubeBad') + ' ' + T('tipBad');
+  const yn = r => (r.ok ? '✅ ' + T('yes') : '❌ ' + T('no')) + (r.why ? ' — ' + r.why : '');
+  const g = R.w2.gpu || R.w2plain.gpu || R.w1.gpu || '—', mt = R.w2.maxTex || R.w2plain.maxTex || R.w1.maxTex || '—';
+  const rows = [[T('w2'), yn(R.w2)], [T('w2plain'), yn(R.w2plain)], [T('w1'), yn(R.w1)], [T('gpu'), g], [T('maxTex'), mt], [T('webgpu'), R.webgpu ? T('yes') : T('no')], [T('xbox'), R.xbox ? T('yes') : T('no')]];
+  const esc = s => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]);
+  document.getElementById('tbl').innerHTML = rows.map(r => '<tr><td>' + esc(r[0]) + '</td><td>' + esc(r[1]) + '</td></tr>').join('');
+  document.getElementById('raw').textContent = navigator.userAgent + '\n' + new Date().toISOString().slice(0, 16).replace('T', ' ');
+}
+document.getElementById('again').onclick = run;
+document.getElementById('play').onclick = () => { location.href = 'index.html'; };
+document.getElementById('back').onclick = () => { if (history.length > 1) history.back(); else location.href = 'index.html'; };
+// controller on iPad/PC (on Xbox the Edge cursor does it): D-pad/stick moves focus, A presses, B goes back
+let prev = {}, last = 0;
+(function poll() { let pads = []; try { pads = navigator.getGamepads ? [...navigator.getGamepads()].filter(Boolean) : []; } catch (e) {}
+  const now = performance.now(), btns = [...document.querySelectorAll('button')];
+  for (const p of pads) { const b = i => !!(p.buttons[i] && p.buttons[i].pressed), ax = p.axes || [];
+    const mv = (b(15) || b(13) || ax[0] > 0.5 || ax[1] > 0.5) ? 1 : (b(14) || b(12) || ax[0] < -0.5 || ax[1] < -0.5) ? -1 : 0;
+    if (mv && now - last > 220) { last = now; const i = btns.indexOf(document.activeElement); btns[(i + mv + btns.length) % btns.length].focus(); }
+    const pr = prev[p.index] || {}; if (b(0) && !pr.a && document.activeElement && document.activeElement.tagName === 'BUTTON') document.activeElement.click(); if (b(1) && !pr.b) document.getElementById('back').click(); prev[p.index] = { a: b(0), b: b(1) }; }
+  requestAnimationFrame(poll); })();
+document.addEventListener('gesturestart', e => e.preventDefault());
+render(); run(); document.getElementById('again').focus();
+</script>
+</body>
+</html>

@@ -2,6 +2,18 @@
   "game": "goat-mayhem",
   "versions": [
     {
+      "v": 8,
+      "file": "goat-mayhem-v8.html",
+      "date": "2026-11-13",
+      "schema": "s2",
+      "notes": {
+        "en": "Smoother and faster to load: far fewer draw calls (people outside the view aren't drawn), lighter settings on iPad, models load while the town is built, the goat is made 2–3× faster. Smarter people: they walk around walls, planters and parked cars, stay out of the pond, get unstuck, dodge a charging goat, stop to watch, wave, cheer or take photos, and chat in pairs. If 3D can't start (seen on Xbox Edge), a clear help screen and a 3D check page instead of an error line.",
+        "fr": "Plus fluide et plus rapide à charger : beaucoup moins d’appels de dessin (les gens hors de vue ne sont pas dessinés), réglages plus légers sur iPad, les modèles se chargent pendant la construction de la ville, la chèvre est créée 2 à 3 fois plus vite. Des gens plus malins : ils contournent murs, jardinières et voitures garées, évitent l’étang, se décoincent, esquivent une chèvre qui fonce, s’arrêtent pour regarder, saluer, applaudir ou prendre des photos, et discutent à deux. Si la 3D ne démarre pas (vu sur Edge Xbox), un écran d’aide clair et une page de test 3D au lieu d’une ligne d’erreur.",
+        "zh-Hans": "更顺、加载更快：画面要画的东西少了很多（看不见的路人不画），iPad 上用更省电的设置，小镇搭好的同时模型就在下载，山羊生成快了 2～3 倍。路人更聪明：会绕开墙、花坛和停着的车，不走进池塘，被卡住会自己走出来，看到山羊冲过来会躲开，还会停下来看你、挥手、欢呼、拍照，两个人凑在一起聊天。如果 3D 打不开（Xbox 的 Edge 上出现过），会显示清楚的帮助页面和「3D 检测」，不再只有一行英文报错。",
+        "zh-Hant": "更順、載入更快：畫面要畫的東西少了很多（看不見的路人不畫），iPad 上用更省電的設定，小鎮搭好的同時模型就在下載，山羊生成快了 2～3 倍。路人更聰明：會繞開牆、花壇和停著的車，不走進池塘，被卡住會自己走出來，看到山羊衝過來會躲開，還會停下來看你、揮手、歡呼、拍照，兩個人湊在一起聊天。如果 3D 打不開（Xbox 的 Edge 上出現過），會顯示清楚的說明頁面和「3D 檢測」，不再只有一行英文報錯。"
+      }
+    },
+    {
       "v": 7,
       "file": "goat-mayhem-v7.html",
       "date": "2026-11-13",
