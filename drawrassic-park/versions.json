@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.40",
+      "file": "drawrassic-park-v3.40.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎨 Picture quality II: dinos lose the white sticker border and get real volume (bevel lit from the upper left, rim light, soft belly shadow, fine scale texture); visitors are 30% bigger; the meadow is full of three-tone grass, clover, tiny flowers and pebbles.",
+        "fr": "🎨 Qualité d’image II : les dinos perdent leur bord blanc d’autocollant et gagnent du volume (relief éclairé d’en haut à gauche, liseré lumineux, ombre douce sous le ventre, fine texture d’écailles) ; les visiteurs sont 30 % plus grands ; la prairie est pleine d’herbe en trois tons, de trèfles, de petites fleurs et de cailloux.",
+        "zh-Hans": "🎨 画面升级二：恐龙去掉了贴纸白边，变得更立体（左上方打光的浮雕感、轮廓光、肚子下的柔和阴影、细细的鳞片纹理）；游客变大了 30%；草地上长满三种颜色的草、三叶草、小花和小石子。",
+        "zh-Hant": "🎨 畫面升級二：恐龍去掉了貼紙白邊，變得更立體（左上方打光的浮雕感、輪廓光、肚子下的柔和陰影、細細的鱗片紋理）；遊客變大了 30%；草地上長滿三種顏色的草、三葉草、小花和小石子。"
+      }
+    },
+    {
       "v": "3.39",
       "file": "drawrassic-park-v3.39.html",
       "date": "2026-11-13",
