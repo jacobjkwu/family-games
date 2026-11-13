@@ -1,5 +1,16 @@
 # Drawrassic Park — Changelog
 
+## v3.22 (2026-11-13) — save schema s7 (unchanged)
+- 🎲 Random events, each a data entry (start / update / end / tap / draw). About every 2½ minutes (number panel: 🎲 Random events) one starts with a big banner and a sound; a panel at the top right (bottom right in portrait) shows the goal and time — tap it, or the red arrow at the screen edge, to jump to the action. No event starts during a boss fight, a disaster or in the arena. Nothing about an event is saved: a reload ends it and every dino goes back to normal.
+- 🚨 Jailbreak: a dino escapes into the visitor plaza, visitors run screaming, the camera follows it; tap it 5 times in 40 s to lasso it back (+10 coins), otherwise it walks back by itself.
+- 🛸 Flying saucer: a tractor beam lifts a dino; tap the saucer 12 times to knock it down (+15 coins, materials, and a lost alien now visits the park). Too slow? The aliens take the dino for a spin and bring it back wearing antennae.
+- 💨 Fart storm: a dino ate too many beans; its stink clouds make visitors flee and other dinos gag; 3 taps of tummy pills end it with one mega fart that launches it into the air (+8 coins, amber).
+- 😎 Superstar visit: a star, a bodyguard and two photographers stroll the park; make 3 of their wishes come true (see an epic or legendary / meat-eater / baby / super-happy dino up close, watch you pet or feed a dino nearby, eat ice cream at a cart). 3 wishes: five stars, +60 coins; fewer: less.
+- 🥚 Mystery egg: a giant egg falls from the sky; tap 8 times to crack it (or wait 25 s): a rare species, or a funny mix of two species with a mixed-up name.
+- 🌀 Time rift: a portal brings knights, cavemen, a mammoth, a sabre-tooth cat and a robot dino; tap them to say hi (+5 coins each); when the rift closes they are pulled back in.
+- 🤧 Dino flu: sneezes blow visitors off their feet and spread the cold to nearby dinos; tap sick dinos (or let a hired vet) give them medicine.
+- New visitor types for events (alien, knight, caveman, superstar, bodyguard), people can be thrown by a sneeze, 63 new lines translated into English and French. Settings: 🎲 Random event now. Number panel: event timings and a ▶ button for each event. Controller: the stick cursor + A works for every event tap. Save format unchanged (s7).
+
 ## v3.21 (2026-11-13) — save schema s7 (unchanged)
 - 🖥️ Adaptive resolution for the park and the arena: when the time between frames stays above 20 ms (under ~50 fps) for a second, the canvas is drawn at 15% lower resolution, down to 50%. The cached background stays sharp; taps and the controller cursor still land in the right place.
 - Each step is checked: if frames don't get faster within 1.5 s (the slowness is in the game logic, or the iPad is capped at 30 fps in Low Power Mode), the step is undone and not retried for 30 s (then 60, 120… up to 10 min). After 6 s of smooth frames the resolution goes back up one step; if that makes it slow again, it steps back down and waits.

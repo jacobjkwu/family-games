@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.22",
+      "file": "drawrassic-park-v3.22.html",
+      "date": "2026-11-13",
+      "schema": 7,
+      "switcher": true,
+      "notes": {
+        "en": "🎲 Random events! Jailbreak, flying saucer, fart storm, superstar visit, mystery egg, time rift and dino flu — every couple of minutes something happens. 🎲 in Settings starts one now.",
+        "fr": "🎲 Événements au hasard ! Évasion, soucoupe volante, tempête de prouts, visite d’une star, œuf mystère, faille temporelle et grippe des dinos : toutes les deux minutes environ, il se passe quelque chose. 🎲 dans les réglages en lance un tout de suite.",
+        "zh-Hans": "🎲 随机事件来了！恐龙越狱、飞碟、放屁风暴、超级明星、神秘巨蛋、时空裂缝、恐龙感冒——每隔两分钟左右就会发生点什么。设置里的 🎲 可以马上来一个。",
+        "zh-Hant": "🎲 隨機事件來了！恐龍越獄、飛碟、放屁風暴、超級明星、神祕巨蛋、時空裂縫、恐龍感冒——每隔兩分鐘左右就會發生點什麼。設定裡的 🎲 可以馬上來一個。"
+      }
+    },
+    {
       "v": "3.21",
       "file": "drawrassic-park-v3.21.html",
       "date": "2026-11-13",
