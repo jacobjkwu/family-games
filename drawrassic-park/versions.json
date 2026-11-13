@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.11",
+      "file": "drawrassic-park-v3.11.html",
+      "date": "2026-11-12",
+      "schema": 5,
+      "switcher": true,
+      "notes": {
+        "en": "Boss Altar: tap the altar in the Boss Arena to challenge any of the 5 bosses in the colosseum with up to 6 of your dinos.",
+        "fr": "Autel des boss : touche l’autel de l’arène des boss pour défier l’un des 5 boss au colisée avec jusqu’à 6 de tes dinos.",
+        "zh-Hans": "Boss 祭坛：点 Boss 竞技场里的祭坛，带最多 6 只恐龙进竞技场挑战 5 个 Boss 中的任意一个。",
+        "zh-Hant": "Boss 祭壇：點 Boss 競技場裡的祭壇，帶最多 6 隻恐龍進競技場挑戰 5 個 Boss 中的任意一個。"
+      }
+    },
+    {
       "v": "3.10",
       "file": "drawrassic-park-v3.10.html",
       "date": "2026-11-12",

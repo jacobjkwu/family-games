@@ -1,5 +1,11 @@
 # Drawrassic Park — Changelog
 
+## v3.11 (2026-11-12) — save schema s5 (unchanged)
+- 👹 Boss Altar in the Wild Lands' Boss Arena (a glowing ring and a "tap the altar" sign mark it; also in Settings). Pick one of the 5 bosses (Shadow Rex, Thunderwing, Magma Ankylo, Frost Spino, Mutant Dark Quetzalcoatlus) and up to 6 park dinos (⭐ picks the strongest 6), then fight in the colosseum.
+- The boss's health and attack scale with the team you bring (the Dark Quetzalcoatlus is the hardest). Each boss uses its own 3 moves, built on the arena's move types; stuns on a boss last at most 0.4 s.
+- Win: the boss's amber and coins, +60 XP for every dino in the team. Lose: +25 XP. Result screen: ⚔️ Again or 👹 Other boss.
+- Save format unchanged (s5); v3.10 and v3.11 share the same park.
+
 ## v3.10 (2026-11-12) — save schema s5 (new)
 - **Schema change s4 → s5:** each dino can carry its own stats `st` {hp, atk, sta, hun} and its current stamina `sta`. On first start v3.10 copies the s4 save to `save/s5` (s4 is left untouched, so v3.9 still plays its own save). Launcher: Copy progress works both ways (s5 → s4 drops the per-dino stats); Recover saves now restores into s5. The Dino Box (`box/s2`) is still shared.
 - 126 more species (141 in all), each a real dinosaur, pterosaur or sea reptile with names in 4 languages, made by a shape generator from 20 body types. The draw screen has 📚 All dinos: a picture grid with group tabs (meat-eaters, raptors, long-necks, horns, armour, duck-bills, flyers, swimmers). Wild Lands and arena challengers use every species; new species use their body type's arena move.
