@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.37",
+      "file": "drawrassic-park-v3.37.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎁 Medals now unlock rewards: 10 hats and accessories, 4 skins (gold, ice, shadow, rainbow), a bouncy castle, a trophy statue, a night lantern that dazzles shadow dinos, and a ×10 firework finale. 📌 Your favourite achievements show under the park name all the time.",
+        "fr": "🎁 Les médailles débloquent des récompenses : 10 chapeaux et accessoires, 4 peaux (or, glace, ombre, arc-en-ciel), un château gonflable, une statue trophée, une lanterne de nuit qui éblouit les dinos de l’ombre et un bouquet final ×10. 📌 Tes exploits préférés restent affichés sous le nom du parc.",
+        "zh-Hans": "🎁 奖牌能解锁奖励啦：10 种帽子和饰品、4 种皮肤（金色、冰冻、暗影、彩虹）、充气城堡、奖杯雕像、能晃晕影子恐龙的夜灯笼、烟花大结局 ×10。📌 喜欢的成就一直显示在公园名字下面。",
+        "zh-Hant": "🎁 獎牌能解鎖獎勵啦：10 種帽子和飾品、4 種皮膚（金色、冰凍、暗影、彩虹）、充氣城堡、獎盃雕像、能晃暈影子恐龍的夜燈籠、煙火大結局 ×10。📌 喜歡的成就一直顯示在公園名字下面。"
+      }
+    },
+    {
       "v": "3.36",
       "file": "drawrassic-park-v3.36.html",
       "date": "2026-11-13",
