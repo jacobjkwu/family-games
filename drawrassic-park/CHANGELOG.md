@@ -1,5 +1,12 @@
 # Drawrassic Park — Changelog
 
+## v3.29 (2026-11-13) — save schema s8 (unchanged)
+- 🐛 Fixed: tapping a wild dino showed no 🍖 Feed button (only 🎯 Catch), so those dinos could not be fed. The Feed and Pet buttons now show for every dino; Store/Release/Stats/Edit/Card stay park-only.
+- 🍖 New feeding animation from the Feed button: a snack (🍖🥩🍗, 🐟 for swimmers, 🥬🍓🌽🍉🍎🥕 for plant eaters) flies in an arc into the dino's mouth, then chewing squashes, crumbs and chomp sounds, a sparkle, “+30 🍽️” and a pulsing tummy bar. Works while carried or in a fight too.
+- 😵 A full dino shakes its head and the snack bounces off onto the ground, where another dino can eat it; a knocked-out dino gets the snack put down beside it. The button shows “· full”.
+- ❤️ Feeding a wild dino gives it trust hearts (up to 3, shown over its head and on the button); each heart adds +12% catch chance (dev panel: fdTrust). Dev panel also gets fdSnack (tummy per snack).
+- Dinos that find food on their own now chew too.
+
 ## v3.28 (2026-11-13) — save schema s8 (unchanged)
 - 🏆 Design contest (quick bar): a random theme (funniest, coolest, cutest, scariest, most colourful, biggest), pick one of your park dinos, three rival monsters from the Mix Factory, three judges flip score cards one by one with comments; scores come from the drawing itself (colours, size, dark/red, pink, length, special move…) plus a little luck. Prizes: 1st +10 coins +3 amber (with fireworks), 2nd +5, 3rd +2.
 - 🃏 Trading cards (quick bar, or 🃏 on the dino card): a card drawn on the spot with a rarity frame (holo shine for epic and legendary), the drawing, level, rarity, food and movement, health/attack/stamina bars and the special move; ◀ ▶ through all park dinos; long-press to save.

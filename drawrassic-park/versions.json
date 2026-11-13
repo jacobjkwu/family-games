@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.29",
+      "file": "drawrassic-park-v3.29.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🍖 Feeding fix: every dino can be fed again, wild ones too. The snack flies into the dino's mouth, it chews, crumbs fly and the tummy bar fills. Full dinos shake their head and the snack drops for someone else. Feeding a wild dino earns trust hearts that make catching easier.",
+        "fr": "🍖 Correctif repas : on peut de nouveau nourrir tous les dinos, même les sauvages. Le goûter vole jusqu’à la bouche, le dino mâche, des miettes volent et le ventre se remplit. Un dino repu secoue la tête et le goûter tombe pour un autre. Nourrir un dino sauvage donne des cœurs de confiance qui facilitent la capture.",
+        "zh-Hans": "🍖 修好喂食：所有恐龙都能喂了，野生恐龙也能喂。零食会飞进恐龙嘴里，它会嚼嚼嚼、掉碎屑，肚子条变满。吃饱的恐龙会摇头，零食掉在地上给别的恐龙吃。喂野生恐龙能得到信任心，越信任越好抓。",
+        "zh-Hant": "🍖 修好餵食：所有恐龍都能餵了，野生恐龍也能餵。零食會飛進恐龍嘴裡，牠會嚼嚼嚼、掉碎屑，肚子條變滿。吃飽的恐龍會搖頭，零食掉在地上給別的恐龍吃。餵野生恐龍能得到信任心，越信任越好抓。"
+      }
+    },
+    {
       "v": "3.28",
       "file": "drawrassic-park-v3.28.html",
       "date": "2026-11-13",
