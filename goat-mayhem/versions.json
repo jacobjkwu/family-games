@@ -2,6 +2,18 @@
   "game": "goat-mayhem",
   "versions": [
     {
+      "v": 7,
+      "file": "goat-mayhem-v7.html",
+      "date": "2026-11-13",
+      "schema": "s2",
+      "notes": {
+        "en": "Xbox fix: the game now asks Edge to hand the controller to the game (before, Edge kept it as a mouse cursor). On the Xbox a \"Press A to start\" card turns on full screen; L3+R3 switches between the game and Edge's cursor.",
+        "fr": "Correctif Xbox : le jeu demande maintenant à Edge de lui donner la manette (avant, Edge la gardait comme curseur). Sur Xbox, une carte « Appuie sur A » active le plein écran ; L3+R3 passe du jeu au curseur d’Edge.",
+        "zh-Hans": "修好 Xbox：游戏现在会让 Edge 把手柄交给游戏（以前 Edge 一直把手柄当鼠标光标用）。在 Xbox 上先出现“按 A 开始”，按下后全屏；同时按两个摇杆可以在游戏和 Edge 光标之间切换。",
+        "zh-Hant": "修好 Xbox：遊戲現在會讓 Edge 把手把交給遊戲（以前 Edge 一直把手把當滑鼠游標用）。在 Xbox 上先出現「按 A 開始」，按下後全螢幕；同時按兩個搖桿可以在遊戲和 Edge 游標之間切換。"
+      }
+    },
+    {
       "v": 6,
       "file": "goat-mayhem-v6.html",
       "date": "2026-11-13",
