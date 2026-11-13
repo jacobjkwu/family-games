@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.39",
+      "file": "drawrassic-park-v3.39.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "💬 Bigger Line Factory: 46 personalities (new: rapper, magician, pirate, robot, royal, chef, gamer, scaredy-cat, explorer, commentator, class monitor, grumpy; parents, firefighters, astronauts, police, builders, artists, superstars, aliens, knights, cavemen) and 1,458 hand-written entries — about 3 billion different lines per language. 📱 Home Screen manifest so the app stays open when switching versions.",
+        "fr": "💬 Usine à répliques agrandie : 46 personnalités (nouveaux : rappeur, magicien, pirate, robot, royal, chef, gamer, froussard, explorateur, commentateur, délégué, ronchon ; parents, pompiers, astronautes, policiers, ouvriers, artistes, stars, aliens, chevaliers, hommes des cavernes) et 1 458 entrées écrites à la main — environ 3 milliards de répliques par langue. 📱 Manifeste écran d’accueil.",
+        "zh-Hans": "💬 台词工厂扩容：46 种性格（新增说唱龙、魔术龙、海盗龙、机器龙、贵族龙、大厨龙、游戏龙、胆小鬼、探险家、解说员、班长龙、暴躁龙；游客新增家长、消防员、宇航员、警察、建筑工人、画家、大明星、外星人、骑士、原始人），手写素材 1458 条，每种语言约 30 亿种台词。📱 加了主屏幕 App 配置，切换版本不再跳出 App。",
+        "zh-Hant": "💬 台詞工廠擴容：46 種性格（新增說唱龍、魔術龍、海盜龍、機器龍、貴族龍、大廚龍、遊戲龍、膽小鬼、探險家、解說員、班長龍、暴躁龍；遊客新增家長、消防員、太空人、警察、建築工人、畫家、大明星、外星人、騎士、原始人），手寫素材 1458 條，每種語言約 30 億種台詞。📱 加了主畫面 App 設定，切換版本不再跳出 App。"
+      }
+    },
+    {
       "v": "3.38",
       "file": "drawrassic-park-v3.38.html",
       "date": "2026-11-13",
