@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.46",
+      "file": "drawrassic-park-v3.46.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "⚠️ Wild dinos now attack any of your dinos they see (even across the wall). Your dino fights back, friends help when the wild one is stronger, and a wild dino that gets knocked out becomes yours.",
+        "fr": "⚠️ Les dinos sauvages attaquent maintenant tous tes dinos qu’ils voient (même par-dessus le mur). Ton dino riposte, ses amis aident si le sauvage est plus fort, et un dino sauvage mis K.-O. devient à toi.",
+        "zh-Hans": "⚠️ 野生恐龙只要看见你的恐龙就会冲过来攻击（隔着围墙也会跳过来）。你的恐龙会打回去，打不过时队友会来帮忙；把野生恐龙打晕，它就自动变成你的恐龙。",
+        "zh-Hant": "⚠️ 野生恐龍只要看見你的恐龍就會衝過來攻擊（隔著圍牆也會跳過來）。你的恐龍會打回去，打不過時隊友會來幫忙；把野生恐龍打暈，牠就自動變成你的恐龍。"
+      }
+    },
+    {
       "v": "3.45",
       "file": "drawrassic-park-v3.45.html",
       "date": "2026-11-13",

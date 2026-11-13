@@ -1,5 +1,10 @@
 # Drawrassic Park — Changelog
 
+## v3.46 (2026-11-13) — save schema s8 (unchanged)
+- ⚠️ Wild dinos attack on sight (number panel 👹 wildAggro, wildSight 420): a wild dino that sees one of your dinos — in the Wild Lands, or in the park near the wall (it jumps over) — charges at it. Your dino fights back (“You want a fight? Here I come!”); if the wild one is 1.3× stronger, up to 3 friends nearby join. A wild dino knocked out in such a fight is tamed and becomes yours (named, walks into the park, or the 📦 Dino Box when full); your dino that loses naps and recovers as in v3.44 raids. At most 4 wild dinos fight at once, and a wild dino waits 40 s after a fight before attacking again. Fighters with no one left to fight go back to normal after 3 s (wild ones in the park jump back over the wall).
+- Fix: the raid message no longer says “wild” twice.
+- Save schema unchanged (s8). Not tested on a real iPad or Xbox.
+
 ## v3.45 (2026-11-13) — save schema s8 (unchanged)
 - 👹 Three more bosses (original designs), data entries like the others, each with a charge, two older moves, three skills of its own and a full-screen ultimate: 🤖 Mecha Morph Carno (Missile Barrage: 10 rockets arc onto marked spots; Racer Mode: it folds into a race car with spinning wheels and zooms through three lanes; Eye Laser: a red beam sweeps in front of it; ultimate FULL ARSENAL with lock-on marks on every dino and a rocket rain), ☣️ Toxic Fang Para (Acid Spit: 5 globs leave bubbling acid pools that slow; Grabbing Tendrils pull up to 4 dinos to it; Toxic Fog around itself; ultimate TOXIC STORM: acid rain, pools and slow for everyone on screen), 🌌 Abyss Dragon, flying (Abyss Breath: a cone of violet fire that leaves a lingering cloud; Obsidian Pillars rise in two rings; Void Orb: a big slow orb that explodes; ultimate END OF WORLDS: the sky turns black and starry, pillars everywhere). 13 bosses and 96 codex entries in all. They come at night (as rarely as set in v3.44), appear in the Boss Altar and the 📖 Boss Codex, and like every boss each hit takes 1 HP.
 - Save schema unchanged (s8). Not tested on a real iPad or Xbox.
