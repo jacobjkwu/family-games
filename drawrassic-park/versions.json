@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.83",
+      "file": "drawrassic-park-v3.83.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "⚡ Speed ×4 while possessing: a new button right below “👻 Leave” makes the dino you possess walk exactly 4 times as fast; tap again for normal speed.",
+        "fr": "⚡ Vitesse ×4 en possédant un dino : un nouveau bouton juste sous « 👻 Sortir » rend le dino possédé exactement 4 fois plus rapide ; touche encore pour la vitesse normale.",
+        "zh-Hans": "⚡ 附身加速 ×4：「👻 离开」正下方的新按钮，点一下附身的恐龙就跑得整整快 4 倍，再点一下恢复正常。",
+        "zh-Hant": "⚡ 附身加速 ×4：「👻 離開」正下方的新按鈕，點一下附身的恐龍就跑得整整快 4 倍，再點一下恢復正常。"
+      }
+    },
+    {
       "v": "3.82",
       "file": "drawrassic-park-v3.82.html",
       "date": "2026-11-14",

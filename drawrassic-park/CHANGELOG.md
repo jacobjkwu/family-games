@@ -1,5 +1,9 @@
 # Drawrassic Park — Changelog
 
+## v3.83 (2026-11-14) — save schema s8 (unchanged)
+- ⚡ Speed boost (possessing): a “⚡ Speed ×4” button right below “👻 Leave”; both now sit just above the skill buttons (Leave moved up by one button height, no skill button moved; checked at 1180×820 and 820×1180 that nothing overlaps). On: the possessed dino's walking speed × exactly 4 (on top of 🎮 poSpeed; measured 3.98–4.07× at the same depth), speed lines behind it, the button glows; tap again for normal speed. Turns off when you stop possessing. Also works for friends' possessed dinos on the host's side if they have it on (not exposed to friends yet).
+- Tutorial updated. Nothing new is saved; save schema unchanged (s8). Tested in 4 languages at both iPad sizes. Not tested on a real iPad or Xbox.
+
 ## v3.82 (2026-11-14) — save schema s8 (unchanged)
 - 🎯 Launch mode (possessing): a 🎯 button first on the skill bar opens a menu with 🚀 Homing missile, 🌀 Grab & slam, 💰 Missile ride and ✕ Leave this mode (the menu sits just above the buttons). With a skill picked the button glows and shows the skill's icon; tapping any creature fires at once — park dinos, wild dinos, shadow dinos, bosses (no card needed) and flytraps (a separate missile list, since they are not dinos). On shadows, bosses and flytraps every missile is a homing hit. Reload 🎮 lnCD 1.5 s. Missiles now chase up to 25 s (was 12), so targets at the far end of the map are reached: tested 3,900–5,700 px away, all hit. The mode stays on until ✕ in the menu or leaving possession. Online friends can use it on dinos and shadows through the host. Card 🎯 lock-on still works.
 - Tutorial updated. Nothing new is saved; save schema unchanged (s8). Tested in 4 languages at 1180×820 and 820×1180 (buttons stay on screen; in portrait they wrap to two rows). Not tested on a real iPad or Xbox.
