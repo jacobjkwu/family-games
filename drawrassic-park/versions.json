@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.61",
+      "file": "drawrassic-park-v3.61.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "😱 The dino you possess can bite visitors and rangers too (🦷 Bite). 🧱 Dinos keep their whole body on their own side of the wall, and when wild dinos do cross (🌿 wildStay off) they jump right over it. 👻 Possessed dinos can hop the wall: jump next to it.",
+        "fr": "😱 Le dino que tu possèdes peut aussi mordre les visiteurs et les gardiens (🦷 Mordre). 🧱 Les dinos gardent tout leur corps de leur côté du mur, et quand les sauvages le passent (🌿 wildStay coupé) ils sautent bien par-dessus. 👻 Un dino possédé peut sauter le mur : saute à côté.",
+        "zh-Hans": "😱 附身的恐龙也能咬游客和管理员了（🦷 咬）。🧱 恐龙的身体不会再卡进墙里；关掉「野生恐龙待在围栏里」时，野生恐龙会从墙上面跳过去，不再穿墙。👻 附身的恐龙在墙边跳一下就能翻墙。",
+        "zh-Hant": "😱 附身的恐龍也能咬遊客和管理員了（🦷 咬）。🧱 恐龍的身體不會再卡進牆裡；關掉「野生恐龍待在圍欄裡」時，野生恐龍會從牆上面跳過去，不再穿牆。👻 附身的恐龍在牆邊跳一下就能翻牆。"
+      }
+    },
+    {
       "v": "3.60",
       "file": "drawrassic-park-v3.60.html",
       "date": "2026-11-13",
