@@ -1,5 +1,17 @@
 # Drawrassic Park — Changelog
 
+## v3.65 (2026-11-14) — save schema s8 (unchanged)
+- 🎯 Lock-on (possessing): tap another dino → its card (or a friend's small card) has 🎯 Lock on: 🚀 Homing missile (any distance, damage atk × lkDmg 2.5, knock-back; bosses and shadows take hero-style damage), 🌀 Grab & slam (lifted, 3 spins, smashed down: −lkSlam 20 and a shockwave), 💰 Missile ride (rides up, explodes, lkCoins 30 coins rain down, floats back). A red target circle and a big 🚀 Fire button; 4 s reload. The host flies every missile; friends see them too.
+- 🚀 Ranged skills in normal fights: a park dino below hero level fighting real enemies (shadows, bosses, wild raiders) now and then fires Missile Barrage or Sky Beams at them (rangedCD 9 s); nothing when there is no enemy.
+- 😡 Rage mode: any dino (park, wild, possessed) at half ❤️ or less turns red and fiery for rageSec 15 s with speed, attack and size × rageMul 2; again after healing above half. Not shadows or party games. Friends see it.
+- 💥 Jump shockwave: landing from a 🦘 jump hits dinos and people around (−jumpDmg 3, small push).
+- 🚑 People: a knocked-out person can be bitten again by a controlled dino (purple 💫 bar = ❤️ × pplDownK); when it runs out an ambulance takes them away. 🌟 The superstar can be bitten (starHp 80); beating it ends the event and no visitors come for starBan 1800 s of play (🚫👥 countdown chip; key drawrassic-park/pplban/b1 with /broken- copies).
+- 👥 Multiplayer: join requests the host approves (✅/❌, can be turned off), welcome message with a random celebration, 📖 multiplayer guide (reopen any time), 👥 players panel (go to, mute, roles, ask to leave with a confirm — one tap never kicks), chat with quick phrases (1 message/s), voice chat (PeerJS calls, host mixes), kicked friends can ask again.
+- ➕ Quick bar: short default bar (watch, meat, snack, possess, together, games) with a glowing ➕ and a hint; catalogue of 74 actions in 8 categories, ready-made sets, search, drag to reorder (⠿). Key toolbar/t2 (t1 left for older versions).
+- 🌱 Starter journey: 19 steps in 5 chapters, pause / resume / restart, coins per step. Existing players start paused.
+- 🌿 Wild raids at least raidMinDay 5 times a day; 👥 at least pplMin 6 visitors by day (new maps too).
+- Save schema unchanged (s8). Tested v3.64 ↔ v3.65 both ways, corrupt keys, full quota, empty storage; 4 languages; online with a local PeerJS stub (two tabs on one machine, voice signalling only, no real audio). Not tested on a real iPad, Xbox, or across real devices/networks.
+
 ## v3.64 (2026-11-14) — save schema s8 (unchanged)
 - 🎩 Hats button in the dino card's main row (park dinos). Its panel: 🚫 Take the hat off — removes the reward hat, a cool hat and a hat picked up from a visitor (v3.63) at once; 😎 Cool hats with drawn (not emoji) looks and animated details: backwards cap 10 🪙, ninja headband 15, gamer headphones 20 (glowing), cowboy hat 20, graduation cap 20 (swinging tassel), neon visor 25, hero mask 25, pirate hat 30, viking helmet 35, dragon horns 45, flame crown 60 (flickering). Bought once, then free for every dino; too few coins shows how many you have. A cool hat replaces the reward hat on that dino; 🏅 reward hats are listed below as before. 👥 Same for all my dinos works here too.
 - Data: drawrassic-park/hats/h1 (+/bak, damaged data kept under /broken-…, unknown hats and dino ids dropped) = owned hats and who wears which; backup codes carry it as "ht" (import adds, never removes). Reward hats stay in rewards/w2 as before. Online friends see cool hats too.

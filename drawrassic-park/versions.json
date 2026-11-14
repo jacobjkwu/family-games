@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.65",
+      "file": "drawrassic-park-v3.65.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎯 Lock-on missiles while possessing (homing hit, grab & slam, missile ride with a coin rain), 😡 rage mode at half health (speed, attack, size ×2), 💥 jump shockwave, 🚑 keep biting knocked-out people (ambulance) and the 🌟 superstar (beat them: no visitors for 30 min), 👥 friends ask to join and you let them in, chat and voice, a short quick bar with a big ➕ catalogue, a 🌱 starter journey, wild raids every day, visitors on new maps.",
+        "fr": "🎯 Missiles verrouillés en possédant un dino (missile à tête chercheuse, attrape et écrase, tour de missile avec pluie de pièces), 😡 mode rage à mi-vie (vitesse, attaque, taille ×2), 💥 onde de choc du saut, 🚑 continuer à mordre les gens assommés (ambulance) et la 🌟 star (battue : plus de visiteurs pendant 30 min), 👥 les amis demandent à entrer, discussion et voix, barre rapide courte avec un grand catalogue ➕, 🌱 premiers pas, raids sauvages chaque jour, visiteurs sur les nouvelles cartes.",
+        "zh-Hans": "🎯 附身时锁定导弹（导弹追踪、抓起来砸、骑导弹上天炸金币），😡 半血暴怒模式（速度、攻击、体型 ×2），💥 跳跃冲击波，🚑 晕倒的人还能继续打（救护车接走），🌟 大明星也能打（打败后 30 分钟没人来），👥 朋友申请加入要你同意、聊天和语音，更短的快捷栏和 ➕ 大目录，🌱 新手冒险，每天都有野生恐龙闯园，新地图也有游客。",
+        "zh-Hant": "🎯 附身時鎖定導彈（導彈追蹤、抓起來砸、騎導彈上天炸金幣），😡 半血暴怒模式（速度、攻擊、體型 ×2），💥 跳躍衝擊波，🚑 暈倒的人還能繼續打（救護車接走），🌟 大明星也能打（打敗後 30 分鐘沒人來），👥 朋友申請加入要你同意、聊天和語音，更短的快捷欄和 ➕ 大目錄，🌱 新手冒險，每天都有野生恐龍闖園，新地圖也有遊客。"
+      }
+    },
+    {
       "v": "3.64",
       "file": "drawrassic-park-v3.64.html",
       "date": "2026-11-14",
