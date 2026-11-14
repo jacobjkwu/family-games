@@ -1,5 +1,10 @@
 # Drawrassic Park — Changelog
 
+## v3.70 (2026-11-14) — save schema s8 (unchanged)
+- 🕊️ Peace on the quick bar, added once right after 🍱 Snacks (nothing removed; flag drawrassic-park/qb/peace370, so removing it keeps it removed; also in the ➕ catalogue under ⚙️). One tap: the current mode and its switches are kept in drawrassic-park/[maps/<id>/]gm/before, then 🕊️ Peaceful is applied and the park calms down at once (shadow dinos and bosses burn away, battles stop, wild raiders go home, people chases end). The button lights up; tapping again restores the kept mode and values (or 🌳 Adventure if none). Only the host can switch it online.
+- 😡 Rage: no cooldown (🎮 rageCD default 0; a saved 180 s from v3.69 becomes 0 once, other settings kept) and the 😡 button works outside fights too. Other dinos and wild dinos still only use it by themselves in fights.
+- Save schema unchanged (s8); tested v3.69 ↔ v3.70, 4 languages at 1180×820 and 820×1180. Not tested on a real iPad or Xbox.
+
 ## v3.69 (2026-11-14) — save schema s8 (unchanged)
 - 🎯 Unlock: while a target is locked, a ✕ (44 px) sits on the corner of 🚀 Fire and the target's card has 🔓 Unlock; both let go of the target and hide the buttons. Controller: left stick press (LS). Online friends' unlocks reach the host. The “add shortcuts here” hint bubble no longer floats over the possession buttons (it covered ✕ in landscape).
 - 😡 Rage is a fight skill: it no longer starts by itself at half health. It works only in a fight (battling, a raid, a boss or shadows nearby, chasing a person, or attacked in the last 3 s), lasts rageSec 15 s and then needs 🎮 → 🦖 rageCD 180 s. The possessed dino has a 😡 button just before 🦷 Bite (jump and the 3 skills stay), showing 🔥 while raging and the cooldown after; outside a fight it says so. Controller: LS (when nothing is locked). Other dinos and wild dinos decide by themselves in fights every 2 s (10% + up to 45% more the more hurt they are). Rage can no longer start from being hit down (e.g. by a homing missile) without fighting.

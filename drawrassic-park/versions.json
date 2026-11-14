@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.70",
+      "file": "drawrassic-park-v3.70.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🕊️ One-tap peace: a 🕊️ Peace button next to 🍱 Snacks switches peaceful mode on at once (shadows vanish, fights stop) and back to your old mode. 😡 Rage has no cooldown any more and can be used any time, not only in fights.",
+        "fr": "🕊️ Paix en un toucher : un bouton 🕊️ Paix à côté de 🍱 Goûters active tout de suite le mode paisible (les ombres disparaissent, les combats s’arrêtent) et revient à ton ancien mode. 😡 La rage n’a plus de recharge et marche à tout moment, pas seulement en combat.",
+        "zh-Hans": "🕊️ 一键和平：「🍱 投喂」旁边的 🕊️ 和平按钮，点一下马上进入和平模式（影子恐龙消失、打架停下），再点一下回到原来的模式。😡 暴怒没有冷却了，不在打架时也能开。",
+        "zh-Hant": "🕊️ 一鍵和平：「🍱 投餵」旁邊的 🕊️ 和平按鈕，點一下馬上進入和平模式（影子恐龍消失、打架停下），再點一下回到原來的模式。😡 暴怒沒有冷卻了，不在打架時也能開。"
+      }
+    },
+    {
       "v": "3.69",
       "file": "drawrassic-park-v3.69.html",
       "date": "2026-11-14",
