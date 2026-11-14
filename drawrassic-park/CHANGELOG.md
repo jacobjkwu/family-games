@@ -1,5 +1,12 @@
 # Drawrassic Park — Changelog
 
+## v3.73 (2026-11-14) — save schema s8 (unchanged)
+- 📅 Daily quests (📅 chip under the achievement strip, ☰ → 📅, ➕ catalogue): every day by the device's date, 3 quests seeded by the date from 27 data entries (dq/dqdata.py): 🟢 easy, 🟡 medium, 🔴 hard. Records-based ones (feed, new dinos, catch, wins, shadows, bosses, eggs, fireworks, parachute jumps, coins, minutes played) count from where the 🏅 record stood when the day began; the rest count what was done today (snacks, chili, popcorn, hats, kites, surfing, pets, mystery events, party games, arena, altar, expeditions, lock-on missiles, shockwaves, rage, possessing). They finish by themselves: 🪙 15/25/40 and ⭐ 40/60/90, with a card and a random celebration (shared with the 🏆 queue). 🔄 swaps a quest, 2 times a day. All 3 → 🎁 chest +50 🪙 (+10 per 🔥 streak day, up to +70) +5 amber +100 ⭐; the streak counts days in a row with all 3 done. Last 7 days shown.
+- 🗓️ Weekly theme by week number (🍱 snacks, ⚔️ battles, 🎨 art, 🌙 night, 🎉 party, 🌿 wild, 🪂 sky, 🧭 explorer): one quest a day fits the theme and gives ×2 coins.
+- ⭐ Park level: stars from quests + 🏆 achievements (task 50, goal 80, challenge 150); level L needs 50·L·(L−1) stars. Each new level +15·L coins (+5 amber every 5th) and 10 titles from 🥚 Egg-sitter to 🐉 Dino master. The level you already had is set quietly the first time.
+- ❓ help and the tutorial (🏅 chapter) explain it. Data drawrassic-park/daily/d1 (+/bak, /broken-…), shared by all maps; backup codes "dq" (import keeps the higher stars and streak). Friends visiting online don't count anything.
+- Save schema unchanged (s8). Tested in 4 languages at 1180×820 and 820×1180, TV 1920×1080 with a mocked controller (🔄 by A, B closes), day change, missed day, corrupt and bad data, export → import, v3.72 ↔ v3.73. Not tested on a real iPad or Xbox.
+
 ## v3.72 (2026-11-14) — save schema s8 (unchanged)
 - 🎮 Controller: B closes the ❓ help window (its OK button is now #hpClose, which the back button finds); a second B closes the ☰ panel behind it. In v3.71 only A on OK closed it.
 - Tested at TV 1920×1080 with a mocked controller (fr): A on OK, B on help, B on the 🏆 panel, A switches 🏆 tabs. Save schema unchanged (s8). Not tested on a real Xbox.

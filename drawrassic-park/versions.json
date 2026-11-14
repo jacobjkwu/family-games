@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.73",
+      "file": "drawrassic-park-v3.73.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "📅 Daily quests: 3 new quests every day (easy, medium, hard) that finish by themselves while you play, with 🪙 coins, ⭐ stars, a 🎁 chest for all 3 and a 🔥 streak. ⭐ Park level with titles (stars from quests and 🏆 achievements), and a 🗓️ theme every week with ×2 coins.",
+        "fr": "📅 Quêtes du jour : 3 nouvelles quêtes chaque jour (facile, moyenne, difficile) qui se finissent toutes seules en jouant, avec 🪙 pièces, ⭐ étoiles, un 🎁 coffre pour les 3 et une 🔥 série. ⭐ Niveau du parc avec des titres (étoiles des quêtes et des 🏆 succès) et un 🗓️ thème chaque semaine avec ×2 pièces.",
+        "zh-Hans": "📅 每日任务：每天 3 个新任务（简单、中等、难），边玩边自动完成，奖励 🪙 金币和 ⭐ 星星；三个都完成开 🎁 宝箱，还有 🔥 连续天数。⭐ 公园等级和称号（星星来自任务和 🏆 成就），🗓️ 每周一个主题，主题任务金币 ×2。",
+        "zh-Hant": "📅 每日任務：每天 3 個新任務（簡單、中等、難），邊玩邊自動完成，獎勵 🪙 金幣和 ⭐ 星星；三個都完成開 🎁 寶箱，還有 🔥 連續天數。⭐ 公園等級和稱號（星星來自任務和 🏆 成就），🗓️ 每週一個主題，主題任務金幣 ×2。"
+      }
+    },
+    {
       "v": "3.72",
       "file": "drawrassic-park-v3.72.html",
       "date": "2026-11-14",
