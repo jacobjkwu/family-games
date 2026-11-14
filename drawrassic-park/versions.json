@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.57",
+      "file": "drawrassic-park-v3.57.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🌐 Play together: open your park with a room code and up to 3 friends join from their own iPad, computer or Xbox. They watch, 👻 possess dinos and fight with you, or 📮 send dinos they draw. Roles: admin, player, visitor. Maps from the cloud now download by themselves.",
+        "fr": "🌐 Jouer ensemble : ouvre ton parc avec un code et jusqu’à 3 amis le rejoignent depuis leur iPad, ordinateur ou Xbox. Ils regardent, 👻 possèdent des dinos et se battent avec toi, ou 📮 envoient les dinos qu’ils dessinent. Rôles : admin, joueur, visiteur. Les cartes du cloud se téléchargent toutes seules.",
+        "zh-Hans": "🌐 一起玩：用房间码打开你的公园，最多 3 个朋友用自己的 iPad、电脑或 Xbox 加入。他们能看、能 👻 附身恐龙和你一起打怪，还能 📮 把自己画的恐龙寄过来。身份：管理员、玩家、访客。云端的地图现在会自己下载。",
+        "zh-Hant": "🌐 一起玩：用房間碼打開你的公園，最多 3 個朋友用自己的 iPad、電腦或 Xbox 加入。他們能看、能 👻 附身恐龍和你一起打怪，還能 📮 把自己畫的恐龍寄過來。身份：管理員、玩家、訪客。雲端的地圖現在會自己下載。"
+      }
+    },
+    {
       "v": "3.56",
       "file": "drawrassic-park-v3.56.html",
       "date": "2026-11-13",
