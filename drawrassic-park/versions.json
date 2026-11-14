@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.79",
+      "file": "drawrassic-park-v3.79.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🥚 Place creatures: a new 🥚 button on the quick bar lets you put flytraps (random, walking or planted), wild dinos (any or rare), shadow dinos and even night bosses anywhere you tap.",
+        "fr": "🥚 Placer des créatures : un nouveau bouton 🥚 dans la barre rapide pose des dionées (au hasard, qui marchent ou plantées), des dinos sauvages (au hasard ou rares), des dinos de l’ombre et même des boss de la nuit là où tu touches.",
+        "zh-Hans": "🥚 放生物：快捷栏新按钮 🥚，可以把食人花（随机 / 会走路 / 不走）、野生恐龙（随机 / 稀有）、影子恐龙，甚至夜晚 Boss 放到你点的任何地方。",
+        "zh-Hant": "🥚 放生物：快捷列新按鈕 🥚，可以把食人花（隨機 / 會走路 / 不走）、野生恐龍（隨機 / 稀有）、影子恐龍，甚至夜晚 Boss 放到你點的任何地方。"
+      }
+    },
+    {
       "v": "3.78",
       "file": "drawrassic-park-v3.78.html",
       "date": "2026-11-14",
