@@ -1,0 +1,3 @@
+"CFBundleDisplayName" = "Drawrassic Park";
+"NSPhotoLibraryAddUsageDescription" = "Drawrassic Park 會把你選擇儲存的恐龍圖片存到照片。";
+"NSCameraUsageDescription" = "只有當你選擇拍下自己的畫、把它放進遊戲時，Drawrassic Park 才會使用相機。";

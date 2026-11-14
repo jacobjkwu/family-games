@@ -1,0 +1,3 @@
+"CFBundleDisplayName" = "Drawrassic Park";
+"NSPhotoLibraryAddUsageDescription" = "Drawrassic Park saves the dinosaur pictures you choose to your photo library.";
+"NSCameraUsageDescription" = "Drawrassic Park uses the camera only when you choose to take a photo of a drawing to bring into the game.";

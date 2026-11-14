@@ -1,0 +1,14 @@
+{
+  "appId": "com.jacobwu.drawrassicpark",
+  "appName": "Drawrassic Park",
+  "webDir": "www",
+  "backgroundColor": "#20331f",
+  "loggingBehavior": "debug",
+  "ios": {
+    "contentInset": "never",
+    "scrollEnabled": false,
+    "allowsLinkPreview": false,
+    "backgroundColor": "#20331f",
+    "webContentsDebuggingEnabled": false
+  }
+}
