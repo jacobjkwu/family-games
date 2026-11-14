@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.84",
+      "file": "drawrassic-park-v3.84.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "⚡ The speed button now works on iPad (it reacts as soon as your finger touches it) and goes ×8. 🪴 Flytraps are kept: the ones you placed or that grew stay where they were after a reload or a new version.",
+        "fr": "⚡ Le bouton de vitesse marche maintenant sur iPad (il réagit dès que le doigt le touche) et passe à ×8. 🪴 Les dionées sont gardées : celles que tu as posées ou qui ont poussé restent en place après un rechargement ou une nouvelle version.",
+        "zh-Hans": "⚡ 加速按钮在 iPad 上能用了（手指一碰就生效），而且变成 ×8。🪴 食人花会存档了：你放的和长出来的食人花，刷新或者换新版本以后还在原地。",
+        "zh-Hant": "⚡ 加速按鈕在 iPad 上能用了（手指一碰就生效），而且變成 ×8。🪴 食人花會存檔了：你放的和長出來的食人花，重新整理或者換新版本以後還在原地。"
+      }
+    },
+    {
       "v": "3.83",
       "file": "drawrassic-park-v3.83.html",
       "date": "2026-11-14",

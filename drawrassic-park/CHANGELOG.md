@@ -1,5 +1,10 @@
 # Drawrassic Park — Changelog
 
+## v3.84 (2026-11-14) — save schema s8 (unchanged)
+- ⚡ Speed button fix: v3.83's button listened for “click”, which iPad Safari doesn't deliver inside the possession controls (they stop the touch to prevent scrolling and zooming), so tapping it did nothing on the iPad (it worked in desktop tests). It now reacts on pointer-down like the other possession buttons (keyboard/controller “click” still works). Boost is ×8 (🎮 poBoostK, 2–12); measured ~8–9× in headless Chrome with touch emulation.
+- 🪴 Flytraps saved per map: drawrassic-park/[maps/<id>/]ft/f1 (+/bak, /broken-…) keeps each grown flytrap's place (as fractions of the map), size, walking, health, facing and colour; saved every 3 s when changed and when the page is hidden; restored exactly when the park opens (tested: 4 saved → 4 back with the same health). An empty or missing list sprouts a fresh few as before. Older versions ignore the key.
+- Tutorial updated. Save schema unchanged (s8). Tested in 4 languages at 1180×820 and 820×1180 with touch taps. Not tested on a real iPad or Xbox.
+
 ## v3.83 (2026-11-14) — save schema s8 (unchanged)
 - ⚡ Speed boost (possessing): a “⚡ Speed ×4” button right below “👻 Leave”; both now sit just above the skill buttons (Leave moved up by one button height, no skill button moved; checked at 1180×820 and 820×1180 that nothing overlaps). On: the possessed dino's walking speed × exactly 4 (on top of 🎮 poSpeed; measured 3.98–4.07× at the same depth), speed lines behind it, the button glows; tap again for normal speed. Turns off when you stop possessing. Also works for friends' possessed dinos on the host's side if they have it on (not exposed to friends yet).
 - Tutorial updated. Nothing new is saved; save schema unchanged (s8). Tested in 4 languages at both iPad sizes. Not tested on a real iPad or Xbox.
