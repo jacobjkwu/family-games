@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.86",
+      "file": "drawrassic-park-v3.86.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🐛 Fix: a park that had been put in 🕊️ Peaceful mode stayed peaceful after a reload while the settings said “Adventure”, so flytraps, fence jumpers and dinos attacking people and your dinos never came back (and 🕊️ switched it on again). Now the game says what is off, and ✅ Turn them all on brings everything back at once. 🌐 Room codes are easy words like DINO7.",
+        "fr": "🐛 Correctif : un parc mis en 🕊️ mode paisible le restait après un rechargement alors que les réglages disaient « Aventure » : plus de dionées, de sauvages qui sautent la clôture ni de dinos qui attaquent (et 🕊️ le remettait). Maintenant le jeu dit ce qui est coupé, et ✅ Tout activer remet tout d’un coup. 🌐 Codes de salle faciles comme DINO7.",
+        "zh-Hans": "🐛 修复：开过 🕊️ 和平模式的公园，刷新以后设置里显示「冒险」，其实还是和平模式，所以食人花、野生恐龙跳栏杆、恐龙咬人、野生恐龙打我们的恐龙都不出来（再点 🕊️ 反而又打开和平）。现在游戏会告诉你哪些关着，点 ✅ 全部打开 就一下全回来。🌐 房间码变成好记的词，比如 DINO7。",
+        "zh-Hant": "🐛 修復：開過 🕊️ 和平模式的公園，重新整理以後設定裡顯示「冒險」，其實還是和平模式，所以食人花、野生恐龍跳欄杆、恐龍咬人、野生恐龍打我們的恐龍都不出來（再點 🕊️ 反而又打開和平）。現在遊戲會告訴你哪些關著，點 ✅ 全部打開 就一下全回來。🌐 房間碼變成好記的詞，比如 DINO7。"
+      }
+    },
+    {
       "v": "3.85",
       "file": "drawrassic-park-v3.85.html",
       "date": "2026-11-14",
