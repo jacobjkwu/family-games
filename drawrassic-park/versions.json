@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.75",
+      "file": "drawrassic-park-v3.75.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🦘 Wild dinos jump the fence: about 90% of the time they run at the fence, jump into the park and attack your dinos, visitors and rangers, and they don't go home by themselves. Knock one out in the park: when its 🎯 countdown ends it becomes yours and moves into the 🏕️ camp.",
+        "fr": "🦘 Les sauvages sautent la clôture : environ 9 fois sur 10, ils foncent vers la clôture, sautent dans le parc et attaquent tes dinos, les visiteurs et les gardiens, sans rentrer tout seuls. Mets-en un K.-O. dans le parc : à la fin du compte à rebours 🎯, il devient à toi et va au 🏕️ camp.",
+        "zh-Hans": "🦘 野生恐龙会跳出围栏：大约 90% 的概率冲向围栏跳进公园，袭击你的恐龙、游客和管理员，而且不会自己回去。在公园里把它打晕，🎯 倒计时结束后它就变成你的恐龙，住进 🏕️ 营地。",
+        "zh-Hant": "🦘 野生恐龍會跳出圍欄：大約 90% 的機率衝向圍欄跳進公園，襲擊你的恐龍、遊客和管理員，而且不會自己回去。在公園裡把牠打暈，🎯 倒數結束後牠就變成你的恐龍，住進 🏕️ 營地。"
+      }
+    },
+    {
       "v": "3.74",
       "file": "drawrassic-park-v3.74.html",
       "date": "2026-11-14",
