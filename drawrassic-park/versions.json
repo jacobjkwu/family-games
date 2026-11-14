@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.82",
+      "file": "drawrassic-park-v3.82.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎯 Launch mode: while possessing, tap 🎯 on the skill bar, pick 🚀 Homing missile, 🌀 Grab & slam or 💰 Missile ride, then tap any creature — even shadow dinos, bosses and flytraps — and a missile locks on and fires at once, following it anywhere on the map. “✕ Leave this mode” is the 4th choice in the same menu.",
+        "fr": "🎯 Mode tir : en possédant un dino, touche 🎯 dans la barre d’attaques, choisis 🚀 Missile à tête chercheuse, 🌀 Attrape et écrase ou 💰 Tour de missile, puis touche n’importe quelle créature — même les ombres, les boss et les dionées — : le missile se verrouille et part tout de suite, et la suit partout. « ✕ Quitter ce mode » est le 4e choix du même menu.",
+        "zh-Hans": "🎯 发射模式：附身时点技能栏上的 🎯，选 🚀 导弹追踪 / 🌀 抓起来砸 / 💰 骑导弹上天，然后点任何生物（影子恐龙、Boss、食人花都行），马上自动锁定发射，多远都追得到。同一个菜单的第 4 个选项是「✕ 退出此模式」。",
+        "zh-Hant": "🎯 發射模式：附身時點技能欄上的 🎯，選 🚀 導彈追蹤 / 🌀 抓起來砸 / 💰 騎導彈上天，然後點任何生物（影子恐龍、Boss、食人花都行），馬上自動鎖定發射，多遠都追得到。同一個選單的第 4 個選項是「✕ 退出此模式」。"
+      }
+    },
+    {
       "v": "3.81",
       "file": "drawrassic-park-v3.81.html",
       "date": "2026-11-14",
