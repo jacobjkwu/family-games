@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.68",
+      "file": "drawrassic-park-v3.68.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "👾 The Glitch Dino from v3.67 is removed: no altar at 3:00, and the Dark Quetzalcoatlus comes as before. A Glitch Dino that already joined stays as a normal dino; if the 999-coins cheat was on, your real coins come back.",
+        "fr": "👾 Le Dino Bogué de la v3.67 est retiré : plus d’autel à 3 h, et le Quetzalcoatlus des ténèbres revient comme avant. Un Dino Bogué déjà dans ton parc reste un dino normal ; si la triche 999 pièces était activée, tes vraies pièces reviennent.",
+        "zh-Hans": "👾 去掉了 v3.67 的乱码龙：夜里 3 点不再出现祭坛，暗黑风神翼龙照常会来。已经加入公园的乱码龙会变成普通恐龙；如果开着 999 金币作弊，金币会变回原来的数量。",
+        "zh-Hant": "👾 去掉了 v3.67 的亂碼龍：夜裡 3 點不再出現祭壇，暗黑風神翼龍照常會來。已經加入公園的亂碼龍會變成普通恐龍；如果開著 999 金幣作弊，金幣會變回原來的數量。"
+      }
+    },
+    {
       "v": "3.67",
       "file": "drawrassic-park-v3.67.html",
       "date": "2026-11-14",
