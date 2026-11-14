@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.89",
+      "file": "drawrassic-park-v3.89.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "💥 Speed ram: things you smash with ⚡ ×8 are now only knocked back a little (about 2 dino lengths; people a bit less) with a small hop. Fixed: a rammed dino could stay floating in the air.",
+        "fr": "💥 Charge rapide : ce que tu renverses avec ⚡ ×8 est maintenant juste un peu repoussé (environ 2 longueurs de dino, les gens un peu moins) avec un petit saut. Corrigé : un dino percuté pouvait rester en l’air.",
+        "zh-Hans": "💥 加速冲撞：开 ⚡ ×8 撞到的东西现在只被撞开一点（大约 2 只恐龙那么远，人再近一点），还会轻轻跳一下。修复：被撞的恐龙有时会一直飘在空中。",
+        "zh-Hant": "💥 加速衝撞：開 ⚡ ×8 撞到的東西現在只被撞開一點（大約 2 隻恐龍那麼遠，人再近一點），還會輕輕跳一下。修復：被撞的恐龍有時會一直飄在空中。"
+      }
+    },
+    {
       "v": "3.88",
       "file": "drawrassic-park-v3.88.html",
       "date": "2026-11-14",

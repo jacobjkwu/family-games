@@ -1,5 +1,11 @@
 # Drawrassic Park — Changelog
 
+## v3.89 (2026-11-14) — save schema s8 (unchanged)
+- 💥 Speed ram distance (asked: “just a little”): 🎮 rmDist 280 px (about 2 dino lengths; v3.88 had 1,800), bosses and flytraps ×0.6, people rmPplDist 180 px; 0.6 s slide. Measured in headless Chrome: dinos 222–284 px, flytrap 169, wild dino 183.
+- 🐛 Floating dinos: v3.87–v3.88 put rammed dinos into the game's “falling” state for the hop. A wild dino or a raid fighter whose own code then set it back to walking or fighting kept its height and floated in the air (seen in tests). The hop is now drawn by the ram itself and always ends on the ground; the dino's state is never changed. Wild dinos jumping the wall (on the way in or home) are not rammed.
+- People that stood on a spot they can't normally walk to (next to a stand) are now pushed too instead of staying stuck.
+- Tutorial updated. Save schema unchanged (s8). Tested at 1180×820 and 820×1180: 10 runs back and forth through 40 park and wild dinos, no invalid positions, nobody stuck in the air. Not tested on a real iPad or Xbox.
+
 ## v3.88 (2026-11-14) — save schema s8 (unchanged)
 - 💥 Speed ram fix (asked: “not that far”): in v3.87 the knock-back was a velocity that the dino's own walking, fighting or landing could cut short — in tests one rammed dino even ended up 57 px behind where it started. Now each rammed thing slides a fixed distance in 1 s (ease-out), placed every frame by the ram itself: dinos and shadow dinos 🎮 rmDist 1,800 px (bosses ×0.6, flytraps ×0.6), people rmPplDist 1,200 px (they still stop at things they can't walk through), walkers stop at a lake edge. Measured in headless Chrome: dinos 1,567–1,859 px, shadow 1,813, flytrap 1,107, person 1,200, wild dino 1,621 — also with the CPU slowed 4× (13–17 fps).
 - Fast dinos on slow frames could jump past a target between two frames (0 hits at 15 fps in v3.87); the hit test now covers the whole path since the last frame.
