@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.85",
+      "file": "drawrassic-park-v3.85.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🦘 Wild dinos jump the fence again and attack your dinos (about 7 in 10 attacks) and people; flytraps no longer distract them; up to 6 at once. 🌐 Your room code stays the same every time, and you can type your own. 📱 Fix for the blank strip on iPad after closing Play together.",
+        "fr": "🦘 Les dinos sauvages sautent de nouveau la clôture et attaquent tes dinos (environ 7 fois sur 10) et les gens ; les dionées ne les distraient plus ; jusqu’à 6 à la fois. 🌐 Ton code de salle reste le même à chaque fois, et tu peux taper le tien. 📱 Correctif pour la bande vide sur iPad après avoir fermé Jouer ensemble.",
+        "zh-Hans": "🦘 野生恐龙又会跳栏杆了，见我们的恐龙就打（大约 10 次里 7 次打恐龙），也会追人；不再被食人花拖住；最多同时 6 只。🌐 房间码每次都一样，也可以自己输入。📱 修了关掉「一起玩」窗口后 iPad 右边变空白的问题。",
+        "zh-Hant": "🦘 野生恐龍又會跳欄杆了，見我們的恐龍就打（大約 10 次裡 7 次打恐龍），也會追人；不再被食人花拖住；最多同時 6 隻。🌐 房間碼每次都一樣，也可以自己輸入。📱 修了關掉「一起玩」視窗後 iPad 右邊變空白的問題。"
+      }
+    },
+    {
       "v": "3.84",
       "file": "drawrassic-park-v3.84.html",
       "date": "2026-11-14",
