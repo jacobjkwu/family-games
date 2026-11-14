@@ -1,5 +1,14 @@
 # Drawrassic Park — Changelog
 
+## v3.56 (2026-11-13) — save schema s8 (unchanged)
+- 👻 Possess (dino card → 👻 Possess, first button; quick bar 👻 takes the selected or the nearest park dino on screen): the dino stops thinking for itself and you steer it with an on-screen stick (bottom left, follows one finger; works together with the buttons for two-finger play). Buttons (bottom right): 🦷 bite the nearest target in reach (shadow dinos and bosses first, then wild dinos, then park dinos), its 3 skills (the 12 Hero Boss skills, chosen in ⋯ → 👑 Boss skills; cooldown 🎮 poCD 8 s, ×0.6 for heroes; a possessed hero no longer casts on its own), 🦘 jump (flyers: fly up / down), 👻 Leave. The quick bar and tools hide while possessed; the camera follows the dino; a 👻 floats over it.
+- A panel under the top bar shows portrait, name, level, ❤️ health, stamina and tummy; when knocked out it shows the seconds until it wakes, and control comes back after.
+- Everyone treats it as a normal dino: shadows and bosses attack it, a park dino it bites battles back (or runs away), a wild dino it bites starts a wild fight (friends may come), it gets hungry and tired, can be picked up, carried, stunned, and it still takes part in toys, events, snacks and raids. It leaves possession by itself when it goes to the box, another map, an expedition or the arena.
+- Controller: left stick walk, A bite, X / RB / LB skills 1–3, LT / RT jump, B leave, Y settings; hints show these.
+- Number panel: poCD, poSpeed (×1.3), poBite (bite damage ×). Tutorial: new 👻 section in “Looking after dinos”. Nothing is saved; save schema unchanged (s8).
+- Next: multiplayer “come to my park” games built on possession (🙈 hide and seek, 🍔 big eater, 🎰 surprise wheel).
+- Not tested on a real iPad or Xbox.
+
 ## v3.55 (2026-11-13) — save schema s8 (unchanged)
 - ☁️ Fix: maps other than Map 1 never reached another device. Each map uploaded its own park (users/{uid}/games/drawrassic-park-map-<id>) but the map list stayed on the device. Now the list is shared (users/{uid}/games/drawrassic-park-maps): on sign-in and whenever the game comes back to the front, maps from other devices are added to 🌍 (a toast names them; entries are only added, never removed or renamed from another device). Opening such a map shows the “can’t be found” screen (nothing saved) with ☁️ Download this map from the cloud and what the cloud copy holds; the download is written only if this device still has no park for that map, then the page reloads into it.
 - ☁️ When the current map uploads, the other maps this device holds are uploaded too, but only when they changed and only if the cloud copy is missing or was last written by this same device (another device's newer copy is never overwritten from the background).

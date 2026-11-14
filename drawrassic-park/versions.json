@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.56",
+      "file": "drawrassic-park-v3.56.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "👻 Possess a dino: tap 👻 on its card and you become it — walk with the stick, 🦷 bite, use its 3 skills, 🦘 jump, with a big health bar. Other dinos treat it as a normal dino.",
+        "fr": "👻 Posséder un dino : touche 👻 sur sa fiche et tu deviens ce dino — marche avec le joystick, 🦷 mords, utilise ses 3 attaques, 🦘 saute, avec une grande barre de vie. Les autres dinos le traitent comme un dino normal.",
+        "zh-Hans": "👻 附身：在恐龙卡片上点 👻，你就变成这只恐龙——用摇杆走路，🦷 咬，放它的 3 个技能，🦘 跳，上面有大血条。别的恐龙还是把它当普通恐龙。",
+        "zh-Hant": "👻 附身：在恐龍卡片上點 👻，你就變成這隻恐龍——用搖桿走路，🦷 咬，放牠的 3 個技能，🦘 跳，上面有大血條。別的恐龍還是把牠當普通恐龍。"
+      }
+    },
+    {
       "v": "3.55",
       "file": "drawrassic-park-v3.55.html",
       "date": "2026-11-13",
