@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.69",
+      "file": "drawrassic-park-v3.69.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎯 Lock-on has an exit: ✕ on the 🚀 Fire button (or 🔓 on the card) lets go of the target. 😡 Rage is now a fight skill: only in a fight, 15 s, then a 3-minute cooldown — a 😡 button next to 🦷 when you possess a dino; other and wild dinos use it by themselves.",
+        "fr": "🎯 Le verrouillage a une sortie : le ✕ sur le bouton 🚀 Feu (ou 🔓 sur la fiche) lâche la cible. 😡 La rage devient une attaque de combat : seulement en combat, 15 s, puis 3 minutes de recharge — un bouton 😡 à côté de 🦷 quand tu possèdes un dino ; les autres dinos et les sauvages l’utilisent tout seuls.",
+        "zh-Hans": "🎯 锁定导弹有退出键了：🚀 发射按钮角上的 ✕（或卡片里的 🔓）取消锁定。😡 暴怒变成战斗技能：只有打架时能开，15 秒，之后冷却 3 分钟；附身时 🦷 旁边有 😡 按钮，别的恐龙和野生恐龙会自己开。",
+        "zh-Hant": "🎯 鎖定導彈有退出鍵了：🚀 發射按鈕角上的 ✕（或卡片裡的 🔓）取消鎖定。😡 暴怒變成戰鬥技能：只有打架時能開，15 秒，之後冷卻 3 分鐘；附身時 🦷 旁邊有 😡 按鈕，別的恐龍和野生恐龍會自己開。"
+      }
+    },
+    {
       "v": "3.68",
       "file": "drawrassic-park-v3.68.html",
       "date": "2026-11-14",

@@ -1,5 +1,10 @@
 # Drawrassic Park — Changelog
 
+## v3.69 (2026-11-14) — save schema s8 (unchanged)
+- 🎯 Unlock: while a target is locked, a ✕ (44 px) sits on the corner of 🚀 Fire and the target's card has 🔓 Unlock; both let go of the target and hide the buttons. Controller: left stick press (LS). Online friends' unlocks reach the host. The “add shortcuts here” hint bubble no longer floats over the possession buttons (it covered ✕ in landscape).
+- 😡 Rage is a fight skill: it no longer starts by itself at half health. It works only in a fight (battling, a raid, a boss or shadows nearby, chasing a person, or attacked in the last 3 s), lasts rageSec 15 s and then needs 🎮 → 🦖 rageCD 180 s. The possessed dino has a 😡 button just before 🦷 Bite (jump and the 3 skills stay), showing 🔥 while raging and the cooldown after; outside a fight it says so. Controller: LS (when nothing is locked). Other dinos and wild dinos decide by themselves in fights every 2 s (10% + up to 45% more the more hurt they are). Rage can no longer start from being hit down (e.g. by a homing missile) without fighting.
+- Save schema unchanged (s8). Tested in 4 languages at 1180×820 and 820×1180 (buttons don't overlap and stay on screen), online with a local PeerJS stub (a friend's 😡 and ✕ reach the host). Not tested on a real iPad or Xbox.
+
 ## v3.68 (2026-11-14) — save schema s8 (unchanged)
 - 👾 Glitch Dino removed (asked by the players): v3.68 is built from v3.66, so there is no altar at 3:00, no Glitch Dino fight, no gz settings, and the Dark Quetzalcoatlus comes at night as before. Kept from v3.67: the 🚫👥 chip sits below a friend's top bar.
 - Data: a Glitch Dino that already joined in v3.67 stays in the park as a normal dino (it can be knocked out again). If v3.67's 💰 999-coins cheat was on, it is switched off once and the real coins saved in drawrassic-park/[maps/<id>/]glitch/g1 come back (key kept, /bak written, marked off). v3.67 itself is unchanged.
