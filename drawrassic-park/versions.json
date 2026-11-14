@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.59",
+      "file": "drawrassic-park-v3.59.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎨 Online draw & guess, 📚 discovery progress in the encyclopedia, ✨ roguelike evolutions, 🎮 game modes (Peaceful / Adventure / Challenge / Creative) and 🎲 pick a camp dino for me.",
+        "fr": "🎨 Dessine et devine en ligne, 📚 progression des découvertes dans l’encyclopédie, ✨ évolutions roguelike, 🎮 modes de jeu (Paisible / Aventure / Défi / Créatif) et 🎲 choix d’un dino du camp au hasard.",
+        "zh-Hans": "🎨 联机你画我猜、📚 图鉴发现进度、✨ 肉鸽进化、🎮 游戏模式（和平 / 冒险 / 挑战 / 创造），还有营地 🎲 帮我选一只。",
+        "zh-Hant": "🎨 連線你畫我猜、📚 圖鑑發現進度、✨ 肉鴿進化、🎮 遊戲模式（和平 / 冒險 / 挑戰 / 創造），還有營地 🎲 幫我選一隻。"
+      }
+    },
+    {
       "v": "3.58",
       "file": "drawrassic-park-v3.58.html",
       "date": "2026-11-13",
