@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.58",
+      "file": "drawrassic-park-v3.58.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎪 Party games for 1–4 players (park dinos join as computer players): 🍔 Big eater, 💣 Hot potato egg, 🌋 Lava survival, 🙈 Hide and seek, 🏁 Dino race, 👾 Shadow hunt, 😈 Trickster, 👹 Boss raid — with a 🎰 surprise wheel every 30 s.",
+        "fr": "🎪 Jeux de fête pour 1 à 4 joueurs (des dinos du parc jouent aussi) : 🍔 Grand mangeur, 💣 Œuf patate chaude, 🌋 Survie dans la lave, 🙈 Cache-cache, 🏁 Course, 👾 Chasse aux ombres, 😈 Farceur, 👹 Raid contre le boss — avec une 🎰 roue surprise toutes les 30 s.",
+        "zh-Hans": "🎪 派对小游戏，1–4 人（公园恐龙当电脑玩家）：🍔 大胃王、💣 烫手山药蛋、🌋 熔岩求生、🙈 躲猫猫、🏁 恐龙赛跑、👾 影子猎手、😈 捣蛋鬼、👹 Boss 团战，每 30 秒还有 🎰 惊喜轮盘。",
+        "zh-Hant": "🎪 派對小遊戲，1–4 人（公園恐龍當電腦玩家）：🍔 大胃王、💣 燙手山藥蛋、🌋 熔岩求生、🙈 躲貓貓、🏁 恐龍賽跑、👾 影子獵手、😈 搗蛋鬼、👹 Boss 團戰，每 30 秒還有 🎰 驚喜輪盤。"
+      }
+    },
+    {
       "v": "3.57",
       "file": "drawrassic-park-v3.57.html",
       "date": "2026-11-13",
