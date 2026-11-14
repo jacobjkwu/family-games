@@ -1,5 +1,12 @@
 # Drawrassic Park — Changelog
 
+## v3.67 (2026-11-14) — save schema s8 (unchanged)
+- 👾 Glitch Dino: the day clock runs 6:00 → 6:00, so 3:00 in the night is dayT 0.875 (a 2:00 hint first). That night the Dark Quetzalcoatlus doesn't come; a glowing altar appears in the park where you are looking, with a flickering glitch dino above it (seeded glitch sprite built from the T. rex shape). Tap it (controller: cursor + A) for a dialog — “…you finally came. I've waited so long.” — then ⚔️ Fight or ⏳ Not yet. The night holds still while it waits (up to 150 s) and during the fight.
+- Fight (🎮 → 🌙 gzOn, gzFrom, gzHp 700 × bossHpK, gzDmg 3, gzMsl 10, gzTaps 6): phase 1 💨 Glitch Charge (dashes to the biggest group; every dino within 420 takes −3 and is thrown back) and it keeps turning into night bosses you have beaten (all 13 if none yet) and casts their skills (ultimates too). Below 2/3 it is enraged (red aura, faster): 🎯 Dark Missile — 3 s charge with a 👆 ×6 counter, tap the boss (or A) to break it (stunned 2.5 s, −4%); otherwise a homing missile hits the target anywhere (−10, stunned 2 s); 🌀 Boss Medley — one skill from each beaten boss in turn. Below 1/3 everything is faster.
+- Beaten: white glow and flash, then it joins the park as a level ≥5 fierce T. rex-shaped dino “Glitch Rex / 乱码龙”, always in rage mode, ❤️ shown as ▓▒░/∞: it is healed every frame, can't be knocked out, scared away, stunned or slowed. Its card has 🎁 💰 999 coins on/off (on: coins stay 999 and your real coins are kept; off: they come back). +80 coins, +60 amber, +60 XP to nearby dinos.
+- Data: drawrassic-park/[maps/<id>/]glitch/g1 {beaten, id, cheat{on,real}} (+/bak, /broken-…), backup codes "gz". Online friends see the boss and its name but not the altar or dialog (only the host can start it). The 🚫👥 chip moves below a friend's top bar.
+- Save schema unchanged (s8); tested v3.66 ↔ v3.67, corrupt key, export → import, 4 languages, both iPad sizes, TV 1920×1080 with a mocked controller (dialog by D-pad + A). Not tested on a real iPad or Xbox.
+
 ## v3.66 (2026-11-14) — save schema s8 (unchanged)
 - 😡 Rage mode keeps the dino's size: size now has its own number 🎮 → 🦖 rageSize (default ×1, up to ×3); rageMul (×2) is only speed and attack. A dino saved mid-rage by v3.65 shrinks back to normal on load. Normal dino size is the same as in v3.64/v3.65 (checked).
 - Rage messages and the tutorial no longer mention size. Save schema unchanged (s8); tested v3.65 ↔ v3.66 both ways. Not tested on a real iPad or Xbox.

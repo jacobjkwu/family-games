@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.67",
+      "file": "drawrassic-park-v3.67.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "👾 At 3:00 in the night a glowing altar appears in your park with the Glitch Dino. Tap it to fight: Glitch Charge, it turns into the bosses you beat, and when enraged a Dark Missile (tap it to break) and a Boss Medley. Beat it and it joins you — unbeatable — with a 💰 999-coins cheat switch.",
+        "fr": "👾 À 3 h du matin, un autel lumineux apparaît dans ton parc avec le Dino Bogué. Touche-le pour te battre : Charge Boguée, il se change en boss que tu as battus, et furieux, Missile Noir (touche-le pour le casser) et Medley des boss. Battu, il te rejoint — invincible — avec un interrupteur de triche 💰 999 pièces.",
+        "zh-Hans": "👾 夜里 3 点，公园里会出现发光的祭坛和乱码龙。点它开战：乱码冲撞、变成你打败过的 Boss；狂暴后放暗夜导弹（快点它打断）和 Boss 大合集。打败它，它会加入你的公园（打不死），还送你 💰 999 金币作弊开关。",
+        "zh-Hant": "👾 夜裡 3 點，公園裡會出現發光的祭壇和亂碼龍。點牠開戰：亂碼衝撞、變成你打敗過的 Boss；狂暴後放暗夜導彈（快點牠打斷）和 Boss 大合集。打敗牠，牠會加入你的公園（打不死），還送你 💰 999 金幣作弊開關。"
+      }
+    },
+    {
       "v": "3.66",
       "file": "drawrassic-park-v3.66.html",
       "date": "2026-11-14",
