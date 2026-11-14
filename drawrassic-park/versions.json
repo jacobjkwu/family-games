@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.80",
+      "file": "drawrassic-park-v3.80.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🥚 Stop placing creatures easily: a big red “✕ Stop placing” button right above the quick bar, tap the lit 🥚 again, a stop button in the 🥚 panel, or Escape / controller B. Possessing a dino or drawing also stops placing.",
+        "fr": "🥚 Arrêter de placer des créatures facilement : un grand bouton rouge « ✕ Arrêter de placer » juste au-dessus de la barre rapide, un nouveau toucher sur le 🥚 allumé, un bouton dans le panneau 🥚, ou Échap / B à la manette. Posséder un dino ou dessiner arrête aussi.",
+        "zh-Hans": "🥚 退出放生物更容易了：快捷栏上方有大大的红色「✕ 退出放生物」按钮；再点一下亮着的 🥚 也能退出；🥚 面板里也有退出按钮；手柄按 B 也行。附身恐龙或去画恐龙时也会自动退出。",
+        "zh-Hant": "🥚 退出放生物更容易了：快捷列上方有大大的紅色「✕ 退出放生物」按鈕；再點一下亮著的 🥚 也能退出；🥚 面板裡也有退出按鈕；手把按 B 也行。附身恐龍或去畫恐龍時也會自動退出。"
+      }
+    },
+    {
       "v": "3.79",
       "file": "drawrassic-park-v3.79.html",
       "date": "2026-11-14",

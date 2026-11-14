@@ -1,5 +1,9 @@
 # Drawrassic Park — Changelog
 
+## v3.80 (2026-11-14) — save schema s8 (unchanged)
+- 🥚 Stop placing: while placing creatures, a bar with a big red “✕ Stop placing” (44 px, yellow border) sits 12 px above the quick bar on every screen size (v3.79 had a small “✕ Done” at the top that the news and achievement cards could cover); the quick bar's 🥚 lights up and tapping it again stops; the 🥚 panel shows “✕ Stop placing” at the top while placing; Escape and controller B stop too. Possessing a dino (👻 button or card) and ✏️ Draw a Dino stop placing, so a tap meant for your dino no longer places a flytrap. The “add shortcuts here” hint hides while placing.
+- Tutorial updated. Nothing new is saved; save schema unchanged (s8). Tested in 4 languages at 1180×820 and 820×1180. Not tested on a real iPad or Xbox (controller B tested only with code, not a real pad).
+
 ## v3.79 (2026-11-14) — save schema s8 (unchanged)
 - 🥚 Place creatures (quick bar 🥚, added once after 🎪 Games, flag drawrassic-park/qb/spawn379; ➕ catalogue under ⚔️): a panel with 🪴 flytrap / walking flytrap / planted flytrap, 🌿 any wild dino / rare wild dino (rare, epic or legendary), 👻 shadow raptor / shadow brute and all 13 👹 night bosses. Pick one, then tap the ground: it appears right there (not in water); keep tapping to place more; “✕ Done” ends. Wild dinos put down in the park act like fence jumpers (fight, chase people, stay; knocked out → 🏕️ camp), past the wall they live in the Wild Lands. Shadow dinos burn away at the next sunrise. Bosses appear at the tap without the fly-in, one at a time (the Dark Quetzalcoatlus separately); a second one says to beat the first. Flytraps need the 🎮 flytrap switch on. Works by controller (cursor + A). Online friends can't place creatures.
 - Tutorial (🌿 chapter, ▶️ Try it) updated. Nothing new is saved; save schema unchanged (s8). Tested in 4 languages at 1180×820 and 820×1180. Not tested on a real iPad or Xbox.
