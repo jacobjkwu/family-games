@@ -1,5 +1,10 @@
 # Drawrassic Park — Changelog
 
+## v3.78 (2026-11-14) — save schema s8 (unchanged)
+- 🪴 Sprout chance (🎮 → 🌿 ftChance, 0.9): when a new flytrap is due (about every ftEvery s), it sprouts 90% of the time (fixed 80% before). Measured over 40 forced tries: 82–95%.
+- 🪴 Grow back (🎮 → 🌿 ftRespawn, 3 s): every flytrap beaten (trimmed, bitten, possessed bite) sprouts again ftRespawn s later within about 400 px of where it wilted, with the sprouting animation — always, even at the most-at-once limit, since it takes the old one's place. Not when flytraps are off or in 🕊️ Peaceful mode.
+- Tutorial updated. Nothing new is saved; save schema unchanged (s8). Tested in headless Chrome at 1180×820 and 820×1180. Not tested on a real iPad or Xbox.
+
 ## v3.77 (2026-11-14) — save schema s8 (unchanged)
 - 🍿 Flytrap throws (🎮 → 🌿 ftFood, on; ftStarP 0.03): a flytrap's long-range throw is a snack flown with the snack bar's throw: 🌟 star fruit 3%, otherwise 🍿 popcorn (half), 🌶️ super-hot chili or 🕷️ spider (a quarter each; measured over 20,000 picks: 3.0% / 48.6% / 24.2% / 24.1%). The target eats it with the usual effect. It costs no amber (even the star fruit) and doesn't count for your 📅 quests or 🏆 achievements. ftFood off = v3.76 venom.
 - 🦘 Fence jumpers and people: about a third land next to a visitor or ranger and chase them (when 👥 pplAtk is on); after each fight a jumper picks a person or a dino about half and half. In v3.75–v3.76 they nearly always chose a dino, so visitors were almost never attacked by them. In tests 1–2 of every 4–6 jumpers chased people.

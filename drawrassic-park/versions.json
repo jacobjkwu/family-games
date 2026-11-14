@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.78",
+      "file": "drawrassic-park-v3.78.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🪴 More flytraps: a new one now sprouts 90% of the times one is due (was 80%), and every beaten flytrap grows back 3 seconds later nearby.",
+        "fr": "🪴 Plus de dionées : une nouvelle pousse maintenant 9 fois sur 10 quand c’est l’heure (avant 8 sur 10), et chaque dionée vaincue repousse tout près 3 secondes plus tard.",
+        "zh-Hans": "🪴 食人花更多了：到时间时长出新食人花的概率从 80% 提高到 90%；每棵被打倒的食人花 3 秒后会在附近重新长出来。",
+        "zh-Hant": "🪴 食人花更多了：到時間時長出新食人花的機率從 80% 提高到 90%；每棵被打倒的食人花 3 秒後會在附近重新長出來。"
+      }
+    },
+    {
       "v": "3.77",
       "file": "drawrassic-park-v3.77.html",
       "date": "2026-11-14",
