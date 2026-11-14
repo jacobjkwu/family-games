@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.64",
+      "file": "drawrassic-park-v3.64.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎩 Hats button on the dino card: take any hat off in one tap, and 11 cool drawn hats to buy once with coins (cap, ninja band, headphones, cowboy, grad cap, neon visor, hero mask, pirate, viking, dragon horns, flame crown).",
+        "fr": "🎩 Bouton Chapeaux sur la fiche du dino : enlève n’importe quel chapeau d’un toucher, et 11 chapeaux stylés à acheter une fois avec des pièces (casquette, bandeau de ninja, casque audio, cowboy, toque, visière néon, masque de héros, pirate, viking, cornes de dragon, couronne de flammes).",
+        "zh-Hans": "🎩 恐龙卡片上的「帽子」按钮：一键摘掉帽子；还有 11 顶用金币买一次就能一直戴的帅帽子（反戴棒球帽、忍者头带、电竞耳机、牛仔帽、学士帽、霓虹护目镜、英雄面罩、海盗帽、维京头盔、龙角、火焰皇冠）。",
+        "zh-Hant": "🎩 恐龍卡片上的「帽子」按鈕：一鍵摘掉帽子；還有 11 頂用金幣買一次就能一直戴的帥帽子（反戴棒球帽、忍者頭帶、電競耳機、牛仔帽、學士帽、霓虹護目鏡、英雄面罩、海盜帽、維京頭盔、龍角、火焰皇冠）。"
+      }
+    },
+    {
       "v": "3.63",
       "file": "drawrassic-park-v3.63.html",
       "date": "2026-11-14",
