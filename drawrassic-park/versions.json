@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.87",
+      "file": "drawrassic-park-v3.87.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "💥 Speed ram: with ⚡ ×8 on, the dino you possess smashes through everything in its way — dinos, wild dinos, shadow dinos, bosses, flytraps and people fly far away. 🚀 While possessing, tapping a flytrap or a shadow dino now always fires a missile (no more ✂️ trimming or 🔦 flashing).",
+        "fr": "💥 Charge rapide : avec ⚡ ×8, le dino possédé renverse tout sur son passage — dinos, sauvages, dinos de l’ombre, boss, dionées et gens volent très loin. 🚀 En possédant un dino, toucher une dionée ou un dino de l’ombre lance toujours un missile (plus de ✂️ taille ni de 🔦 flash).",
+        "zh-Hans": "💥 加速冲撞：开了 ⚡ ×8 以后，附身的恐龙会把挡路的一切撞飞老远——恐龙、野生恐龙、影子恐龙、Boss、食人花和人。🚀 附身时点食人花或影子恐龙，现在一定是发射导弹（不会再用 ✂️ 剪或 🔦 闪光）。",
+        "zh-Hant": "💥 加速衝撞：開了 ⚡ ×8 以後，附身的恐龍會把擋路的一切撞飛老遠——恐龍、野生恐龍、影子恐龍、Boss、食人花和人。🚀 附身時點食人花或影子恐龍，現在一定是發射導彈（不會再用 ✂️ 剪或 🔦 閃光）。"
+      }
+    },
+    {
       "v": "3.86",
       "file": "drawrassic-park-v3.86.html",
       "date": "2026-11-14",
