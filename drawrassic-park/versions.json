@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.77",
+      "file": "drawrassic-park-v3.77.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🪴 Flytraps now throw snacks instead of venom: 🍿 popcorn, 🌶️ super-hot chili or 🕷️ spider, and sometimes (3%) a 🌟 star fruit; whoever is hit eats it. 🦘 Fence jumpers go for visitors and rangers too, and dinos chasing people no longer stop for flytraps.",
+        "fr": "🪴 Les dionées lancent maintenant des goûters au lieu du venin : 🍿 pop-corn, 🌶️ piment de l’enfer ou 🕷️ araignée, et parfois (3 %) un 🌟 fruit étoile ; celui qui est touché le mange. 🦘 Les sauvages qui sautent la clôture s’en prennent aussi aux visiteurs et gardiens, et les dinos qui poursuivent les gens ne s’arrêtent plus pour les dionées.",
+        "zh-Hans": "🪴 食人花现在扔零食，不吐毒液了：🍿 爆米花、🌶️ 变态辣辣椒、🕷️ 蜘蛛，偶尔（3%）是 🌟 星星果，砸中谁谁就吃下去。🦘 跳进来的野生恐龙也会去追游客和管理员；追人的恐龙不会再因为食人花停下来。",
+        "zh-Hant": "🪴 食人花現在扔零食，不吐毒液了：🍿 爆米花、🌶️ 變態辣辣椒、🕷️ 蜘蛛，偶爾（3%）是 🌟 星星果，砸中誰誰就吃下去。🦘 跳進來的野生恐龍也會去追遊客和管理員；追人的恐龍不會再因為食人花停下來。"
+      }
+    },
+    {
       "v": "3.76",
       "file": "drawrassic-park-v3.76.html",
       "date": "2026-11-14",

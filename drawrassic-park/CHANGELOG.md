@@ -1,5 +1,11 @@
 # Drawrassic Park — Changelog
 
+## v3.77 (2026-11-14) — save schema s8 (unchanged)
+- 🍿 Flytrap throws (🎮 → 🌿 ftFood, on; ftStarP 0.03): a flytrap's long-range throw is a snack flown with the snack bar's throw: 🌟 star fruit 3%, otherwise 🍿 popcorn (half), 🌶️ super-hot chili or 🕷️ spider (a quarter each; measured over 20,000 picks: 3.0% / 48.6% / 24.2% / 24.1%). The target eats it with the usual effect. It costs no amber (even the star fruit) and doesn't count for your 📅 quests or 🏆 achievements. ftFood off = v3.76 venom.
+- 🦘 Fence jumpers and people: about a third land next to a visitor or ranger and chase them (when 👥 pplAtk is on); after each fight a jumper picks a person or a dino about half and half. In v3.75–v3.76 they nearly always chose a dino, so visitors were almost never attacked by them. In tests 1–2 of every 4–6 jumpers chased people.
+- 🤝 The flytrap truce no longer stops dinos that are chasing people (it only ends dino-vs-dino fights).
+- Tutorial and ❓ help updated. Nothing new is saved; save schema unchanged (s8). Tested in 4 languages at 1180×820 and 820×1180. Not tested on a real iPad or Xbox.
+
 ## v3.76 (2026-11-14) — save schema s8 (unchanged)
 - 🟢 Venom (🎮 → 🌿 ftSpitR 8 dino lengths, ftSpitCD 5 s): a flytrap spits a glob at the nearest dino or person out of biting reach but within range; the glob arcs, follows its target and splashes: −ftDmg (3) to everyone in the splash, plus a bubbling green puddle for 4 s. Planted flytraps spit too. Wild dinos and people never go below 1.
 - 🤝 Truce (🎮 → 🌿 ftTruce, on): a dino that sees a flytrap (about 5 dino lengths, same side of the wall) drops its fight — park battle, raid or fence-jump fight, chasing a person — and goes to beat the flytrap first, up to 5 dinos per flytrap (its opponent joins too). Other dinos join unless they are calm plant-eaters. They give up after 25 s, and go back to normal when the flytrap wilts (fence jumpers pick a new target). Your possessed dino is never taken over.
