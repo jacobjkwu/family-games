@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.88",
+      "file": "drawrassic-park-v3.88.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "💥 Speed ram fixed: whatever you smash with ⚡ ×8 now always flies far — dinos about 1,800 px (1½ screens), people 1,200 px — on every device and frame rate. Rammed dinos never go through the wall any more (the chili ram too).",
+        "fr": "💥 Charge rapide corrigée : tout ce que tu renverses avec ⚡ ×8 vole maintenant toujours loin — dinos environ 1 800 px (1 écran et demi), gens 1 200 px — sur tous les appareils. Les dinos percutés ne traversent plus le mur (le coup de piment non plus).",
+        "zh-Hans": "💥 修好加速冲撞：开 ⚡ ×8 撞到的东西现在一定飞得很远——恐龙大约 1800 像素（一个半屏幕），人 1200 像素，什么设备都一样。被撞的恐龙也不会再穿过围墙（辣椒撞人也修了）。",
+        "zh-Hant": "💥 修好加速衝撞：開 ⚡ ×8 撞到的東西現在一定飛得很遠——恐龍大約 1800 像素（一個半螢幕），人 1200 像素，什麼裝置都一樣。被撞的恐龍也不會再穿過圍牆（辣椒撞人也修了）。"
+      }
+    },
+    {
       "v": "3.87",
       "file": "drawrassic-park-v3.87.html",
       "date": "2026-11-14",
