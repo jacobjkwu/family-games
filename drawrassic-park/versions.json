@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.62",
+      "file": "drawrassic-park-v3.62.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🌶️ A dino that eats a super-hot chili now charges at other dinos: each ram takes health and sends them flying. 🍿 Popcorn blasts a dino high into the sky; it crashes down for −10 health, popcorn rains on the park, and dinos that eat a piece spit popcorn.",
+        "fr": "🌶️ Un dino qui mange un piment de l’enfer fonce maintenant sur les autres : chaque coup enlève de la vie et les envoie voler. 🍿 Le pop-corn envoie un dino haut dans le ciel ; il retombe et perd 10 de vie, le pop-corn pleut sur le parc et les dinos qui en mangent un morceau recrachent du pop-corn.",
+        "zh-Hans": "🌶️ 吃了变态辣辣椒的恐龙会主动去撞别的恐龙：撞一下掉血，还会被撞飞。🍿 吃了爆米花的恐龙会被炸上天，摔下来掉 10 滴血；爆米花掉满地，别的恐龙抢着吃，吃了就吐爆米花。",
+        "zh-Hant": "🌶️ 吃了變態辣辣椒的恐龍會主動去撞別的恐龍：撞一下掉血，還會被撞飛。🍿 吃了爆米花的恐龍會被炸上天，摔下來掉 10 滴血；爆米花掉滿地，別的恐龍搶著吃，吃了就吐爆米花。"
+      }
+    },
+    {
       "v": "3.61",
       "file": "drawrassic-park-v3.61.html",
       "date": "2026-11-13",
