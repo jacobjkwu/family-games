@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.55",
+      "file": "drawrassic-park-v3.55.html",
+      "date": "2026-11-13",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "☁️ Maps and the 🎨 gallery now sync between devices: a map made on one iPad shows up on the other, with ☁️ Download this map from the cloud. 🔥 Roguelike mode for the expedition: endless monster waves, 💎 gems, pick 1 of 3 powers at each level, a boss every 2 minutes.",
+        "fr": "☁️ Les cartes et la 🎨 galerie se synchronisent entre appareils : une carte créée sur un iPad apparaît sur l’autre, avec ☁️ Télécharger cette carte depuis le cloud. 🔥 Mode Roguelike pour l’expédition : vagues de monstres sans fin, 💎 gemmes, 1 pouvoir sur 3 à chaque niveau, un boss toutes les 2 minutes.",
+        "zh-Hans": "☁️ 地图和 🎨 画廊会在设备之间同步了：一台 iPad 上建的地图，另一台也能看到，点「☁️ 从云端下载这个地图」就能玩。🔥 探险新增肉鸽模式：怪物一波接一波，捡 💎 升级，每次 3 选 1 超能力，每 2 分钟一只 Boss。",
+        "zh-Hant": "☁️ 地圖和 🎨 畫廊會在裝置之間同步了：一台 iPad 上建的地圖，另一台也能看到，點「☁️ 從雲端下載這個地圖」就能玩。🔥 探險新增肉鴿模式：怪物一波接一波，撿 💎 升級，每次 3 選 1 超能力，每 2 分鐘一隻 Boss。"
+      }
+    },
+    {
       "v": "3.54",
       "file": "drawrassic-park-v3.54.html",
       "date": "2026-11-13",
