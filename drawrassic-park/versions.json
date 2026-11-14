@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.66",
+      "file": "drawrassic-park-v3.66.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "😡 Rage mode no longer makes dinos twice as big: they keep their normal size and still get speed and attack ×2.",
+        "fr": "😡 Le mode rage ne double plus la taille des dinos : ils gardent leur taille normale, avec toujours vitesse et attaque ×2.",
+        "zh-Hans": "😡 暴怒模式不再让恐龙变成两倍大：恐龙保持原来的大小，速度和攻击还是 ×2。",
+        "zh-Hant": "😡 暴怒模式不再讓恐龍變成兩倍大：恐龍保持原來的大小，速度和攻擊還是 ×2。"
+      }
+    },
+    {
       "v": "3.65",
       "file": "drawrassic-park-v3.65.html",
       "date": "2026-11-14",

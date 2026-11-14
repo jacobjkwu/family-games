@@ -1,5 +1,9 @@
 # Drawrassic Park — Changelog
 
+## v3.66 (2026-11-14) — save schema s8 (unchanged)
+- 😡 Rage mode keeps the dino's size: size now has its own number 🎮 → 🦖 rageSize (default ×1, up to ×3); rageMul (×2) is only speed and attack. A dino saved mid-rage by v3.65 shrinks back to normal on load. Normal dino size is the same as in v3.64/v3.65 (checked).
+- Rage messages and the tutorial no longer mention size. Save schema unchanged (s8); tested v3.65 ↔ v3.66 both ways. Not tested on a real iPad or Xbox.
+
 ## v3.65 (2026-11-14) — save schema s8 (unchanged)
 - 🎯 Lock-on (possessing): tap another dino → its card (or a friend's small card) has 🎯 Lock on: 🚀 Homing missile (any distance, damage atk × lkDmg 2.5, knock-back; bosses and shadows take hero-style damage), 🌀 Grab & slam (lifted, 3 spins, smashed down: −lkSlam 20 and a shockwave), 💰 Missile ride (rides up, explodes, lkCoins 30 coins rain down, floats back). A red target circle and a big 🚀 Fire button; 4 s reload. The host flies every missile; friends see them too.
 - 🚀 Ranged skills in normal fights: a park dino below hero level fighting real enemies (shadows, bosses, wild raiders) now and then fires Missile Barrage or Sky Beams at them (rangedCD 9 s); nothing when there is no enemy.
