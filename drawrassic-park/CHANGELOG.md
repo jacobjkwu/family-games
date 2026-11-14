@@ -1,5 +1,11 @@
 # Drawrassic Park — Changelog
 
+## v3.76 (2026-11-14) — save schema s8 (unchanged)
+- 🟢 Venom (🎮 → 🌿 ftSpitR 8 dino lengths, ftSpitCD 5 s): a flytrap spits a glob at the nearest dino or person out of biting reach but within range; the glob arcs, follows its target and splashes: −ftDmg (3) to everyone in the splash, plus a bubbling green puddle for 4 s. Planted flytraps spit too. Wild dinos and people never go below 1.
+- 🤝 Truce (🎮 → 🌿 ftTruce, on): a dino that sees a flytrap (about 5 dino lengths, same side of the wall) drops its fight — park battle, raid or fence-jump fight, chasing a person — and goes to beat the flytrap first, up to 5 dinos per flytrap (its opponent joins too). Other dinos join unless they are calm plant-eaters. They give up after 25 s, and go back to normal when the flytrap wilts (fence jumpers pick a new target). Your possessed dino is never taken over.
+- 🗺️ Mini map: flytraps are very dark green dots.
+- Tutorial and ❓ help updated. Nothing new is saved; save schema unchanged (s8). Tested in 4 languages at 1180×820 and 820×1180. Not tested on a real iPad or Xbox.
+
 ## v3.75 (2026-11-14) — save schema s8 (unchanged)
 - 🦘 Wild dinos jump the fence (🎮 → 🌿 wjOn, wjChance 0.9, wjEvery 45 s, wjMax 3; works even with 🌿 wildStay on): every awake wild dino in the Wild Lands tries about every 45 s; with 90% it runs to the fence, jumps over it (the v3.61 jump right over the palisade) and lands next to your nearest dino to fight it. At most 3 jumpers at once (running, jumping or in the park).
 - In the park a jumper is never sent home: when its fight is over it picks the next park dino within reach, else chases a visitor or ranger (when 👥 pplAtk is on), else roams; every few seconds it looks for a new target. Raids ending don't send jumpers home either.

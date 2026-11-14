@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.76",
+      "file": "drawrassic-park-v3.76.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🪴 Flytraps spit 🟢 venom at dinos and people up to about 8 dino lengths away (−3 in the splash), dinos that see a flytrap stop their own fights and team up to beat it first, and flytraps show as dark green dots on the mini map.",
+        "fr": "🪴 Les dionées crachent du 🟢 venin sur les dinos et les gens jusqu’à environ 8 longueurs de dino (−3 dans l’éclaboussure), les dinos qui en voient une arrêtent leurs bagarres pour s’unir contre elle, et les dionées sont des points vert foncé sur la mini-carte.",
+        "zh-Hans": "🪴 食人花会朝大约 8 只恐龙远的恐龙和人吐 🟢 毒液（溅到 −3）；恐龙看到食人花会先停战，一起去打它；小地图上食人花是墨绿色的点。",
+        "zh-Hant": "🪴 食人花會朝大約 8 隻恐龍遠的恐龍和人吐 🟢 毒液（濺到 −3）；恐龍看到食人花會先停戰，一起去打牠；小地圖上食人花是墨綠色的點。"
+      }
+    },
+    {
       "v": "3.75",
       "file": "drawrassic-park-v3.75.html",
       "date": "2026-11-14",
