@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.72",
+      "file": "drawrassic-park-v3.72.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🎮 Controller fix: B now closes the ❓ help window (then a second B closes the panel behind it).",
+        "fr": "🎮 Correctif manette : B ferme maintenant la fenêtre d'aide ❓ (puis un second B ferme le panneau derrière).",
+        "zh-Hans": "🎮 手柄修复：按 B 现在能关掉 ❓ 说明窗口（再按一次 B 关掉后面的面板）。",
+        "zh-Hant": "🎮 手把修復：按 B 現在能關掉 ❓ 說明視窗（再按一次 B 關掉後面的面板）。"
+      }
+    },
+    {
       "v": "3.71",
       "file": "drawrassic-park-v3.71.html",
       "date": "2026-11-14",

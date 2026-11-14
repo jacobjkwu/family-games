@@ -1,5 +1,9 @@
 # Drawrassic Park — Changelog
 
+## v3.72 (2026-11-14) — save schema s8 (unchanged)
+- 🎮 Controller: B closes the ❓ help window (its OK button is now #hpClose, which the back button finds); a second B closes the ☰ panel behind it. In v3.71 only A on OK closed it.
+- Tested at TV 1920×1080 with a mocked controller (fr): A on OK, B on help, B on the 🏆 panel, A switches 🏆 tabs. Save schema unchanged (s8). Not tested on a real Xbox.
+
 ## v3.71 (2026-11-14) — save schema s8 (unchanged)
 - 🏆 Achievements (☰ → 🏆, ➕ catalogue): 51 data entries in 6 groups (🌱 start, 🏞️ park, ⚔️ battles, 🎉 fun, 👥 friends, ❓ secret), 🟨 task / 🟩 goal / 🟪 challenge like Minecraft. Checked every second from 🏅 records, the park and one-off events (possess, rage, lock-on missile, slam, ride, shockwave, chili, popcorn, hat, ambulance, superstar, peace, online, chat, voice, 3:00 at night). Done → a Minecraft-style card slides in (tap: list) plus a random celebration (confetti, trophy rain, star burst, balloons, fireworks, dino dance, rainbow; challenges get two); queued; none with reduced motion. The list has progress bars and 📜 a dated log (date, time, park day). First run on a device with 5+ min of play records earlier ones quietly as “done before”. Data drawrassic-park/ach/a1 (+/bak, /broken-…), backup codes "ac".
 - ❓ Help (hp/helpdata.py, 15 screens, 4 languages): top bar, drawing screen, new-dino dialog, dino card, quick-bar editor and every ☰ panel.
