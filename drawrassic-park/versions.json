@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.63",
+      "file": "drawrassic-park-v3.63.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🔥🍿 Chili + popcorn = fire rocket that crashes down in a ring of fire. 🎩 Knocked-out people drop ice cream, burgers, hats, balloons or cameras: dinos eat the food, your possessed dino can wear the hat. 🌐 Friends playing online now see visitors, rangers and dropped things.",
+        "fr": "🔥🍿 Piment + pop-corn = fusée de feu qui retombe dans un anneau de feu. 🎩 Les gens K.-O. lâchent glaces, burgers, chapeaux, ballons ou appareils photo : les dinos mangent, ton dino possédé peut porter le chapeau. 🌐 Les amis en ligne voient maintenant les visiteurs, les gardiens et les objets tombés.",
+        "zh-Hans": "🔥🍿 辣椒 + 爆米花 = 火箭龙，落地砸出一圈火。🎩 被咬晕的人会掉冰淇淋、汉堡、帽子、气球或相机：恐龙会吃掉食物，附身的恐龙能戴上帽子。🌐 联机的朋友现在能看到游客、管理员和掉在地上的东西了。",
+        "zh-Hant": "🔥🍿 辣椒 + 爆米花 = 火箭龍，落地砸出一圈火。🎩 被咬暈的人會掉冰淇淋、漢堡、帽子、氣球或相機：恐龍會吃掉食物，附身的恐龍能戴上帽子。🌐 連線的朋友現在能看到遊客、管理員和掉在地上的東西了。"
+      }
+    },
+    {
       "v": "3.62",
       "file": "drawrassic-park-v3.62.html",
       "date": "2026-11-13",
