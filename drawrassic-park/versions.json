@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.71",
+      "file": "drawrassic-park-v3.71.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🏆 51 achievements like Minecraft (tasks, goals, challenges, secrets) with a slide-in card, random celebrations and a dated log. ❓ help on every screen, 🙈 clean screen to see more dinos, a movable/hideable 🌱 starter card, drawing buttons right under the paper, and clearer one-of-a-kind button icons.",
+        "fr": "🏆 51 succès comme dans Minecraft (tâches, objectifs, défis, secrets) avec une carte qui glisse, des fêtes au hasard et un journal daté. ❓ aide sur chaque écran, 🙈 écran épuré pour voir plus de dinos, carte 🌱 Premiers pas déplaçable et cachable, boutons de dessin sous la feuille, et des icônes plus claires, toutes différentes.",
+        "zh-Hans": "🏆 像我的世界一样的 51 个成就（任务、目标、挑战、隐藏），完成时滑出卡片、随机庆祝动画，还会记下日期。每个界面加了 ❓ 说明，🙈 干净页面能看到更多恐龙，🌱 新手冒险卡片能拖动和隐藏，画恐龙的按钮挪到画布下面，按钮图标全部换成不重复、一看就懂的。",
+        "zh-Hant": "🏆 像我的世界一樣的 51 個成就（任務、目標、挑戰、隱藏），完成時滑出卡片、隨機慶祝動畫，還會記下日期。每個介面加了 ❓ 說明，🙈 乾淨頁面能看到更多恐龍，🌱 新手冒險卡片能拖動和隱藏，畫恐龍的按鈕挪到畫布下面，按鈕圖示全部換成不重複、一看就懂的。"
+      }
+    },
+    {
       "v": "3.70",
       "file": "drawrassic-park-v3.70.html",
       "date": "2026-11-14",
