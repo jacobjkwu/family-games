@@ -8,10 +8,10 @@
       "schema": 8,
       "switcher": true,
       "notes": {
-        "en": "🚧 Wild dinos stay behind the fence. 💫 A knocked-out wild dino waits with a countdown: 🎯 catch it in time or it disappears. 😱 Any dino — plant-eater, meat-eater, your drawings, wild ones at the fence — chases visitors and rangers: people have health, lose it bite by bite and get knocked out; rangers help them up (🎮 → 👥; off in 🕊️ Peaceful).",
-        "fr": "🚧 Les dinos sauvages restent derrière la clôture. 💫 Un sauvage K.-O. attend avec un compte à rebours : 🎯 capture-le à temps ou il disparaît. 😱 Tous les dinos — herbivores, carnivores, tes dessins, les sauvages près de la clôture — chassent visiteurs et gardiens : les gens ont des points de vie, en perdent à chaque morsure et finissent K.-O. ; les gardiens les relèvent (🎮 → 👥 ; coupé en 🕊️ Paisible).",
-        "zh-Hans": "🚧 野生恐龙待在围栏里。💫 打晕的野生恐龙头上有倒计时：时间内用 🎯 抓住它，不然它就消失了。😱 所有恐龙——吃草的、吃肉的、你画的、围栏边的野生恐龙——都会追咬游客和管理员：人有血条，一口一口掉血，血掉光就晕倒在地，管理员会来扶他们起来（🎮 → 👥；🕊️ 和平模式里关闭）。",
-        "zh-Hant": "🚧 野生恐龍待在圍欄裡。💫 打暈的野生恐龍頭上有倒數：時間內用 🎯 抓住牠，不然牠就消失了。😱 所有恐龍——吃草的、吃肉的、你畫的、圍欄邊的野生恐龍——都會追咬遊客和管理員：人有血條，一口一口掉血，血掉光就暈倒在地，管理員會來扶他們起來（🎮 → 👥；🕊️ 和平模式裡關閉）。"
+        "en": "🧱 Wild dinos no longer pass through the wall: they run up and jump over it, and stay fully on their own side. 👻 The dino you possess can hop over the wall (jump next to it).",
+        "fr": "🧱 Les dinos sauvages ne traversent plus le mur : ils prennent de l’élan et sautent par-dessus, et restent bien de leur côté. 👻 Le dino que tu possèdes peut sauter le mur (saute à côté).",
+        "zh-Hans": "🧱 野生恐龙不再穿墙：先跑到墙边再跳过去，身体也不会卡在墙里。👻 附身的恐龙在墙边跳一下就能翻墙。",
+        "zh-Hant": "🧱 野生恐龍不再穿牆：先跑到牆邊再跳過去，身體也不會卡在牆裡。👻 附身的恐龍在牆邊跳一下就能翻牆。"
       }
     },
     {
