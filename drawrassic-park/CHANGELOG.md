@@ -1,5 +1,11 @@
 # Drawrassic Park — Changelog
 
+## v3.81 (2026-11-14) — save schema s8 (unchanged)
+- 🎁 Level rewards (18 data entries in LVR_DEF), unlocked by the ⭐ park level from v3.73: 🎩 hats at 3 Sprout, 6 Ranger hat, 10 Star halo, 15 Dino buddy, 20 Park crown, 30 Rainbow, 45 Volcano helmet, 60 Dragon king (drawn and animated like the cool hats; dino card → 🎩 Hats → ⭐ Level hats, locked ones show the level; 👥 for all dinos works); 🚪 gate looks at 2 balloons, 5 flower garland, 8 lanterns (glow at night), 12 dino skull, 18 crystals, 25 fire braziers, 40 golden gate (📅 → 🚪 Gate look, drawn over the gate every frame); perks at 4 (+1 🔄 quest swap a day), 10 (daily chest ×1.5), 20 (+25% quest coins).
+- 📅 panel: a scrolling reward road under the level card (✅ unlocked / 🔒 level) and the gate picker. Reaching a level with a reward shows a 🎁 card for each new one (the 🏆 queue); the first time, rewards already earned are noted in the news.
+- Data: drawrassic-park/lvrew/r1 {gate, seen} and drawrassic-park/hats/lv1 {dress} (+/bak, /broken-… each), separate from hats/h1 so older versions can't drop them; wearing a level hat takes off the cool or reward hat and the other way round. Backup codes "lr". Older versions show the dino without the level hat and the normal gate.
+- Tutorial and ❓ help updated. Save schema unchanged (s8). Tested in 4 languages at 1180×820 and 820×1180 (road and gate picker inside the panel, every gate look drawn, hat wear/take off, reload, corrupt keys, export, v3.80 still opens). Not tested on a real iPad or Xbox.
+
 ## v3.80 (2026-11-14) — save schema s8 (unchanged)
 - 🥚 Stop placing: while placing creatures, a bar with a big red “✕ Stop placing” (44 px, yellow border) sits 12 px above the quick bar on every screen size (v3.79 had a small “✕ Done” at the top that the news and achievement cards could cover); the quick bar's 🥚 lights up and tapping it again stops; the 🥚 panel shows “✕ Stop placing” at the top while placing; Escape and controller B stop too. Possessing a dino (👻 button or card) and ✏️ Draw a Dino stop placing, so a tap meant for your dino no longer places a flytrap. The “add shortcuts here” hint hides while placing.
 - Tutorial updated. Nothing new is saved; save schema unchanged (s8). Tested in 4 languages at 1180×820 and 820×1180. Not tested on a real iPad or Xbox (controller B tested only with code, not a real pad).

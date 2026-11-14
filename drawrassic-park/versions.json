@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.81",
+      "file": "drawrassic-park-v3.81.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "⭐ Park level rewards: 8 exclusive hats (Sprout, Ranger, Star halo, Dino buddy, Park crown, Rainbow, Volcano helmet, Dragon king), 7 gate looks (balloons, flowers, lanterns, dino skull, crystals, fire braziers, gold) and perks (+1 quest swap, chest ×1.5, +25% quest coins). See the reward road in 📅.",
+        "fr": "⭐ Récompenses de niveau du parc : 8 chapeaux exclusifs (Pousse, Garde, Halo d’étoiles, Copain dino, Couronne du parc, Arc-en-ciel, Casque volcan, Roi dragon), 7 styles de portail (ballons, fleurs, lanternes, crâne de dino, cristaux, braseros, or) et des bonus (+1 échange de quête, coffre ×1,5, +25 % de pièces). Route des récompenses dans 📅.",
+        "zh-Hans": "⭐ 公园等级奖励：8 顶专属帽子（小芽帽、管理员帽、星星光环、恐龙小跟班、园长皇冠、彩虹帽、火山头盔、龙王冠）、7 种大门样子（气球、花环、灯笼、恐龙头骨、水晶、火盆、黄金），还有福利（每天多换 1 次任务、宝箱 ×1.5、任务金币 +25%）。在 📅 里看奖励路线。",
+        "zh-Hant": "⭐ 公園等級獎勵：8 頂專屬帽子（小芽帽、管理員帽、星星光環、恐龍小跟班、園長皇冠、彩虹帽、火山頭盔、龍王冠）、7 種大門樣子（氣球、花環、燈籠、恐龍頭骨、水晶、火盆、黃金），還有福利（每天多換 1 次任務、寶箱 ×1.5、任務金幣 +25%）。在 📅 裡看獎勵路線。"
+      }
+    },
+    {
       "v": "3.80",
       "file": "drawrassic-park-v3.80.html",
       "date": "2026-11-14",
