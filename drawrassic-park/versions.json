@@ -2,6 +2,19 @@
   "game": "drawrassic-park",
   "versions": [
     {
+      "v": "3.74",
+      "file": "drawrassic-park-v3.74.html",
+      "date": "2026-11-14",
+      "schema": 8,
+      "switcher": true,
+      "notes": {
+        "en": "🪴 Giant flytraps sprout everywhere on every map; about half grow legs and walk. They bite dinos and visitors for −3; tap one 4 times to ✂️ trim it for coins. 😡 Rage is now a boss skill: only 👑 Hero Bosses (level 10) can rage.",
+        "fr": "🪴 Des dionées géantes poussent partout, sur chaque carte ; environ la moitié ont des pattes et marchent. Elles mordent dinos et visiteurs (−3) ; touche-en une 4 fois pour la ✂️ tailler et gagner des pièces. 😡 La rage devient une attaque de boss : seuls les 👑 boss héros (niveau 10) l’ont.",
+        "zh-Hans": "🪴 每张地图到处会长出巨型食人花，差不多一半长腿会走路。它们咬恐龙和游客（−3），点 4 下能 ✂️ 剪掉换金币。😡 暴怒改成 Boss 技能：只有 👑 英雄 Boss（10 级）才会。",
+        "zh-Hant": "🪴 每張地圖到處會長出巨型食人花，差不多一半長腿會走路。牠們咬恐龍和遊客（−3），點 4 下能 ✂️ 剪掉換金幣。😡 暴怒改成 Boss 技能：只有 👑 英雄 Boss（10 級）才會。"
+      }
+    },
+    {
       "v": "3.73",
       "file": "drawrassic-park-v3.73.html",
       "date": "2026-11-14",
